@@ -47,10 +47,10 @@ class MessagingHarness:
             self.vm.uc.mem_write(self.messaging + 0x254, struct.pack('<I', value))
         return word(self.vm, self.messaging + 0x254)
 
-    def receive(self, id, version, payload):
+    def receive(self, id, version, payload, **budgets):
         self.packet = struct.pack('>H', id) + len(payload).to_bytes(3, 'big') + struct.pack('>H', version) + payload
         self.offset = 0
-        result = self.vm.call(0x250bbc, self.messaging, self.shared, count=200000000)
+        result = self.vm.call(0x250bbc, self.messaging, self.shared, count=budgets.pop('count', 200000000), **budgets)
         assert self.offset == len(self.packet), 'Native parser did not read all framed bytes'
         return result
 

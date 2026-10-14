@@ -22,5 +22,15 @@
       "instanceMatches": true
     }
   ],
+  "connectionWorkers": [
+    {
+      "start": "0x825b70",
+      "member": "0x7c92b0",
+      "adjustment": 0,
+      "callbackOffset": "0x50"
+    }
+  ],
+  "connectionStart": "0x2330ec",
+  "connectionScope": "Explicit connection object; native connect branch, tuple and trampoline; OS/reader-entry adapters",
   "scope": "Original ARM64 constructor in Unicorn; OS adapters; no Android runtime verification"
 }

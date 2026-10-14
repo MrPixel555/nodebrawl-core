@@ -1,0 +1,17 @@
+{
+  "nativeOutgoingLoginAcceptedByNode": true,
+  "nativeNodeReplyAccepted": true,
+  "nativeEncryptedHomeConsumed": 416,
+  "nativeEncryptedKeepAliveAccepted": true,
+  "nativeStateAfterReply": 5,
+  "overriddenCallSites": [
+    "0x2641e4",
+    "0x264200",
+    "0x27eab4",
+    "0x27ead4"
+  ],
+  "loginPendingBeforeServerHello": true,
+  "androidStalkerExecutionVerified": false,
+  "originalExecutableBytesUnchanged": true,
+  "runtimeState": "Protocol VM with call-site overrides and verified Messaging stack slots; connection caller state initialized explicitly"
+}

@@ -195,13 +195,39 @@ bytes are untouched. Both native workers are followed with system libraries
 excluded; after the reply-open result, all active scopes are unfollowed. A new
 game connection resumes only previously identified live native workers. The
 script does not follow a Java thread outside its bounded native update.
-`tools/check-frida-workers.py` passed on Frida 17.15.4 Linux x86-64 with two real
-pthreads: both saw argument overrides, an unrelated thread stayed untraced,
-one worker stopped both traces, subsequent calls ran unmodified, original tuples
+`tools/check-frida-workers.py` passed on Frida 17.15.4 Linux x86-64 with three real
+pthreads and two different start trampolines: all saw argument overrides, an unrelated thread stayed untraced,
+one worker stopped all three traces, subsequent calls ran unmodified, original tuples
 and code stayed unchanged, and original arguments/results were forwarded.
 This is not Android or ARM64 runtime validation. Device output must now include
-`diagnostics:"network-v2"`, both `messaging-worker-scope-started` roles and the
+`diagnostics:"network-v3"`, all three `messaging-worker-scope-started` roles and the
 actual peer crypto callouts before claiming that the authentication failure is fixed.
+
+The `network-v2` device test confirmed both queue scopes and ClientHello encoding,
+but still sent a 358-byte Login rejected by Node without any peer callout. These
+queues are not the connection's native reader thread. The successful-connect
+branch at `0x2330ec` creates another std::thread with start `0x825b70`, member
+`0x7c92b0` and a connection instance whose callback at `+0x50` points to Messaging.
+`verify_messaging_workers.py` now executes that branch with an explicitly
+initialized connection/vtable and resolver/socket/status adapters. It verifies
+the tuple and runs the original trampoline/member through to the reader virtual
+entry. This does not execute the complete connection factory or a real network
+reader loop. The adapter selects this worker only if its callback has the exact
+Messaging vtable; an unrelated socket with no callback is left alone.
+
+There is also a second native Login encryption path inside `Messaging.read`.
+When Login is pending before ServerHello arrives, core/seal calls occur at
+`0x2641e4` and `0x264200`; the Messaging slot is `SP+0x3b0`, not `SP+0x60`.
+`network-v3` covers both outgoing paths and the existing reply path. Reproduce
+the new observation with `verify_development_peer.py --inline-login`: queue the
+native Login object first, then feed ServerHello through the actual parser.
+The original inline key generation, encoding and seal execute with the same
+key/nonce argument overrides. Node accepted the resulting encrypted Login, and
+native Messaging accepted Node LoginOk, codec-only empty Home and KeepAlive.
+[Inline observation](native-inline-development-peer.json) records the exact
+sites and verifies original executable PT_LOAD bytes stayed unchanged. The
+connection caller's state remains explicitly initialized in the harness. This
+is a native protocol VM test, not an Android result.
 
 **OwnHomeData:** the native encoder/decoder call nested LogicClientHome and
 LogicClientAvatar serializers. A further probe showed that the avatar decoder at
@@ -303,7 +329,7 @@ scopes retain their outer trace; subsequent frames use an untraced bridge after
 the authenticated-open result. Socket Interceptor hooks remain active in that
 bridge. Missing RegisterNatives symbols disable only the JNI bridge with a diagnostic;
 the verified Messaging worker adapter remains available. That adapter wraps the
-original native pthread trampoline and follows only its two verified member types.
+original native pthread trampolines and follows only its three verified member types.
 The incoming reply-open result or game-socket closure unfollows active scopes.
 On reconnect, only the recorded live Messaging workers resume tracing from the
 socket callback; this does not activate whole-GLThread tracing.
@@ -333,7 +359,7 @@ collection is delayed by 50 ms on the script thread instead of running inside
 the render-thread callback. Zero socket counters are not evidence of no traffic
 when the server has received a frame. The next report did confirm receipt of
 Login with an authentication failure while all peer callouts were absent. The
-`network-v2` worker adapter addresses that missing execution scope; a new device
+`network-v3` reader-worker and inline-Login probes address the missing scopes; a new device
 log must verify the actual override and authenticated reply before declaring the
 handshake fixed.
 

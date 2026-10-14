@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import struct
 import subprocess
+import sys
 from elftools.elf.elffile import ELFFile
 
 from native_vm import ROOT
@@ -24,10 +25,13 @@ def node(operation, **values):
 
 model = MessagingHarness()
 vm, obj = model.vm, model.messaging
+inline = '--inline-login' in sys.argv[1:]
+outgoing_core, outgoing_nonce, outgoing_return = (0x2641e4, 0x264200, 0x264204) if inline else (0x3bcc68, 0x3bcc84, 0x3bcc88)
 peer = bytes.fromhex(node('public')['publicKey'])
 model.state(3)
 hello = bytes(range(24))
-assert model.receive(20100, 0, struct.pack('>I', 24) + hello) == 0
+if not inline:
+    assert model.receive(20100, 0, struct.pack('>I', 24) + hello) == 0
 fields = json.loads((ROOT / 'extra-schemas.json').read_text())['10101']
 message, _, payload, _ = prepare(vm, fields, 1)
 vm.uc.mem_write(message, struct.pack('<Q', 0xa2d968))
@@ -38,7 +42,7 @@ login = {}
 
 def native_object(vm, outgoing):
     sp = vm.uc.reg_read(UC_ARM64_REG_SP)
-    pointer = qword(vm, sp + (0x60 if outgoing else 0x3b0))
+    pointer = qword(vm, sp + (0x60 if outgoing and not inline else 0x3b0))
     assert pointer == obj, 'Stalker call-site stack slot did not resolve Messaging'
     return pointer
 
@@ -51,7 +55,7 @@ def override_core(vm, outgoing):
     pointer = vm.alloc(32)
     vm.uc.mem_write(pointer, shared)
     vm.uc.reg_write(UC_ARM64_REG_X2, pointer)
-    observed.append(hex(0x3bcc68 if outgoing else 0x27eab4))
+    observed.append(hex(outgoing_core if outgoing else 0x27eab4))
 
 
 def override_nonce(vm, outgoing):
@@ -62,18 +66,21 @@ def override_nonce(vm, outgoing):
     pointer = vm.alloc(24)
     vm.uc.mem_write(pointer, digest)
     vm.uc.reg_write(UC_ARM64_REG_X3, pointer)
-    observed.append(hex(0x3bcc84 if outgoing else 0x27ead4))
+    observed.append(hex(outgoing_nonce if outgoing else 0x27ead4))
     if outgoing:
         output, count = vm.reg(0), vm.reg(2)
         def returned(vm):
             login['box'] = pub.hex() + bytes(vm.uc.mem_read(output + 16, count - 16)).hex()
-        vm.register_hook(0x3bcc88, returned)
+        vm.register_hook(outgoing_return, returned)
 
-vm.register_hook(0x3bcc68, lambda vm: override_core(vm, True))
-vm.register_hook(0x3bcc84, lambda vm: override_nonce(vm, True))
+vm.register_hook(outgoing_core, lambda vm: override_core(vm, True))
+vm.register_hook(outgoing_nonce, lambda vm: override_nonce(vm, True))
 vm.register_hook(0x27eab4, lambda vm: override_core(vm, False))
 vm.register_hook(0x27ead4, lambda vm: override_nonce(vm, False))
-assert vm.call(0x3affd4, obj, count=300000000, timeout=120000000) == 1
+if inline:
+    assert model.receive(20100, 0, struct.pack('>I', 24) + hello, count=400000000, timeout=120000000) == 0
+else:
+    assert vm.call(0x3affd4, obj, count=300000000, timeout=120000000) == 1
 print('Native outgoing Login with development peer override: PASS', flush=True)
 reply = node('reply', helloNonce=hello.hex(), loginBox=login['box'], loginPayload=payload.hex(),
              homePayload=json.loads((ROOT / 'native-home.json').read_text())['payloadHex'])
@@ -87,15 +94,16 @@ for frame in reply['frames']:
     if frame['id'] == 21217:
         assert word(vm, result + 0x24) == 416
 assert model.state() == 5
-assert observed == ['0x3bcc68', '0x3bcc84', '0x27eab4', '0x27ead4']
+assert observed == [hex(outgoing_core), hex(outgoing_nonce), '0x27eab4', '0x27ead4']
 for segment in ELFFile(open(ROOT / 'libg.so', 'rb')).iter_segments():
     if segment['p_type'] == 'PT_LOAD' and segment['p_flags'] & 1:
         start, size = segment['p_vaddr'], segment['p_filesz']
         assert bytes(vm.uc.mem_read(start, size)) == vm.memory[start:start + size], 'Original executable bytes changed'
-(ROOT / 'native-development-peer.json').write_text(json.dumps({
+(ROOT / ('native-inline-development-peer.json' if inline else 'native-development-peer.json')).write_text(json.dumps({
     'nativeOutgoingLoginAcceptedByNode': True, 'nativeNodeReplyAccepted': True,
     'nativeEncryptedHomeConsumed': 416, 'nativeEncryptedKeepAliveAccepted': True,
     'nativeStateAfterReply': 5, 'overriddenCallSites': observed,
+    'loginPendingBeforeServerHello': inline,
     'androidStalkerExecutionVerified': False,
     'originalExecutableBytesUnchanged': True,
     'runtimeState': 'Protocol VM with call-site overrides and verified Messaging stack slots; connection caller state initialized explicitly',

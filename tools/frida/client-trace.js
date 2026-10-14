@@ -35,6 +35,7 @@ function instrument (module) {
   if (hex(module.base, 4) !== '7f454c46' || buildId !== '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4') { record('library-profile-mismatch', { reason: 'ELF build ID', buildId }); return }
   const locations = [
     [0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'],
+    [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'],
     [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'],
     [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'],
     [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'],
@@ -43,6 +44,8 @@ function instrument (module) {
     [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'],
     [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'],
     [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'],
+    [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'],
+    [0x7c92b0, '080040f9014940f920001fd6'],
   ]
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
@@ -56,9 +59,9 @@ function instrument (module) {
 function installDevelopmentPeer (module) {
   const peer = Uint8Array.from(configuration.serverPublicKey.match(/../g).map(byte => parseInt(byte, 16)))
   const basePoint = new Uint8Array(32); basePoint[0] = 9
-  function messaging (context, outgoing) {
+  function messaging (context, outgoing, inlineLogin = false) {
     // Slots are in the caller immediately before BL, not inside the crypto core.
-    const object = context.sp.add(outgoing ? 0x60 : 0x3b0).readPointer()
+    const object = context.sp.add(outgoing && !inlineLogin ? 0x60 : 0x3b0).readPointer()
     const state = object.add(0x254).readU32()
     if (outgoing ? ![3, 4].includes(state) : state !== 4) throw new Error('Unexpected native handshake state ' + state)
     return object
@@ -74,10 +77,10 @@ function installDevelopmentPeer (module) {
       }
     }
   }
-  function shared (outgoing) {
+  function shared (outgoing, inlineLogin = false) {
     return guardProbe((context, thread) => {
       clearTemporary(thread)
-      const object = messaging(context, outgoing)
+      const object = messaging(context, outgoing, inlineLogin)
       const secret = bytes(object.add(0x280), 32)
       let raw
       try {
@@ -89,14 +92,14 @@ function installDevelopmentPeer (module) {
       raw.fill(0)
       temporaries.set(thread, { pointer, size: 32 })
       context.x2 = pointer
-      record('development-peer-shared', { direction: outgoing ? 'login' : 'reply', state: object.add(0x254).readU32() })
+      record('development-peer-shared', { direction: outgoing ? 'login' : 'reply', path: outgoing ? inlineLogin ? 'server-hello-login' : 'deferred-login' : 'reply', thread, state: object.add(0x254).readU32() })
     })
   }
-  function nonce (outgoing) {
+  function nonce (outgoing, inlineLogin = false) {
     return guardProbe((context, thread) => {
       // The native HSalsa core has consumed the temporary shared secret.
       clearTemporary(thread)
-      const object = messaging(context, outgoing)
+      const object = messaging(context, outgoing, inlineLogin)
       const pub = bytes(object.add(0x260), 32)
       const digest = clientCrypto.blake2b(outgoing ? join(pub, peer) : join(bytes(object.add(0x2a0), 24), pub, peer), 24)
       const pointer = allocate(digest)
@@ -108,6 +111,8 @@ function installDevelopmentPeer (module) {
   const definitions = [
     [0x3bcc68, shared(true)], [0x3bcc84, nonce(true)],
     [0x3bcc88, guardProbe((context, thread) => { clearTemporary(thread); record('development-peer-seal-result', { result: context.x0.toInt32() }) })],
+    [0x2641e4, shared(true, true)], [0x264200, nonce(true, true)],
+    [0x264204, guardProbe((context, thread) => { clearTemporary(thread); record('development-peer-seal-result', { result: context.x0.toInt32(), path: 'server-hello-login' }) })],
     [0x27eab4, shared(false)], [0x27ead4, nonce(false)],
     [0x27ead8, guardProbe((context, thread) => {
       clearTemporary(thread)
@@ -126,7 +131,7 @@ function installDevelopmentPeer (module) {
       if (lastStates.get(object.toString()) === state) return
       if (lastStates.size >= 8) lastStates.clear()
       lastStates.set(object.toString(), state)
-      record('native-messaging-state', { state })
+      record('native-messaging-state', { state, thread: Process.getCurrentThreadId() })
     })],
     [0x54c92c, observe(context => {
       const object = context.x0
@@ -150,21 +155,24 @@ function installDevelopmentPeer (module) {
 
 function installMessagingWorkers (module) {
   // std::thread's heap tuple is { TLS, member function, adjustment, this }.
-  // Only the two workers created by Messaging's constructor are accepted.
+  // Accept Messaging's two queue workers and its connection's reader worker.
   // Replace pthread_create's start argument, never the original tuple or code.
   const callbacks = new Map()
   Interceptor.attach(api('pthread_create'), {
     onEnter (args) {
-      if (!args[2].equals(module.base.add(0x8011bc))) return
+      const socketWorker = args[2].equals(module.base.add(0x825b70))
+      if (!socketWorker && !args[2].equals(module.base.add(0x8011bc))) return
       try {
         const tuple = args[3]
         const member = tuple.add(8).readPointer()
-        const role = member.equals(module.base.add(0x16db08)) ? 'events' : member.equals(module.base.add(0x6a5ab8)) ? 'send' : null
+        const role = socketWorker ? member.equals(module.base.add(0x7c92b0)) ? 'socket' : null : member.equals(module.base.add(0x16db08)) ? 'events' : member.equals(module.base.add(0x6a5ab8)) ? 'send' : null
         if (!role || !tuple.add(16).readPointer().isNull()) return
-        if (!tuple.add(24).readPointer().readPointer().equals(module.base.add(0xa5b528))) return
+        const instance = tuple.add(24).readPointer()
+        const messaging = socketWorker ? instance.add(0x50).readPointer() : instance
+        if (messaging.isNull() || !messaging.readPointer().equals(module.base.add(0xa5b528))) return
         let replacement = callbacks.get(role)
         if (!replacement) {
-          replacement = clientFrame.createNativeFrame(module.base.add(0x8011bc), 'pointer', ['pointer'], {
+          replacement = clientFrame.createNativeFrame(module.base.add(socketWorker ? 0x825b70 : 0x8011bc), 'pointer', ['pointer'], {
             probes,
             shouldTrace: () => peerActive,
             onEnter (thread) {
@@ -192,7 +200,7 @@ function installMessagingWorkers (module) {
       if (this.role) record('messaging-worker-registered', { role: this.role, result: result.toInt32(), nativeInlineHooks: 0 })
     },
   })
-  record('messaging-worker-adapter-ready', { roles: ['events', 'send'], nativeInlineHooks: 0, spawnRequired: true })
+  record('messaging-worker-adapter-ready', { roles: ['events', 'send', 'socket'], nativeInlineHooks: 0, spawnRequired: true })
 }
 
 function installNativeFrame (module) {
@@ -296,7 +304,7 @@ Interceptor.attach(api('connect'), {
       this.address = replacement
       args[1] = replacement
     }
-    record('game-connect', { socket, originalHost, originalPort: port, redirectedHost: configuration.host, redirectedPort: configuration.host ? configuration.port : null })
+    record('game-connect', { socket, thread: Process.getCurrentThreadId(), caller: this.returnAddress ? this.returnAddress.toString() : null, originalHost, originalPort: port, redirectedHost: configuration.host, redirectedPort: configuration.host ? configuration.port : null })
   },
   onLeave (result) {
     if (this.socket === undefined) return
@@ -358,4 +366,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v2' })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v3' })

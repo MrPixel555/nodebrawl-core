@@ -25,4 +25,4 @@ const frameBundle = `const clientFrame = (() => { const module = { exports: {} }
 fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true })
 fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + probeBundle + frameBundle + source, { flag: 'wx' })
 console.log(`Created ${output}; logs metadata only; ${host ? `redirects port 9339 to ${host}:${port}` : 'keeps the original connection address'}.`)
-console.log(serverPublicKey ? 'Development peer traces verified Messaging workers and native JNI updates; spawn with -f before thread creation. No inline hooks in libg.so. Android verification is required.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')
+console.log(serverPublicKey ? 'Development peer traces Messaging queues, its socket reader and native JNI updates; both Login paths are covered. Spawn with -f before thread creation. No inline hooks in libg.so. Android verification is required.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')

@@ -49,7 +49,7 @@ function client (publicKey, profileMatches = true) {
   const art = { name: 'libart.so', size: 0x10000, base: new Pointer(0x50000000), enumerateSymbols: () => [{ name: '_ZN3art3JNI_RegisterNatives', address: new Pointer(0x50001000) }] }
   blocks.set(base.value, Buffer.from('7f454c46', 'hex'))
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
-  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9']]
+  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
   const originalInstructions = instructions.map(([offset]) => Buffer.from(blocks.get(base.value + offset)))
   blocks.set(base.value + 0x3f3f9c, Buffer.from('f30f1ef8fd7b01a9fd430091c84b00f0', 'hex'))
@@ -61,7 +61,7 @@ function client (publicKey, profileMatches = true) {
     Memory: memory,
     ptr: value => new Pointer(Number(value)),
     NativeFunction: function (address, returnType, argumentTypes, settings) {
-      const worker = address.equals(base.add(0x8011bc))
+      const worker = address.equals(base.add(0x8011bc)) || address.equals(base.add(0x825b70))
       assert(worker || address.equals(base.add(0x3f3f9c)))
       assert.equal(returnType, worker ? 'pointer' : 'uint8')
       assert.equal(JSON.stringify(argumentTypes), worker ? '["pointer"]' : '["pointer","pointer"]')
@@ -131,26 +131,30 @@ function client (publicKey, profileMatches = true) {
     return value
   }
   function worker (role, operation, valid = true) {
+    const socketWorker = role.startsWith('socket')
     const tuple = memory.alloc(32)
     tuple.writePointer(new Pointer(1234))
-    tuple.add(8).writePointer(base.add(role === 'events' ? 0x16db08 : role === 'send' ? 0x6a5ab8 : 0x1234))
-    tuple.add(24).writePointer(object)
+    tuple.add(8).writePointer(base.add(socketWorker ? 0x7c92b0 : role === 'events' ? 0x16db08 : role === 'send' ? 0x6a5ab8 : 0x1234))
+    const instance = socketWorker ? memory.alloc(0xa0) : object
+    if (role === 'socket') instance.add(0x50).writePointer(object)
+    tuple.add(24).writePointer(instance)
     if (!valid) tuple.add(16).writePointer(new Pointer(1))
     const before = Buffer.from(tuple.readByteArray(32))
-    const args = [memory.alloc(8), new Pointer(0), base.add(0x8011bc), tuple]
+    const start = base.add(socketWorker ? 0x825b70 : 0x8011bc)
+    const args = [memory.alloc(8), new Pointer(0), start, tuple]
     const hook = hooks.find(hook => hook.address === 'pthread_create')
     const invocation = {}
     hook.callbacks.onEnter.call(invocation, args)
     hook.callbacks.onLeave.call(invocation, new Pointer(0))
     assert.deepEqual(Buffer.from(tuple.readByteArray(32)), before, 'The original std::thread tuple must remain unchanged')
-    if (!valid || !['events', 'send'].includes(role)) { assert(args[2].equals(base.add(0x8011bc))); return }
-    assert(!args[2].equals(base.add(0x8011bc)))
+    if (!valid || !['events', 'send', 'socket'].includes(role)) { assert(args[2].equals(start)); return }
+    assert(!args[2].equals(start))
     const outerThread = currentThread
-    currentThread = role === 'events' ? 43 : 44
+    currentThread = socketWorker ? 45 : role === 'events' ? 43 : 44
     nativeBody = actual => { assert(actual.equals(tuple)); return operation() }
     try { return callbacks.get(args[2].value)(tuple) } finally { currentThread = outerThread }
   }
-  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, register, frame, worker, invocations, excluded, following, memory, object, timers, collected }
+  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, stack, register, frame, worker, invocations, excluded, following, memory, object, timers, collected }
 }
 
 test('Frida socket diagnostics install no protected hooks or Stalker callouts', () => {
@@ -174,7 +178,7 @@ test('actual Stalker peer callouts produce matching Login and reply keys/nonces 
   assert(c.hooks.every(hook => typeof hook.address === 'string' || hook.address.value === 0x50001000))
   const transport = new NativeTransport(serverSecret)
   c.frame(() => {
-    assert.equal(c.callouts.size, 10)
+    assert.equal(c.callouts.size, 13)
     c.state(login, 3)
     const keyPointer = c.probe(0x3bcc68).x2
     const raw = Buffer.from(keyPointer.readByteArray(32))
@@ -266,8 +270,44 @@ test('Worker selection ignores unrelated threads and adjusted member functions',
   const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
   c.worker('other', () => assert.fail('Unrelated worker was wrapped'))
   c.worker('events', () => assert.fail('Adjusted member was wrapped'), false)
+  c.worker('socket-other', () => assert.fail('Socket without a Messaging callback was wrapped'))
   assert.equal(c.callouts.size, 0)
   assert(!c.logs.some(log => log.event === 'messaging-worker-registered'))
+  assert(!c.logs.some(log => log.event === 'development-peer-error'))
+})
+
+test('Socket reader uses the inline Login stack slot and authenticates without deferred Login probes', () => {
+  const serverSecret = Buffer.alloc(32, 29)
+  const peer = keyPair(serverSecret)
+  const c = client(peer.publicKey.toString('hex'))
+  const transport = new NativeTransport(serverSecret)
+  c.stack.add(0x60).writePointer(new c.Pointer(0xbad0))
+  c.worker('socket', () => {
+    assert.deepEqual(Array.from(c.following), [45])
+    c.state(login, 3)
+    const sharedPointer = c.probe(0x2641e4).x2
+    const raw = Buffer.from(sharedPointer.readByteArray(32))
+    const noncePointer = c.probe(0x264200).x3
+    assert.deepEqual(Buffer.from(sharedPointer.readByteArray(32)), Buffer.alloc(32))
+    const nonce = Buffer.from(noncePointer.readByteArray(24))
+    const box = seal(Buffer.from(login.nativePaddedPlaintext, 'hex').subarray(32), nonce, core(Buffer.alloc(16), raw, true))
+    c.probe(0x264204)
+    assert.deepEqual(Buffer.from(noncePointer.readByteArray(24)), Buffer.alloc(24))
+    transport.hello(Buffer.from(login.serverHelloNonce, 'hex'))
+    assert.deepEqual(transport.decode({ id: 10101, payload: Buffer.concat([Buffer.from(login.clientPublicKey, 'hex'), box]) }), Buffer.from(login.loginPayload, 'hex'))
+    c.state(login, 4)
+    const replyRaw = Buffer.from(c.probe(0x27eab4).x2.readByteArray(32))
+    const replyNonce = Buffer.from(c.probe(0x27ead4).x3.readByteArray(24))
+    const reply = transport.encode({ id: 20103, version: 4, payload: Buffer.from(failed.payload, 'hex') }).payload
+    assert.deepEqual(open(reply, replyNonce, core(Buffer.alloc(16), replyRaw, true)).subarray(56), Buffer.from(failed.payload, 'hex'))
+    c.probe(0x27ead8)
+    assert.equal(c.following.size, 0)
+    return new c.Pointer(0)
+  })
+  assert(c.logs.some(log => log.event === 'development-peer-shared' && log.path === 'server-hello-login' && log.thread === 45))
+  assert(!c.logs.some(log => log.event === 'development-peer-shared' && log.path === 'deferred-login'))
+  assert(!c.logs.some(log => log.event === 'development-peer-error'))
+  transport.close()
 })
 
 test('A new connection resumes existing native workers after a closed socket', () => {
