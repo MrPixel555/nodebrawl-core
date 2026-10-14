@@ -27,7 +27,7 @@ destination.write_bytes(raw)
 environment = os.environ.copy()
 environment['GAME_ANALYSIS_DIR'] = str(args.output.resolve())
 scripts = Path(__file__).parent / 'reverse'
-for step in ['analyze_elf.py', 'inspect_hook_integrity.py', 'find_messages.py', 'extract_schemas.py', 'verify_schemas.py', 'verify_factory.py']:
+for step in ['analyze_elf.py', 'inspect_hook_integrity.py', 'verify_messaging_workers.py', 'find_messages.py', 'extract_schemas.py', 'verify_schemas.py', 'verify_factory.py']:
     subprocess.run([sys.executable, str(scripts / step)], env=environment, check=True)
 export = subprocess.run(['node', str(Path(__file__).parent / 'export-native-schemas.js')], check=True, stdout=subprocess.PIPE)
 (args.output / 'extra-schemas.json').write_bytes(export.stdout)

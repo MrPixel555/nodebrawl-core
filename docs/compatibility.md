@@ -177,6 +177,32 @@ Stalker's indirect-call exclusions also cover JNI's BLR calls. This test does no
 execute ART or validate that ARM64 behavior on a device. Reproduce with
 `python3 tools/check-frida-stalker.py` on Linux x86-64 with Python `frida` and `cc`.
 
+The JNI scope alone missed the device's handshake: the next device report included
+server receipt of Login `10101`, version 4, 358 payload bytes, rejected with
+`Ciphertext authentication failed`, with no peer key/nonce callouts in the client
+log. The unchanged development public key does not establish that its override
+executed. The ready script now also wraps the two native Messaging workers.
+`verify_messaging_workers.py` runs the original constructor `0x23fe4c` in Unicorn
+with only OS thread/socket adapters. It observes two `pthread_create` calls with
+start `0x8011bc`, members `0x16db08` and `0x6a5ab8`, adjustment zero, and the same
+Messaging instance with vtable `0xa5b528`. The tuple is 32 bytes: TLS pointer,
+member, adjustment and instance. [Worker observation](native-messaging-workers.json)
+records these executed constructor results.
+
+The Frida adapter selects only these tuples and replaces the `pthread_create`
+start argument with a native bridge. The original tuple, vtable and executable
+bytes are untouched. Both native workers are followed with system libraries
+excluded; after the reply-open result, all active scopes are unfollowed. A new
+game connection resumes only previously identified live native workers. The
+script does not follow a Java thread outside its bounded native update.
+`tools/check-frida-workers.py` passed on Frida 17.15.4 Linux x86-64 with two real
+pthreads: both saw argument overrides, an unrelated thread stayed untraced,
+one worker stopped both traces, subsequent calls ran unmodified, original tuples
+and code stayed unchanged, and original arguments/results were forwarded.
+This is not Android or ARM64 runtime validation. Device output must now include
+`diagnostics:"network-v2"`, both `messaging-worker-scope-started` roles and the
+actual peer crypto callouts before claiming that the authentication failure is fixed.
+
 **OwnHomeData:** the native encoder/decoder call nested LogicClientHome and
 LogicClientAvatar serializers. A further probe showed that the avatar decoder at
 `0x43bda4` requires exactly nine commodity groups; this is a literal constant,
@@ -272,11 +298,16 @@ A NativeCallback wrapper follows the invoking thread only during the original
 native update, called through NativeFunction with cooperative scheduling and
 `traps:'all'`. A finally block unfollows it and schedules collection of completed contexts
 before returning to ART. All other modules, including ART, are excluded. There
-is no GL-thread polling or thread activation from socket callbacks. Nested native
+is no GL-thread polling. Nested native
 scopes retain their outer trace; subsequent frames use an untraced bridge after
 the authenticated-open result. Socket Interceptor hooks remain active in that
-bridge. Missing RegisterNatives symbols leave tracing disabled with a diagnostic.
-This requires spawn-time script loading before JNI registration, using `-f`.
+bridge. Missing RegisterNatives symbols disable only the JNI bridge with a diagnostic;
+the verified Messaging worker adapter remains available. That adapter wraps the
+original native pthread trampoline and follows only its two verified member types.
+The incoming reply-open result or game-socket closure unfollows active scopes.
+On reconnect, only the recorded live Messaging workers resume tracing from the
+socket callback; this does not activate whole-GLThread tracing.
+This requires spawn-time script loading before worker creation, using `-f`.
 Temporary tracing can slow loading. Architecture, build ID, update entry and
 all call-site instructions must match before probes activate. A key-pair check
 guards reads of the Messaging slots. A profile mismatch leaves the peer unchanged.
@@ -299,8 +330,12 @@ changes and ClientHello/Login encoding metadata. Socket observations cover all
 six scalar imported I/O APIs: send/recv, sendto/recvfrom and write/read. Nested
 aliases are counted once and repeated identical errors are suppressed. Stalker
 collection is delayed by 50 ms on the script thread instead of running inside
-the render-thread callback. These diagnostics still require the next device log
-to locate the loading stall; they are not evidence that authentication succeeds.
+the render-thread callback. Zero socket counters are not evidence of no traffic
+when the server has received a frame. The next report did confirm receipt of
+Login with an authentication failure while all peer callouts were absent. The
+`network-v2` worker adapter addresses that missing execution scope; a new device
+log must verify the actual override and authenticated reply before declaring the
+handshake fixed.
 
 The native VM models single-thread mutexes, condition notifications, static
 initialization guards and reads from `/dev/urandom`. Contention, unrelated file

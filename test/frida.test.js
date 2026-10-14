@@ -18,6 +18,7 @@ function client (publicKey, profileMatches = true) {
   const logs = []; const hooks = []; const excluded = []; const timers = []; const collected = []
   const callouts = new Map(); const unfollowed = []; const callbacks = new Map(); const invocations = []; const following = new Set()
   let nativeBody = () => 1
+  let currentThread = 42
   let allocation = 0x40000000
   class Pointer {
     constructor (value) { this.value = Number(value) }
@@ -26,6 +27,7 @@ function client (publicKey, profileMatches = true) {
     toUInt32 () { return this.value >>> 0 }
     toInt32 () { return this.value | 0 }
     equals (other) { return this.value === other.value }
+    isNull () { return this.value === 0 }
     region (size) {
       for (const [base, data] of blocks) if (this.value >= base && this.value + size <= base + data.length) return data.subarray(this.value - base, this.value - base + size)
       throw new Error('Unmapped test memory ' + this.toString())
@@ -47,21 +49,22 @@ function client (publicKey, profileMatches = true) {
   const art = { name: 'libart.so', size: 0x10000, base: new Pointer(0x50000000), enumerateSymbols: () => [{ name: '_ZN3art3JNI_RegisterNatives', address: new Pointer(0x50001000) }] }
   blocks.set(base.value, Buffer.from('7f454c46', 'hex'))
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
-  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9']]
+  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
   const originalInstructions = instructions.map(([offset]) => Buffer.from(blocks.get(base.value + offset)))
   blocks.set(base.value + 0x3f3f9c, Buffer.from('f30f1ef8fd7b01a9fd430091c84b00f0', 'hex'))
   const memory = { alloc (size) { const pointer = new Pointer(allocation); blocks.set(allocation, Buffer.alloc(size)); allocation += size + 16; return pointer } }
   const context = vm.createContext({
     console: { log: value => logs.push(JSON.parse(value)) },
-    Process: { arch: 'arm64', getCurrentThreadId: () => 42, enumerateModules: () => [module, art], findModuleByName: name => name === 'libart.so' ? art : null, attachModuleObserver: observer => observer.onAdded(module) },
+    Process: { arch: 'arm64', getCurrentThreadId: () => currentThread, enumerateModules: () => [module, art], findModuleByName: name => name === 'libart.so' ? art : null, attachModuleObserver: observer => observer.onAdded(module) },
     Module: { getGlobalExportByName: name => name },
     Memory: memory,
     ptr: value => new Pointer(Number(value)),
     NativeFunction: function (address, returnType, argumentTypes, settings) {
-      assert(address.equals(base.add(0x3f3f9c)))
-      assert.equal(returnType, 'uint8')
-      assert.equal(JSON.stringify(argumentTypes), '["pointer","pointer"]')
+      const worker = address.equals(base.add(0x8011bc))
+      assert(worker || address.equals(base.add(0x3f3f9c)))
+      assert.equal(returnType, worker ? 'pointer' : 'uint8')
+      assert.equal(JSON.stringify(argumentTypes), worker ? '["pointer"]' : '["pointer","pointer"]')
       return (...args) => { invocations.push({ args, settings }); return nativeBody(...args) }
     },
     NativeCallback: function (fn) { const pointer = memory.alloc(16); callbacks.set(pointer.value, fn); return pointer },
@@ -113,6 +116,7 @@ function client (publicKey, profileMatches = true) {
   }
   const object = new Pointer(0x20000000); const stack = new Pointer(0x30000000)
   const data = Buffer.alloc(0x300); blocks.set(object.value, data)
+  data.writeBigUInt64LE(BigInt(base.value + 0xa5b528))
   const stackBytes = Buffer.alloc(0x400); blocks.set(stack.value, stackBytes)
   stackBytes.writeBigUInt64LE(BigInt(object.value), 0x60)
   stackBytes.writeBigUInt64LE(BigInt(object.value), 0x3b0)
@@ -121,12 +125,32 @@ function client (publicKey, profileMatches = true) {
     for (const [name, offset] of [['clientPublicKey', 0x260], ['clientSecret', 0x280], ['clientNonce', 0x2a0]]) Buffer.from(fixture[name], 'hex').copy(data, offset)
   }
   function probe (offset, registers = {}) {
-    assert(following.has(42), 'Peer probes must execute inside the native frame')
+    assert(following.has(currentThread), 'Peer probes must execute inside the native scope')
     const value = { sp: stack, x0: new Pointer(0), x2: new Pointer(128), ...registers }
     callouts.get(offset)(value)
     return value
   }
-  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, register, frame, invocations, excluded, following, memory, object, timers, collected }
+  function worker (role, operation, valid = true) {
+    const tuple = memory.alloc(32)
+    tuple.writePointer(new Pointer(1234))
+    tuple.add(8).writePointer(base.add(role === 'events' ? 0x16db08 : role === 'send' ? 0x6a5ab8 : 0x1234))
+    tuple.add(24).writePointer(object)
+    if (!valid) tuple.add(16).writePointer(new Pointer(1))
+    const before = Buffer.from(tuple.readByteArray(32))
+    const args = [memory.alloc(8), new Pointer(0), base.add(0x8011bc), tuple]
+    const hook = hooks.find(hook => hook.address === 'pthread_create')
+    const invocation = {}
+    hook.callbacks.onEnter.call(invocation, args)
+    hook.callbacks.onLeave.call(invocation, new Pointer(0))
+    assert.deepEqual(Buffer.from(tuple.readByteArray(32)), before, 'The original std::thread tuple must remain unchanged')
+    if (!valid || !['events', 'send'].includes(role)) { assert(args[2].equals(base.add(0x8011bc))); return }
+    assert(!args[2].equals(base.add(0x8011bc)))
+    const outerThread = currentThread
+    currentThread = role === 'events' ? 43 : 44
+    nativeBody = actual => { assert(actual.equals(tuple)); return operation() }
+    try { return callbacks.get(args[2].value)(tuple) } finally { currentThread = outerThread }
+  }
+  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, register, frame, worker, invocations, excluded, following, memory, object, timers, collected }
 }
 
 test('Frida socket diagnostics install no protected hooks or Stalker callouts', () => {
@@ -199,6 +223,70 @@ test('peer callouts reject invalid native key state without writing argument reg
   const original = new c.Pointer(1234)
   c.frame(() => { assert.equal(c.probe(0x3bcc68, { x2: original }).x2, original); return 1 })
   assert(c.logs.some(log => log.event === 'development-peer-error' && log.message === 'Native client key pair mismatch'))
+})
+
+test('Messaging workers apply the peer outside JNI and stop both traces after an authenticated reply', () => {
+  const serverSecret = Buffer.alloc(32, 29)
+  const peer = keyPair(serverSecret)
+  const c = client(peer.publicKey.toString('hex'))
+  const transport = new NativeTransport(serverSecret)
+  const vtable = Buffer.from(c.data.subarray(0, 8))
+  c.worker('send', () => {
+    assert.deepEqual(Array.from(c.following), [44])
+    c.state(login, 3)
+    const raw = Buffer.from(c.probe(0x3bcc68).x2.readByteArray(32))
+    const nonce = Buffer.from(c.probe(0x3bcc84).x3.readByteArray(24))
+    const box = seal(Buffer.from(login.nativePaddedPlaintext, 'hex').subarray(32), nonce, core(Buffer.alloc(16), raw, true))
+    c.probe(0x3bcc88)
+    transport.hello(Buffer.from(login.serverHelloNonce, 'hex'))
+    assert.deepEqual(transport.decode({ id: 10101, payload: Buffer.concat([Buffer.from(login.clientPublicKey, 'hex'), box]) }), Buffer.from(login.loginPayload, 'hex'))
+    c.worker('events', () => {
+      assert.deepEqual(Array.from(c.following), [44, 43])
+      c.state(login, 4)
+      const raw = Buffer.from(c.probe(0x27eab4).x2.readByteArray(32))
+      const nonce = Buffer.from(c.probe(0x27ead4).x3.readByteArray(24))
+      const reply = transport.encode({ id: 20103, version: 4, payload: Buffer.from(failed.payload, 'hex') }).payload
+      assert.deepEqual(open(reply, nonce, core(Buffer.alloc(16), raw, true)).subarray(56), Buffer.from(failed.payload, 'hex'))
+      c.probe(0x27ead8)
+      assert.equal(c.following.size, 0, 'An incoming reply must also stop the other live worker')
+      return new c.Pointer(0)
+    })
+    assert.equal(c.following.size, 0)
+    return new c.Pointer(0)
+  })
+  assert(!c.logs.some(log => log.event === 'jni-frame-registered'))
+  assert(c.logs.some(log => log.event === 'development-peer-tracing-stopped' && log.reason === 'reply-opened'))
+  assert.deepEqual(c.data.subarray(0, 8), vtable)
+  for (let n = 0; n < c.instructions.length; n++) assert.deepEqual(c.blocks.get(c.base.value + c.instructions[n][0]), c.originalInstructions[n])
+  assert(!JSON.stringify(c.logs).includes(login.clientSecret))
+  transport.close()
+})
+
+test('Worker selection ignores unrelated threads and adjusted member functions', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
+  c.worker('other', () => assert.fail('Unrelated worker was wrapped'))
+  c.worker('events', () => assert.fail('Adjusted member was wrapped'), false)
+  assert.equal(c.callouts.size, 0)
+  assert(!c.logs.some(log => log.event === 'messaging-worker-registered'))
+})
+
+test('A new connection resumes existing native workers after a closed socket', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
+  const hooks = new Map(c.hooks.map(hook => [hook.address, hook.callbacks]))
+  const address = c.memory.alloc(16)
+  const data = Buffer.alloc(16); data.writeUInt16LE(2); data.writeUInt16BE(9339, 2)
+  address.writeByteArray(data)
+  const args = [new c.Pointer(145), address, new c.Pointer(16)]
+  c.worker('events', () => {
+    hooks.get('connect').onEnter.call({}, args)
+    hooks.get('close').onEnter.call({}, args)
+    assert.equal(c.following.size, 0)
+    hooks.get('connect').onEnter.call({}, args)
+    assert(c.following.has(43))
+    assert(c.logs.some(log => log.event === 'messaging-worker-scope-resumed' && log.thread === 43))
+    return new c.Pointer(0)
+  })
+  assert.equal(c.following.size, 0)
 })
 
 test('JNI bridge excludes ART, traces only the native invocation and forwards its arguments/result', () => {

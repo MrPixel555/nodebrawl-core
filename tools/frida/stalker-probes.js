@@ -7,7 +7,7 @@ function createStalkerProbes (probes) {
   const callbacks = new Map(probes.map(probe => [probe.address.toString(), probe.callback]))
   const threads = new Set()
   let collectionQueued = false
-  return {
+  const controller = {
     follow (threadId) {
       if (threads.has(threadId)) return false
       Stalker.follow(threadId, {
@@ -34,7 +34,11 @@ function createStalkerProbes (probes) {
         setTimeout(() => { collectionQueued = false; Stalker.garbageCollect() }, 50)
       }
     },
+    stop () {
+      for (const thread of Array.from(threads)) controller.unfollow(thread)
+    },
   }
+  return controller
 }
 
 module.exports = { createStalkerProbes }

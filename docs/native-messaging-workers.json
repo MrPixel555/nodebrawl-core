@@ -1,0 +1,26 @@
+{
+  "constructor": "0x23fe4c",
+  "vtable": "0xa5b528",
+  "tupleBytes": 32,
+  "tupleFields": [
+    "TLS",
+    "member",
+    "adjustment",
+    "instance"
+  ],
+  "workers": [
+    {
+      "start": "0x8011bc",
+      "member": "0x16db08",
+      "adjustment": 0,
+      "instanceMatches": true
+    },
+    {
+      "start": "0x8011bc",
+      "member": "0x6a5ab8",
+      "adjustment": 0,
+      "instanceMatches": true
+    }
+  ],
+  "scope": "Original ARM64 constructor in Unicorn; OS adapters; no Android runtime verification"
+}

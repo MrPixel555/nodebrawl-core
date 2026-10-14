@@ -7,6 +7,7 @@ const activeIO = new Set()
 const installed = new Set()
 const temporaries = new Map()
 const registrationRoots = []
+const workerThreads = new Map()
 let probes = null
 let peerActive = Boolean(configuration.serverPublicKey)
 function record (event, fields = {}) { console.log(JSON.stringify({ event, ...fields })) }
@@ -20,11 +21,16 @@ function clearTemporary (thread) {
   if (value) value.pointer.writeByteArray(Array(value.size).fill(0))
   temporaries.delete(thread)
 }
+function stopPeerTracing (reason) {
+  peerActive = false
+  if (probes) probes.stop()
+  record('development-peer-tracing-stopped', { reason })
+}
 function instrument (module) {
   if (probes && module.name !== 'libg.so') Stalker.exclude({ base: module.base, size: module.size })
   if (module.name !== 'libg.so' || installed.has(module.base.toString())) return
   if (Process.arch !== 'arm64') { record('unsupported-architecture', { arch: Process.arch }); return }
-  if (module.size < 0x41e924) { record('library-profile-mismatch', { reason: 'module too small' }); return }
+  if (module.size < 0xa5b558) { record('library-profile-mismatch', { reason: 'module too small' }); return }
   const buildId = hex(module.base.add(0x210), 20)
   if (hex(module.base, 4) !== '7f454c46' || buildId !== '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4') { record('library-profile-mismatch', { reason: 'ELF build ID', buildId }); return }
   const locations = [
@@ -34,6 +40,9 @@ function instrument (module) {
     [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'],
     [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'],
     [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'],
+    [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'],
+    [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'],
+    [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'],
   ]
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
@@ -41,7 +50,7 @@ function instrument (module) {
   if (hex(module.base.add(0x3f3f9c), 16) !== 'f30f1ef8fd7b01a9fd430091c84b00f0') { record('library-profile-mismatch', { reason: 'JNI update entry' }); return }
   installed.add(module.base.toString())
   if (configuration.serverPublicKey) installDevelopmentPeer(module)
-  record('library-profile-matched', { module: module.name, buildId, base: module.base.toString(), nativeInlineHooks: 0, mode: configuration.serverPublicKey ? 'jni-scoped-peer' : 'sockets' })
+  record('library-profile-matched', { module: module.name, buildId, base: module.base.toString(), nativeInlineHooks: 0, mode: configuration.serverPublicKey ? 'messaging-workers-and-jni-peer' : 'sockets' })
 }
 
 function installDevelopmentPeer (module) {
@@ -60,7 +69,7 @@ function installDevelopmentPeer (module) {
       const thread = Process.getCurrentThreadId()
       try { action(context, thread) } catch (error) {
         record('development-peer-error', { message: error.message, thread })
-        peerActive = false
+        stopPeerTracing('probe-error')
         clearTemporary(thread)
       }
     }
@@ -103,8 +112,7 @@ function installDevelopmentPeer (module) {
     [0x27ead8, guardProbe((context, thread) => {
       clearTemporary(thread)
       record('development-peer-open-result', { result: context.x0.toInt32() })
-      peerActive = false
-      // The JNI wrapper ends tracing after the complete native frame returns.
+      stopPeerTracing(context.x0.toInt32() === 0 ? 'reply-opened' : 'reply-rejected')
     })],
   ]
   const lastStates = new Map()
@@ -137,6 +145,54 @@ function installDevelopmentPeer (module) {
     if (other.name !== 'libg.so') Stalker.exclude({ base: other.base, size: other.size })
   }
   installNativeFrame(module)
+  installMessagingWorkers(module)
+}
+
+function installMessagingWorkers (module) {
+  // std::thread's heap tuple is { TLS, member function, adjustment, this }.
+  // Only the two workers created by Messaging's constructor are accepted.
+  // Replace pthread_create's start argument, never the original tuple or code.
+  const callbacks = new Map()
+  Interceptor.attach(api('pthread_create'), {
+    onEnter (args) {
+      if (!args[2].equals(module.base.add(0x8011bc))) return
+      try {
+        const tuple = args[3]
+        const member = tuple.add(8).readPointer()
+        const role = member.equals(module.base.add(0x16db08)) ? 'events' : member.equals(module.base.add(0x6a5ab8)) ? 'send' : null
+        if (!role || !tuple.add(16).readPointer().isNull()) return
+        if (!tuple.add(24).readPointer().readPointer().equals(module.base.add(0xa5b528))) return
+        let replacement = callbacks.get(role)
+        if (!replacement) {
+          replacement = clientFrame.createNativeFrame(module.base.add(0x8011bc), 'pointer', ['pointer'], {
+            probes,
+            shouldTrace: () => peerActive,
+            onEnter (thread) {
+              workerThreads.set(thread, role)
+              record('messaging-worker-scope-started', { thread, role, interpreterExcluded: true })
+            },
+            onLeave (thread) {
+              workerThreads.delete(thread)
+              clearTemporary(thread)
+              record('messaging-worker-scope-complete', { thread, role })
+            },
+            onError (error) { stopPeerTracing('worker-error'); record('development-peer-error', { message: error.message }) },
+          })
+          callbacks.set(role, replacement)
+          registrationRoots.push({ replacement })
+        }
+        args[2] = replacement
+        this.role = role
+      } catch (error) {
+        stopPeerTracing('worker-profile-error')
+        record('development-peer-error', { message: error.message })
+      }
+    },
+    onLeave (result) {
+      if (this.role) record('messaging-worker-registered', { role: this.role, result: result.toInt32(), nativeInlineHooks: 0 })
+    },
+  })
+  record('messaging-worker-adapter-ready', { roles: ['events', 'send'], nativeInlineHooks: 0, spawnRequired: true })
 }
 
 function installNativeFrame (module) {
@@ -148,8 +204,7 @@ function installNativeFrame (module) {
     }
   }
   if (!addresses.size) {
-    peerActive = false
-    record('development-peer-unavailable', { reason: 'ART RegisterNatives entry not found; no thread tracing started' })
+    record('jni-frame-unavailable', { reason: 'ART RegisterNatives entry not found; Messaging workers remain available' })
     return
   }
   let registered = false
@@ -208,7 +263,7 @@ function installNativeFrame (module) {
       },
     })
   }
-  record('development-peer-enabled', { publicKey: configuration.serverPublicKey, method: 'stalker-jni-scope', nativeInlineHooks: 0, spawnRequired: true })
+  record('development-peer-enabled', { publicKey: configuration.serverPublicKey, method: 'stalker-messaging-workers-and-jni', nativeInlineHooks: 0, spawnRequired: true })
 }
 
 Interceptor.attach(api('connect'), {
@@ -226,6 +281,11 @@ Interceptor.attach(api('connect'), {
     ioStatus.set(socket, { started: new Set(), errors: new Map(), sentBytes: 0, receivedBytes: 0 })
     this.socket = socket
     peerActive = Boolean(configuration.serverPublicKey)
+    if (peerActive && probes) {
+      for (const [thread, role] of workerThreads) {
+        if (probes.follow(thread)) record('messaging-worker-scope-resumed', { thread, role })
+      }
+    }
     if (configuration.host) {
       const replacement = Memory.alloc(size)
       bytes[2] = configuration.port >>> 8
@@ -286,6 +346,7 @@ Interceptor.attach(api('close'), {
     const socket = args[0].toInt32()
     const status = ioStatus.get(socket)
     if (status) record('game-socket-close', { socket, sentBytes: status.sentBytes, receivedBytes: status.receivedBytes })
+    if (status && peerActive) stopPeerTracing('socket-closed')
     ioStatus.delete(socket)
     sockets.delete(socket)
   },
@@ -297,4 +358,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'jni-update-only', diagnostics: 'network-v1' })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v2' })
