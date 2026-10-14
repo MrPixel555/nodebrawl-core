@@ -13,7 +13,7 @@ const failed = require('./fixtures/native-encrypted-failed.json')
 
 // Executes the actual generated script in a small Frida API model. Native
 // call-site stack slots are checked separately by verify_development_peer.py.
-function client (publicKey, profileMatches = true) {
+function client (publicKey, profileMatches = true, traceHome = false) {
   const blocks = new Map()
   const logs = []; const hooks = []; const excluded = []; const timers = []; const collected = []
   const callouts = new Map(); const unfollowed = []; const callbacks = new Map(); const invocations = []; const following = new Set()
@@ -51,6 +51,9 @@ function client (publicKey, profileMatches = true) {
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
   const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
+  blocks.set(base.value + 0x154440, Buffer.from('f50f1df8f44f01a9fd7b02a9fd830091', 'hex'))
+  blocks.set(base.value + 0x1544f4, Buffer.from('fd7b42a9f44f41a9', 'hex'))
+  if (traceHome) instructions.push([0x154440, 'f50f1df8f44f01a9fd7b02a9fd830091'], [0x1544f4, 'fd7b42a9f44f41a9'])
   const originalInstructions = instructions.map(([offset]) => Buffer.from(blocks.get(base.value + offset)))
   blocks.set(base.value + 0x3f3f9c, Buffer.from('f30f1ef8fd7b01a9fd430091c84b00f0', 'hex'))
   const memory = { alloc (size) { const pointer = new Pointer(allocation); blocks.set(allocation, Buffer.alloc(size)); allocation += size + 16; return pointer } }
@@ -86,7 +89,7 @@ function client (publicKey, profileMatches = true) {
   })
   const source = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8')
   const bundle = (name, file) => `const ${name} = (() => { const module = {exports:{}}; ${source(file)}; return module.exports })();\n`
-  vm.runInContext(`const configuration = ${JSON.stringify({ host: '198.51.100.3', port: 9339, serverPublicKey: publicKey })};\n` + bundle('clientCrypto', 'lib/protocol/crypto-math.js') + bundle('clientProbes', 'tools/frida/stalker-probes.js') + bundle('clientFrame', 'tools/frida/native-frame.js') + source('tools/frida/client-trace.js'), context)
+  vm.runInContext(`const configuration = ${JSON.stringify({ host: '198.51.100.3', port: 9339, serverPublicKey: publicKey, traceHome })};\n` + bundle('clientCrypto', 'lib/protocol/crypto-math.js') + bundle('clientProbes', 'tools/frida/stalker-probes.js') + bundle('clientFrame', 'tools/frida/native-frame.js') + source('tools/frida/client-trace.js'), context)
   let replacement
   const methods = memory.alloc(48)
   const name = memory.alloc(7); name.writeByteArray(Buffer.from('update\0'))
@@ -308,6 +311,46 @@ test('Socket reader uses the inline Login stack slot and authenticates without d
   assert(!c.logs.some(log => log.event === 'development-peer-shared' && log.path === 'deferred-login'))
   assert(!c.logs.some(log => log.event === 'development-peer-error'))
   transport.close()
+})
+
+test('Home tracing keeps the reader after LoginOk and stops after decoded card metadata', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'), true, true)
+  const message = c.memory.alloc(0xa8)
+  const home = c.memory.alloc(0x730)
+  const avatar = c.memory.alloc(0x1a0)
+  message.add(0x80).writePointer(home)
+  message.add(0x88).writePointer(avatar)
+  message.add(0x24).writeByteArray(Buffer.from([0x6f, 2, 0, 0]))
+  home.add(0x134).writeByteArray(Buffer.from([8, 0, 0, 0]))
+  home.add(0x15c).writeByteArray(Buffer.from([5, 0, 0, 0]))
+  avatar.add(0xd8).writeByteArray(Buffer.from([1, 0, 0, 0]))
+  const ids = require('../server/data/starter-home.json').starter.deckIds
+  for (let n = 0; n < 8; n++) {
+    const card = c.memory.alloc(0x40)
+    const data = c.memory.alloc(0x30)
+    const id = Buffer.alloc(4); id.writeUInt32LE(ids[n])
+    data.add(0x20).writeByteArray(id)
+    card.add(8).writePointer(data)
+    home.add(0x20 + n * 8).writePointer(card)
+  }
+  c.worker('socket', () => {
+    c.state(login, 4)
+    c.probe(0x27ead8)
+    assert(c.following.has(45), 'Successful reply must retain the Home decoder scope when requested')
+    const original = new c.Pointer(1234)
+    assert.equal(c.probe(0x2641e4, { x2: original }).x2, original, 'Peer overrides must stop after the first reply')
+    c.probe(0x154440, { x0: message })
+    c.probe(0x1544f4, { x19: message })
+    assert.equal(c.following.size, 0)
+    return new c.Pointer(0)
+  })
+  const observed = c.logs.find(log => log.event === 'native-home-decode-complete')
+  assert.equal(observed.consumedBytes, 623)
+  assert.deepEqual(observed.cards, ids)
+  assert.equal(observed.decks, 5)
+  assert.equal(observed.level, 1)
+  assert(c.logs.some(log => log.event === 'development-peer-tracing-stopped' && log.reason === 'home-decoded'))
+  assert(!JSON.stringify(c.logs).includes(login.clientSecret))
 })
 
 test('A new connection resumes existing native workers after a closed socket', () => {

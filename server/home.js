@@ -2,8 +2,11 @@
 const fs = require('node:fs/promises')
 const { createHash } = require('node:crypto')
 const { profile } = require('../lib/protocol/messages')
+const { Writer, ProtocolError } = require('../lib/protocol/stream')
+const starter = require('./data/starter-home.json')
 
-// Nested Home data still requires the matching game assets and schema.
+// External templates bind fixed-width account IDs explicitly. The starter
+// profile below uses typed bindings generated from the native nested codecs.
 async function loadHomeTemplate (filename) {
   if (!filename) return null
   const template = JSON.parse(await fs.readFile(filename, 'utf8'))
@@ -24,4 +27,31 @@ async function loadHomeTemplate (filename) {
     return { payload: copy, version: template.version }
   }
 }
-module.exports = { loadHomeTemplate }
+
+function createStarterHomeProvider () {
+  if (starter.schema !== 1 || starter.librarySha256 !== profile.library_sha256 || starter.messageId !== 21217) throw new Error('Starter Home does not match this library')
+  const parts = starter.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
+  return async account => {
+    if (!Array.isArray(account.id) || account.id.length !== 2 || typeof account.name !== 'string' || !account.name || Buffer.byteLength(account.name, 'utf8') > 200) throw new ProtocolError('Invalid starter player identity')
+    const writer = new Writer()
+    for (const part of parts) {
+      if (part.buffer) writer.raw(part.buffer)
+      else if (part.field === 'accountId' && part.type === 'long') writer.long(account.id)
+      else if (part.field === 'accountId' && part.type === 'vlong') { writer.vint(account.id[0]); writer.vint(account.id[1]) }
+      else if (part.field === 'name' && part.type === 'string') writer.string(account.name)
+      else throw new Error('Invalid starter Home binding')
+    }
+    return { payload: writer.toBuffer(), version: starter.version }
+  }
+}
+
+async function loadHomeProvider ({ mode, templatePath } = {}) {
+  mode = mode || (templatePath ? 'template' : 'disabled')
+  if (!['disabled', 'starter', 'template'].includes(mode)) throw new Error('Invalid HOME_MODE; use disabled, starter or template')
+  if (mode !== 'template' && templatePath) throw new Error('HOME_TEMPLATE_PATH requires HOME_MODE=template')
+  if (mode === 'template' && !templatePath) throw new Error('HOME_MODE=template requires HOME_TEMPLATE_PATH')
+  if (mode === 'starter') return createStarterHomeProvider()
+  return mode === 'template' ? loadHomeTemplate(templatePath) : null
+}
+
+module.exports = { loadHomeTemplate, createStarterHomeProvider, loadHomeProvider }

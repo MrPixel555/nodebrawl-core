@@ -8,7 +8,7 @@ const os = require('node:os')
 const path = require('node:path')
 const { AccountStore } = require('../server/accounts')
 const { createGameServer } = require('../server/core')
-const { loadHomeTemplate } = require('../server/home')
+const { loadHomeTemplate, createStarterHomeProvider } = require('../server/home')
 const { createHash } = require('node:crypto')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
@@ -157,37 +157,40 @@ test('invalid server configuration is rejected before connections arrive', () =>
   }
 })
 
-test('encrypted TCP hello, LoginOk/Home and heartbeat work in both directions', { timeout: 5000 }, async t => {
-  const { NativeTransport } = require('../server/transport')
-  const { keyPair, boxKey } = require('../lib/protocol/salsa17')
-  const { sealLogin, openLoginReply, SessionCipher } = require('../lib/protocol/transport')
-  const secret = Buffer.alloc(32, 13); const peer = keyPair(secret).publicKey
-  const clientSecret = Buffer.alloc(32, 7); const clientPublicKey = keyPair(clientSecret).publicKey
-  const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
-  const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret), homeProvider: async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
-  const c = await client(port)
-  c.send(10100)
-  const hello = decodeMessage(20100, (await c.receive()).payload)
-  const box = sealLogin({ payload: encodeMessage(10101), sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverHelloNonce: hello.nonce })
-  c.socket.write(encodeFrame(10101, 4, box))
-  const reply = await c.receive()
-  assert.equal(reply.id, 20758)
-  const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
-  const account = decodeMessage(20758, opened.payload)
-  assert.equal(account.field_0x80[1], 1)
-  const receive = new SessionCipher(opened.sessionKey, opened.serverNonce)
-  const send = new SessionCipher(opened.sessionKey, clientNonce)
-  const home = await c.receive()
-  assert.equal(home.id, 21217)
-  assert.equal(receive.decrypt(home.payload).toString(), 'SYNTHETIC HOME FOR TCP TEST ONLY')
-  for (let n = 0; n < 2; n++) {
-    c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
-    const response = await c.receive()
-    assert.equal(response.id, 20108); assert.equal(receive.decrypt(response.payload).length, 0)
-  }
-  assert.equal(game.statistics.logins, 1)
-  receive.close(); send.close()
-})
+for (const starterHome of [false, true]) {
+  test(`encrypted TCP hello, ${starterHome ? 'native starter' : 'synthetic'} Home and heartbeat work in both directions`, { timeout: 5000 }, async t => {
+    const { NativeTransport } = require('../server/transport')
+    const { keyPair, boxKey } = require('../lib/protocol/salsa17')
+    const { sealLogin, openLoginReply, SessionCipher } = require('../lib/protocol/transport')
+    const secret = Buffer.alloc(32, 13); const peer = keyPair(secret).publicKey
+    const clientSecret = Buffer.alloc(32, 7); const clientPublicKey = keyPair(clientSecret).publicKey
+    const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
+    const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+    const c = await client(port)
+    c.send(10100)
+    const hello = decodeMessage(20100, (await c.receive()).payload)
+    const box = sealLogin({ payload: encodeMessage(10101), sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverHelloNonce: hello.nonce })
+    c.socket.write(encodeFrame(10101, 4, box))
+    const reply = await c.receive()
+    assert.equal(reply.id, 20758)
+    const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
+    const account = decodeMessage(20758, opened.payload)
+    assert.equal(account.field_0x80[1], 1)
+    const receive = new SessionCipher(opened.sessionKey, opened.serverNonce)
+    const send = new SessionCipher(opened.sessionKey, clientNonce)
+    const home = await c.receive()
+    assert.equal(home.id, 21217)
+    const expected = starterHome ? Buffer.from(require('./fixtures/native-starter-home.json').find(f => f.accountId[1] === 1).payloadHex, 'hex') : Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY')
+    assert.deepEqual(receive.decrypt(home.payload), expected)
+    for (let n = 0; n < 2; n++) {
+      c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
+      const response = await c.receive()
+      assert.equal(response.id, 20108); assert.equal(receive.decrypt(response.payload).length, 0)
+    }
+    assert.equal(game.statistics.logins, 1)
+    receive.close(); send.close()
+  })
+}
 
 test('missing Home returns encrypted LoginFailed after encrypted Login', { timeout: 5000 }, async t => {
   const { NativeTransport } = require('../server/transport')

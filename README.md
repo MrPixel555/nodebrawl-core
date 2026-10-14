@@ -1,12 +1,13 @@
 # سرور پروتکل Clash Royale 3.1.0
 
-این نسخه در nodebrawl-core، بر اساس کتابخانهٔ ARM64 و APK ارسالی ساخته شده است. **هنوز سرور کامل و قابل‌بازی نیست:** وضعیت معتبر بازیکن و Home، handlerهای بازی و شبیه‌سازی نبرد کامل نشده‌اند.
+این نسخه در nodebrawl-core، بر اساس کتابخانهٔ ARM64 و APK ارسالی ساخته شده است. **هنوز سرور کامل و قابل‌بازی نیست:** Home اولیه برای آزمون لابی اضافه شده، اما نمایش لابی روی Android، handlerهای بازی و شبیه‌سازی نبرد کامل نشده‌اند.
 
 - کاتالوگ ۲۸۴ شناسه و ۱۵۹ کدک پیام؛ قالب‌ها با encoder/decoder اصلی کتابخانه بررسی شده‌اند.
 - دریافت TCP تکه‌تکه، چند فریم در یک دریافت، محدودیت صف/اندازه، heartbeat و ذخیرهٔ اتمی حساب‌ها.
 - انتقال اختیاری `nacl17`: Login رمز‌شده، LoginOk/LoginFailed رمز‌شده و کلید/nonce مستقل پیام‌های بعدی.
 - اسکریپت Frida برای ثبت اتصال، تغییر آدرس و تنظیم اختیاری کلید عمومی سرور توسعه.
-- مسیر رمزنگاری و تنظیم کلید با توابع اصلی کتابخانه در Unicorn آزموده شده؛ اسکریپت فعلی برای حفظ checksum از Stalker استفاده می‌کند. تأیید آن روی Android هنوز لازم است.
+- مسیر رمزنگاری روی گوشی نیز تأیید شد: سرور Login را باز کرد و گوشی پاسخ رمز‌شدهٔ LoginFailed را پذیرفت. این مشاهده به معنای دریافت LoginOk یا ورود به لابی نیست.
+- Home اولیهٔ مبتنی بر serializer اصلی: هشت کارت، پنج deck، Arena1، منابع اولیه و شناسه/نام هماهنگ با حساب؛ فعال‌سازی با `HOME_MODE=starter`.
 
 ## دریافت و اجرا
 
@@ -22,13 +23,14 @@ npm run lint
 برای آزمون اتصال رمز‌شده، سرور را روی کامپیوتر یا سرور خود اجرا کنید:
 
 ```bash
-TRANSPORT=nacl17 HOST=0.0.0.0 PORT=9339 npm start
+TRANSPORT=nacl17 HOME_MODE=starter HOST=0.0.0.0 PORT=9339 npm start
 ```
 
 معادل در Windows CMD:
 
 ```bat
 set TRANSPORT=nacl17
+set HOME_MODE=starter
 set HOST=0.0.0.0
 set PORT=9339
 npm start
@@ -39,19 +41,29 @@ npm start
 برای آزمون داخلی از ترمینال دیگر، کلید عمومی چاپ‌شده را جایگزین کنید:
 
 ```bash
-SERVER_PUBLIC_KEY="PUBLIC_KEY_FROM_SERVER" node tools/smoke-client.js
+EXPECT_HOME=starter SERVER_PUBLIC_KEY="PUBLIC_KEY_FROM_SERVER" node tools/smoke-client.js
 ```
 
-بدون تنظیم `TRANSPORT`، سرور plaintext است و با `node tools/smoke-client.js` آزموده می‌شود. حالت plaintext به کلاینتی با تغییرات متناسب نیاز دارد.
+بدون تنظیم `TRANSPORT`، سرور plaintext است؛ در حالت starter با `EXPECT_HOME=starter node tools/smoke-client.js` آزموده می‌شود. حالت plaintext به کلاینتی با تغییرات متناسب نیاز دارد.
 
-**سرور پیش‌فرض Home معتبر ندارد.** پاسخ فعلی، LoginFailed با توضیح نبودن provider سازگار است. آزمون smoke همین پاسخ را بررسی می‌کند؛ نتیجهٔ آن ورود به بازی نیست.
+بدون `HOME_MODE` یا `HOME_TEMPLATE_PATH`، Home غیرفعال است و پاسخ همان LoginFailed خواهد بود. **برای آزمون Home اولیه، `HOME_MODE=starter` را تنظیم کنید.** در این حالت سرور LoginOk و سپس OwnHomeData می‌فرستد. این provider در decoder اصلی کتابخانه آزموده شده، ولی موفقیت UI و منطق بازی هنوز تأیید نشده است. [محدوده و شواهد Home اولیه](docs/starter-home.md).
+
+برای آزمون داخلی سرور در حالت starter، از ترمینال دیگر اجرا کنید؛ کلید عمومی چاپ‌شده را جایگزین کنید:
+
+```bat
+set EXPECT_HOME=starter
+set SERVER_PUBLIC_KEY=PUBLIC_KEY_FROM_SERVER
+node tools/smoke-client.js
+```
+
+این آزمون LoginOk، Home با شناسهٔ حساب درست و heartbeat رمز‌شده را بررسی می‌کند. آزمون قدیمی LoginFailed را با `HOME_MODE=disabled` روی سرور و `EXPECT_HOME=missing` روی کلاینت smoke اجرا کنید.
 
 ## آزمون دستگاه با Frida
 
 اسکریپت آمادهٔ `client-dev.js` در ریشهٔ ریپازیتوری، برای سرور `223.223.223.1:9339` و کلید عمومی `b82bd01df81e8eba890cb3659d2b2f083a47717dc8159106380ca146bb8b9745` تنظیم شده است. اگر کنسول سرور همین کلید عمومی را نشان می‌دهد، پس از دریافت تغییرات مستقیماً اجرا کنید؛ دانلود فایل جداگانه از چت لازم نیست:
 
 ```bat
-frida -U -f com.supercell.clashroyale -l client-dev.js -o frida-network.log
+frida -U -f com.supercell.clashroyale -l client-dev.js -o frida-home.log
 ```
 
 این فایل با `tools/make-client-trace.js` از سورس‌های ریپازیتوری ساخته شده و کلید خصوصی ندارد. برای آدرس یا کلید عمومی متفاوت، اسکریپت خودتان را طبق دستور زیر بسازید. فایل `.local/server-key.json` قبلی سرور را نگه دارید تا کلید عوض نشود.
@@ -59,19 +71,19 @@ frida -U -f com.supercell.clashroyale -l client-dev.js -o frida-network.log
 در دستور زیر، `192.168.1.10` را با IPv4 قابل دسترس سرورتان و `PUBLIC_KEY_FROM_SERVER` را با کلید عمومی کنسول جایگزین کنید:
 
 ```bash
-node tools/make-client-trace.js --host 192.168.1.10 --port 9339 --server-public-key "PUBLIC_KEY_FROM_SERVER" --output .local/client-jni.js
+node tools/make-client-trace.js --host 192.168.1.10 --port 9339 --server-public-key "PUBLIC_KEY_FROM_SERVER" --trace-home 1 --output .local/client-jni.js
 frida -U -f com.supercell.clashroyale -l .local/client-jni.js -o .local/frida-jni.log
 ```
 
 **اسکریپت قدیمی را حذف/غیرفعال کنید و نسخهٔ تازه بسازید.** هم‌زمان دو اسکریپت را بارگذاری نکنید. گزارش کرش دستگاه نشان داد هوک‌های مستقیم قبلی در محدوده‌های checksum بازی قرار می‌گرفتند و بررسی یکپارچگی به مسیر کرش `libg+0x514b30` می‌رسید. نسخهٔ جدید هیچ هوک مستقیمی در کد `libg.so` نصب نمی‌کند؛ Stalker فقط نسخهٔ اجرایی موقت را ابزارگذاری می‌کند و checksumهای بازی غیرفعال نمی‌شوند.
 
-نسخهٔ بعدی که کل GLThread را دنبال می‌کرد نیز روی Android 14 با Frida 17.15.4 در مسیر مفسر ART کرش کرد. نسخهٔ JNI بعد از آن روی گوشی باز ماند، ولی پیام Login به سرور رسید بدون اینکه رویداد تنظیم کلید ثبت شود. نسخهٔ `network-v2` دو صف `Messaging` را پوشش داد و ClientHello را مشاهده کرد، اما worker خواندن اتصال و مسیر ساخت Login داخل دریافت ServerHello را پوشش نمی‌داد. **نسخهٔ فعلی `network-v3` علاوه بر اجرای بومی `GameApp.update()`، دو صف `Messaging` و worker خواندن اتصال متعلق به آن را پوشش می‌دهد.** آرگومان ورودی این workerها در `pthread_create` جایگزین می‌شود؛ کد کتابخانه و tuple اصلی thread تغییر نمی‌کنند. کتابخانهٔ ART و سایر کتابخانه‌ها از ردیابی کنار گذاشته شده‌اند. اسکریپت باید با `-f` و پیش از ساخت workerها بارگذاری شود.
+نسخهٔ بعدی که کل GLThread را دنبال می‌کرد نیز روی Android 14 با Frida 17.15.4 در مسیر مفسر ART کرش کرد. نسخهٔ JNI بعد از آن روی گوشی باز ماند، ولی پیام Login به سرور رسید بدون اینکه رویداد تنظیم کلید ثبت شود. نسخهٔ `network-v2` دو صف `Messaging` را پوشش داد و ClientHello را مشاهده کرد، اما worker خواندن اتصال و مسیر ساخت Login داخل دریافت ServerHello را پوشش نمی‌داد. **نسخهٔ فعلی مانند `network-v3` علاوه بر اجرای بومی `GameApp.update()`، دو صف `Messaging` و worker خواندن اتصال متعلق به آن را پوشش می‌دهد.** آرگومان ورودی این workerها در `pthread_create` جایگزین می‌شود؛ کد کتابخانه و tuple اصلی thread تغییر نمی‌کنند. کتابخانهٔ ART و سایر کتابخانه‌ها از ردیابی کنار گذاشته شده‌اند. اسکریپت باید با `-f` و پیش از ساخت workerها بارگذاری شود.
 
 برای `nacl17`، **کلید عمومی سرور** چاپ‌شده در کنسول را در `--server-public-key` قرار دهید؛ کلید جداگانه‌ای به نام «کلید کلاینت» لازم نیست. بازی جفت‌کلید موقت خودش را می‌سازد. کلید خصوصی `.local/server-key.json` را در اسکریپت یا لاگ قرار ندهید. در صورت عوض‌شدن کلید سرور، اسکریپت را با کلید عمومی جدید دوباره بسازید.
 
-تنظیم کلید فقط در پردازش جاری انجام می‌شود. Stalker آرگومان کلید مشترک و nonce را در دو مسیر ساخت Login و مسیر بازکردن پاسخ تغییر می‌دهد؛ رمزنگاری پیام‌های جلسه به توابع خود بازی سپرده می‌شود. یک کپی از جدول JNI به `RegisterNatives` داده می‌شود تا اجرای `update()` از یک wrapper عبور کند؛ جدول اصلی تغییر نمی‌کند. پس از بازشدن نخستین پاسخ، ردیابی همهٔ workerهای فعال و فریم فعال متوقف می‌شود. اتصال تازه، workerهای بومی موجود را دوباره فعال می‌کند. ردیابی GLThread هنگام اجرای Java یا مفسر انجام نمی‌شود. این مرحله ممکن است کندتر اجرا شود. سازندهٔ واقعی `Messaging` و شاخهٔ موفق اتصال با adapterهای سیستم‌عامل در Unicorn اجرا شده‌اند؛ رفتار نسخهٔ جدید روی گوشی و UI هنوز تأیید نشده است.
+تنظیم کلید فقط در پردازش جاری انجام می‌شود. Stalker آرگومان کلید مشترک و nonce را در دو مسیر ساخت Login و مسیر بازکردن پاسخ تغییر می‌دهد؛ رمزنگاری پیام‌های جلسه به توابع خود بازی سپرده می‌شود. یک کپی از جدول JNI به `RegisterNatives` داده می‌شود تا اجرای `update()` از یک wrapper عبور کند؛ جدول اصلی تغییر نمی‌کند. پس از بازشدن نخستین پاسخ، تغییر آرگومان‌های رمزنگاری متوقف می‌شود. بدون گزینهٔ `--trace-home 1` ردیابی نیز همان‌جا تمام می‌شود؛ با آن گزینه ردیابی بومی تا پایان decode شدن Home یا بسته‌شدن اتصال باقی می‌ماند. اتصال تازه، workerهای بومی موجود را دوباره فعال می‌کند. ردیابی GLThread هنگام اجرای Java یا مفسر انجام نمی‌شود. این مرحله ممکن است کندتر اجرا شود. رمزنگاری نسخهٔ `network-v3` روی گوشی تأیید شده؛ UI نسخهٔ Home جدید هنوز تأیید نشده است.
 
-اسکریپت معماری ARM64، ELF build ID و بایت‌های محل callها و ورودی workerها را کنترل می‌کند. در خروجی جدید `diagnostics:"network-v3"` و `tracingScope:"messaging-workers-and-jni-update"`، سپس `messaging-worker-registered` و `messaging-worker-scope-started` برای roleهای `events`، `send` و `socket` را بررسی کنید. رویدادهای `development-peer-shared`، `development-peer-seal-result` و `development-peer-open-result` اعمال تنظیم و نتیجهٔ توابع رمزنگاری را نشان می‌دهند؛ `path:"server-hello-login"` مسیر ساخت مستقیم Login هنگام دریافت ServerHello است. `result:0` موفقیت همان تابع است و به‌تنهایی به معنای ورود به بازی نیست. اگر `development-peer-error` دیده شد، متن همان رویداد را گزارش کنید. فایل خروجی `-o` متعلق به Frida است؛ logcat معمولی این رویدادهای JavaScript را ثبت نمی‌کند. کلید خصوصی، توکن حساب و بدنهٔ پیام‌ها ثبت نمی‌شوند.
+اسکریپت معماری ARM64، ELF build ID و بایت‌های محل callها و ورودی workerها را کنترل می‌کند. در خروجی آمادهٔ جدید `diagnostics:"network-v4"` و `homeTrace:true`، سپس workerهای `events`، `send` و `socket` را بررسی کنید. `development-peer-open-result` با `result:0` بازشدن پاسخ رمز‌شده است. با فعال‌بودن starter، رویدادهای `native-home-decode-start` و `native-home-decode-complete` باید تعداد بایت مصرف‌شده، هشت کارت، پنج deck و level 1 را گزارش کنند. این پایان decoder پیام است؛ پذیرش UI بعد از آن مرحله‌ای جداست. کلید خصوصی، توکن حساب، نام/شناسهٔ بازیکن و بدنهٔ Home ثبت نمی‌شوند. فایل خروجی `-o` متعلق به Frida است؛ logcat معمولی این رویدادهای JavaScript را ثبت نمی‌کند.
 
 برای آزمون اتصال با **فقط هوک‌های libc**، دستور تولید را بدون `--server-public-key` و با نام خروجی تازه اجرا کنید. در این حالت نه Stalker فعال است و نه هوکی در `libg.so` نصب می‌شود؛ کلید بازی عوض نمی‌شود و ورود با `nacl17` سرور توسعه انتظار نمی‌رود. برای حفظ آدرس فعلی بازی، `--host` را هم حذف کنید. خروجی موجود بازنویسی نمی‌شود؛ برای اسکریپت تازه، نام خروجی تازه انتخاب کنید.
 
@@ -101,7 +113,10 @@ set TRACE_NETWORK=1
 | `DATA_DIR` | `.local/accounts`؛ یک پردازش برای هر دیتابیس |
 | `SERVER_KEY_PATH` | `.local/server-key.json` در حالت `nacl17` |
 | `TRACE_NETWORK` | `1` برای ثبت رویدادهای اتصال و مشخصات پکت؛ پیش‌فرض خاموش |
+| `HOME_MODE` | `disabled` پیش‌فرض؛ `starter` برای Home اولیهٔ آزمون لابی؛ `template` برای قالب خارجی |
 | `HOME_TEMPLATE_PATH` | مسیر قالب Home معتبر؛ اختیاری |
+
+اگر فقط `HOME_TEMPLATE_PATH` تنظیم شده باشد، حالت `template` انتخاب می‌شود. هم‌زمان آن مسیر و `HOME_MODE=starter` را تنظیم نکنید. حساب‌ها در `.local/accounts` باقی می‌مانند؛ حالت starter فعلاً پیشرفت پویا، ارتقای کارت، فروشگاه یا نبرد پیاده‌سازی نمی‌کند.
 
 قالب Home شامل `librarySha256` مطابق پروفایل، `messageId: 21217`، `version`، `payloadHex`، `payloadSha256` و `accountIdOffsets` است. offsetها باید محل واقعی Long هشت‌بایتی شناسهٔ حساب باشند. بررسی checksum صحت فایل را می‌سنجد؛ سازگاری با بازی نیازمند آزمون جداگانه است.
 

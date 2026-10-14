@@ -378,6 +378,21 @@ disconnected during an asynchronous Home provider is not counted as authenticate
 Tests reproduce those failure cases and encrypted TCP login, ordered Home,
 heartbeat, encrypted missing-Home failure and concurrent persistent-key creation.
 
-The current server deliberately refuses login without a compatible Home provider.
-No shipped fixture or native-empty Home is presented as a playable player state.
-Game handlers, player initialization and battle simulation remain incomplete.
+The network-v3 device report subsequently confirmed the complete encrypted
+transport: the server accepted Login 10101 without a MAC error, sent encrypted
+LoginFailed 20103 for missing Home, and the native reply-open result was zero.
+[Device observation](device-transport.json) preserves only the relevant metadata.
+This confirms the key/nonce adapter on Android; it does not demonstrate LoginOk,
+Home reception or lobby entry.
+
+The server now offers an opt-in `HOME_MODE=starter` provider. Its 623-byte initial
+Home includes eight native card records, five decks, Arena1, initial resources,
+and variable identity/name bindings matched against four complete native codec
+fixtures. Node-produced encrypted LoginOk, starter Home with a variable UTF-8
+identity, and KeepAlive were accepted by the native session parser using explicit
+CSV data lookup adapters. See [starter scope and reproduction](starter-home.md).
+The default remains disabled; a missing provider still returns LoginFailed.
+The ready network-v4 script retains native Home decoder observations only when
+requested with `--trace-home 1`, and stops changing crypto arguments after the
+first reply. Android Home/UI, progression handlers and battle simulation remain
+unverified or incomplete. No native-empty Home is presented as a playable lobby.

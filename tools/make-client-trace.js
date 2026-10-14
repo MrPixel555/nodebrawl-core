@@ -7,14 +7,17 @@ let host = null
 let port = 9339
 let output = null
 let serverPublicKey = null
+let traceHome = false
 for (let n = 0; n < args.length; n += 2) {
   if (args[n] === '--host') host = args[n + 1]
   else if (args[n] === '--port') port = Number(args[n + 1])
   else if (args[n] === '--server-public-key') serverPublicKey = args[n + 1]
   else if (args[n] === '--output') output = args[n + 1]
-  else throw new Error('Usage: node tools/make-client-trace.js [--host IPv4] [--port 9339] [--server-public-key HEX] --output FILE')
+  else if (args[n] === '--trace-home' && ['0', '1'].includes(args[n + 1])) traceHome = args[n + 1] === '1'
+  else throw new Error('Usage: node tools/make-client-trace.js [--host IPv4] [--port 9339] [--server-public-key HEX] [--trace-home 0|1] --output FILE')
 }
 if ((serverPublicKey !== null && (!host || !/^[a-f0-9]{64}$/i.test(serverPublicKey))) || !output || (host !== null && net.isIP(host) !== 4) || !Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Valid output, IPv4 host (optional) and port are required')
+if (traceHome && !serverPublicKey) throw new Error('--trace-home 1 requires --server-public-key')
 const math = fs.readFileSync(path.join(__dirname, '../lib/protocol/crypto-math.js'), 'utf8')
 const bundle = `const clientCrypto = (() => { const module = { exports: {} }; ${math}; return module.exports })()\n`
 const source = fs.readFileSync(path.join(__dirname, 'frida/client-trace.js'), 'utf8')
@@ -23,6 +26,6 @@ const probeBundle = `const clientProbes = (() => { const module = { exports: {} 
 const frame = fs.readFileSync(path.join(__dirname, 'frida/native-frame.js'), 'utf8')
 const frameBundle = `const clientFrame = (() => { const module = { exports: {} }; ${frame}; return module.exports })()\n`
 fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true })
-fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + probeBundle + frameBundle + source, { flag: 'wx' })
+fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey, traceHome })}\n` + bundle + probeBundle + frameBundle + source, { flag: 'wx' })
 console.log(`Created ${output}; logs metadata only; ${host ? `redirects port 9339 to ${host}:${port}` : 'keeps the original connection address'}.`)
 console.log(serverPublicKey ? 'Development peer traces Messaging queues, its socket reader and native JNI updates; both Login paths are covered. Spawn with -f before thread creation. No inline hooks in libg.so. Android verification is required.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')

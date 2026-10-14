@@ -21,8 +21,8 @@ def word(vm, pointer):
 
 
 class MessagingHarness:
-    def __init__(self):
-        self.vm = NativeVM(trace_instructions=False)
+    def __init__(self, vm=None):
+        self.vm = vm if vm is not None else NativeVM(trace_instructions=False)
         self.messaging = self.vm.alloc(0x300)
         self.factory = self.vm.alloc(0x20)
         self.vm.uc.mem_write(self.factory, struct.pack('<Q', 0xa4c938))

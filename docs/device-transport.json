@@ -1,0 +1,22 @@
+{
+  "libraryBuildId": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "platform": "Android ARM64",
+  "fridaVersion": "17.15.4",
+  "scriptDiagnostics": "network-v3",
+  "source": "User-provided paired device and development-server logs",
+  "clientLoginVersion": { "major": 3, "minor": 0, "build": 1945 },
+  "nativeLoginSealResult": 0,
+  "nativeReplyOpenResult": 0,
+  "serverFramesReceived": [
+    { "id": 10100, "version": 0, "payloadBytes": 72 },
+    { "id": 10101, "version": 4, "payloadBytes": 358 }
+  ],
+  "serverFramesSent": [
+    { "id": 20100, "version": 0, "payloadBytes": 28 },
+    { "id": 20103, "version": 4, "payloadBytes": 194 }
+  ],
+  "encryptedTransportConfirmedOnDevice": true,
+  "loginOkObservedOnDevice": false,
+  "homeObservedOnDevice": false,
+  "outcome": "Server authenticated the encrypted Login; device opened the encrypted missing-Home LoginFailed. This does not demonstrate lobby entry."
+}

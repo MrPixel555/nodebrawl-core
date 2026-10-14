@@ -92,6 +92,7 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         session.account = account
         session.state = 'authenticated'
         statistics.logins++
+        trace({ event: 'login-accepted', state: session.state, homeBytes: home.payload.length })
         events.emit('login', session)
       } else if (frame.id === 10108) {
         if (session.state !== 'authenticated') throw new ProtocolError('KeepAlive before authentication')

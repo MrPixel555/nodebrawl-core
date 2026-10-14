@@ -10,6 +10,7 @@ const registrationRoots = []
 const workerThreads = new Map()
 let probes = null
 let peerActive = Boolean(configuration.serverPublicKey)
+let homePending = false
 function record (event, fields = {}) { console.log(JSON.stringify({ event, ...fields })) }
 function hex (pointer, size) { return Array.from(new Uint8Array(pointer.readByteArray(size)), n => n.toString(16).padStart(2, '0')).join('') }
 function api (name) { return typeof Module.getGlobalExportByName === 'function' ? Module.getGlobalExportByName(name) : Module.getExportByName(null, name) }
@@ -23,6 +24,7 @@ function clearTemporary (thread) {
 }
 function stopPeerTracing (reason) {
   peerActive = false
+  homePending = false
   if (probes) probes.stop()
   record('development-peer-tracing-stopped', { reason })
 }
@@ -46,6 +48,8 @@ function instrument (module) {
     [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'],
     [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'],
     [0x7c92b0, '080040f9014940f920001fd6'],
+    [0x154440, 'f50f1df8f44f01a9fd7b02a9fd830091'],
+    [0x1544f4, 'fd7b42a9f44f41a9'],
   ]
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
@@ -117,7 +121,11 @@ function installDevelopmentPeer (module) {
     [0x27ead8, guardProbe((context, thread) => {
       clearTemporary(thread)
       record('development-peer-open-result', { result: context.x0.toInt32() })
-      stopPeerTracing(context.x0.toInt32() === 0 ? 'reply-opened' : 'reply-rejected')
+      if (context.x0.toInt32() === 0 && configuration.traceHome) {
+        peerActive = false
+        homePending = true
+        record('home-trace-waiting')
+      } else stopPeerTracing(context.x0.toInt32() === 0 ? 'reply-opened' : 'reply-rejected')
     })],
   ]
   const lastStates = new Map()
@@ -143,6 +151,27 @@ function installDevelopmentPeer (module) {
     })],
     [0x3affd4, observe(context => record('native-login-build', { state: context.x0.add(0x254).readU32() }))],
   )
+  if (configuration.traceHome) {
+    definitions.push(
+      [0x154440, observe(() => { if (homePending) record('native-home-decode-start', { thread: Process.getCurrentThreadId() }) })],
+      [0x1544f4, observe(context => {
+        if (!homePending) return
+        const message = context.x19
+        const home = message.add(0x80).readPointer()
+        const avatar = message.add(0x88).readPointer()
+        const slots = home.add(0x134).readU32()
+        const cards = Array.from({ length: Math.min(slots, 8) }, (_, n) => {
+          const card = home.add(0x20 + n * 8).readPointer()
+          if (card.isNull()) return null
+          const data = card.add(8).readPointer()
+          return data.isNull() ? null : data.add(0x20).readU32()
+        })
+        const arena = avatar.add(0x158).readPointer()
+        record('native-home-decode-complete', { consumedBytes: message.add(0x24).readU32(), slots, cards, decks: home.add(0x15c).readU32(), level: avatar.add(0xd8).readU32(), arena: arena.isNull() ? null : arena.add(0x20).readU32() })
+        stopPeerTracing('home-decoded')
+      })],
+    )
+  }
   probes = clientProbes.createStalkerProbes(definitions.map(([offset, action]) => ({ address: module.base.add(offset), callback: action })))
   // Never relocate ART's non-ABI interpreter or other system-library code.
   // JNI registration gives us an exact native frame boundary on every update.
@@ -174,7 +203,7 @@ function installMessagingWorkers (module) {
         if (!replacement) {
           replacement = clientFrame.createNativeFrame(module.base.add(socketWorker ? 0x825b70 : 0x8011bc), 'pointer', ['pointer'], {
             probes,
-            shouldTrace: () => peerActive,
+            shouldTrace: () => peerActive || homePending,
             onEnter (thread) {
               workerThreads.set(thread, role)
               record('messaging-worker-scope-started', { thread, role, interpreterExcluded: true })
@@ -230,7 +259,7 @@ function installNativeFrame (module) {
           if (row.readPointer().readUtf8String() !== 'update' || row.add(8).readPointer().readUtf8String() !== '()Z') continue
           const replacement = clientFrame.createNativeFrame(module.base.add(0x3f3f9c), 'uint8', ['pointer', 'pointer'], {
             probes,
-            shouldTrace: () => peerActive,
+            shouldTrace: () => peerActive || homePending,
             onEnter (thread) {
               const progress = frames.get(thread) || { count: 0 }
               progress.started = Date.now()
@@ -289,6 +318,7 @@ Interceptor.attach(api('connect'), {
     ioStatus.set(socket, { started: new Set(), errors: new Map(), sentBytes: 0, receivedBytes: 0 })
     this.socket = socket
     peerActive = Boolean(configuration.serverPublicKey)
+    homePending = false
     if (peerActive && probes) {
       for (const [thread, role] of workerThreads) {
         if (probes.follow(thread)) record('messaging-worker-scope-resumed', { thread, role })
@@ -354,7 +384,7 @@ Interceptor.attach(api('close'), {
     const socket = args[0].toInt32()
     const status = ioStatus.get(socket)
     if (status) record('game-socket-close', { socket, sentBytes: status.sentBytes, receivedBytes: status.receivedBytes })
-    if (status && peerActive) stopPeerTracing('socket-closed')
+    if (status && (peerActive || homePending)) stopPeerTracing('socket-closed')
     ioStatus.delete(socket)
     sockets.delete(socket)
   },
@@ -366,4 +396,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v3' })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v4', homeTrace: Boolean(configuration.traceHome) })

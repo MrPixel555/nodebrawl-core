@@ -1,7 +1,7 @@
 'use strict'
 const path = require('node:path')
 const { AccountStore } = require('./accounts')
-const { loadHomeTemplate } = require('./home')
+const { loadHomeProvider } = require('./home')
 const { createGameServer } = require('./core')
 const { NativeTransport } = require('./transport')
 const { loadServerKey, publicKey } = require('./key')
@@ -15,7 +15,7 @@ async function main () {
   if (process.env.TRACE_NETWORK && !['0', '1'].includes(process.env.TRACE_NETWORK)) throw new Error('TRACE_NETWORK must be 0 or 1')
   const secret = mode === 'nacl17' ? await loadServerKey(process.env.SERVER_KEY_PATH || path.resolve(__dirname, '../.local/server-key.json')) : null
   const transportFactory = secret ? () => new NativeTransport(secret) : null
-  const homeProvider = await loadHomeTemplate(process.env.HOME_TEMPLATE_PATH)
+  const homeProvider = await loadHomeProvider({ mode: process.env.HOME_MODE, templatePath: process.env.HOME_TEMPLATE_PATH })
   const store = new AccountStore(process.env.DATA_DIR || path.resolve(__dirname, '../.local/accounts'))
   const game = createGameServer({ store, homeProvider, transportFactory, traceNetwork: process.env.TRACE_NETWORK === '1', logger: entry => console.log(JSON.stringify(entry)) })
   await new Promise((resolve, reject) => { game.server.once('error', reject); game.server.listen(port, process.env.HOST || '127.0.0.1', resolve) })
@@ -24,6 +24,7 @@ async function main () {
   if (process.env.TRACE_NETWORK === '1') console.log('Network metadata tracing enabled; payloads, credentials and keys are omitted.')
   if (secret) console.log(`Development server public key: ${publicKey(secret).toString('hex')}; client must use this peer key`)
   if (!homeProvider) console.log('Home data missing: login will return a clear LoginFailed response, rather than an invalid Home packet.')
+  if (process.env.HOME_MODE === 'starter') console.log('Starter Home enabled: 8 cards, 5 decks, Arena1, level 1. Native codec verified; Android lobby and gameplay remain unverified.')
   let stopping = false
   for (const signal of ['SIGINT', 'SIGTERM']) { process.on(signal, async () => {
     if (stopping) return
