@@ -1,0 +1,58 @@
+{
+  "checker": "0x5148ac",
+  "checksumTable": "0xbeefd4",
+  "protectedRangeCount": 83788,
+  "protectedByteCount": 8780931,
+  "oldInlineHookCoverage": [
+    {
+      "name": "Home.decode",
+      "hook": "0x154440",
+      "tableEntry": 1656,
+      "rangeStart": "0x154440",
+      "rangeBytes": 196
+    },
+    {
+      "name": "Login.build",
+      "hook": "0x3affd4",
+      "tableEntry": 25581,
+      "rangeStart": "0x3affd4",
+      "rangeBytes": 184
+    },
+    {
+      "name": "HSalsa core",
+      "hook": "0x35b118",
+      "tableEntry": 55561,
+      "rangeStart": "0x35b118",
+      "rangeBytes": 2464
+    },
+    {
+      "name": "authenticated seal",
+      "hook": "0x36bc7c",
+      "tableEntry": 67237,
+      "rangeStart": "0x36bc7c",
+      "rangeBytes": 232
+    },
+    {
+      "name": "authenticated open",
+      "hook": "0x1f8f08",
+      "tableEntry": 70961,
+      "rangeStart": "0x1f8f08",
+      "rangeBytes": 240
+    },
+    {
+      "name": "Login.encode",
+      "hook": "0x41e914",
+      "tableEntry": 78369,
+      "rangeStart": "0x41e914",
+      "rangeBytes": 380
+    },
+    {
+      "name": "Messaging.read",
+      "hook": "0x250bbc",
+      "tableEntry": 83568,
+      "rangeStart": "0x250bbc",
+      "rangeBytes": 372
+    }
+  ],
+  "scope": "Static coverage of original hook prologues; does not execute Android or disable integrity checks"
+}

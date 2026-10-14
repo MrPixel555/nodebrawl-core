@@ -149,9 +149,14 @@ runtime adapter. The original observed peer still has the emulator context state
 above and is not assumed to match the running Android process.
 
 **Development peer adapter:** `tools/make-client-trace.js --server-public-key`
-generates an optional Frida mode. It changes the raw key-agreement argument at
-native core call sites `0x3bcc6c` and `0x27eab8` and the handshake nonce arguments
-at `0x3bcc88` and `0x27ead8`. The file on disk is untouched. Portable X25519 used
+generates an optional Frida mode. Stalker callouts change the raw key-agreement
+argument immediately before BL at `0x3bcc68` and `0x27eab4`, and the handshake
+nonce arguments at `0x3bcc84` and `0x27ead4`. The Messaging pointer is read from
+the parent stack at `SP+0x60` for outgoing Login and `SP+0x3b0` for the reply.
+These slots are asserted against the native VM's actual Messaging object.
+Temporary shared-key/nonce buffers are erased after their native consumer returns.
+Neither the original executable instructions nor the file on disk are patched.
+Portable X25519 used
 by the script is compared against Node's crypto implementation for eight pairs;
 portable BLAKE2b is checked against Python hashlib at block boundaries.
 
@@ -162,8 +167,12 @@ accepted the Node-encrypted LoginOk, canonical empty Home (416 bytes consumed),
 and KeepAlive. State advanced to 5 and ordinary session cipher functions executed.
 The connection caller's initial state is set explicitly by the harness.
 [Adapter observation](native-development-peer.json) records the scope.
-This proves the protocol argument transformation in that model, not Frida
-Interceptor installation, runtime integrity behavior or an Android UI test.
+The VM also asserts that every executable PT_LOAD byte is unchanged. This proves
+the protocol argument transformation in that model, not Android Stalker execution
+or an Android UI test. The actual Stalker helper separately passed an optional
+Frida 17.23.3 Linux x86-64 smoke test: a native call's argument changed and its
+original code stayed identical. Reproduce with `python3 tools/check-frida-stalker.py`
+on Linux x86-64 with Python `frida` and `cc` installed.
 
 **OwnHomeData:** the native encoder/decoder call nested LogicClientHome and
 LogicClientAvatar serializers. A further probe showed that the avatar decoder at
@@ -232,12 +241,32 @@ cipher and key-agreement vectors. Unexpected failures make the tool fail.
 
 ## Device diagnostics and operational fixes
 
-The generated Frida script validates ARM64 architecture, the ELF build ID and
-native hook prologues. Its optional IPv4 target redirect handles IPv4 sockets
-and IPv4-mapped IPv6 destinations on port 9339. Without a development key it
-only observes connection state and packet metadata. Private keys, account tokens
-and payload contents are not logged. See README for the exact device commands.
-The user has an Android device and Frida; actual device results are still pending.
+The reported Android 14 ARM64 crash occurs at an indirect call from `libg+0x514b30`
+inside the integrity checker beginning at `0x5148ac`, before encrypted Login.
+The user confirmed that the same APK runs without the old script. The checker's
+range table at `0xbeefd4` has 83,788 entries covering 8,780,931 bytes; all seven
+old inline hook prologues intersect those ranges. `inspect_hook_integrity.py`
+reproduces this static finding. [Coverage report](native-hook-integrity.json)
+records the exact intersections. A PC inside Android's CFI shadow is the invalid
+branch destination here; it is not evidence of a failed Android CFI check.
+The crash target and integrity checks are not patched or suppressed.
+
+The revised script uses libc hooks for sockets and Stalker call-site probes for
+the development peer. Without a development key there are no native-library
+probes and no Stalker activity. With a key, GL threads are discovered by name and
+game-socket threads at libc callbacks, and tracing stops after the first reply's
+authenticated-open returns. ART is kept visible so its JNI callbacks remain
+traceable. This temporary tracing can slow loading. Architecture, build ID and
+all call-site instructions must match before probes activate. A key-pair check
+guards reads of the Messaging slots. A profile mismatch leaves the peer unchanged.
+The IPv4 target redirect handles IPv4 and IPv4-mapped IPv6 sockets on port 9339.
+Private keys, account tokens and payload contents are not logged. Events use
+console output, captured by Frida CLI `-o`; ordinary Android logcat is not that
+console. See README for device commands and the public-key distinction.
+
+The original inline-hook script is confirmed to crash on the user's device.
+The revised Stalker script still requires a new Android test; no successful
+device Login or playable Home has been observed.
 
 The native VM models single-thread mutexes, condition notifications, static
 initialization guards and reads from `/dev/urandom`. Contention, unrelated file

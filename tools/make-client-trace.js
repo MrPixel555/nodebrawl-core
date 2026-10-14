@@ -18,7 +18,9 @@ if ((serverPublicKey !== null && (!host || !/^[a-f0-9]{64}$/i.test(serverPublicK
 const math = fs.readFileSync(path.join(__dirname, '../lib/protocol/crypto-math.js'), 'utf8')
 const bundle = `const clientCrypto = (() => { const module = { exports: {} }; ${math}; return module.exports })()\n`
 const source = fs.readFileSync(path.join(__dirname, 'frida/client-trace.js'), 'utf8')
+const probes = fs.readFileSync(path.join(__dirname, 'frida/stalker-probes.js'), 'utf8')
+const probeBundle = `const clientProbes = (() => { const module = { exports: {} }; ${probes}; return module.exports })()\n`
 fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true })
-fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + source, { flag: 'wx' })
+fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + probeBundle + source, { flag: 'wx' })
 console.log(`Created ${output}; logs metadata only; ${host ? `redirects port 9339 to ${host}:${port}` : 'keeps the original connection address'}.`)
-console.log(serverPublicKey ? 'Development peer key override enabled for this process; Home compatibility still requires a separate client test.' : 'Metadata only: client encryption is unchanged.')
+console.log(serverPublicKey ? 'Development peer uses Stalker callouts; no inline hooks in libg.so. Android verification is required; Home compatibility still requires a separate client test.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')

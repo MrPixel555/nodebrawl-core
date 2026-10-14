@@ -5,11 +5,12 @@
   "nativeEncryptedKeepAliveAccepted": true,
   "nativeStateAfterReply": 5,
   "overriddenCallSites": [
-    "0x3bcc6c",
-    "0x3bcc88",
-    "0x27eab8",
-    "0x27ead8"
+    "0x3bcc68",
+    "0x3bcc84",
+    "0x27eab4",
+    "0x27ead4"
   ],
-  "androidInterceptorInstallationVerified": false,
-  "runtimeState": "Protocol VM with explicit development peer key/nonce argument overrides; connection caller state initialized explicitly"
+  "originalExecutableBytesUnchanged": true,
+  "runtimeState": "Protocol VM with call-site overrides and verified Messaging stack slots; connection caller state initialized explicitly",
+  "androidStalkerExecutionVerified": false
 }

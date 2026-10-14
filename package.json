@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "node --test test/*.test.js",
-    "lint": "eslint index.js lib/protocol/*.js server/*.js test/*.test.js tools/*.js",
+    "lint": "eslint index.js lib/protocol/*.js server/*.js test/*.test.js tools/*.js tools/frida/*.js",
     "packets": "node tools/packets.js"
   },
   "engines": { "node": ">=18" },
