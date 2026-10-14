@@ -35,6 +35,8 @@ subprocess.run([sys.executable, str(scripts / 'verify_extra.py')], env=environme
 subprocess.run([sys.executable, str(scripts / 'verify_cipher.py')], env=environment, check=True)
 subprocess.run([sys.executable, str(scripts / 'verify_home.py')], env=environment, check=True)
 subprocess.run([sys.executable, str(scripts / 'verify_transport.py')], env=environment, check=True)
+subprocess.run([sys.executable, str(scripts / 'verify_login_envelope.py')], env=environment, check=True)
+subprocess.run([sys.executable, str(scripts / 'verify_development_peer.py')], env=environment, check=True)
 fixtures = json.loads((args.output / 'native-fixtures.json').read_text())
 failures = json.loads((args.output / 'native-failures.json').read_text())
 if failures:

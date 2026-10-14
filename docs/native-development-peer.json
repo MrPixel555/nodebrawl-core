@@ -1,0 +1,15 @@
+{
+  "nativeOutgoingLoginAcceptedByNode": true,
+  "nativeNodeReplyAccepted": true,
+  "nativeEncryptedHomeConsumed": 416,
+  "nativeEncryptedKeepAliveAccepted": true,
+  "nativeStateAfterReply": 5,
+  "overriddenCallSites": [
+    "0x3bcc6c",
+    "0x3bcc88",
+    "0x27eab8",
+    "0x27ead8"
+  ],
+  "androidInterceptorInstallationVerified": false,
+  "runtimeState": "Protocol VM with explicit development peer key/nonce argument overrides; connection caller state initialized explicitly"
+}

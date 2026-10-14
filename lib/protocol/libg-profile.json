@@ -6494,8 +6494,15 @@
     "sessionNonceIncrement": 2,
     "sessionNonceEndian": "little",
     "nativeHandshakeMaterialCleared": true,
-    "outgoingLoginVerified": false,
+    "outgoingLoginVerified": true,
     "androidClientVerified": false,
-    "runtimeState": "Explicit synthetic client connection state in protocol VM; Android initialization and outgoing Login not executed"
+    "runtimeState": "Explicit synthetic client connection state in protocol VM; Android initialization and outgoing Login not executed",
+    "outgoingLoginFunction": "0x3affd4",
+    "loginNonce": "BLAKE2b-192(clientPublicKey || observedPeerPublicKey)",
+    "loginPlaintext": "serverHelloNonce[24] || clientNonce[24] || LoginPayload",
+    "wireLoginBody": "clientPublicKey[32] || compactBox",
+    "nativeEncryptedLoginFailedAccepted": true,
+    "serverTcpIntegration": "optional nacl17 development-key mode",
+    "developmentPeerOverrideVmVerified": true
   }
 }

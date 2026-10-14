@@ -49,3 +49,17 @@ for (const vector of require('./fixtures/blake2b.json')) {
     assert.equal(blake2b(Buffer.from(vector.input, 'hex'), vector.length).toString('hex'), vector.digest)
   })
 }
+
+test('portable Curve25519 for Frida matches Node key agreement and rejects low-order peers', () => {
+  const { x25519 } = require('../lib/protocol/crypto-math')
+  const { diffieHellman } = require('node:crypto')
+  for (let variant = 0; variant < 8; variant++) {
+    const first = Buffer.from(Array.from({ length: 32 }, (_, n) => n * 3 + variant))
+    const second = Buffer.from(Array.from({ length: 32 }, (_, n) => n * 5 + variant))
+    const a = cipher.keyPair(first); const b = cipher.keyPair(second)
+    const expected = diffieHellman({ privateKey: a.privateKey, publicKey: require('node:crypto').createPublicKey(b.privateKey) })
+    assert.deepEqual(Buffer.from(x25519(first, b.publicKey)), expected)
+    assert.deepEqual(Buffer.from(x25519(second, a.publicKey)), expected)
+  }
+  assert.throws(() => x25519(Buffer.alloc(32), Buffer.alloc(32)), /peer key/)
+})

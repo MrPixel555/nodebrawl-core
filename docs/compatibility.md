@@ -122,14 +122,48 @@ before each message. Replay, modified MAC, carry propagation, and nonce exhausti
 are covered by Node tests. Native cipher and counter implementations are
 `0x106fe0`, `0x6554f8` and `0x397e50`.
 
-The observed peer key still has the stated emulator context. The outgoing Login
-envelope, real initialized peer binding, and a complete Android handshake remain
-unverified. These functions are not enabled on the server TCP connection yet.
-The user-mentioned [curve25519-meh](https://github.com/iqyx/curve25519-meh) is an
-implementation of the ECDH primitive; it does not specify this game's transport.
-The running server
-uses plaintext and requires a matching modified client. The official server's
-private key cannot be recovered from a public client key.
+**Outgoing Login and server transport:** native function `0x3affd4` now completes
+with native key generation, RNG initialization, Curve25519 and authenticated box
+creation. The ServerHello nonce length at Messaging `+0x230` is a 64-bit value;
+an earlier probe incorrectly supplied two 32-bit values, resulting in an
+oversized copy. Correct ABI initialization resolved that probe. The function's
+public key matches Node X25519, its shared key matches Curve25519 plus HSalsa17,
+and its nonce matches BLAKE2b-192 of `clientPublicKey || observedPeerPublicKey`.
+The native plaintext is `serverHelloNonce[24] || clientNonce[24] || LoginPayload`.
+The native heap contains the wire body `clientPublicKey[32] || compactBox`.
+`tools/reverse/verify_login_envelope.py` executes this path without skipping native
+checks and compares its result against Node with `tools/check-native-login.js`.
+
+`server/transport.js` now integrates the envelope and session ciphers with TCP
+behind `TRANSPORT=nacl17`. New Login validates the authenticated echo of the
+ServerHello nonce. LoginOk and LoginFailed both use the first reply envelope.
+A separate native parser probe accepted encrypted LoginFailed, consumed all 28
+bytes, and reached state 5. Plaintext LoginFailed probes in that state failed
+authentication. These negative probes are not counted as successful observations.
+
+Native transport startup creates a development private key once, using an
+exclusive temporary file and atomic hard-link publication with private permissions.
+Only the public key is printed. No official server private key is derived or
+required: a client must use this development public key through a matching
+runtime adapter. The original observed peer still has the emulator context stated
+above and is not assumed to match the running Android process.
+
+**Development peer adapter:** `tools/make-client-trace.js --server-public-key`
+generates an optional Frida mode. It changes the raw key-agreement argument at
+native core call sites `0x3bcc6c` and `0x27eab8` and the handshake nonce arguments
+at `0x3bcc88` and `0x27ead8`. The file on disk is untouched. Portable X25519 used
+by the script is compared against Node's crypto implementation for eight pairs;
+portable BLAKE2b is checked against Python hashlib at block boundaries.
+
+`tools/reverse/verify_development_peer.py` applies the same argument overrides in
+the protocol VM. The original native outgoing Login was decrypted by the actual
+Node NativeTransport with a development server key. Native Messaging then
+accepted the Node-encrypted LoginOk, canonical empty Home (416 bytes consumed),
+and KeepAlive. State advanced to 5 and ordinary session cipher functions executed.
+The connection caller's initial state is set explicitly by the harness.
+[Adapter observation](native-development-peer.json) records the scope.
+This proves the protocol argument transformation in that model, not Frida
+Interceptor installation, runtime integrity behavior or an Android UI test.
 
 **OwnHomeData:** the native encoder/decoder call nested LogicClientHome and
 LogicClientAvatar serializers. A further probe showed that the avatar decoder at
@@ -198,24 +232,28 @@ cipher and key-agreement vectors. Unexpected failures make the tool fail.
 
 ## Device diagnostics and operational fixes
 
-`tools/make-client-trace.js` generates a Frida script with an optional IPv4
-redirect for connections to port 9339. It validates the four native hook prologues
-against this library before attaching them. It logs packet/header metadata,
-connection state, Login version fields and authentication return codes. It does
-not log private keys, account tokens or payload contents and does not alter client
-encryption. Syntax was checked here; a device run is still needed.
+The generated Frida script validates ARM64 architecture, the ELF build ID and
+native hook prologues. Its optional IPv4 target redirect handles IPv4 sockets
+and IPv4-mapped IPv6 destinations on port 9339. Without a development key it
+only observes connection state and packet metadata. Private keys, account tokens
+and payload contents are not logged. See README for the exact device commands.
+The user has an Android device and Frida; actual device results are still pending.
 
-The native VM now models single-thread mutexes, condition notifications, static
-initialization guards and reads from `/dev/urandom` for further outgoing Login
-analysis. Contention, unrelated file access and unsupported imports fail explicitly.
-Native calls have both instruction limits and a 60-second default time limit.
-A separate outgoing Login probe did not finish within its allotted budget; that
-probe is not included among successful transport observations.
+The native VM models single-thread mutexes, condition notifications, static
+initialization guards and reads from `/dev/urandom`. Contention, unrelated file
+access and unsupported imports fail explicitly. Native calls have instruction
+and time limits; outgoing Login allows 120 seconds because native key generation
+and the protected path take substantially longer than a flat codec.
 
 The server validates configuration before accepting clients, bounds frame batches,
 and assembles fragmented frames without repeatedly copying the buffered payload.
 Account writes from multiple Store instances sharing one resolved directory are
-serialized within the process, and malformed databases are rejected without
-rewriting them. Successful LoginOk/Home frames are validated as a batch before
-writing either frame. A client disconnected while an asynchronous provider runs
-is not counted as authenticated. Tests reproduce these failure cases.
+serialized within one process. Invalid databases are rejected without rewriting.
+LoginOk/Home frames are validated as a batch before writing either frame. A client
+disconnected during an asynchronous Home provider is not counted as authenticated.
+Tests reproduce those failure cases and encrypted TCP login, ordered Home,
+heartbeat, encrypted missing-Home failure and concurrent persistent-key creation.
+
+The current server deliberately refuses login without a compatible Home provider.
+No shipped fixture or native-empty Home is presented as a playable player state.
+Game handlers, player initialization and battle simulation remain incomplete.

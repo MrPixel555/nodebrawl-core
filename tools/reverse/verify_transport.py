@@ -106,6 +106,18 @@ def main():
                              'runtimeState': 'Synthetic client state in protocol VM; outgoing Login and Android initialization not executed'})
         print(f'Native Messaging Login reply and bidirectional session, variant {vector["variant"]}: PASS', flush=True)
     (ROOT / 'native-transport.json').write_text(json.dumps(observations, indent=2) + '\n')
+    failed = json.loads((Path(__file__).resolve().parents[2] / 'test/fixtures/native-encrypted-failed.json').read_text())
+    model = MessagingHarness()
+    model.state(4)
+    for name, offset in [('clientPublicKey', 0x260), ('clientSecret', 0x280), ('clientNonce', 0x2a0)]:
+        model.vm.uc.mem_write(model.messaging + offset, bytes.fromhex(failed[name]))
+    result = model.receive(20103, 4, bytes.fromhex(failed['box']))
+    assert qword(model.vm, result) == 0xa70d88
+    assert word(model.vm, result + 0x24) == len(bytes.fromhex(failed['payload']))
+    assert model.state() == 5
+    (ROOT / 'native-encrypted-failed.json').write_text(json.dumps({**failed, 'nativeAccepted': True, 'nativeState': 5}, indent=2) + '\n')
+    print('Native encrypted LoginFailed: PASS', flush=True)
+
 
 
 if __name__ == '__main__':

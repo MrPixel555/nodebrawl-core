@@ -6,8 +6,9 @@ const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, catalog, loginOk, loginFailed } = require('../lib/protocol/messages')
 const { ProtocolError } = require('../lib/protocol/stream')
 
-function createGameServer ({ store, homeProvider = null, handlers = new Map(), idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {} } = {}) {
+function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {} } = {}) {
   if (!store || typeof store.login !== 'function') throw new TypeError('Account store required')
+  if (transportFactory !== null && typeof transportFactory !== 'function') throw new TypeError('Invalid transport factory')
   if (homeProvider !== null && typeof homeProvider !== 'function') throw new TypeError('Invalid Home provider')
   if (!(handlers instanceof Map) || [...handlers.values()].some(handler => typeof handler !== 'function')) throw new TypeError('Invalid message handlers')
   if (!Number.isInteger(idleTimeout) || idleTimeout < 1 || idleTimeout > 2147483647) throw new TypeError('Invalid idle timeout')
@@ -19,6 +20,11 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), i
   const statistics = { received: 0, sent: 0, unsupported: 0, malformed: 0, logins: 0 }
   const server = net.createServer(socket => {
     if (clients.size >= maxConnections) { socket.destroy(); return }
+    let transport = null
+    try {
+      transport = transportFactory ? transportFactory() : null
+      if (transportFactory && (!transport || ['decode', 'hello', 'encode', 'overhead', 'close'].some(name => typeof transport[name] !== 'function'))) throw new TypeError('Invalid transport instance')
+    } catch (_) { socket.destroy(); return }
     clients.add(socket)
     socket.setNoDelay(true)
     socket.setTimeout(idleTimeout, () => socket.destroy())
@@ -29,12 +35,16 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), i
     session.send = (id, fields = {}, version = 0) => session.sendRaw(id, encodeMessage(id, fields), version)
     const sendBatch = frames => {
       if (socket.destroyed) return false
-      const encoded = frames.map(({ id, payload, version = 0 }) => {
-        if (!Buffer.isBuffer(payload) || payload.length > maxPayload) throw new ProtocolError('Outbound payload limit exceeded')
+      let estimatedSize = 0
+      const plainFrames = frames.map(({ id, payload, version = 0 }) => {
+        const overhead = transport ? transport.overhead(id) : 0
+        if (!Buffer.isBuffer(payload) || payload.length + overhead > maxPayload) throw new ProtocolError('Outbound payload limit exceeded')
+        estimatedSize += payload.length + overhead + 7
         return encodeFrame(id, version, payload)
       })
+      if (socket.writableLength + estimatedSize > maxPayload * 2 + 14) throw new ProtocolError('Outbound queue limit exceeded')
+      const encoded = transport ? frames.map(frame => { const transformed = transport.encode(frame); return encodeFrame(transformed.id, transformed.version ?? 0, transformed.payload) }) : plainFrames
       const size = encoded.reduce((sum, frame) => sum + frame.length, 0)
-      if (socket.writableLength + size > maxPayload * 2 + 14) throw new ProtocolError('Outbound queue limit exceeded')
       socket.write(Buffer.concat(encoded, size))
       statistics.sent += frames.length
       return true
@@ -44,12 +54,14 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), i
     async function handle (frame) {
       if (socket.destroyed || session.state === 'failed') return
       statistics.received++
+      if (transport) frame = { ...frame, payload: transport.decode(frame) }
       if (frame.id === 10100) {
         if (session.state !== 'connected') throw new ProtocolError('Unexpected ClientHello')
         const hello = decodeMessage(frame.id, frame.payload)
         session.hello = hello
         session.nonce = randomBytes(24)
         session.state = 'hello'
+        if (transport) transport.hello(session.nonce)
         session.send(20100, { nonce: session.nonce })
         events.emit('hello', session, hello)
       } else if (frame.id === 10101) {
@@ -95,14 +107,14 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), i
           queue = queue.then(() => handle(frame)).catch(error => {
             if (session.state === 'failed') return
             if (error instanceof ProtocolError) statistics.malformed++
-            logger({ event: 'session-error', error: error instanceof ProtocolError ? error.message : 'Internal server error' })
+            logger({ event: 'session-error', id: frame.id, version: frame.version, payloadBytes: frame.payload.length, state: session.state, error: error instanceof ProtocolError ? error.message : 'Internal server error' })
             try { fail(error instanceof ProtocolError ? error.message : 'Internal server error') } catch (_) { socket.destroy() }
           }).finally(() => { pending-- })
         }
       } catch (error) { statistics.malformed++; logger({ event: 'framing-error', error: error.message }); socket.destroy() }
     })
     socket.on('error', error => logger({ event: 'socket-error', error: error.code || 'socket error' }))
-    socket.on('close', () => { clients.delete(socket); events.emit('disconnect', session) })
+    socket.on('close', () => { transport?.close(); clients.delete(socket); events.emit('disconnect', session) })
   })
   async function stop () { for (const client of clients) client.destroy(); await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve())) }
   return { server, events, statistics, clients, stop }

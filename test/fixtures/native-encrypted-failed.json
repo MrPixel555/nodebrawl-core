@@ -1,0 +1,10 @@
+{
+  "payload": "c0807fffffffffffffffffffffffffffffffffc0807f01ffffffff7f",
+  "box": "de74450a632678c4e3a1081c06cfbe6a7623bf69207c720d830e4c88c63ee8b6c1c8380c9db167a0fef8d44c696cc92985bbc142e31c8977e3869e1fec95c51d2666a55c4e65fec629ab6d9fe896595424b40f5bbf688a5fd24056dd038fb8d3db460d4c",
+  "clientSecret": "01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3da",
+  "clientPublicKey": "c8feca81be196cdf2cadeabf13c4903d7632dce4955aa68b6e5d9adef54e2616",
+  "clientNonce": "03080d12171c21262b30353a3f44494e53585d62676c7176",
+  "nativeAccepted": true,
+  "nativeState": 5,
+  "consumed": 28
+}

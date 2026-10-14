@@ -156,3 +156,66 @@ test('invalid server configuration is rejected before connections arrive', () =>
     assert.throws(() => createGameServer({ store, ...config }), /Invalid/)
   }
 })
+
+test('encrypted TCP hello, LoginOk/Home and heartbeat work in both directions', { timeout: 5000 }, async t => {
+  const { NativeTransport } = require('../server/transport')
+  const { keyPair, boxKey } = require('../lib/protocol/salsa17')
+  const { sealLogin, openLoginReply, SessionCipher } = require('../lib/protocol/transport')
+  const secret = Buffer.alloc(32, 13); const peer = keyPair(secret).publicKey
+  const clientSecret = Buffer.alloc(32, 7); const clientPublicKey = keyPair(clientSecret).publicKey
+  const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
+  const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret), homeProvider: async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+  const c = await client(port)
+  c.send(10100)
+  const hello = decodeMessage(20100, (await c.receive()).payload)
+  const box = sealLogin({ payload: encodeMessage(10101), sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverHelloNonce: hello.nonce })
+  c.socket.write(encodeFrame(10101, 4, box))
+  const reply = await c.receive()
+  assert.equal(reply.id, 20758)
+  const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
+  const account = decodeMessage(20758, opened.payload)
+  assert.equal(account.field_0x80[1], 1)
+  const receive = new SessionCipher(opened.sessionKey, opened.serverNonce)
+  const send = new SessionCipher(opened.sessionKey, clientNonce)
+  const home = await c.receive()
+  assert.equal(home.id, 21217)
+  assert.equal(receive.decrypt(home.payload).toString(), 'SYNTHETIC HOME FOR TCP TEST ONLY')
+  for (let n = 0; n < 2; n++) {
+    c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
+    const response = await c.receive()
+    assert.equal(response.id, 20108); assert.equal(receive.decrypt(response.payload).length, 0)
+  }
+  assert.equal(game.statistics.logins, 1)
+  receive.close(); send.close()
+})
+
+test('missing Home returns encrypted LoginFailed after encrypted Login', { timeout: 5000 }, async t => {
+  const { NativeTransport } = require('../server/transport')
+  const { keyPair, boxKey } = require('../lib/protocol/salsa17')
+  const { sealLogin, openLoginReply } = require('../lib/protocol/transport')
+  const secret = Buffer.alloc(32, 19); const peer = keyPair(secret).publicKey
+  const clientSecret = Buffer.alloc(32, 21); const clientPublicKey = keyPair(clientSecret).publicKey
+  const clientNonce = Buffer.alloc(24, 17); const sharedKey = boxKey(peer, clientSecret)
+  const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret) })
+  const c = await client(port); c.send(10100)
+  const hello = decodeMessage(20100, (await c.receive()).payload)
+  const packet = sealLogin({ payload: encodeMessage(10101), sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverHelloNonce: hello.nonce })
+  c.socket.write(encodeFrame(10101, 4, packet))
+  const reply = await c.receive()
+  assert.equal(reply.id, 20103); assert.equal(reply.version, 4)
+  const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
+  assert.match(decodeMessage(20103, opened.payload).field_0x98, /compatible player-state Home provider/)
+  assert.equal(game.statistics.logins, 0)
+})
+
+test('server key creation is persistent, private and safe under concurrent startup', async t => {
+  const { directory } = await setup(t)
+  const { loadServerKey } = require('../server/key')
+  const filename = path.join(directory, 'server-key.json')
+  const secrets = await Promise.all(Array.from({ length: 5 }, () => loadServerKey(filename)))
+  for (const secret of secrets) assert.deepEqual(secret, secrets[0])
+  assert.equal((await fs.stat(filename)).mode & 0o077, 0)
+  assert.deepEqual(await loadServerKey(filename), secrets[0])
+  await fs.writeFile(filename, '{"schema":1,"secret":"bad"}')
+  await assert.rejects(loadServerKey(filename), /Invalid server key/)
+})
