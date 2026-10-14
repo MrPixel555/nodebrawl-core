@@ -15,7 +15,7 @@ const failed = require('./fixtures/native-encrypted-failed.json')
 // call-site stack slots are checked separately by verify_development_peer.py.
 function client (publicKey, profileMatches = true) {
   const blocks = new Map()
-  const logs = []; const hooks = []; const excluded = []
+  const logs = []; const hooks = []; const excluded = []; const timers = []; const collected = []
   const callouts = new Map(); const unfollowed = []; const callbacks = new Map(); const invocations = []; const following = new Set()
   let nativeBody = () => 1
   let allocation = 0x40000000
@@ -34,6 +34,7 @@ function client (publicKey, profileMatches = true) {
     readByteArray (size) { return Uint8Array.from(this.region(size)).buffer }
     writeByteArray (data) { if (data.length === undefined) data = new Uint8Array(data); this.region(data.length).set(data) }
     readU32 () { return this.region(4).readUInt32LE() }
+    readU16 () { return this.region(2).readUInt16LE() }
     readPointer () { return new Pointer(this.region(8).readBigUInt64LE()) }
     writePointer (value) { this.region(8).writeBigUInt64LE(BigInt(value.value)) }
     readUtf8String () {
@@ -46,7 +47,7 @@ function client (publicKey, profileMatches = true) {
   const art = { name: 'libart.so', size: 0x10000, base: new Pointer(0x50000000), enumerateSymbols: () => [{ name: '_ZN3art3JNI_RegisterNatives', address: new Pointer(0x50001000) }] }
   blocks.set(base.value, Buffer.from('7f454c46', 'hex'))
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
-  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091']]
+  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
   const originalInstructions = instructions.map(([offset]) => Buffer.from(blocks.get(base.value + offset)))
   blocks.set(base.value + 0x3f3f9c, Buffer.from('f30f1ef8fd7b01a9fd430091c84b00f0', 'hex'))
@@ -73,11 +74,12 @@ function client (publicKey, profileMatches = true) {
         options.transform({ memoryAccess: 'open', next: () => ++index < instructions.length ? { address: base.add(instructions[index][0]) } : null, putCallout: callback => callouts.set(instructions[index][0], callback), keep: () => {} })
       },
       unfollow: thread => { unfollowed.push(thread); following.delete(thread) },
-      garbageCollect: () => {},
+      garbageCollect: () => { assert.equal(following.size, 0); collected.push(true) },
     },
     Frida: { version: 'model' },
     Script: { runtime: 'model' },
     setInterval: () => assert.fail('Never follow Java/GL threads from a timer'),
+    setTimeout: (callback, delay) => { assert.equal(delay, 50); timers.push(callback) },
   })
   const source = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8')
   const bundle = (name, file) => `const ${name} = (() => { const module = {exports:{}}; ${source(file)}; return module.exports })();\n`
@@ -124,12 +126,12 @@ function client (publicKey, profileMatches = true) {
     callouts.get(offset)(value)
     return value
   }
-  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, register, frame, invocations, excluded, following }
+  return { logs, hooks, callouts, state, probe, Pointer, unfollowed, data, originalInstructions, instructions, blocks, base, register, frame, invocations, excluded, following, memory, object, timers, collected }
 }
 
 test('Frida socket diagnostics install no protected hooks or Stalker callouts', () => {
   const c = client(null)
-  assert.deepEqual(c.hooks.map(hook => hook.address), ['connect', 'send', 'recv', 'close'])
+  assert.deepEqual(c.hooks.map(hook => hook.address), ['connect', 'send', 'recv', 'sendto', 'recvfrom', 'write', 'read', 'close'])
   assert.equal(c.callouts.size, 0)
   assert.equal(c.logs.find(log => log.event === 'library-profile-matched').mode, 'sockets')
 })
@@ -148,7 +150,7 @@ test('actual Stalker peer callouts produce matching Login and reply keys/nonces 
   assert(c.hooks.every(hook => typeof hook.address === 'string' || hook.address.value === 0x50001000))
   const transport = new NativeTransport(serverSecret)
   c.frame(() => {
-    assert.equal(c.callouts.size, 6)
+    assert.equal(c.callouts.size, 10)
     c.state(login, 3)
     const keyPointer = c.probe(0x3bcc68).x2
     const raw = Buffer.from(keyPointer.readByteArray(32))
@@ -230,4 +232,59 @@ test('JNI scope keeps an outer trace through nested native calls and unwinds on 
   assert.throws(() => c.frame(() => { throw new Error('native invocation failed') }), /native invocation failed/)
   assert.deepEqual(c.unfollowed, [42, 42])
   assert.equal(c.following.size, 0)
+})
+
+test('native progress observations are metadata only and Stalker collection is deferred', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
+  c.state(login, 3)
+  c.frame(() => {
+    for (let n = 0; n < 2; n++) c.probe(0x250bbc, { x0: c.object })
+    c.probe(0x54c92c, { x0: c.object })
+    c.probe(0x41e914, { x0: c.object })
+    c.probe(0x3affd4, { x0: c.object })
+    return 1
+  })
+  assert.equal(c.logs.filter(log => log.event === 'native-messaging-state').length, 1)
+  assert(c.logs.some(log => log.event === 'native-client-hello-encode'))
+  const returned = c.logs.findIndex(log => log.event === 'native-frame-returned')
+  assert(returned >= 0)
+  assert(c.logs.findIndex(log => log.event === 'native-frame-complete') > returned)
+  assert.equal(c.timers.length, 1)
+  assert.equal(c.collected.length, 0)
+  c.timers[0]()
+  assert.equal(c.collected.length, 1)
+  assert(!JSON.stringify(c.logs).includes(login.clientSecret))
+})
+
+test('socket diagnostics cover write/read and nested aliases without logging body contents', () => {
+  const c = client(null)
+  const hooks = new Map(c.hooks.map(hook => [hook.address, hook.callbacks]))
+  const address = c.memory.alloc(16)
+  const data = Buffer.alloc(16); data.writeUInt16LE(2); data.writeUInt16BE(9339, 2)
+  address.writeByteArray(data)
+  const socket = new c.Pointer(5)
+  const connection = { errno: 0 }
+  hooks.get('connect').onEnter.call(connection, [socket, address, new c.Pointer(16)])
+  hooks.get('connect').onLeave.call(connection, new c.Pointer(0))
+  const body = Buffer.from('PRIVATE BODY MUST NOT APPEAR')
+  const packet = Buffer.concat([Buffer.from([0x27, 0x74, 0, 0, body.length, 0, 0]), body])
+  const buffer = c.memory.alloc(packet.length); buffer.writeByteArray(packet)
+  const args = [socket, buffer, new c.Pointer(packet.length)]
+  const outer = { errno: 0 }; const inner = { errno: 0 }
+  hooks.get('write').onEnter.call(outer, args)
+  hooks.get('sendto').onEnter.call(inner, args)
+  hooks.get('sendto').onLeave.call(inner, new c.Pointer(packet.length))
+  hooks.get('write').onLeave.call(outer, new c.Pointer(packet.length))
+  assert.equal(c.logs.filter(log => log.event === 'socket-send').length, 1)
+  assert.equal(c.logs.find(log => log.event === 'socket-send').api, 'write')
+  for (let n = 0; n < 3; n++) {
+    const invocation = { errno: 11 }
+    hooks.get('read').onEnter.call(invocation, args)
+    hooks.get('read').onLeave.call(invocation, new c.Pointer(-1))
+  }
+  assert.equal(c.logs.filter(log => log.event === 'socket-recv').length, 1)
+  hooks.get('close').onEnter.call({}, [socket])
+  assert.equal(c.logs.find(log => log.event === 'game-socket-close').sentBytes, packet.length)
+  assert(!JSON.stringify(c.logs).includes(body.toString()))
+  assert(!JSON.stringify(c.logs).includes(body.toString('hex')))
 })

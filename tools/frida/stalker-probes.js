@@ -1,4 +1,4 @@
-/* global Stalker */
+/* global Stalker, setTimeout */
 'use strict'
 
 // Callouts run in translated blocks. Never patch the original instructions.
@@ -6,6 +6,7 @@
 function createStalkerProbes (probes) {
   const callbacks = new Map(probes.map(probe => [probe.address.toString(), probe.callback]))
   const threads = new Set()
+  let collectionQueued = false
   return {
     follow (threadId) {
       if (threads.has(threadId)) return false
@@ -26,8 +27,12 @@ function createStalkerProbes (probes) {
       if (!threads.has(threadId)) return
       Stalker.unfollow(threadId)
       threads.delete(threadId)
-      // A scope may run once per frame; reclaim completed translation contexts.
-      Stalker.garbageCollect()
+      // Collect on the script thread after the native callback has unwound.
+      // Avoid doing this work synchronously in the Android render thread.
+      if (!collectionQueued) {
+        collectionQueued = true
+        setTimeout(() => { collectionQueued = false; Stalker.garbageCollect() }, 50)
+      }
     },
   }
 }

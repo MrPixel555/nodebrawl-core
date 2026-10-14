@@ -6,7 +6,7 @@ const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, catalog, loginOk, loginFailed } = require('../lib/protocol/messages')
 const { ProtocolError } = require('../lib/protocol/stream')
 
-function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {} } = {}) {
+function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false } = {}) {
   if (!store || typeof store.login !== 'function') throw new TypeError('Account store required')
   if (transportFactory !== null && typeof transportFactory !== 'function') throw new TypeError('Invalid transport factory')
   if (homeProvider !== null && typeof homeProvider !== 'function') throw new TypeError('Invalid Home provider')
@@ -15,9 +15,11 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
   if (!Number.isInteger(maxConnections) || maxConnections < 1) throw new TypeError('Invalid connection limit')
   if (!Number.isInteger(maxPayload) || maxPayload < 1 || maxPayload > 0xffffff) throw new TypeError('Invalid payload limit')
   if (typeof logger !== 'function') throw new TypeError('Invalid logger')
+  if (typeof traceNetwork !== 'boolean') throw new TypeError('Invalid network tracing option')
   const events = new EventEmitter()
   const clients = new Set()
   const statistics = { received: 0, sent: 0, unsupported: 0, malformed: 0, logins: 0 }
+  let nextConnection = 1
   const server = net.createServer(socket => {
     if (clients.size >= maxConnections) { socket.destroy(); return }
     let transport = null
@@ -26,9 +28,14 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
       if (transportFactory && (!transport || ['decode', 'hello', 'encode', 'overhead', 'close'].some(name => typeof transport[name] !== 'function'))) throw new TypeError('Invalid transport instance')
     } catch (_) { socket.destroy(); return }
     clients.add(socket)
+    const connectionId = nextConnection++
+    const traffic = { receivedBytes: 0, sentBytes: 0, receivedFrames: 0, sentFrames: 0 }
+    let closeReason = 'closed'
+    const trace = entry => { if (traceNetwork) logger({ connectionId, ...entry }) }
     socket.setNoDelay(true)
-    socket.setTimeout(idleTimeout, () => socket.destroy())
+    socket.setTimeout(idleTimeout, () => { closeReason = 'idle-timeout'; socket.destroy() })
     const session = { socket, state: 'connected', account: null, nonce: null }
+    trace({ event: 'connection-open', state: session.state })
     const decoder = new FrameDecoder({ maxPayload })
     let queue = Promise.resolve()
     let pending = 0
@@ -47,6 +54,9 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
       const size = encoded.reduce((sum, frame) => sum + frame.length, 0)
       socket.write(Buffer.concat(encoded, size))
       statistics.sent += frames.length
+      traffic.sentBytes += size
+      traffic.sentFrames += encoded.length
+      for (const frame of encoded) trace({ event: 'message-sent', id: frame.readUInt16BE(0), version: frame.readUInt16BE(5), payloadBytes: frame.length - 7, state: session.state })
       return true
     }
     session.sendRaw = (id, payload, version = 0) => sendBatch([{ id, payload, version }])
@@ -54,6 +64,8 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
     async function handle (frame) {
       if (socket.destroyed || session.state === 'failed') return
       statistics.received++
+      traffic.receivedFrames++
+      trace({ event: 'message-received', id: frame.id, version: frame.version, payloadBytes: frame.payload.length, state: session.state })
       if (transport) frame = { ...frame, payload: transport.decode(frame) }
       if (frame.id === 10100) {
         if (session.state !== 'connected') throw new ProtocolError('Unexpected ClientHello')
@@ -93,12 +105,14 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         if (handler) await handler(session, fields, frame)
         else {
           statistics.unsupported++
-          logger({ event: 'unsupported-message', id: frame.id, length: frame.payload.length, codecAvailable: fields !== null })
+          logger({ event: 'unsupported-message', connectionId, id: frame.id, length: frame.payload.length, codecAvailable: fields !== null })
           events.emit('unsupported', { id: frame.id, version: frame.version, length: frame.payload.length, fields })
         }
       }
     }
     socket.on('data', chunk => {
+      traffic.receivedBytes += chunk.length
+      trace({ event: 'bytes-received', bytes: chunk.length, state: session.state })
       try {
         const frames = decoder.push(chunk)
         pending += frames.length
@@ -107,14 +121,18 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
           queue = queue.then(() => handle(frame)).catch(error => {
             if (session.state === 'failed') return
             if (error instanceof ProtocolError) statistics.malformed++
-            logger({ event: 'session-error', id: frame.id, version: frame.version, payloadBytes: frame.payload.length, state: session.state, error: error instanceof ProtocolError ? error.message : 'Internal server error' })
+            logger({ event: 'session-error', connectionId, id: frame.id, version: frame.version, payloadBytes: frame.payload.length, state: session.state, error: error instanceof ProtocolError ? error.message : 'Internal server error' })
             try { fail(error instanceof ProtocolError ? error.message : 'Internal server error') } catch (_) { socket.destroy() }
           }).finally(() => { pending-- })
         }
-      } catch (error) { statistics.malformed++; logger({ event: 'framing-error', error: error.message }); socket.destroy() }
+      } catch (error) { statistics.malformed++; logger({ event: 'framing-error', connectionId, error: error.message }); socket.destroy() }
     })
-    socket.on('error', error => logger({ event: 'socket-error', error: error.code || 'socket error' }))
-    socket.on('close', () => { transport?.close(); clients.delete(socket); events.emit('disconnect', session) })
+    socket.on('end', () => { closeReason = 'peer-ended' })
+    socket.on('error', error => { closeReason = error.code || 'socket-error'; logger({ event: 'socket-error', connectionId, error: error.code || 'socket error' }) })
+    socket.on('close', () => {
+      trace({ event: 'connection-close', state: session.state, reason: closeReason, ...traffic })
+      transport?.close(); clients.delete(socket); events.emit('disconnect', session)
+    })
   })
   async function stop () { for (const client of clients) client.destroy(); await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve())) }
   return { server, events, statistics, clients, stop }

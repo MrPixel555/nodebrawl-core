@@ -18,7 +18,9 @@ function createNativeFrame (address, returnType, argumentTypes, options) {
     }
     try {
       options.onEnter(thread)
-      return traced(...args)
+      const result = traced(...args)
+      if (options.onReturn) options.onReturn(thread, result)
+      return result
     } finally {
       if (started) options.probes.unfollow(thread)
       options.onLeave(thread)

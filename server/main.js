@@ -12,14 +12,16 @@ async function main () {
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid PORT')
   const mode = process.env.TRANSPORT || 'plaintext'
   if (!['plaintext', 'nacl17'].includes(mode)) throw new Error('Invalid TRANSPORT; use plaintext or nacl17')
+  if (process.env.TRACE_NETWORK && !['0', '1'].includes(process.env.TRACE_NETWORK)) throw new Error('TRACE_NETWORK must be 0 or 1')
   const secret = mode === 'nacl17' ? await loadServerKey(process.env.SERVER_KEY_PATH || path.resolve(__dirname, '../.local/server-key.json')) : null
   const transportFactory = secret ? () => new NativeTransport(secret) : null
   const homeProvider = await loadHomeTemplate(process.env.HOME_TEMPLATE_PATH)
   const store = new AccountStore(process.env.DATA_DIR || path.resolve(__dirname, '../.local/accounts'))
-  const game = createGameServer({ store, homeProvider, transportFactory, logger: entry => console.log(JSON.stringify(entry)) })
+  const game = createGameServer({ store, homeProvider, transportFactory, traceNetwork: process.env.TRACE_NETWORK === '1', logger: entry => console.log(JSON.stringify(entry)) })
   await new Promise((resolve, reject) => { game.server.once('error', reject); game.server.listen(port, process.env.HOST || '127.0.0.1', resolve) })
   console.log(`Clash Royale protocol server listening on ${process.env.HOST || '127.0.0.1'}:${port}`)
   console.log(`libg.so SHA-256: ${profile.library_sha256}; transport: ${mode}`)
+  if (process.env.TRACE_NETWORK === '1') console.log('Network metadata tracing enabled; payloads, credentials and keys are omitted.')
   if (secret) console.log(`Development server public key: ${publicKey(secret).toString('hex')}; client must use this peer key`)
   if (!homeProvider) console.log('Home data missing: login will return a clear LoginFailed response, rather than an invalid Home packet.')
   let stopping = false

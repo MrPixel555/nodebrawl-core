@@ -270,7 +270,7 @@ by `inspect_hook_integrity.py` in the coverage report.
 
 A NativeCallback wrapper follows the invoking thread only during the original
 native update, called through NativeFunction with cooperative scheduling and
-`traps:'all'`. A finally block unfollows it and reclaims completed Stalker contexts
+`traps:'all'`. A finally block unfollows it and schedules collection of completed contexts
 before returning to ART. All other modules, including ART, are excluded. There
 is no GL-thread polling or thread activation from socket callbacks. Nested native
 scopes retain their outer trace; subsequent frames use an untraced bridge after
@@ -286,8 +286,21 @@ console output, captured by Frida CLI `-o`; ordinary Android logcat is not that
 console. See README for device commands and the public-key distinction.
 
 Both the original inline-hook and whole-GLThread scripts are confirmed to crash
-on the user's device. The JNI-scoped replacement still requires a new Android
-test; no successful device Login or playable Home has been observed.
+on the user's device. The JNI-scoped replacement subsequently registered update,
+entered the native scope and reached a successful libc connect on that device.
+The user confirmed that the app stayed open, but loading stalled. No ClientHello
+or Login events were included in that console output. This verifies registration
+and TCP connection only; no successful device Login or playable Home was observed.
+
+`TRACE_NETWORK=1` now exposes server-side connection IDs, byte counts, message
+IDs/versions/sizes and timeout closure without packet bodies or credentials.
+The client records native frame return versus scope completion, Messaging state
+changes and ClientHello/Login encoding metadata. Socket observations cover all
+six scalar imported I/O APIs: send/recv, sendto/recvfrom and write/read. Nested
+aliases are counted once and repeated identical errors are suppressed. Stalker
+collection is delayed by 50 ms on the script thread instead of running inside
+the render-thread callback. These diagnostics still require the next device log
+to locate the loading stall; they are not evidence that authentication succeeds.
 
 The native VM models single-thread mutexes, condition notifications, static
 initialization guards and reads from `/dev/urandom`. Contention, unrelated file

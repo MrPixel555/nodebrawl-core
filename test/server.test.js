@@ -152,7 +152,7 @@ test('disconnecting while the Home provider runs does not authenticate or increm
 
 test('invalid server configuration is rejected before connections arrive', () => {
   const store = { login: async () => {} }
-  for (const config of [{ maxPayload: Infinity }, { maxConnections: -1 }, { idleTimeout: -1 }, { handlers: [] }, { homeProvider: 3 }]) {
+  for (const config of [{ maxPayload: Infinity }, { maxConnections: -1 }, { idleTimeout: -1 }, { handlers: [] }, { homeProvider: 3 }, { traceNetwork: 'yes' }]) {
     assert.throws(() => createGameServer({ store, ...config }), /Invalid/)
   }
 })
@@ -196,7 +196,8 @@ test('missing Home returns encrypted LoginFailed after encrypted Login', { timeo
   const secret = Buffer.alloc(32, 19); const peer = keyPair(secret).publicKey
   const clientSecret = Buffer.alloc(32, 21); const clientPublicKey = keyPair(clientSecret).publicKey
   const clientNonce = Buffer.alloc(24, 17); const sharedKey = boxKey(peer, clientSecret)
-  const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret) })
+  const entries = []
+  const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret), traceNetwork: true, logger: entry => entries.push(entry) })
   const c = await client(port); c.send(10100)
   const hello = decodeMessage(20100, (await c.receive()).payload)
   const packet = sealLogin({ payload: encodeMessage(10101), sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverHelloNonce: hello.nonce })
@@ -206,6 +207,28 @@ test('missing Home returns encrypted LoginFailed after encrypted Login', { timeo
   const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
   assert.match(decodeMessage(20103, opened.payload).field_0x98, /compatible player-state Home provider/)
   assert.equal(game.statistics.logins, 0)
+  assert.deepEqual(entries.filter(entry => entry.event === 'message-received').map(entry => entry.id), [10100, 10101])
+  assert.deepEqual(entries.filter(entry => entry.event === 'message-sent').map(entry => entry.id), [20100, 20103])
+  assert.equal(entries[0].event, 'connection-open')
+  assert(entries.every(entry => entry.connectionId === 1))
+  const serialized = JSON.stringify(entries)
+  for (const value of [secret, clientSecret, sharedKey]) assert(!serialized.includes(value.toString('hex')))
+  assert(!serialized.includes('compatible player-state Home provider'))
+})
+
+test('network tracing distinguishes a silent connected client from a protocol login', { timeout: 5000 }, async t => {
+  const entries = []
+  const { game, port } = await setup(t, { idleTimeout: 100, traceNetwork: true, logger: entry => entries.push(entry) })
+  const disconnected = once(game.events, 'disconnect')
+  const c = await client(port)
+  await disconnected
+  c.socket.destroy()
+  assert.deepEqual(entries.map(entry => entry.event), ['connection-open', 'connection-close'])
+  const close = entries[1]
+  assert.equal(close.reason, 'idle-timeout')
+  assert.equal(close.receivedBytes, 0)
+  assert.equal(close.receivedFrames, 0)
+  assert.equal(close.state, 'connected')
 })
 
 test('server key creation is persistent, private and safe under concurrent startup', async t => {

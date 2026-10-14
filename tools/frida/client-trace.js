@@ -2,6 +2,8 @@
 'use strict'
 
 const sockets = new Set()
+const ioStatus = new Map()
+const activeIO = new Set()
 const installed = new Set()
 const temporaries = new Map()
 const registrationRoots = []
@@ -28,9 +30,13 @@ function instrument (module) {
   const locations = [
     [0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'],
     [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'],
+    [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'],
+    [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'],
+    [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'],
+    [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'],
   ]
   for (const [offset, expected] of locations) {
-    if (hex(module.base.add(offset), 4) !== expected) { record('library-profile-mismatch', { offset }); return }
+    if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
   }
   if (hex(module.base.add(0x3f3f9c), 16) !== 'f30f1ef8fd7b01a9fd430091c84b00f0') { record('library-profile-mismatch', { reason: 'JNI update entry' }); return }
   installed.add(module.base.toString())
@@ -101,6 +107,29 @@ function installDevelopmentPeer (module) {
       // The JNI wrapper ends tracing after the complete native frame returns.
     })],
   ]
+  const lastStates = new Map()
+  function observe (action) {
+    return context => { try { action(context) } catch (error) { record('observation-error', { message: error.message }) } }
+  }
+  definitions.push(
+    [0x250bbc, observe(context => {
+      const object = context.x0
+      const state = object.add(0x254).readU32()
+      if (lastStates.get(object.toString()) === state) return
+      if (lastStates.size >= 8) lastStates.clear()
+      lastStates.set(object.toString(), state)
+      record('native-messaging-state', { state })
+    })],
+    [0x54c92c, observe(context => {
+      const object = context.x0
+      record('native-client-hello-encode', { version: object.add(8).readU32(), fields: Object.fromEntries([0x7c, 0x80, 0x84, 0x88, 0x8c, 0xa8, 0xac].map(offset => ['field_0x' + offset.toString(16), object.add(offset).readU32()])) })
+    })],
+    [0x41e914, observe(context => {
+      const object = context.x0
+      record('native-login-encode', { version: object.add(8).readU32(), major: object.add(0x90).readU32(), minor: object.add(0x94).readU32(), build: object.add(0x98).readU32() })
+    })],
+    [0x3affd4, observe(context => record('native-login-build', { state: context.x0.add(0x254).readU32() }))],
+  )
   probes = clientProbes.createStalkerProbes(definitions.map(([offset, action]) => ({ address: module.base.add(offset), callback: action })))
   // Never relocate ART's non-ABI interpreter or other system-library code.
   // JNI registration gives us an exact native frame boundary on every update.
@@ -125,6 +154,7 @@ function installNativeFrame (module) {
   }
   let registered = false
   const seenThreads = new Set()
+  const frames = new Map()
   for (const address of addresses) {
     Interceptor.attach(ptr(address), {
       onEnter (args) {
@@ -139,9 +169,21 @@ function installNativeFrame (module) {
             probes,
             shouldTrace: () => peerActive,
             onEnter (thread) {
+              const progress = frames.get(thread) || { count: 0 }
+              progress.started = Date.now()
+              frames.set(thread, progress)
               if (!seenThreads.has(thread)) { seenThreads.add(thread); record('native-frame-scope-started', { thread, method: 'GameApp.update', interpreterExcluded: true }) }
             },
-            onLeave: clearTemporary,
+            onReturn (thread, result) {
+              const progress = frames.get(thread)
+              progress.count++
+              if (progress.count <= 3 || progress.count % 300 === 0) record('native-frame-returned', { thread, frames: progress.count, durationMs: Date.now() - progress.started, result })
+            },
+            onLeave (thread) {
+              clearTemporary(thread)
+              const progress = frames.get(thread)
+              if (progress.count <= 3 || progress.count % 300 === 0) record('native-frame-complete', { thread, frames: progress.count })
+            },
             onError (error) { peerActive = false; record('development-peer-error', { message: error.message }) },
           })
           // Clone the whole JNI table: its original bytes belong to libg's
@@ -181,6 +223,7 @@ Interceptor.attach(api('connect'), {
     const originalHost = family === 2 ? Array.from(bytes.slice(4, 8)).join('.') : Array.from({ length: 8 }, (_, n) => (bytes[8 + n * 2] * 256 + bytes[9 + n * 2]).toString(16)).join(':')
     const socket = args[0].toInt32()
     sockets.add(socket)
+    ioStatus.set(socket, { started: new Set(), errors: new Map(), sentBytes: 0, receivedBytes: 0 })
     this.socket = socket
     peerActive = Boolean(configuration.serverPublicKey)
     if (configuration.host) {
@@ -201,28 +244,51 @@ Interceptor.attach(api('connect'), {
   },
 })
 
-for (const name of ['send', 'recv']) {
+for (const name of ['send', 'recv', 'sendto', 'recvfrom', 'write', 'read']) {
   Interceptor.attach(api(name), {
     onEnter (args) {
       this.socket = args[0].toInt32()
       if (!sockets.has(this.socket)) return
+      this.thread = Process.getCurrentThreadId()
+      if (activeIO.has(this.thread)) return
+      activeIO.add(this.thread)
+      this.ownsIO = true
       this.buffer = args[1]
       this.requested = args[2].toUInt32()
+      this.direction = ['send', 'sendto', 'write'].includes(name) ? 'send' : 'recv'
+      const status = ioStatus.get(this.socket)
+      if (!status.started.has(this.direction)) {
+        status.started.add(this.direction)
+        record('socket-io-start', { socket: this.socket, api: name, direction: this.direction, requested: this.requested })
+      }
     },
     onLeave (result) {
-      if (!this.buffer) return
+      if (!this.ownsIO) return
+      activeIO.delete(this.thread)
       const count = result.toInt32()
-      const fields = { socket: this.socket, bytes: count, requested: this.requested }
+      const status = ioStatus.get(this.socket)
+      if (!status) return
+      if (count < 0 && status.errors.has(this.direction) && status.errors.get(this.direction) === this.errno) return
+      if (count < 0) status.errors.set(this.direction, this.errno)
+      else status.errors.delete(this.direction)
+      if (count > 0) status[this.direction === 'send' ? 'sentBytes' : 'receivedBytes'] += count
+      const fields = { socket: this.socket, api: name, bytes: count, requested: this.requested, errno: count < 0 ? this.errno : 0 }
       if (count >= 7) {
         const header = new Uint8Array(this.buffer.readByteArray(7))
         fields.candidateHeader = { id: header[0] * 256 + header[1], bytes: header[2] * 65536 + header[3] * 256 + header[4], version: header[5] * 256 + header[6] }
       }
-      record('socket-' + name, fields)
+      record('socket-' + this.direction, fields)
     },
   })
 }
 Interceptor.attach(api('close'), {
-  onEnter (args) { sockets.delete(args[0].toInt32()) },
+  onEnter (args) {
+    const socket = args[0].toInt32()
+    const status = ioStatus.get(socket)
+    if (status) record('game-socket-close', { socket, sentBytes: status.sentBytes, receivedBytes: status.receivedBytes })
+    ioStatus.delete(socket)
+    sockets.delete(socket)
+  },
 })
 
 if (typeof Process.attachModuleObserver === 'function') Process.attachModuleObserver({ onAdded: instrument })
@@ -231,4 +297,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'jni-update-only' })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'jni-update-only', diagnostics: 'network-v1' })
