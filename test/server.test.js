@@ -1,0 +1,158 @@
+'use strict'
+const test = require('node:test')
+const assert = require('node:assert/strict')
+const net = require('node:net')
+const { once } = require('node:events')
+const fs = require('node:fs/promises')
+const os = require('node:os')
+const path = require('node:path')
+const { AccountStore } = require('../server/accounts')
+const { createGameServer } = require('../server/core')
+const { loadHomeTemplate } = require('../server/home')
+const { createHash } = require('node:crypto')
+const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
+const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
+
+async function client (port) {
+  const socket = net.connect(port, '127.0.0.1')
+  await once(socket, 'connect')
+  const decoder = new FrameDecoder()
+  const frames = []
+  const waiters = []
+  socket.on('data', chunk => {
+    for (const frame of decoder.push(chunk)) { if (waiters.length) waiters.shift()(frame); else frames.push(frame) }
+  })
+  return { socket, receive: () => frames.length ? Promise.resolve(frames.shift()) : new Promise(resolve => waiters.push(resolve)), send: (id, fields = {}, version = 0) => socket.write(encodeFrame(id, version, encodeMessage(id, fields))) }
+}
+
+async function setup (t, options = {}) {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'cr-server-'))
+  const game = createGameServer({ store: new AccountStore(directory), ...options })
+  game.server.listen(0, '127.0.0.1')
+  await once(game.server, 'listening')
+  t.after(async () => { await game.stop(); await fs.rm(directory, { recursive: true, force: true }) })
+  return { game, directory, port: game.server.address().port }
+}
+
+test('real TCP ClientHello and explicit missing-Home LoginFailed', { timeout: 5000 }, async t => {
+  const { game, port } = await setup(t)
+  const c = await client(port)
+  const hello = encodeFrame(10100, 0, encodeMessage(10100, { field_0x7c: 1, field_0x84: 3, field_0x88: 1 }))
+  c.socket.write(hello.subarray(0, 3)); c.socket.write(hello.subarray(3))
+  const response = await c.receive()
+  assert.equal(response.id, 20100); assert.equal(decodeMessage(20100, response.payload).nonce.length, 24)
+  c.send(10101, { field_0x80: [0, 0], field_0x90: 3, field_0x94: 1 }, 4)
+  const failed = await c.receive()
+  assert.equal(failed.id, 20103); assert.equal(failed.version, 4)
+  assert.match(decodeMessage(20103, failed.payload).field_0x98, /compatible player-state Home provider/)
+  assert.equal(game.statistics.logins, 0)
+})
+
+test('login persistence, frame ordering and heartbeat with a synthetic Home provider', { timeout: 5000 }, async t => {
+  const syntheticPayload = Buffer.from('TEST HOME TRANSPORT ONLY')
+  const { game, port, directory } = await setup(t, { homeProvider: async () => ({ payload: syntheticPayload, version: 0 }) })
+  const c = await client(port)
+  c.send(10101, { field_0x80: [0, 0], field_0x90: 3, field_0x94: 1, field_0x98: 162 }, 4)
+  const ok = await c.receive(); const home = await c.receive()
+  const account = decodeMessage(20758, ok.payload)
+  assert.equal(ok.id, 20758); assert.equal(home.id, 21217); assert.deepEqual(home.payload, syntheticPayload)
+  assert.equal(account.field_0xb0, 3); assert.equal(account.field_0xb4, 162); assert.equal(account.field_0xbc, 1)
+  c.socket.write(Buffer.concat([encodeFrame(10108, 0, Buffer.alloc(0)), encodeFrame(10108, 0, Buffer.alloc(0))]))
+  assert.equal((await c.receive()).id, 20108); assert.equal((await c.receive()).id, 20108)
+  c.socket.destroy()
+  const loaded = await new AccountStore(directory).login(account.field_0x80, account.field_0x90)
+  assert.deepEqual(loaded.id, account.field_0x80)
+  await assert.rejects(new AccountStore(directory).login(account.field_0x80, 'incorrect'), /Invalid account/)
+  assert.equal(game.statistics.logins, 1)
+})
+
+test('malformed and oversized frames close or fail only their own connection', { timeout: 5000 }, async t => {
+  const { game, port } = await setup(t)
+  const c = await client(port)
+  c.socket.write(encodeFrame(10100, 0, Buffer.alloc(0)))
+  assert.equal((await c.receive()).id, 20103)
+  const next = await client(port)
+  const header = Buffer.alloc(7); header.writeUIntBE(1048577, 2, 3)
+  next.socket.write(header)
+  await once(next.socket, 'close')
+  const healthy = await client(port); healthy.send(10100)
+  assert.equal((await healthy.receive()).id, 20100)
+  assert.equal(game.statistics.malformed, 2)
+})
+
+test('concurrent new account creation is serialized and persists unique IDs', async t => {
+  const { game, directory } = await setup(t)
+  const store = new AccountStore(directory)
+  const accounts = await Promise.all(Array.from({ length: 10 }, () => store.login([0, 0], null)))
+  assert.equal(new Set(accounts.map(a => a.id[1])).size, 10)
+  for (const account of accounts) assert.equal((await store.login(account.id, account.token)).token, account.token)
+  assert.equal(game.statistics.logins, 0)
+})
+
+test('Home templates are checksum-bound, library-bound and explicitly bind account IDs', async t => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'cr-template-'))
+  t.after(() => fs.rm(directory, { recursive: true, force: true }))
+  const payload = Buffer.alloc(16)
+  const template = { librarySha256: profile.library_sha256, messageId: 21217, version: 0, payloadHex: payload.toString('hex'), payloadSha256: createHash('sha256').update(payload).digest('hex'), accountIdOffsets: [0, 8] }
+  const filename = path.join(directory, 'template.json')
+  await fs.writeFile(filename, JSON.stringify(template))
+  const provider = await loadHomeTemplate(filename)
+  const home = await provider({ id: [0, 123] })
+  assert.equal(home.payload.readInt32BE(4), 123); assert.equal(home.payload.readInt32BE(12), 123)
+  template.librarySha256 = 'wrong'; await fs.writeFile(filename, JSON.stringify(template))
+  await assert.rejects(loadHomeTemplate(filename), /does not match/)
+})
+
+test('separate stores sharing a directory serialize account IDs without losing accounts', async t => {
+  const { directory } = await setup(t)
+  const stores = [new AccountStore(directory), new AccountStore(path.join(directory, '.'))]
+  const accounts = await Promise.all(Array.from({ length: 20 }, (_, n) => stores[n % 2].login([0, 0], null)))
+  assert.equal(new Set(accounts.map(a => a.id[1])).size, 20)
+  for (const account of accounts) assert.deepEqual((await stores[0].login(account.id, account.token)).id, account.id)
+})
+
+test('malformed account databases and IDs cannot allocate duplicate or invalid identities', async t => {
+  const { directory } = await setup(t)
+  const store = new AccountStore(directory)
+  for (const nextId of [-1, 0, 1.5, 2147483649]) {
+    const source = JSON.stringify({ schema: 1, nextId, accounts: [] })
+    await fs.writeFile(path.join(directory, 'accounts.json'), source)
+    await assert.rejects(store.login([0, 0], null), /Invalid account database/)
+    assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), source)
+  }
+  await assert.rejects(store.login([0], null), /Invalid account credentials/)
+  await assert.rejects(store.login([0, NaN], null), /Invalid account credentials/)
+})
+
+test('a rejected Home batch never sends LoginOk before LoginFailed', { timeout: 5000 }, async t => {
+  const { game, port } = await setup(t, { homeProvider: async () => ({ payload: Buffer.alloc(1048577) }) })
+  const c = await client(port)
+  c.send(10101, {}, 4)
+  const failed = await c.receive()
+  assert.equal(failed.id, 20103)
+  assert.equal(game.statistics.logins, 0)
+})
+
+test('disconnecting while the Home provider runs does not authenticate or increment logins', { timeout: 5000 }, async t => {
+  let started
+  const providerStarted = new Promise(resolve => { started = resolve })
+  let complete
+  const pendingHome = new Promise(resolve => { complete = resolve })
+  const { game, port } = await setup(t, { homeProvider: async () => { started(); return pendingHome } })
+  const disconnected = once(game.events, 'disconnect')
+  const c = await client(port)
+  c.send(10101, {}, 4)
+  await providerStarted
+  c.socket.destroy()
+  await disconnected
+  complete({ payload: Buffer.alloc(0) })
+  await new Promise(resolve => setImmediate(resolve))
+  assert.equal(game.statistics.logins, 0)
+})
+
+test('invalid server configuration is rejected before connections arrive', () => {
+  const store = { login: async () => {} }
+  for (const config of [{ maxPayload: Infinity }, { maxConnections: -1 }, { idleTimeout: -1 }, { handlers: [] }, { homeProvider: 3 }]) {
+    assert.throws(() => createGameServer({ store, ...config }), /Invalid/)
+  }
+})

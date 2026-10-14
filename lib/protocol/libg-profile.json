@@ -1,0 +1,6501 @@
+{
+  "library_sha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "library_build_id": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "architecture": "aarch64",
+  "game": "Clash Royale",
+  "version_reported_by_user": "3.1.0",
+  "version_independently_confirmed": true,
+  "string_table": "0xcfe63c",
+  "string_range_count": 21757,
+  "string_key_address": "0xd4663f",
+  "messages": [
+    {
+      "id": 10098,
+      "vtable": "0xa34e30",
+      "encode": "0x74a63c",
+      "decode": "0x2b110c",
+      "type": "0x4d3358",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x74a65c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x74a668",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x74a67c",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10098",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10099,
+      "vtable": "0xa6c138",
+      "encode": "0x520a98",
+      "decode": "0x24795c",
+      "type": "0x1d34d4",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x520abc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10099",
+      "factoryObservations": []
+    },
+    {
+      "id": 10100,
+      "vtable": "0xa34490",
+      "encode": "0x54c92c",
+      "decode": "0x355da4",
+      "type": "0x82a7cc",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x54c94c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c958",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c964",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c970",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c97c",
+          "field": "field_0x8c",
+          "object_offset": "0x8c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x54c988",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c994",
+          "field": "field_0xa8",
+          "object_offset": "0xa8",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x54c9a8",
+          "field": "field_0xac",
+          "object_offset": "0xac",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "ClientHello",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10101,
+      "vtable": "0xa2d968",
+      "encode": "0x41e914",
+      "decode": "0x60f844",
+      "type": "0x138620",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Login",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 4
+        }
+      ]
+    },
+    {
+      "id": 10102,
+      "vtable": "0xa53228",
+      "encode": "0x4c92ac",
+      "decode": "0x109704",
+      "type": "0x74d1f8",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x4c92cc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x4c92d8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4c92e4",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4c92f0",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4c92fc",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4c9308",
+          "field": "field_0xa0",
+          "object_offset": "0xa0",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4c9314",
+          "field": "field_0xa8",
+          "object_offset": "0xa8",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x4c9328",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10102",
+      "factoryObservations": []
+    },
+    {
+      "id": 10108,
+      "vtable": "0xa38a50",
+      "encode": "0x564e34",
+      "decode": "0x73940c",
+      "type": "0x1e9ee4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "KeepAlive",
+      "factoryObservations": []
+    },
+    {
+      "id": 10268,
+      "vtable": "0xa41090",
+      "encode": "0x229750",
+      "decode": "0x13a7cc",
+      "type": "0x5c8c6c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x229774",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10268",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10344,
+      "vtable": "0xa360a8",
+      "encode": "0x1a834c",
+      "decode": "0x68aef8",
+      "type": "0x3fb9cc",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x1a836c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x1a8380",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10344",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10393,
+      "vtable": "0xa55a10",
+      "encode": "0x6fddd0",
+      "decode": "0x4a7268",
+      "type": "0x5eab50",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x6fddf0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x6fddfc",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x6fde08",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x6fde1c",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10393",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10453,
+      "vtable": "0xa696d8",
+      "encode": "0x6c12fc",
+      "decode": "0x74935c",
+      "type": "0x57002c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message10453",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10459,
+      "vtable": "0xa3df28",
+      "encode": "0x21c2d4",
+      "decode": "0x581cc4",
+      "type": "0x545f14",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x610f54",
+      "codec_status": "unresolved",
+      "name": "Message10459",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10484,
+      "vtable": "0xa5b258",
+      "encode": "0x121d28",
+      "decode": "0x6b7c28",
+      "type": "0x4cd088",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x121d4c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10484",
+      "factoryObservations": []
+    },
+    {
+      "id": 10576,
+      "vtable": "0xa305d0",
+      "encode": "0x1629ec",
+      "decode": "0x412354",
+      "type": "0x187e50",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10576",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10593,
+      "vtable": "0xa2c430",
+      "encode": "0x5391bc",
+      "decode": "0x4465f4",
+      "type": "0x18d3c0",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10593",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10679,
+      "vtable": "0xa5f858",
+      "encode": "0x144fc4",
+      "decode": "0x324a18",
+      "type": "0x59119c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message10679",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10707,
+      "vtable": "0xa2b870",
+      "encode": "0x315af8",
+      "decode": "0x6e6c20",
+      "type": "0x463528",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x315b1c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10707",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10834,
+      "vtable": "0xa72880",
+      "encode": "0x4408f8",
+      "decode": "0x16711c",
+      "type": "0x65b654",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10834",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10916,
+      "vtable": "0xa57de8",
+      "encode": "0x1bf5f8",
+      "decode": "0x2f73bc",
+      "type": "0x21b2a0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x1bf618",
+      "codec_status": "unresolved",
+      "name": "Message10916",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10947,
+      "vtable": "0xa3a9e0",
+      "encode": "0x562ba8",
+      "decode": "0x58601c",
+      "type": "0x51d420",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x13a8e0",
+      "codec_status": "unresolved",
+      "name": "Message10947",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10953,
+      "vtable": "0xa53f18",
+      "encode": "0x1cfe5c",
+      "decode": "0x2c68c0",
+      "type": "0x53db24",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message10953",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 10985,
+      "vtable": "0xa41748",
+      "encode": "0x42f01c",
+      "decode": "0x22bea8",
+      "type": "0x61bd08",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x42f03c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x42f050",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message10985",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11006,
+      "vtable": "0xa2bd10",
+      "encode": "0x1cb684",
+      "decode": "0x5d7f24",
+      "type": "0x4cd610",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11006",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11212,
+      "vtable": "0xa64998",
+      "encode": "0x45d79c",
+      "decode": "0x236118",
+      "type": "0x6877c0",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x45d7c0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11212",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11311,
+      "vtable": "0xa3cbe8",
+      "encode": "0x58041c",
+      "decode": "0x4986d8",
+      "type": "0x5494bc",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11311",
+      "factoryObservations": []
+    },
+    {
+      "id": 11466,
+      "vtable": "0xa4f538",
+      "encode": "0x474d34",
+      "decode": "0x5eadf8",
+      "type": "0x1959e8",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x474d54",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x474d68",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11466",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11474,
+      "vtable": "0xa33d38",
+      "encode": "0x13e49c",
+      "decode": "0x6e3a50",
+      "type": "0x440548",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message11474",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11485,
+      "vtable": "0xa728d0",
+      "encode": "0x5f643c",
+      "decode": "0x687d10",
+      "type": "0x4b4150",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11485",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11632,
+      "vtable": "0xa71c70",
+      "encode": "0x39d474",
+      "decode": "0x2f3cac",
+      "type": "0x12b2d0",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x39d494",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x39d4a8",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11632",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11689,
+      "vtable": "0xa2d880",
+      "encode": "0x6de2fc",
+      "decode": "0x3f4cc4",
+      "type": "0x5d0348",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message11689",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11712,
+      "vtable": "0xa5b398",
+      "encode": "0x65f3b0",
+      "decode": "0x48bc08",
+      "type": "0x3c5398",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x65f3d4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11712",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11760,
+      "vtable": "0xa2dc00",
+      "encode": "0x66e12c",
+      "decode": "0x31f3c0",
+      "type": "0x1d0e8c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message11760",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11836,
+      "vtable": "0xa63438",
+      "encode": "0x3900b4",
+      "decode": "0x38ff98",
+      "type": "0x58d2e0",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x3900d8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message11836",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 11925,
+      "vtable": "0xa5d010",
+      "encode": "0x1dc2f8",
+      "decode": "0x62f5f4",
+      "type": "0x4cee78",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1dc314",
+      "codec_status": "unresolved",
+      "name": "Message11925",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12087,
+      "vtable": "0xa47d28",
+      "encode": "0x472550",
+      "decode": "0x55c7f0",
+      "type": "0x3f08a8",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message12087",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12373,
+      "vtable": "0xa350a8",
+      "encode": "0x5a4574",
+      "decode": "0x3fad7c",
+      "type": "0x6aab7c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x5a4598",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12373",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12395,
+      "vtable": "0xa3a4d8",
+      "encode": "0x22de14",
+      "decode": "0x15a8b8",
+      "type": "0x4a33b0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message12395",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12405,
+      "vtable": "0xa328e0",
+      "encode": "0x480d04",
+      "decode": "0x410668",
+      "type": "0x65a360",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x480d3c",
+      "codec_status": "unresolved",
+      "name": "Message12405",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12445,
+      "vtable": "0xa4fe70",
+      "encode": "0x6aee30",
+      "decode": "0x459ba4",
+      "type": "0x73b53c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x6aee50",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x6aee5c",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x6aee68",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x6aee7c",
+          "field": "field_0x94",
+          "object_offset": "0x94",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12445",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12473,
+      "vtable": "0xa6b1e8",
+      "encode": "0x75481c",
+      "decode": "0x4cffc0",
+      "type": "0x422998",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x754840",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12473",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12526,
+      "vtable": "0xa34590",
+      "encode": "0x7431b0",
+      "decode": "0x3ca568",
+      "type": "0x49aee4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12526",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12527,
+      "vtable": "0xa42958",
+      "encode": "0xf8114",
+      "decode": "0x3436f0",
+      "type": "0x5c42b8",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0xf8134",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0xf8148",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12527",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12649,
+      "vtable": "0xa53138",
+      "encode": "0x41c85c",
+      "decode": "0x4833a0",
+      "type": "0x5d5f54",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x16e918",
+      "codec_status": "unresolved",
+      "name": "Message12649",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12848,
+      "vtable": "0xa60750",
+      "encode": "0x621170",
+      "decode": "0xfbcbc",
+      "type": "0x717578",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message12848",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12912,
+      "vtable": "0xa585a8",
+      "encode": "0x6b44ec",
+      "decode": "0x2e778c",
+      "type": "0x44f508",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x6b4510",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12912",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 12951,
+      "vtable": "0xa737c8",
+      "encode": "0x240230",
+      "decode": "0x1e0b50",
+      "type": "0x6bb858",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message12951",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13006,
+      "vtable": "0xa5f3f8",
+      "encode": "0x415534",
+      "decode": "0x423b40",
+      "type": "0x4df690",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13006",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13058,
+      "vtable": "0xa53e28",
+      "encode": "0x4531f4",
+      "decode": "0x7047cc",
+      "type": "0x3fa800",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x453218",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13058",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13090,
+      "vtable": "0xa42f10",
+      "encode": "0x61b608",
+      "decode": "0x2379f0",
+      "type": "0x5290f0",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x61b628",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x61b63c",
+          "field": "field_0x7d",
+          "object_offset": "0x7d",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13090",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13172,
+      "vtable": "0xa53ec8",
+      "encode": "0x240230",
+      "decode": "0x1e0b50",
+      "type": "0x54ac20",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13172",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13211,
+      "vtable": "0xa62448",
+      "encode": "0x118a54",
+      "decode": "0x561454",
+      "type": "0x16a984",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x42f01c",
+      "codec_status": "unresolved",
+      "name": "Message13211",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13351,
+      "vtable": "0xa40298",
+      "encode": "0x24de20",
+      "decode": "0x531908",
+      "type": "0x23be08",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x223834",
+      "codec_status": "unresolved",
+      "name": "Message13351",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13475,
+      "vtable": "0xa3ce20",
+      "encode": "0x240f88",
+      "decode": "0x349b44",
+      "type": "0x636ea8",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message13475",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13481,
+      "vtable": "0xa66be8",
+      "encode": "0x1876cc",
+      "decode": "0x2933c8",
+      "type": "0x567974",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message13481",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13525,
+      "vtable": "0xa44008",
+      "encode": "0x1b1720",
+      "decode": "0x4ce9c0",
+      "type": "0x45b140",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x13a8e0",
+      "codec_status": "unresolved",
+      "name": "Message13525",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13549,
+      "vtable": "0xa6ab78",
+      "encode": "0x4beed8",
+      "decode": "0x2a458c",
+      "type": "0x24b514",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x4beef8",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4bef04",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4bef18",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13549",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13597,
+      "vtable": "0xa48b18",
+      "encode": "0x520928",
+      "decode": "0x17c560",
+      "type": "0x5e18e8",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x520960",
+      "codec_status": "unresolved",
+      "name": "Message13597",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13631,
+      "vtable": "0xa623f8",
+      "encode": "0x2a1684",
+      "decode": "0x4886e4",
+      "type": "0x61c0f4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13631",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13727,
+      "vtable": "0xa510c0",
+      "encode": "0x669dc0",
+      "decode": "0x63c07c",
+      "type": "0x4676d8",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x669de4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13727",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13732,
+      "vtable": "0xa515c0",
+      "encode": "0x41f58c",
+      "decode": "0x5954c4",
+      "type": "0x2c8aac",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x41f5ac",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x41f5c0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13732",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13752,
+      "vtable": "0xa44ad8",
+      "encode": "0x187678",
+      "decode": "0x3e09e0",
+      "type": "0x5507b8",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x187698",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x1876ac",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message13752",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13781,
+      "vtable": "0xa4c278",
+      "encode": "0x45cf44",
+      "decode": "0x5f34cc",
+      "type": "0x4a8910",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x45cf60",
+      "codec_status": "unresolved",
+      "name": "Message13781",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 13882,
+      "vtable": "0xa70858",
+      "encode": "0x4a1128",
+      "decode": "0x3ccde4",
+      "type": "0x452014",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message13882",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14054,
+      "vtable": "0xa536b0",
+      "encode": "0x62778c",
+      "decode": "0x2d056c",
+      "type": "0x30b43c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x6277ac",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x6277c0",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14054",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14062,
+      "vtable": "0xa2d9b8",
+      "encode": "0x425398",
+      "decode": "0x6ab084",
+      "type": "0x47f448",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14062",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14124,
+      "vtable": "0xa66408",
+      "encode": "0x1df5e4",
+      "decode": "0x592794",
+      "type": "0x674934",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x16e918",
+      "codec_status": "unresolved",
+      "name": "Message14124",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14164,
+      "vtable": "0xa5a0c8",
+      "encode": "0x35e208",
+      "decode": "0x21d638",
+      "type": "0x2c9514",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x35e234",
+      "codec_status": "unresolved",
+      "name": "Message14164",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14173,
+      "vtable": "0xa74098",
+      "encode": "0x4a5688",
+      "decode": "0x3178ac",
+      "type": "0x438f74",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message14173",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14315,
+      "vtable": "0xa49528",
+      "encode": "0x38c650",
+      "decode": "0x74069c",
+      "type": "0x37f554",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x38c670",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "pointer"
+        },
+        {
+          "type": "long",
+          "instruction": "0x38c684",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14315",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14674,
+      "vtable": "0xa40338",
+      "encode": "0x741b18",
+      "decode": "0x1b1b08",
+      "type": "0x2c8b8c",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x741b3c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14674",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14783,
+      "vtable": "0xa587b8",
+      "encode": "0x3ed2f4",
+      "decode": "0x24b2dc",
+      "type": "0x467798",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message14783",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14809,
+      "vtable": "0xa48a60",
+      "encode": "0x754958",
+      "decode": "0x6ca8bc",
+      "type": "0x2baa74",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x75497c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14809",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14843,
+      "vtable": "0xa57f98",
+      "encode": "0x42f01c",
+      "decode": "0x22bea8",
+      "type": "0x3479bc",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x42f03c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x42f050",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message14843",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 14997,
+      "vtable": "0xa3faa0",
+      "encode": "0x14e4f0",
+      "decode": "0x1c8b18",
+      "type": "0x2f2134",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x16e918",
+      "codec_status": "unresolved",
+      "name": "Message14997",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15114,
+      "vtable": "0xa5c720",
+      "encode": "0x37dcc4",
+      "decode": "0x6a0d7c",
+      "type": "0x152c1c",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15114",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15141,
+      "vtable": "0xa2b730",
+      "encode": "0x322738",
+      "decode": "0x6e238c",
+      "type": "0x22e29c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x322754",
+      "codec_status": "unresolved",
+      "name": "Message15141",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15164,
+      "vtable": "0xa48198",
+      "encode": "0x552880",
+      "decode": "0x2f7b1c",
+      "type": "0x1d259c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5528a8",
+      "codec_status": "unresolved",
+      "name": "Message15164",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15226,
+      "vtable": "0xa44910",
+      "encode": "0x1c470c",
+      "decode": "0x671e88",
+      "type": "0x2a1cc0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x1c472c",
+      "codec_status": "unresolved",
+      "name": "Message15226",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15263,
+      "vtable": "0xa2e478",
+      "encode": "0x5eaf68",
+      "decode": "0x372674",
+      "type": "0x1498a8",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15263",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15332,
+      "vtable": "0xa2ea08",
+      "encode": "0x1b4a98",
+      "decode": "0x243314",
+      "type": "0x68b4e4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15332",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15353,
+      "vtable": "0xa36980",
+      "encode": "0x6e4a68",
+      "decode": "0x178e28",
+      "type": "0x53d5fc",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x6e4a88",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x6e4a9c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15353",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15415,
+      "vtable": "0xa72640",
+      "encode": "0x1b4b30",
+      "decode": "0x654dd0",
+      "type": "0x5e10f0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1b4b4c",
+      "codec_status": "unresolved",
+      "name": "Message15415",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15428,
+      "vtable": "0xa5f978",
+      "encode": "0x456388",
+      "decode": "0x3fb504",
+      "type": "0x3a84a4",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message15428",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15441,
+      "vtable": "0xa2af20",
+      "encode": "0x567d94",
+      "decode": "0x2a1538",
+      "type": "0x6d5698",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15441",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15725,
+      "vtable": "0xa307c8",
+      "encode": "0x3e1998",
+      "decode": "0x736fec",
+      "type": "0x651d78",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message15725",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15821,
+      "vtable": "0xa2ef60",
+      "encode": "0x30b5b0",
+      "decode": "0x332294",
+      "type": "0x51dc90",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message15821",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 15965,
+      "vtable": "0xa58558",
+      "encode": "0x14c8b0",
+      "decode": "0x42324c",
+      "type": "0x64af6c",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message15965",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16001,
+      "vtable": "0xa561a8",
+      "encode": "0x176400",
+      "decode": "0x293ee0",
+      "type": "0x5ce66c",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16001",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16045,
+      "vtable": "0xa2b9d0",
+      "encode": "0x57eee0",
+      "decode": "0x756a44",
+      "type": "0x1c9090",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x57ef04",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16045",
+      "factoryObservations": []
+    },
+    {
+      "id": 16194,
+      "vtable": "0xa442a8",
+      "encode": "0x4b1fb4",
+      "decode": "0x47f938",
+      "type": "0x591ff0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x4b1fe8",
+      "codec_status": "unresolved",
+      "name": "Message16194",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16220,
+      "vtable": "0xa5f180",
+      "encode": "0x3f58f8",
+      "decode": "0x5f37b0",
+      "type": "0x2c5670",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x3f5918",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x3f592c",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16220",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16292,
+      "vtable": "0xa35568",
+      "encode": "0x5df5b8",
+      "decode": "0x608d04",
+      "type": "0x440ca0",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x5df5dc",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16292",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16401,
+      "vtable": "0xa44a88",
+      "encode": "0x333dc4",
+      "decode": "0x57ef84",
+      "type": "0x4c21dc",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x333de4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x333df8",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16401",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16442,
+      "vtable": "0xa49d30",
+      "encode": "0x240230",
+      "decode": "0x1e0b50",
+      "type": "0x36ef28",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16442",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16592,
+      "vtable": "0xa3b5a8",
+      "encode": "0x5ac59c",
+      "decode": "0x4c0af0",
+      "type": "0x105b98",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x5ac5c0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16592",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16783,
+      "vtable": "0xa2bb38",
+      "encode": "0x41c5fc",
+      "decode": "0x1d62f8",
+      "type": "0x781620",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x241ecc",
+      "codec_status": "unresolved",
+      "name": "Message16783",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 16957,
+      "vtable": "0xa41be0",
+      "encode": "0x5e053c",
+      "decode": "0x204c04",
+      "type": "0x60f83c",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x5e055c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x5e0568",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x5e057c",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message16957",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17151,
+      "vtable": "0xa6a370",
+      "encode": "0x5f0954",
+      "decode": "0x3ed194",
+      "type": "0x243b88",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message17151",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17212,
+      "vtable": "0xa42b88",
+      "encode": "0x494840",
+      "decode": "0x1527e0",
+      "type": "0x4d5584",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x494860",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x49486c",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x494880",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17212",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17221,
+      "vtable": "0xa62ce0",
+      "encode": "0x322910",
+      "decode": "0x1b2834",
+      "type": "0x367fa4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17221",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17248,
+      "vtable": "0xa73460",
+      "encode": "0x3f3a8c",
+      "decode": "0x520484",
+      "type": "0x590d18",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x16e918",
+      "codec_status": "unresolved",
+      "name": "Message17248",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17337,
+      "vtable": "0xa62310",
+      "encode": "0x740528",
+      "decode": "0x452684",
+      "type": "0x2bf3b0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message17337",
+      "factoryObservations": []
+    },
+    {
+      "id": 17363,
+      "vtable": "0xa5fd50",
+      "encode": "0x2c4fec",
+      "decode": "0x202840",
+      "type": "0x68ac98",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17363",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17438,
+      "vtable": "0xa35f80",
+      "encode": "0x167878",
+      "decode": "0x5233ac",
+      "type": "0x63b0f8",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message17438",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17541,
+      "vtable": "0xa583d8",
+      "encode": "0x6e0a28",
+      "decode": "0x3225b4",
+      "type": "0x496274",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x223834",
+      "codec_status": "unresolved",
+      "name": "Message17541",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17599,
+      "vtable": "0xa6a320",
+      "encode": "0x597ab8",
+      "decode": "0x59ac84",
+      "type": "0x61d7d0",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x597adc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17599",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17628,
+      "vtable": "0xa6f4a0",
+      "encode": "0x240230",
+      "decode": "0x1e0b50",
+      "type": "0x44845c",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17628",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17656,
+      "vtable": "0xa4fec0",
+      "encode": "0x49badc",
+      "decode": "0x3bde74",
+      "type": "0x42a5f4",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x49baf8",
+      "codec_status": "unresolved",
+      "name": "Message17656",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17688,
+      "vtable": "0xa335b8",
+      "encode": "0x6c6000",
+      "decode": "0x6cb8f4",
+      "type": "0x171e6c",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x6c6020",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x6c6034",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message17688",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 17967,
+      "vtable": "0xa74138",
+      "encode": "0x6ed88c",
+      "decode": "0x7499d4",
+      "type": "0x64c164",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message17967",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18077,
+      "vtable": "0xa53f68",
+      "encode": "0x669958",
+      "decode": "0x73d9f4",
+      "type": "0x6d10a8",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x66997c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18077",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18100,
+      "vtable": "0xa40660",
+      "encode": "0x56d61c",
+      "decode": "0x47de5c",
+      "type": "0x393b20",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x56d63c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x56d650",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18100",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18102,
+      "vtable": "0xa4bd58",
+      "encode": "0x15d504",
+      "decode": "0x1d2a24",
+      "type": "0x39e388",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x15d524",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x15d538",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18102",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18104,
+      "vtable": "0xa70150",
+      "encode": "0x315370",
+      "decode": "0x6932a8",
+      "type": "0x2c5c64",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x315390",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "pointer"
+        },
+        {
+          "type": "long",
+          "instruction": "0x3153a4",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18104",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18195,
+      "vtable": "0xa4aed0",
+      "encode": "0x524af0",
+      "decode": "0x4a7bf8",
+      "type": "0x2d2d10",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x524b28",
+      "codec_status": "unresolved",
+      "name": "Message18195",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18216,
+      "vtable": "0xa6f670",
+      "encode": "0x6130f4",
+      "decode": "0x3dc818",
+      "type": "0x377670",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbnz at 0x613110",
+      "codec_status": "unresolved",
+      "name": "Message18216",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18385,
+      "vtable": "0xa32350",
+      "encode": "0x374544",
+      "decode": "0x4193b8",
+      "type": "0x467f6c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x374560",
+      "codec_status": "unresolved",
+      "name": "Message18385",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18443,
+      "vtable": "0xa2b800",
+      "encode": "0x6af664",
+      "decode": "0x10d3f0",
+      "type": "0x716d38",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message18443",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18495,
+      "vtable": "0xa2bc38",
+      "encode": "0x1d043c",
+      "decode": "0x382690",
+      "type": "0x309184",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x1d045c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x1d0470",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18495",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18533,
+      "vtable": "0xa707e8",
+      "encode": "0x66baec",
+      "decode": "0x34a3cc",
+      "type": "0x2c980c",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18533",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18685,
+      "vtable": "0xa5de78",
+      "encode": "0x453430",
+      "decode": "0x43c554",
+      "type": "0x72df18",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x453450",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x453464",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18685",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18720,
+      "vtable": "0xa3bb78",
+      "encode": "0x111534",
+      "decode": "0x4a4700",
+      "type": "0x15efb8",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message18720",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 18900,
+      "vtable": "0xa61cb0",
+      "encode": "0x3db90c",
+      "decode": "0x562b24",
+      "type": "0x3557d4",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x3db92c",
+      "codec_status": "unresolved",
+      "name": "Message18900",
+      "factoryObservations": []
+    },
+    {
+      "id": 18974,
+      "vtable": "0xa33838",
+      "encode": "0x63a35c",
+      "decode": "0x543b04",
+      "type": "0x5dea18",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x63a37c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x63a388",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x63a39c",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message18974",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19089,
+      "vtable": "0xa45570",
+      "encode": "0x1ab460",
+      "decode": "0x3ccb9c",
+      "type": "0x35a2f0",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19089",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19158,
+      "vtable": "0xa34358",
+      "encode": "0x3690f8",
+      "decode": "0x38d924",
+      "type": "0x16d188",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x66be6c",
+      "codec_status": "unresolved",
+      "name": "Message19158",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19248,
+      "vtable": "0xa54a30",
+      "encode": "0x346cc4",
+      "decode": "0x564c2c",
+      "type": "0x5e4204",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x346ce8",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19248",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19329,
+      "vtable": "0xa6d688",
+      "encode": "0x6ba744",
+      "decode": "0x4bbfd0",
+      "type": "0x6ed034",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x6d6928",
+      "codec_status": "unresolved",
+      "name": "Message19329",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19355,
+      "vtable": "0xa4cb18",
+      "encode": "0x581f44",
+      "decode": "0x402154",
+      "type": "0x228e48",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x581f60",
+      "codec_status": "unresolved",
+      "name": "Message19355",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19397,
+      "vtable": "0xa3ae68",
+      "encode": "0x1c6284",
+      "decode": "0x2e36bc",
+      "type": "0x65cff0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message19397",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19404,
+      "vtable": "0xa5fda0",
+      "encode": "0x467b20",
+      "decode": "0x2f15f0",
+      "type": "0x59dc5c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x16e918",
+      "codec_status": "unresolved",
+      "name": "Message19404",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19462,
+      "vtable": "0xa45998",
+      "encode": "0x1b9870",
+      "decode": "0x1c91f0",
+      "type": "0x102f04",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19462",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19500,
+      "vtable": "0xa4c968",
+      "encode": "0x701624",
+      "decode": "0x73e5cc",
+      "type": "0x1c2b90",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x701648",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19500",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19503,
+      "vtable": "0xa4a918",
+      "encode": "0x19c898",
+      "decode": "0x4586d0",
+      "type": "0x607ed4",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x19c8b8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x19c8c4",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x19c8d8",
+          "field": "field_0x8c",
+          "object_offset": "0x8c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19503",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19591,
+      "vtable": "0xa6a2d0",
+      "encode": "0x49acb4",
+      "decode": "0x374d98",
+      "type": "0x2c3ba8",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x49acd4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x49ace0",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x49acec",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x49ad00",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19591",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19652,
+      "vtable": "0xa68038",
+      "encode": "0x2fbcac",
+      "decode": "0x6b66b4",
+      "type": "0x17cab8",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x2fbcd0",
+      "codec_status": "unresolved",
+      "name": "Message19652",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19726,
+      "vtable": "0xa4a720",
+      "encode": "0x407f74",
+      "decode": "0x2f7708",
+      "type": "0x20f21c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x407f98",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19726",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19958,
+      "vtable": "0xa402e8",
+      "encode": "0x45f26c",
+      "decode": "0x332fe4",
+      "type": "0x2118d8",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x45f290",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19958",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 19966,
+      "vtable": "0xa740e8",
+      "encode": "0x474398",
+      "decode": "0x115c4c",
+      "type": "0x4627b8",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x4743b8",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4743c4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x4743d8",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message19966",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20000,
+      "vtable": "0xa35fd0",
+      "encode": "0x335c44",
+      "decode": "0x71412c",
+      "type": "0x3c87dc",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message20000",
+      "factoryObservations": []
+    },
+    {
+      "id": 20072,
+      "vtable": "0xa3f548",
+      "encode": "0x679c58",
+      "decode": "0x1bf1d0",
+      "type": "0x31b8a4",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x679c7c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20072",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20100,
+      "vtable": "0xa6d8e0",
+      "encode": "0x1d72d0",
+      "decode": "0x633134",
+      "type": "0x195b0c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "ServerHello",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20103,
+      "vtable": "0xa70d88",
+      "encode": "0x5bfc3c",
+      "decode": "0x1cda3c",
+      "type": "0x68c82c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5bfcbc",
+      "codec_status": "unresolved",
+      "name": "LoginFailed",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 4
+        }
+      ]
+    },
+    {
+      "id": 20108,
+      "vtable": "0xa735c8",
+      "encode": "0x3846e8",
+      "decode": "0x6409b0",
+      "type": "0x3166d8",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "KeepAliveOk",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20144,
+      "vtable": "0xa2b780",
+      "encode": "0x472150",
+      "decode": "0x649dd0",
+      "type": "0x3772bc",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x241ecc",
+      "codec_status": "unresolved",
+      "name": "Message20144",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20154,
+      "vtable": "0xa2fa30",
+      "encode": "0x1a2adc",
+      "decode": "0x5525a4",
+      "type": "0x64457c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1a2af8",
+      "codec_status": "unresolved",
+      "name": "Message20154",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20182,
+      "vtable": "0xa5e778",
+      "encode": "0x3557e4",
+      "decode": "0x354464",
+      "type": "0x58a5e4",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x355808",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20182",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20316,
+      "vtable": "0xa51610",
+      "encode": "0x6ed9c4",
+      "decode": "0x213664",
+      "type": "0x69b148",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x6ed9e8",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20316",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20324,
+      "vtable": "0xa59a68",
+      "encode": "0x1aa9e0",
+      "decode": "0x739030",
+      "type": "0x1328f4",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x1aaa04",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20324",
+      "factoryObservations": []
+    },
+    {
+      "id": 20329,
+      "vtable": "0xa50248",
+      "encode": "0x6a34fc",
+      "decode": "0x496b9c",
+      "type": "0x3243f0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1c08b8",
+      "codec_status": "unresolved",
+      "name": "Message20329",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20367,
+      "vtable": "0xa36290",
+      "encode": "0x5807b8",
+      "decode": "0x4b40ec",
+      "type": "0x1284c0",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x5807dc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20367",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20388,
+      "vtable": "0xa44e30",
+      "encode": "0x5ef3d4",
+      "decode": "0x675ed4",
+      "type": "0x13ea60",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5ef3f0",
+      "codec_status": "unresolved",
+      "name": "Message20388",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20429,
+      "vtable": "0xa32128",
+      "encode": "0x1cd940",
+      "decode": "0x672138",
+      "type": "0x608cfc",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x1cd960",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x1cd974",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20429",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20463,
+      "vtable": "0xa6f400",
+      "encode": "0x518958",
+      "decode": "0x1a3914",
+      "type": "0x637d88",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x518978",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x518984",
+          "field": "field_0x9c",
+          "object_offset": "0x9c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x518998",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20463",
+      "factoryObservations": []
+    },
+    {
+      "id": 20471,
+      "vtable": "0xa5c288",
+      "encode": "0x48bad0",
+      "decode": "0x5647d4",
+      "type": "0x568448",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x48baf4",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20471",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20758,
+      "vtable": "0xa62c90",
+      "encode": "0x610a54",
+      "decode": "0x14a764",
+      "type": "0x381a40",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x610bac",
+      "codec_status": "unresolved",
+      "name": "LoginOk",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 1
+        }
+      ]
+    },
+    {
+      "id": 20819,
+      "vtable": "0xa646a0",
+      "encode": "0x12f808",
+      "decode": "0x5876d4",
+      "type": "0x13144c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x12f83c",
+      "codec_status": "unresolved",
+      "name": "Message20819",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20821,
+      "vtable": "0xa69e38",
+      "encode": "0x3ceba0",
+      "decode": "0x30b20c",
+      "type": "0x442418",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x3cebc0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x3cebcc",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x3cebe0",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message20821",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 20828,
+      "vtable": "0xa32178",
+      "encode": "0x12b2d8",
+      "decode": "0x5b6680",
+      "type": "0x6e41dc",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x12b300",
+      "codec_status": "unresolved",
+      "name": "Message20828",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21008,
+      "vtable": "0xa48db0",
+      "encode": "0x2281c8",
+      "decode": "0x647b1c",
+      "type": "0x2982c0",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x2281ec",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message21008",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21047,
+      "vtable": "0xa399a8",
+      "encode": "0x5e5f88",
+      "decode": "0x204f78",
+      "type": "0x377f14",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5e5fb4",
+      "codec_status": "unresolved",
+      "name": "Message21047",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21083,
+      "vtable": "0xa3dc20",
+      "encode": "0x217fdc",
+      "decode": "0x17842c",
+      "type": "0x4a5f54",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x218000",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message21083",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21217,
+      "vtable": "0xa6d260",
+      "encode": "0x4bce90",
+      "decode": "0x154440",
+      "type": "0x6946d4",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x34c598",
+      "codec_status": "unresolved",
+      "name": "OwnHomeData",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21243,
+      "vtable": "0xa4abe0",
+      "encode": "0x5aa5f4",
+      "decode": "0x2bed54",
+      "type": "0x72ef7c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message21243",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21669,
+      "vtable": "0xa73b88",
+      "encode": "0x215a90",
+      "decode": "0x24b51c",
+      "type": "0x1a4288",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x215ab4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message21669",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21749,
+      "vtable": "0xa4c348",
+      "encode": "0x1f2524",
+      "decode": "0x653558",
+      "type": "0x68170c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform blr at 0x1f2548",
+      "codec_status": "unresolved",
+      "name": "Message21749",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21769,
+      "vtable": "0xa49c90",
+      "encode": "0x644698",
+      "decode": "0x49b77c",
+      "type": "0x43c698",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x6446bc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message21769",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21822,
+      "vtable": "0xa68e80",
+      "encode": "0x675a0c",
+      "decode": "0x2ef6b8",
+      "type": "0x15e1cc",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x675a2c",
+      "codec_status": "unresolved",
+      "name": "Message21822",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21827,
+      "vtable": "0xa6d930",
+      "encode": "0x6d63c4",
+      "decode": "0x6da544",
+      "type": "0x58da7c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x6d63e0",
+      "codec_status": "unresolved",
+      "name": "Message21827",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21888,
+      "vtable": "0xa59b38",
+      "encode": "0x3a8ba8",
+      "decode": "0x3402d4",
+      "type": "0x54aa94",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message21888",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21926,
+      "vtable": "0xa3a2b0",
+      "encode": "0x702738",
+      "decode": "0x1ca970",
+      "type": "0x3fad74",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x223834",
+      "codec_status": "unresolved",
+      "name": "Message21926",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 21929,
+      "vtable": "0xa59600",
+      "encode": "0x1c453c",
+      "decode": "0x1475c0",
+      "type": "0x5c6a30",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message21929",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22064,
+      "vtable": "0xa53d70",
+      "encode": "0x2b83cc",
+      "decode": "0x1aaa0c",
+      "type": "0x5b6dbc",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x2b83f0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22064",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22091,
+      "vtable": "0xa682c8",
+      "encode": "0x52fa68",
+      "decode": "0x2200cc",
+      "type": "0x699b74",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x52fa88",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "bool",
+          "instruction": "0x52fa9c",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22091",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22177,
+      "vtable": "0xa5fe98",
+      "encode": "0x15cf00",
+      "decode": "0x29380c",
+      "type": "0x2ec5c4",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x462298",
+      "codec_status": "unresolved",
+      "name": "Message22177",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22192,
+      "vtable": "0xa4e390",
+      "encode": "0x167b88",
+      "decode": "0x6129d8",
+      "type": "0x1b573c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x2c0a60",
+      "codec_status": "unresolved",
+      "name": "Message22192",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22344,
+      "vtable": "0xa49018",
+      "encode": "0x12839c",
+      "decode": "0x73ca4c",
+      "type": "0x17c370",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x541fb0",
+      "codec_status": "unresolved",
+      "name": "Message22344",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22493,
+      "vtable": "0xa3f4c0",
+      "encode": "0x13a104",
+      "decode": "0x123bb8",
+      "type": "0x5a0134",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22493",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22556,
+      "vtable": "0xa69de8",
+      "encode": "0x6dca3c",
+      "decode": "0x2cc370",
+      "type": "0x396bb8",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x6dca74",
+      "codec_status": "unresolved",
+      "name": "Message22556",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22572,
+      "vtable": "0xa49ce0",
+      "encode": "0x57bad8",
+      "decode": "0x4a701c",
+      "type": "0x3d9334",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x57bafc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22572",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22594,
+      "vtable": "0xa4bd08",
+      "encode": "0x192de0",
+      "decode": "0x493f04",
+      "type": "0x57fee8",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1e4d2c",
+      "codec_status": "unresolved",
+      "name": "Message22594",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22605,
+      "vtable": "0xa4d038",
+      "encode": "0x738e50",
+      "decode": "0x5e87ac",
+      "type": "0x371c34",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x738e70",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x738e7c",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x738e90",
+          "field": "field_0xb0",
+          "object_offset": "0xb0",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22605",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22675,
+      "vtable": "0xa69640",
+      "encode": "0x5bf8c0",
+      "decode": "0x5e47f0",
+      "type": "0x51ddc0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x5bf8ec",
+      "codec_status": "unresolved",
+      "name": "Message22675",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22708,
+      "vtable": "0xa38030",
+      "encode": "0x333bec",
+      "decode": "0x2b3858",
+      "type": "0x2d4320",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x333c20",
+      "codec_status": "unresolved",
+      "name": "Message22708",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22757,
+      "vtable": "0xa5b4d8",
+      "encode": "0x37e848",
+      "decode": "0x11c3bc",
+      "type": "0x3ac160",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x37e87c",
+      "codec_status": "unresolved",
+      "name": "Message22757",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22823,
+      "vtable": "0xa2dfe0",
+      "encode": "0x1e98c4",
+      "decode": "0x41f6c8",
+      "type": "0x2e7638",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1e98e0",
+      "codec_status": "unresolved",
+      "name": "Message22823",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22871,
+      "vtable": "0xa5d3f0",
+      "encode": "0x57be64",
+      "decode": "0x739d3c",
+      "type": "0xf7aec",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x6561ac",
+      "codec_status": "unresolved",
+      "name": "Message22871",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22904,
+      "vtable": "0xa313d8",
+      "encode": "0x323164",
+      "decode": "0x4899d0",
+      "type": "0x457c80",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x323188",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22904",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22906,
+      "vtable": "0xa33220",
+      "encode": "0x632238",
+      "decode": "0x6abbc0",
+      "type": "0x13abf8",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x63225c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22906",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22968,
+      "vtable": "0xa5d870",
+      "encode": "0x5d6718",
+      "decode": "0x4822d8",
+      "type": "0x1d7258",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x5d673c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message22968",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 22999,
+      "vtable": "0xa71770",
+      "encode": "0x7493e8",
+      "decode": "0x2b2b7c",
+      "type": "0x530c0c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x749414",
+      "codec_status": "unresolved",
+      "name": "Message22999",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23160,
+      "vtable": "0xa2bea8",
+      "encode": "0x21a4dc",
+      "decode": "0x1d5e10",
+      "type": "0x631d34",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x21a4fc",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x21a508",
+          "field": "field_0x9c",
+          "object_offset": "0x9c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x21a51c",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message23160",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23251,
+      "vtable": "0xa6f6c0",
+      "encode": "0x473140",
+      "decode": "0x170414",
+      "type": "0x671f54",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x473160",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x473174",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message23251",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23269,
+      "vtable": "0xa481e8",
+      "encode": "0x11c57c",
+      "decode": "0x5d7ebc",
+      "type": "0x4459ac",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x11c5b0",
+      "codec_status": "unresolved",
+      "name": "Message23269",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23311,
+      "vtable": "0xa4f3a8",
+      "encode": "0x4985d0",
+      "decode": "0x1afedc",
+      "type": "0x52f4cc",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x4985f4",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message23311",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23426,
+      "vtable": "0xa5a2b0",
+      "encode": "0x54c104",
+      "decode": "0x3a9b84",
+      "type": "0x66b714",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x54c128",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message23426",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23609,
+      "vtable": "0xa3aeb8",
+      "encode": "0x1e21c8",
+      "decode": "0x392f68",
+      "type": "0x5963f0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1e21e4",
+      "codec_status": "unresolved",
+      "name": "Message23609",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 23943,
+      "vtable": "0xa2b6e0",
+      "encode": "0x70573c",
+      "decode": "0x33f148",
+      "type": "0x6b48e8",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x70575c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x705768",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x705774",
+          "field": "field_0x90",
+          "object_offset": "0x90",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x705780",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x705794",
+          "field": "field_0xa0",
+          "object_offset": "0xa0",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message23943",
+      "factoryObservations": []
+    },
+    {
+      "id": 24184,
+      "vtable": "0xa57598",
+      "encode": "0x6c5be4",
+      "decode": "0x69e244",
+      "type": "0x5d1a24",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x6c5c00",
+      "codec_status": "unresolved",
+      "name": "Message24184",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24233,
+      "vtable": "0xa3faf0",
+      "encode": "0x2e7aac",
+      "decode": "0x4b5f0c",
+      "type": "0x64b3a4",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x2e7acc",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x2e7ae0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24233",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24255,
+      "vtable": "0xa4b468",
+      "encode": "0x754870",
+      "decode": "0x1533ac",
+      "type": "0x6da53c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x75488c",
+      "codec_status": "unresolved",
+      "name": "Message24255",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24278,
+      "vtable": "0xa42ab0",
+      "encode": "0x4029c4",
+      "decode": "0x46388c",
+      "type": "0x5e5a14",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x4029e8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24278",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24283,
+      "vtable": "0xa6d720",
+      "encode": "0x69b6d8",
+      "decode": "0x57b970",
+      "type": "0x58b020",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x42f01c",
+      "codec_status": "unresolved",
+      "name": "Message24283",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24291,
+      "vtable": "0xa5c4b0",
+      "encode": "0x207a8c",
+      "decode": "0x302f80",
+      "type": "0x11e22c",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x207ab0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24291",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24292,
+      "vtable": "0xa6a110",
+      "encode": "0x2a8c24",
+      "decode": "0x413550",
+      "type": "0x6efd2c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x2a8c40",
+      "codec_status": "unresolved",
+      "name": "Message24292",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24338,
+      "vtable": "0xa3fb40",
+      "encode": "0x418d18",
+      "decode": "0x2ea980",
+      "type": "0x468418",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x418d38",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x418d4c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24338",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24365,
+      "vtable": "0xa5f8a8",
+      "encode": "0x197e0c",
+      "decode": "0x4d7468",
+      "type": "0x6c03f8",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x197e30",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24365",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24415,
+      "vtable": "0xa2dbb0",
+      "encode": "0x397be8",
+      "decode": "0x1b5768",
+      "type": "0x70229c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x397c04",
+      "codec_status": "unresolved",
+      "name": "Message24415",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24514,
+      "vtable": "0xa49c40",
+      "encode": "0x69f4c4",
+      "decode": "0x327690",
+      "type": "0x4c9bac",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x69f4e8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24514",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24546,
+      "vtable": "0xa59e40",
+      "encode": "0x36fdf4",
+      "decode": "0x3d3028",
+      "type": "0x227bec",
+      "fields": null,
+      "unsupported_reason": "control flow/transform blr at 0x36fe18",
+      "codec_status": "unresolved",
+      "name": "Message24546",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24933,
+      "vtable": "0xa40e00",
+      "encode": "0x6d5410",
+      "decode": "0x6cbb08",
+      "type": "0x4227e8",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x6d5434",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24933",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 24990,
+      "vtable": "0xa40248",
+      "encode": "0x564860",
+      "decode": "0x5ade04",
+      "type": "0x1f46cc",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x564880",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "pointer"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x564894",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message24990",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25027,
+      "vtable": "0xa32be0",
+      "encode": "0x2fc328",
+      "decode": "0x6ba100",
+      "type": "0x2471fc",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25027",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25074,
+      "vtable": "0xa6f518",
+      "encode": "0x5c51b0",
+      "decode": "0x2c6bb0",
+      "type": "0x545d80",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5c51dc",
+      "codec_status": "unresolved",
+      "name": "Message25074",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25084,
+      "vtable": "0xa2a4a8",
+      "encode": "0x524aec",
+      "decode": "0x3efce8",
+      "type": "0x6a1c10",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25084",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25161,
+      "vtable": "0xa471a0",
+      "encode": "0x5f06f4",
+      "decode": "0x303aa0",
+      "type": "0x5ff5f0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x241ecc",
+      "codec_status": "unresolved",
+      "name": "Message25161",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25261,
+      "vtable": "0xa38f60",
+      "encode": "0x1cbd34",
+      "decode": "0x377454",
+      "type": "0x5e4ad4",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1cbd50",
+      "codec_status": "unresolved",
+      "name": "Message25261",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25275,
+      "vtable": "0xa50c10",
+      "encode": "0x23e2f8",
+      "decode": "0x3ed900",
+      "type": "0x69dcec",
+      "fields": null,
+      "unsupported_reason": "control flow/transform blr at 0x23e318",
+      "codec_status": "unresolved",
+      "name": "Message25275",
+      "factoryObservations": []
+    },
+    {
+      "id": 25279,
+      "vtable": "0xa445f0",
+      "encode": "0x42ac1c",
+      "decode": "0x2a3ce4",
+      "type": "0x2c31bc",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x42ac4c",
+      "codec_status": "unresolved",
+      "name": "Message25279",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25290,
+      "vtable": "0xa721e8",
+      "encode": "0x43cc7c",
+      "decode": "0x5615e4",
+      "type": "0x217b90",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x43cca0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25290",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25382,
+      "vtable": "0xa4bda8",
+      "encode": "0x4bec84",
+      "decode": "0x59c670",
+      "type": "0x6669c8",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25382",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25507,
+      "vtable": "0xa2c528",
+      "encode": "0x229b1c",
+      "decode": "0x1b2a00",
+      "type": "0x7b21a0",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x229b24",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25507",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25520,
+      "vtable": "0xa2aff0",
+      "encode": "0x594410",
+      "decode": "0x62e414",
+      "type": "0x2d315c",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x594434",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25520",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25729,
+      "vtable": "0xa55db0",
+      "encode": "0x758a70",
+      "decode": "0x56d080",
+      "type": "0x576a68",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x1032d8",
+      "codec_status": "unresolved",
+      "name": "Message25729",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25781,
+      "vtable": "0xa5c500",
+      "encode": "0x5313a8",
+      "decode": "0x3907f0",
+      "type": "0x461438",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5313d0",
+      "codec_status": "unresolved",
+      "name": "Message25781",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25892,
+      "vtable": "0xa6ab28",
+      "encode": "0x6d5394",
+      "decode": "0x4cac28",
+      "type": "0x38b430",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x6d53b8",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25892",
+      "factoryObservations": []
+    },
+    {
+      "id": 25953,
+      "vtable": "0xa4cd58",
+      "encode": "0x2f1344",
+      "decode": "0x2131d8",
+      "type": "0x455cc8",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message25953",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 25992,
+      "vtable": "0xa70798",
+      "encode": "0x1ace74",
+      "decode": "0x213478",
+      "type": "0x534b30",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x1ace9c",
+      "codec_status": "unresolved",
+      "name": "Message25992",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26036,
+      "vtable": "0xa73268",
+      "encode": "0x35f220",
+      "decode": "0x4808f8",
+      "type": "0x648a3c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x35f23c",
+      "codec_status": "unresolved",
+      "name": "Message26036",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26085,
+      "vtable": "0xa601f0",
+      "encode": "0x61c764",
+      "decode": "0x173b98",
+      "type": "0x552bb0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x61c794",
+      "codec_status": "unresolved",
+      "name": "Message26085",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26133,
+      "vtable": "0xa744c8",
+      "encode": "0x5c8aac",
+      "decode": "0x6a1d94",
+      "type": "0x15d44c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5c8ad4",
+      "codec_status": "unresolved",
+      "name": "Message26133",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26147,
+      "vtable": "0xa30ef0",
+      "encode": "0x39c784",
+      "decode": "0x6ed8b4",
+      "type": "0x5cfcc0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x56fb6c",
+      "codec_status": "unresolved",
+      "name": "Message26147",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26157,
+      "vtable": "0xa2ac60",
+      "encode": "0x3bfff0",
+      "decode": "0x2d07b4",
+      "type": "0x55ba40",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26157",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26287,
+      "vtable": "0xa43408",
+      "encode": "0x6ef130",
+      "decode": "0x716a40",
+      "type": "0x7bc2d0",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x6ef150",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x6ef15c",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "pointer"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x6ef170",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26287",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26310,
+      "vtable": "0xa5f300",
+      "encode": "0x385f80",
+      "decode": "0x143078",
+      "type": "0x41450c",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x478308",
+      "codec_status": "unresolved",
+      "name": "Message26310",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26360,
+      "vtable": "0xa32ea8",
+      "encode": "0x450a8c",
+      "decode": "0x347bac",
+      "type": "0x44f6ac",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x450aac",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "long",
+          "instruction": "0x450ac0",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26360",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26474,
+      "vtable": "0xa37e30",
+      "encode": "0x3ce7bc",
+      "decode": "0x3ce2dc",
+      "type": "0xf7b00",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x3ce7dc",
+          "field": "field_0x9c",
+          "object_offset": "0x9c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x3ce7e8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x3ce7fc",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26474",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26492,
+      "vtable": "0xa579b0",
+      "encode": "0x53a878",
+      "decode": "0x1578a4",
+      "type": "0x343b58",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x541fb0",
+      "codec_status": "unresolved",
+      "name": "Message26492",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26500,
+      "vtable": "0xa48818",
+      "encode": "0x42f490",
+      "decode": "0x47d3a8",
+      "type": "0x4db9fc",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x42f4b4",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26500",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26511,
+      "vtable": "0xa2e4f0",
+      "encode": "0x16a2a8",
+      "decode": "0x66c874",
+      "type": "0x643480",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x16a2c8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x16a2d4",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x16a2e0",
+          "field": "field_0xb0",
+          "object_offset": "0xb0",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x16a2f4",
+          "field": "field_0xc8",
+          "object_offset": "0xc8",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26511",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26720,
+      "vtable": "0xa695f0",
+      "encode": "0x448f94",
+      "decode": "0x5f5034",
+      "type": "0x479c9c",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x448fb4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x448fc0",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x448fd4",
+          "field": "field_0xb0",
+          "object_offset": "0xb0",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26720",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26774,
+      "vtable": "0xa4c530",
+      "encode": "0x5768c4",
+      "decode": "0x571590",
+      "type": "0x73b254",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x5768e8",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26774",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26783,
+      "vtable": "0xa31428",
+      "encode": "0x135814",
+      "decode": "0x31622c",
+      "type": "0x3c9564",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x135838",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message26783",
+      "factoryObservations": []
+    },
+    {
+      "id": 26831,
+      "vtable": "0xa46e20",
+      "encode": "0x19a0a0",
+      "decode": "0x401958",
+      "type": "0x29551c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x19a0cc",
+      "codec_status": "unresolved",
+      "name": "Message26831",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 26980,
+      "vtable": "0xa68a88",
+      "encode": "0x24f744",
+      "decode": "0x217b98",
+      "type": "0x496128",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cmp at 0x24f784",
+      "codec_status": "unresolved",
+      "name": "Message26980",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27029,
+      "vtable": "0xa5df48",
+      "encode": "0x7442b8",
+      "decode": "0x2245a8",
+      "type": "0xfd888",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x7442dc",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27029",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27050,
+      "vtable": "0xa47060",
+      "encode": "0x129ab8",
+      "decode": "0x496acc",
+      "type": "0x5a9f5c",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x129ad8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x129aec",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27050",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27072,
+      "vtable": "0xa6f3b0",
+      "encode": "0x3ae1fc",
+      "decode": "0x2f4104",
+      "type": "0x395798",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x3ae21c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x3ae230",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27072",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27109,
+      "vtable": "0xa43eb8",
+      "encode": "0x2ff624",
+      "decode": "0x2e41c4",
+      "type": "0x1d34a0",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x60679c",
+      "codec_status": "unresolved",
+      "name": "Message27109",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27137,
+      "vtable": "0xa70530",
+      "encode": "0x55d944",
+      "decode": "0x19f738",
+      "type": "0x6c0180",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x55d974",
+      "codec_status": "unresolved",
+      "name": "Message27137",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27172,
+      "vtable": "0xa3dbd0",
+      "encode": "0x5d60a4",
+      "decode": "0x445870",
+      "type": "0x6ca86c",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x5d60c0",
+      "codec_status": "unresolved",
+      "name": "Message27172",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27224,
+      "vtable": "0xa60538",
+      "encode": "0x2026f8",
+      "decode": "0x247f8c",
+      "type": "0x490f68",
+      "fields": [
+        {
+          "type": "bool",
+          "instruction": "0x202718",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "int",
+          "instruction": "0x20272c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27224",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27361,
+      "vtable": "0xa2e820",
+      "encode": "0x36e574",
+      "decode": "0x5e8104",
+      "type": "0x3ced54",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x139298",
+      "codec_status": "unresolved",
+      "name": "Message27361",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27447,
+      "vtable": "0xa60700",
+      "encode": "0x55c04c",
+      "decode": "0x299290",
+      "type": "0x4629c4",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27447",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27629,
+      "vtable": "0xa4c398",
+      "encode": "0x66696c",
+      "decode": "0x6d6f08",
+      "type": "0x5e1594",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x666994",
+      "codec_status": "unresolved",
+      "name": "Message27629",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27832,
+      "vtable": "0xa58d00",
+      "encode": "0x316154",
+      "decode": "0x205de0",
+      "type": "0x242708",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x316174",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x316188",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27832",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27891,
+      "vtable": "0xa72050",
+      "encode": "0x561680",
+      "decode": "0x714b68",
+      "type": "0x49e364",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x56169c",
+      "codec_status": "unresolved",
+      "name": "Message27891",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 27914,
+      "vtable": "0xa68f40",
+      "encode": "0x58b6f8",
+      "decode": "0x6e71bc",
+      "type": "0x7d0260",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x58b718",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x58b72c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message27914",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28089,
+      "vtable": "0xa58498",
+      "encode": "0x1d58f0",
+      "decode": "0x1cdeec",
+      "type": "0x29fef8",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28089",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28100,
+      "vtable": "0xa607f0",
+      "encode": "0x72d6d4",
+      "decode": "0x58344c",
+      "type": "0x544900",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x72d6f0",
+      "codec_status": "unresolved",
+      "name": "Message28100",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28158,
+      "vtable": "0xa35ae0",
+      "encode": "0x1e00ac",
+      "decode": "0x5ad5a0",
+      "type": "0x456f48",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28158",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28165,
+      "vtable": "0xa3e6c0",
+      "encode": "0x583b9c",
+      "decode": "0x694730",
+      "type": "0x5c0da4",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x406960",
+      "codec_status": "unresolved",
+      "name": "Message28165",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28299,
+      "vtable": "0xa6d980",
+      "encode": "0x2ebe8c",
+      "decode": "0x2326c8",
+      "type": "0x2ed038",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x2ebeac",
+      "codec_status": "unresolved",
+      "name": "Message28299",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28313,
+      "vtable": "0xa34b78",
+      "encode": "0x3efcb8",
+      "decode": "0x6ec4c4",
+      "type": "0x432878",
+      "fields": null,
+      "unsupported_reason": "control flow/transform br at 0x3efce4",
+      "codec_status": "unresolved",
+      "name": "Message28313",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28356,
+      "vtable": "0xa5f9c8",
+      "encode": "0x19fd24",
+      "decode": "0x11cbfc",
+      "type": "0x35a1dc",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x19fd4c",
+      "codec_status": "unresolved",
+      "name": "Message28356",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28732,
+      "vtable": "0xa3f398",
+      "encode": "0x4d0f44",
+      "decode": "0x1d307c",
+      "type": "0x2c11c4",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x4d0f68",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28732",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28741,
+      "vtable": "0xa6bbc8",
+      "encode": "0x246284",
+      "decode": "0x34f414",
+      "type": "0x670cec",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x2462a0",
+      "codec_status": "unresolved",
+      "name": "Message28741",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28766,
+      "vtable": "0xa5a400",
+      "encode": "0x3f10cc",
+      "decode": "0x582228",
+      "type": "0x32e494",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x3f10f0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28766",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28851,
+      "vtable": "0xa50428",
+      "encode": "0x568214",
+      "decode": "0x20b540",
+      "type": "0x3f000c",
+      "fields": [
+        {
+          "type": "int",
+          "instruction": "0x568238",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28851",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28854,
+      "vtable": "0xa338f8",
+      "encode": "0x656314",
+      "decode": "0x2e42dc",
+      "type": "0x2e7538",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x656340",
+      "codec_status": "unresolved",
+      "name": "Message28854",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28887,
+      "vtable": "0xa34440",
+      "encode": "0x6ab5f8",
+      "decode": "0x13a210",
+      "type": "0x1c44fc",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x6ab61c",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28887",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28921,
+      "vtable": "0xa4f088",
+      "encode": "0x704ac0",
+      "decode": "0x62e2c4",
+      "type": "0x3f48cc",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x704adc",
+      "codec_status": "unresolved",
+      "name": "Message28921",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 28991,
+      "vtable": "0xa4d488",
+      "encode": "0xfb52c",
+      "decode": "0x200810",
+      "type": "0x14b840",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message28991",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        },
+        {
+          "factory_flag": 1,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29188,
+      "vtable": "0xa51ea0",
+      "encode": "0x333994",
+      "decode": "0x23f424",
+      "type": "0x66e850",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x3339c0",
+      "codec_status": "unresolved",
+      "name": "Message29188",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29461,
+      "vtable": "0xa48bf8",
+      "encode": "0x3677a8",
+      "decode": "0x3454c0",
+      "type": "0x2324ec",
+      "fields": [
+        {
+          "type": "long",
+          "instruction": "0x3677c8",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x3677dc",
+          "field": "field_0x88",
+          "object_offset": "0x88",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29461",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29531,
+      "vtable": "0xa39288",
+      "encode": "0x563620",
+      "decode": "0x346f24",
+      "type": "0x6fe1b8",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x563640",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x56364c",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x563660",
+          "field": "field_0xb0",
+          "object_offset": "0xb0",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29531",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29561,
+      "vtable": "0xa3cb68",
+      "encode": "0x7452fc",
+      "decode": "0x65a6a4",
+      "type": "0x576064",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x241ecc",
+      "codec_status": "unresolved",
+      "name": "Message29561",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29604,
+      "vtable": "0xa5b3e8",
+      "encode": "0x101d44",
+      "decode": "0x48fed4",
+      "type": "0x1e9974",
+      "fields": [],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29604",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29670,
+      "vtable": "0xa636f8",
+      "encode": "0x314620",
+      "decode": "0x24dbd8",
+      "type": "0xfbd38",
+      "fields": null,
+      "unsupported_reason": "nested/unknown call 0x13a8e0",
+      "codec_status": "unresolved",
+      "name": "Message29670",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29829,
+      "vtable": "0xa67ca8",
+      "encode": "0x2d60b4",
+      "decode": "0x141934",
+      "type": "0x690c2c",
+      "fields": [
+        {
+          "type": "string",
+          "instruction": "0x2d60d4",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "pointer"
+        },
+        {
+          "type": "string",
+          "instruction": "0x2d60e0",
+          "field": "field_0x98",
+          "object_offset": "0x98",
+          "storage": "pointer"
+        },
+        {
+          "type": "int",
+          "instruction": "0x2d60f4",
+          "field": "field_0xb0",
+          "object_offset": "0xb0",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29829",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29901,
+      "vtable": "0xa2db60",
+      "encode": "0x73caac",
+      "decode": "0x4bfc24",
+      "type": "0x44f654",
+      "fields": null,
+      "unsupported_reason": "control flow/transform cbz at 0x73cad4",
+      "codec_status": "unresolved",
+      "name": "Message29901",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29949,
+      "vtable": "0xa3ec38",
+      "encode": "0x377ed0",
+      "decode": "0x71baf0",
+      "type": "0x5e84d0",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x377ef0",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x377efc",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        },
+        {
+          "type": "vint",
+          "instruction": "0x377f10",
+          "field": "field_0x84",
+          "object_offset": "0x84",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29949",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29957,
+      "vtable": "0xa431c0",
+      "encode": "0x41beec",
+      "decode": "0x1a9c0c",
+      "type": "0x5e47d8",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x41bf0c",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        },
+        {
+          "type": "string",
+          "instruction": "0x41bf20",
+          "field": "field_0x80",
+          "object_offset": "0x80",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29957",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29991,
+      "vtable": "0xa4ae80",
+      "encode": "0x6a08e4",
+      "decode": "0x393aa8",
+      "type": "0x46fec0",
+      "fields": null,
+      "unsupported_reason": "control flow/transform br at 0x6a0910",
+      "codec_status": "unresolved",
+      "name": "Message29991",
+      "factoryObservations": [
+        {
+          "factory_flag": 0,
+          "version": 0
+        }
+      ]
+    },
+    {
+      "id": 29997,
+      "vtable": "0xa4b308",
+      "encode": "0x12721c",
+      "decode": "0x3622fc",
+      "type": "0x5e1624",
+      "fields": [
+        {
+          "type": "vint",
+          "instruction": "0x127240",
+          "field": "field_0x7c",
+          "object_offset": "0x7c",
+          "storage": "field"
+        }
+      ],
+      "unsupported_reason": null,
+      "codec_status": "flat",
+      "name": "Message29997",
+      "factoryObservations": []
+    }
+  ],
+  "message_factory": "0x622544",
+  "notes": [
+    "Vtable catalog includes both factory-created and SDK-only types.",
+    "Flat codec tests verify wire structure, not message semantics or gameplay.",
+    "Version 3.1.0 was supplied by the user; the exact APK build is still unverified."
+  ],
+  "customCodecObservations": {
+    "10101": {
+      "encoder": "0x41e914",
+      "decoder": "0x60f844",
+      "nativeDecodeVerified": true,
+      "nativeReencodeVerified": true,
+      "fixtureSizes": [
+        343,
+        213
+      ],
+      "headerVersion": 4
+    },
+    "20103": {
+      "encoder": "0x5bfc3c",
+      "decoder": "0x1cda3c",
+      "nativeDecodeVerified": true,
+      "nativeReencodeVerified": true,
+      "fixtureSizes": [
+        116,
+        28
+      ],
+      "headerVersion": 4
+    },
+    "20758": {
+      "encoder": "0x610a54",
+      "decoder": "0x14a764",
+      "nativeDecodeVerified": true,
+      "nativeReencodeVerified": true,
+      "fixtureSizes": [
+        351,
+        129
+      ],
+      "headerVersion": 1
+    }
+  },
+  "cipherObservations": {
+    "core": "0x35b118",
+    "rounds": 17,
+    "seal": "0x36bc7c",
+    "open": "0x1f8f08",
+    "authenticatedBoxVectors": 12,
+    "nativeCorruptMacRejected": true,
+    "keyAgreementBox": "0x6957e8",
+    "keyAgreementVectors": 4,
+    "runtimeState": "zero-initialized BSS in emulator",
+    "clientTransportVerified": false
+  },
+  "apkObservations": {
+    "sha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
+    "bytes": 104298365,
+    "package": "com.supercell.clashroyale",
+    "versionName": "3.1.0",
+    "versionCode": 400,
+    "contentVersion": "3.1945.13",
+    "contentFingerprint": "8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc",
+    "bundledLibrarySha256": "6020d2fb42fa13c81ac755cbec31621b3b104ebfdbfb65ae4b1a4356b7b0a46a",
+    "bundledLibraryIsExactStringsDecryptedOriginal": true,
+    "csvTables": 149,
+    "fingerprintAssetsVerified": 1075,
+    "fingerprintAssetsAbsent": 125,
+    "androidClientTested": false
+  },
+  "homeObservations": {
+    "nativeEncoder": "0x4bce90",
+    "nativeDecoder": "0x154440",
+    "canonicalEmptyHomeBytes": 416,
+    "nativeDecodeConsumed": 416,
+    "nativeReencodeEqual": true,
+    "commodityGroups": 9,
+    "commodityCountCheck": "0x43bda4",
+    "runtimeState": "Protocol VM with zero-initialized game globals",
+    "androidClientAccepted": false,
+    "gameStateImplemented": false
+  },
+  "transportObservations": {
+    "messagingReceive": "0x250bbc",
+    "stateOffset": "0x254",
+    "clientPublicKeyOffset": "0x260",
+    "clientPrivateKeyOffset": "0x280",
+    "clientNonceOffset": "0x2a0",
+    "replyNonce": "BLAKE2b-192(clientNonce || clientPublicKey || observedPeerPublicKey)",
+    "replyPlaintext": "serverNonce[24] || sessionKey[32] || messagePayload",
+    "nativeLoginRepliesAccepted": 2,
+    "nativeIncomingSessionFramesAccepted": 4,
+    "nativeOutgoingSessionBoxesMatched": 4,
+    "sessionNonceIncrement": 2,
+    "sessionNonceEndian": "little",
+    "nativeHandshakeMaterialCleared": true,
+    "outgoingLoginVerified": false,
+    "androidClientVerified": false,
+    "runtimeState": "Explicit synthetic client connection state in protocol VM; Android initialization and outgoing Login not executed"
+  }
+}

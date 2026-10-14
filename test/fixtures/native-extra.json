@@ -1,0 +1,243 @@
+[
+  {
+    "id": 10101,
+    "version": 4,
+    "variant": 0,
+    "fields": {
+      "field_0x80": [
+        7,
+        -234567
+      ],
+      "field_0x88": "protocol-check",
+      "field_0x90": 12345,
+      "field_0x94": 12345,
+      "field_0x98": 12345,
+      "field_0xa0": "protocol-check",
+      "field_0xa8": "protocol-check",
+      "field_0xb0": "protocol-check",
+      "field_0xb8": "protocol-check",
+      "field_0xc0": "protocol-check",
+      "field_0xe8": "protocol-check",
+      "field_0xf0": "protocol-check",
+      "field_0xf8": false,
+      "field_0x118": "protocol-check",
+      "field_0x100": "protocol-check",
+      "field_0xc8": "protocol-check",
+      "field_0xe0": [
+        0,
+        0
+      ],
+      "field_0x130": "protocol-check",
+      "field_0xf9": false,
+      "field_0xfa": false,
+      "field_0x148": "protocol-check",
+      "field_0x150": 12345,
+      "field_0x158": "protocol-check",
+      "field_0x170": "protocol-check",
+      "field_0x188": "protocol-check",
+      "field_0x1a0": "protocol-check",
+      "field_0x1b8": 12345,
+      "field_0x1bc": 12345,
+      "field_0x1c0": {
+        "hex": "626c6f62"
+      }
+    },
+    "payload": "00000007fffc6bb90000000e70726f746f636f6c2d636865636bb9c001b9c001b9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b000000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b000000000e70726f746f636f6c2d636865636b000000000e70726f746f636f6c2d636865636bb9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c00100000004626c6f62",
+    "native_decode_consumed": 343,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 10101,
+    "version": 4,
+    "variant": 1,
+    "fields": {
+      "field_0x80": [
+        7,
+        -234567
+      ],
+      "field_0x88": null,
+      "field_0x90": -8192,
+      "field_0x94": -8192,
+      "field_0x98": -8192,
+      "field_0xa0": null,
+      "field_0xa8": null,
+      "field_0xb0": null,
+      "field_0xb8": null,
+      "field_0xc0": null,
+      "field_0xe8": null,
+      "field_0xf0": null,
+      "field_0xf8": true,
+      "field_0x118": "protocol-check",
+      "field_0x100": "protocol-check",
+      "field_0xc8": "protocol-check",
+      "field_0xe0": [
+        0,
+        0
+      ],
+      "field_0x130": "protocol-check",
+      "field_0xf9": true,
+      "field_0xfa": true,
+      "field_0x148": null,
+      "field_0x150": -8192,
+      "field_0x158": "protocol-check",
+      "field_0x170": "protocol-check",
+      "field_0x188": "protocol-check",
+      "field_0x1a0": "protocol-check",
+      "field_0x1b8": -8192,
+      "field_0x1bc": -8192,
+      "field_0x1c0": null
+    },
+    "payload": "00000007fffc6bb9ffffffffc0807fc0807fc0807fffffffffffffffffffffffffffffffffffffffffffffffffffffffff010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b000000000e70726f746f636f6c2d636865636b03ffffffffc0807f0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bc0807fc0807fffffffff",
+    "native_decode_consumed": 213,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 20103,
+    "version": 4,
+    "variant": 0,
+    "fields": {
+      "field_0x7c": 12345,
+      "field_0x80": "protocol-check",
+      "field_0x88": "protocol-check",
+      "field_0x90": "protocol-check",
+      "field_0x98": "protocol-check",
+      "field_0xb0": 12345,
+      "field_0xa0": false,
+      "field_0xa8": "protocol-check",
+      "field_0xb8": [
+        "item1",
+        "item2"
+      ]
+    },
+    "payload": "b9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001000000000e70726f746f636f6c2d636865636b02000000056974656d31000000056974656d32",
+    "native_decode_consumed": 116,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 20103,
+    "version": 4,
+    "variant": 1,
+    "fields": {
+      "field_0x7c": -8192,
+      "field_0x80": null,
+      "field_0x88": null,
+      "field_0x90": null,
+      "field_0x98": null,
+      "field_0xb0": -8192,
+      "field_0xa0": true,
+      "field_0xa8": null,
+      "field_0xb8": null
+    },
+    "payload": "c0807fffffffffffffffffffffffffffffffffc0807f01ffffffff7f",
+    "native_decode_consumed": 28,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 20758,
+    "version": 1,
+    "variant": 0,
+    "fields": {
+      "field_0x80": [
+        7,
+        -234567
+      ],
+      "field_0x88": [
+        7,
+        -234567
+      ],
+      "field_0x90": "protocol-check",
+      "field_0x98": "protocol-check",
+      "field_0xa0": "protocol-check",
+      "field_0xb0": 12345,
+      "field_0xb4": 12345,
+      "field_0xb8": 12345,
+      "field_0xbc": 12345,
+      "field_0xc0": "protocol-check",
+      "field_0xc8": 12345,
+      "field_0xcc": 12345,
+      "field_0xd0": 12345,
+      "field_0xa8": "protocol-check",
+      "field_0xd8": "protocol-check",
+      "field_0xe0": "protocol-check",
+      "field_0x120": 12345,
+      "field_0xe8": "protocol-check",
+      "field_0xf0": "protocol-check",
+      "field_0xf8": "protocol-check",
+      "field_0x100": "protocol-check",
+      "field_0x108": "protocol-check",
+      "field_0x110": "protocol-check",
+      "field_0x124": 12345,
+      "field_0x118": 12345,
+      "field_0x11c": 12345,
+      "field_0x128": [
+        "item1",
+        "item2"
+      ],
+      "field_0x130": [
+        "item1",
+        "item2"
+      ],
+      "field_0x138": {
+        "hex": "626c6f62"
+      },
+      "field_0x140": false,
+      "field_0x141": false,
+      "field_0x142": false,
+      "field_0x144": 12345,
+      "field_0x148": "protocol-check"
+    },
+    "payload": "00000007fffc6bb900000007fffc6bb90000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c001b9c001b9c0010000000e70726f746f636f6c2d636865636bb9c001b9c001b9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c001b9c00102000000056974656d31000000056974656d3202000000056974656d31000000056974656d3200000004626c6f6200b9c0010000000e70726f746f636f6c2d636865636b",
+    "native_decode_consumed": 351,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 20758,
+    "version": 1,
+    "variant": 1,
+    "fields": {
+      "field_0x80": [
+        7,
+        -234567
+      ],
+      "field_0x88": [
+        7,
+        -234567
+      ],
+      "field_0x90": null,
+      "field_0x98": null,
+      "field_0xa0": null,
+      "field_0xb0": -8192,
+      "field_0xb4": -8192,
+      "field_0xb8": -8192,
+      "field_0xbc": -8192,
+      "field_0xc0": null,
+      "field_0xc8": -8192,
+      "field_0xcc": -8192,
+      "field_0xd0": -8192,
+      "field_0xa8": null,
+      "field_0xd8": null,
+      "field_0xe0": null,
+      "field_0x120": -8192,
+      "field_0xe8": null,
+      "field_0xf0": null,
+      "field_0xf8": null,
+      "field_0x100": null,
+      "field_0x108": null,
+      "field_0x110": null,
+      "field_0x124": -8192,
+      "field_0x118": -8192,
+      "field_0x11c": -8192,
+      "field_0x128": null,
+      "field_0x130": null,
+      "field_0x138": null,
+      "field_0x140": true,
+      "field_0x141": true,
+      "field_0x142": true,
+      "field_0x144": -8192,
+      "field_0x148": "protocol-check"
+    },
+    "payload": "00000007fffc6bb900000007fffc6bb9ffffffffffffffffffffffffc0807fc0807fc0807fc0807fffffffffc0807fc0807fc0807fffffffffffffffffffffffffc0807fffffffffffffffffffffffffffffffffffffffffffffffffc0807fc0807fc0807f7f7fffffffff07c0807f0000000e70726f746f636f6c2d636865636b",
+    "native_decode_consumed": 129,
+    "native_reencode_equal": true
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "variant": 0,
+    "clientSecret": "01080f161d242b323940474e555c636a71787f868d949ba2a9b0b7bec5ccd3da",
+    "clientPublicKey": "c8feca81be196cdf2cadeabf13c4903d7632dce4955aa68b6e5d9adef54e2616",
+    "serverPublicKey": "d33c93779ee51583730e78e83c2e5f90bc5cfc28319bd69af82226b8bb347c65",
+    "clientNonce": "03080d12171c21262b30353a3f44494e53585d62676c7176",
+    "serverNonce": "000b16212c37424d58636e79848f9aa5b0bbc6d1dce7f2fd",
+    "sessionKey": "000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693",
+    "sharedKey": "83739e0b9ef23cfa895fc73acae1ec13e28ea2f037162f9b26084883ea699768",
+    "replyNonce": "a711654fb733fbcffdf99634bde0685dcfcabfed325631c1",
+    "payload": "00000007fffc6bb900000007fffc6bb90000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c001b9c001b9c0010000000e70726f746f636f6c2d636865636bb9c001b9c001b9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c0010000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c001b9c00102000000056974656d31000000056974656d3202000000056974656d31000000056974656d3200000004626c6f6200b9c0010000000e70726f746f636f6c2d636865636b",
+    "box": "a166c2c39b076da5b191e80fd5e88d5c7623bf69207c720d830e4c88c63ee8b6c1c8380c9db167a0fef8d44c696cc92985bbc142e31c8977e3869e1fec95c51d2666a55c4e65fec6e92b1267e895cd12db4bf0a3bf6b1e192dbfa913f382d6584bda9d5f8bc5d23931d2261712b5d4c2b6725e64424daf3ab33d470dab91dd47094cb07880674b37f8f8b35013c5585941240ec174ac154c3c5ce040a298fbc94ec40636b76c83050a66e8886e2d3e6cad308086318cc9d06409c3b0a8397ecdf093d2825bd3d49d53d4321cff449b337d3c54a22a53064f9fc89c0250a36cdc0d8739aee83e163ac79c67fd9b666a132358f0592cb3032597aba0818a3b5324b434d59b2761948906bcb2f3457367d0cd8d177fd4e8c2c424eb5bde33756135a80564c34b08a8940ee03880bb8ac3936e5ec99ef3631de54e2ceaeab6188c8ee038d1169cf9f5fc00be9fc3021911c76081f9d43791e3c55f6e4eb3f12b4a0d4b49350807917a6875725ef324de42c50e32f2ad93f3f6947afafbc2384bf03e905d205c45c0fe4b4c6d9935c3d09be7ec8c89f50da3f634b0fcbcbf3d7ad8dc00bf6726429b07",
+    "outgoing": [
+      {
+        "payload": "",
+        "box": "95f7b451999dd21c00b70057b9a0571a"
+      },
+      {
+        "payload": "73796e7468657469632073657373696f6e207061796c6f6164",
+        "box": "8587c4026d4185a5973067591a1950d6163d2802ec01e237689ae6ee00edcd4e4e1f57213e671fa34c"
+      }
+    ],
+    "incoming": [
+      {
+        "id": 20108,
+        "version": 0,
+        "payload": "",
+        "box": "94af013a3135185490ca793d7927acb9"
+      },
+      {
+        "id": 20108,
+        "version": 0,
+        "payload": "",
+        "box": "a5db4d9ece99766c8ca3c0c4ff4adc15"
+      }
+    ],
+    "finalClientNonce": "07080d12171c21262b30353a3f44494e53585d62676c7176",
+    "finalServerNonce": "040b16212c37424d58636e79848f9aa5b0bbc6d1dce7f2fd",
+    "nativeLoginReplyAccepted": true,
+    "nativeStateAfterLoginReply": 5,
+    "nativeIncomingFramesAccepted": 2,
+    "nativeOutgoingBoxesMatched": 2,
+    "nativeHandshakeMaterialCleared": true,
+    "runtimeState": "Synthetic client state in protocol VM; outgoing Login and Android initialization not executed"
+  },
+  {
+    "variant": 1,
+    "clientSecret": "0e151c232a31383f464d545b626970777e858c939aa1a8afb6bdc4cbd2d9e0e7",
+    "clientPublicKey": "7d0c85cb9d79059839640ae51624055acf5f1b1c9480bba37c1d66d809009217",
+    "serverPublicKey": "d33c93779ee51583730e78e83c2e5f90bc5cfc28319bd69af82226b8bb347c65",
+    "clientNonce": "0c11161b20252a2f34393e43484d52575c61666b70757a7f",
+    "serverNonce": "111c27323d48535e69747f8a95a0abb6c1ccd7e2edf8030e",
+    "sessionKey": "13202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6",
+    "sharedKey": "e0c5fea5bc353725f294c06562ac9260e6d7ee0cd0bdd6ad70f1053a8c12ac67",
+    "replyNonce": "48bedad7b789e751052262a3f89b9d0c776bf5caa32d1925",
+    "payload": "00000007fffc6bb900000007fffc6bb9ffffffffffffffffffffffffc0807fc0807fc0807fc0807fffffffffc0807fc0807fc0807fffffffffffffffffffffffffc0807fffffffffffffffffffffffffffffffffffffffffffffffffc0807fc0807fc0807f7f7fffffffff07c0807f0000000e70726f746f636f6c2d636865636b",
+    "box": "78100adf3ea474aeb92f314781c6c530791ec933c0841fb07263ef1ff38a118c9bbf905ac260520114b3f1ca7e91d2f0176169e8edb0030719478ebda7bb337956fd19227f25e5bfd83a5127e0c64bf7092e668a62a0009f55a28ddba32004ec089238268a360ef455e2a9213936ff8b42c226408fc35a5cc4f3413d74710fe7cbe75de27c643fef263b3f5da6040423c7a4e865da893d5be29010f40087a614402272bc5886a72ed0a4bb62fd360d8babeb18495f4145d7d693516992957ff7fa7d7bc3bd991bc1d2",
+    "outgoing": [
+      {
+        "payload": "",
+        "box": "13cf9baaf123276cdf8012a6fa5fe033"
+      },
+      {
+        "payload": "73796e7468657469632073657373696f6e207061796c6f6164",
+        "box": "7fb6dc1b2dc54e254b3605aed1f18ddc78f6a385dc91c606e5d3b71e185ba6386ba0e8c70333c97001"
+      }
+    ],
+    "incoming": [
+      {
+        "id": 20108,
+        "version": 0,
+        "payload": "",
+        "box": "f28984612e28a4e59cb4723a55540288"
+      },
+      {
+        "id": 20108,
+        "version": 0,
+        "payload": "",
+        "box": "9d55c9a6d6bd3100346b9cd30f239024"
+      }
+    ],
+    "finalClientNonce": "1011161b20252a2f34393e43484d52575c61666b70757a7f",
+    "finalServerNonce": "151c27323d48535e69747f8a95a0abb6c1ccd7e2edf8030e",
+    "nativeLoginReplyAccepted": true,
+    "nativeStateAfterLoginReply": 5,
+    "nativeIncomingFramesAccepted": 2,
+    "nativeOutgoingBoxesMatched": 2,
+    "nativeHandshakeMaterialCleared": true,
+    "runtimeState": "Synthetic client state in protocol VM; outgoing Login and Android initialization not executed"
+  }
+]

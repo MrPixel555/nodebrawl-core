@@ -1,25 +1,92 @@
-# nodebrawl-core
-The world's first open source Brawl Stars private server core written on JavaScript. <br>
-*[Now uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">Classes</a> instead of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions">Functions!</a>]*
+# سرور پروتکل Clash Royale برای libg.so ارسالی
 
-* [Русский язык](/README-ru.md)
-* Try [nightly](https://github.com/tailsjs/nodebrawl-core/tree/nightly) version of core!
+این نسخه روی ریپازیتوری nodebrawl-core ساخته شده و از شناسه‌ها و قالب‌های استخراج‌شده از فایل ARM64 ارسالی استفاده می‌کند. **هنوز سرور کامل و قابل‌بازی نیست**: ارسال Login رمز‌شدهٔ کلاینت، وضعیت معتبر Home، منطق پکت‌های بازی و شبیه‌سازی نبرد باقی مانده‌اند.
 
-## Requirements
-* [NodeJS](https://nodejs.org/)
-* Brain
+- کاتالوگ ۲۸۴ شناسه و ۱۵۹ کدک پیام؛ ۱۵۵ کدک ساده با توابع encode/decode خود کتابخانه آزموده شده‌اند.
+- دریافت TCP با پشتیبانی از پکت تکه‌تکه، چند پکت در یک دریافت و محدودیت اندازه/صف.
+- ClientHello/ServerHello، LoginOk/LoginFailed، heartbeat و ذخیرهٔ اتمی حساب‌ها.
+- Home از طریق provider یا قالب صریح قابل اتصال است؛ بدون دادهٔ معتبر، ورود با توضیح مشخص رد می‌شود.
+- فایل‌های قدیمی `Protocol/` و `ByteStream/` حفظ شده‌اند؛ ورودی برنامه اکنون سرور جدید در `server/` را اجرا می‌کند.
+- هستهٔ Salsa با ۱۷ دور، MAC، بازکردن ciphertext و تبادل کلید با نمونه‌های تابع اصلی کتابخانه تطبیق داده شده‌اند. این ماژول هنوز به handshake کلاینت واقعی متصل نشده است.
 
-## Setting up
-1. Download/clone a repository
-2. Type in console `npm install`
-3. `node index`
+## اجرا و آزمون
 
-* Now you can connect to your server through any Brawl Stars client with Frida Injection.
+Node.js 18 یا بالاتر نیاز است. نصب با Yarn Classic و lockfile موجود:
 
-## Why game isn't loading?
-Because it's core. You need implement all messages/packets and logic by yourself.
+```bash
+yarn install --frozen-lockfile --non-interactive
+npm test
+npm run lint
+npm start
+```
 
-![screen](/Screens/console.png)
+سرور پیش‌فرض روی `127.0.0.1:9339` اجرا می‌شود. برای گوش‌دادن روی رابط‌های دیگر از `HOST` و برای پورت از `PORT` استفاده کنید. اتصال فعلاً plaintext است و به کلاینتی با تغییرات متناسب نیاز دارد.
 
-## Forks:
- * [nodebrawl-core-http](https://github.com/TailedTeam/nodebrawl-core-http)
+```bash
+node tools/smoke-client.js
+node tools/packets.js
+node tools/packets.js --json > .local/packets.json
+```
+
+آزمون smoke پیش‌فرض handshake و پاسخ روشنِ نبودن Home را بررسی می‌کند؛ ورود واقعی به بازی را تأیید نمی‌کند. در کاتالوگ، داشتن کدک به معنای پیاده‌سازی منطق آن پیام نیست. پیام‌های بدون handler با وضعیت unsupported گزارش می‌شوند.
+
+## تنظیمات
+
+| متغیر | پیش‌فرض / کاربرد |
+| --- | --- |
+| `HOST` | `127.0.0.1` |
+| `PORT` | `9339` |
+| `DATA_DIR` | `.local/accounts`؛ فقط یک پردازش سرور برای هر دیتابیس |
+| `HOME_TEMPLATE_PATH` | مسیر قالب JSON معتبرِ Home؛ اختیاری |
+
+قالب Home باید شامل `librarySha256` مطابق پروفایل، `messageId: 21217`، `version`، `payloadHex`، `payloadSha256` و `accountIdOffsets` باشد. این offsetها محل Long هشت‌بایتیِ شناسهٔ حساب هستند و باید از قالب واقعی معلوم باشند. بررسی checksum صحت فایل را می‌سنجد؛ سازگاری آن با بازی نیازمند آزمون جداگانه است. هیچ قالب نمونهٔ ناقص به‌صورت پیش‌فرض به کلاینت ارسال نمی‌شود.
+
+برای توسعه می‌توانید `createGameServer` را از `server/core.js` وارد کنید، `AccountStore` و `homeProvider` بدهید و handlerهای شناسه‌محور را در `Map` ثبت کنید. فیلدهای هنوز نام‌گذاری‌نشده با offset واقعی مانند `field_0x80` ثبت شده‌اند.
+
+## ادامهٔ سازگاری
+
+APK کامل بازسازی و بررسی شد: نسخهٔ `3.1.0` با build برابر `400` از manifest تأیید شد؛ نسخهٔ محتوا در fingerprint برابر `3.1945.13` است. کتابخانهٔ داخل APK دقیقاً همان نسخهٔ رمزگشایی‌شدهٔ رشته‌های فایل اصلی است. ۱۴۹ جدول CSV استخراج شد و هش ۱۰۷۵ فایل موجود تأیید شد؛ ۱۲۵ فایل فهرست‌شده در fingerprint داخل APK نیستند.
+
+ابزارهای بازسازی، بررسی و استخراج داده‌ها:
+
+```bash
+python3 tools/apk-transfer.py join /path/client.apk.manifest.json --parts-directory /path/parts --output .local/client.apk
+python3 tools/inspect-apk.py .local/client.apk --output .local/apk
+python3 tools/apk_data.py .local/apk --output .local/game-data
+python3 -m unittest discover -s test/python -v
+```
+
+خروجی `game-data.json` شامل ستون‌ها، نوع‌ها، نام رکوردها و هش جدول‌های استخراج‌شده است. assets اصلی داخل Git کپی نشده‌اند.
+
+Home خالیِ استانداردشدهٔ ۴۱۶ بایتی اکنون با encoder و decoder اصلی کتابخانه به‌صورت کامل و پایدار رفت‌وبرگشت می‌شود. این آزمایش در `tools/reverse/verify_home.py` قابل تکرار است؛ هنوز وضعیت معتبر بازیکن و پذیرش Home در کلاینت واقعی ثابت نشده و به سرور پیش‌فرض متصل نشده است.
+
+۳۷۴ آزمون Node و ۷ آزمون ابزار APK پاس شده‌اند. ورود واقعی، رمزنگاری کامل اتصال، منطق بازی و نبرد همچنان تکمیل نشده‌اند. در این محیط Android emulator یا adb موجود نیست.
+
+[گزارش تحلیل، آدرس توابع، شواهد آزمون و محدودیت‌های دقیق](docs/compatibility.md)
+
+## آزمون روی دستگاه با Frida
+
+برای در دسترس بودن سرور از دستگاه دیگر، اجرا کنید:
+
+```bash
+HOST=0.0.0.0 PORT=9339 npm start
+```
+
+اسکریپت ثبت اتصال را با IP واقعی کامپیوتر یا سرور خود بسازید:
+
+```bash
+node tools/make-client-trace.js --host 192.168.1.10 --port 9339 --output .local/client-trace.js
+frida -U -f com.supercell.clashroyale -l .local/client-trace.js
+```
+
+برای ثبت اتصال فعلی بازی بدون تغییر آدرس، گزینهٔ `--host` را حذف کنید. اسکریپت پیش از نصب hookها، معماری ARM64 و بایت‌های محل توابع را بررسی می‌کند. `library-profile-matched`، `game-connect`، `login-encode` و `messaging-read` مراحل قابل گزارش هستند. کلید خصوصی، توکن حساب و بدنهٔ پیام‌ها ثبت نمی‌شوند. این اسکریپت در محیط تحلیل از نظر syntax بررسی شده؛ اجرای واقعی آن روی Android هنوز تأیید نشده است.
+
+**تغییر آدرس به‌تنهایی کلاینت را با سرور سازگار نمی‌کند.** اسکریپت رمزنگاری را تغییر نمی‌دهد و انتقال TCP سرور فعلاً plaintext است. بدون Home معتبر، LoginFailed برمی‌گردد؛ آزمون اتصال به معنای ورود به بازی نیست.
+
+## وضعیت انتقال رمز‌شده
+
+ماژول `lib/protocol/transport.js` اکنون nonce پاسخ Login را با BLAKE2b-192 می‌سازد، envelope پاسخ را با `serverNonce[24] + sessionKey[32] + payload` رمز می‌کند و رمزنگاری پیام‌های بعدی را با nonce مستقل در هر جهت انجام می‌دهد. افزایش nonce، عدد little-endian با گام ۲ است و پیش از هر پیام انجام می‌شود.
+
+دو پاسخ LoginOk تولیدشده توسط Node با parser اصلی `Messaging` پذیرفته شدند و وضعیت بومی از ۴ به ۵ رفت. چهار پیام دریافتی و چهار ciphertext ارسالی جلسه نیز با کتابخانه تطبیق داشتند. این آزمون‌ها حالت کلاینت مصنوعی را مقداردهی می‌کنند؛ مسیر ارسال Login و اجرای Android را ثابت نمی‌کنند. ماژول هنوز به ورودی TCP سرور متصل نشده است.
+
+دریافت فریم‌ها اکنون برای تکه‌تکه‌شدن طولانی، کپی مکرر کل بافر انجام نمی‌دهد. Storeهای داخل یک پردازش که مسیر مشترک دارند، نوشتن حساب‌ها را مشترکاً صف‌بندی می‌کنند. Home نامعتبر پیش از ارسال LoginOk رد می‌شود و قطع اتصال حین آماده‌سازی Home ورود موفق ثبت نمی‌کند.

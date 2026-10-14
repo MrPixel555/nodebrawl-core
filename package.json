@@ -4,8 +4,12 @@
   "description": "The world's first open source Brawl Stars private server core written on JavaScript.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node --test test/*.test.js",
+    "lint": "eslint index.js lib/protocol/*.js server/*.js test/*.test.js tools/*.js",
+    "packets": "node tools/packets.js"
   },
+  "engines": { "node": ">=18" },
   "keywords": [],
   "author": "tailsjs",
   "license": "ISC",

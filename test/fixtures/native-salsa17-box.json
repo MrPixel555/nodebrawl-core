@@ -1,0 +1,122 @@
+[
+  {
+    "key": "000b16212c37424d58636e79848f9aa5b0bbc6d1dce7f2fd08131e29343f4a55",
+    "nonce": "00070e151c232a31383f464d545b626970777e858c939aa1",
+    "plaintext": "",
+    "box": "1614dc07d74fb863a4022e9f01cb2a6e",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "030e19242f3a45505b66717c87929da8b3bec9d4dfeaf5000b16212c37424d58",
+    "nonce": "01080f161d242b323940474e555c636a71787f868d949ba2",
+    "plaintext": "01",
+    "box": "1c75bad703799f153c9b10dbb64bf11da5",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "06111c27323d48535e69747f8a95a0abb6c1ccd7e2edf8030e19242f3a45505b",
+    "nonce": "020910171e252c333a41484f565d646b727980878e959ca3",
+    "plaintext": "020f1c293643505d6a7784919eabb8",
+    "box": "274e43a0b897d57458ed505c26f8270e3cbea0a9413d6f514a00fd453c6d34",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "09141f2a35404b56616c77828d98a3aeb9c4cfdae5f0fb06111c27323d48535e",
+    "nonce": "030a11181f262d343b424950575e656c737a81888f969da4",
+    "plaintext": "03101d2a3744515e6b7885929facb9c6",
+    "box": "f58808d6d3d1afb361721ebc84cc7c9bccb6be491e9e09b688d16498f46174a6",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "0c17222d38434e59646f7a85909ba6b1bcc7d2dde8f3fe09141f2a35404b5661",
+    "nonce": "040b121920272e353c434a51585f666d747b828990979ea5",
+    "plaintext": "04111e2b3845525f6c798693a0adbac7d4",
+    "box": "b69ad6027e8e0e0b1c7b0dc3d327ee893dcb00c4032ccd727cf907aabb32558baa",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "0f1a25303b46515c67727d88939ea9b4bfcad5e0ebf6010c17222d38434e5964",
+    "nonce": "050c131a21282f363d444b525960676e757c838a91989fa6",
+    "plaintext": "05121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b",
+    "box": "cbfb9f3b67741782d89ae48edc53f7a887b0241c237b422d4f18d2d0081d51fd272812bfde49158431964def2fc231",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "121d28333e49545f6a75808b96a1acb7c2cdd8e3eef9040f1a25303b46515c67",
+    "nonce": "060d141b222930373e454c535a61686f767d848b9299a0a7",
+    "plaintext": "0613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99",
+    "box": "8e54749958dd07515f902e5d4296c77ac8da0555609995fd0aee4e0bd0a69efe1c810e6371efb2f686bea2afc60470d8",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "15202b36414c57626d78838e99a4afbac5d0dbe6f1fc07121d28333e49545f6a",
+    "nonce": "070e151c232a31383f464d545b626970777e858c939aa1a8",
+    "plaintext": "0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7",
+    "box": "5de50bd56dfd70df878ec038854d8e2190c5ad0ef8e7798dd86bb12487798aeab7275202412c0f927c161c3a93d200dbd4",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "18232e39444f5a65707b86919ca7b2bdc8d3dee9f4ff0a15202b36414c57626d",
+    "nonce": "080f161d242b323940474e555c636a71787f868d949ba2a9",
+    "plaintext": "0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e",
+    "box": "1d75d40efc62227ae62316994559726842fc0ee95a87a3fa063a2854f6cc61b51a98068fbdad5feb0c9f6af6eee06ca4a72dea4e939175e17da7effb11add533fb85fbee994c4e2d705adde42dad82",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "1b26313c47525d68737e89949faab5c0cbd6e1ecf7020d18232e39444f5a6570",
+    "nonce": "0910171e252c333a41484f565d646b727980878e959ca3aa",
+    "plaintext": "091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c",
+    "box": "b6afb103e1cafb2c638b5afc251d37a77df74632d5d9f1a15053e1fc5b4f5c72c13c95c91f413e4f9406b91711bfe44274df2828fcf23d8a87d1f7990ef844f746426b0448361f0f97a0a82b4f892384",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "1e29343f4a55606b76818c97a2adb8c3ced9e4effa05101b26313c47525d6873",
+    "nonce": "0a11181f262d343b424950575e656c737a81888f969da4ab",
+    "plaintext": "0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a",
+    "box": "018ab81c9cbd5b3325cc7f5a7e47422f8dc835bb5a3e9fdef2d11982943b283903e4ba63791dc7f40b874b6ba4e5c3ce60de3b77a0536257a77d081fdabedd7643cf282ea7f304bf2632108f54953ac90f",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  },
+  {
+    "key": "212c37424d58636e79848f9aa5b0bbc6d1dce7f2fd08131e29343f4a55606b76",
+    "nonce": "0b121920272e353c434a51585f666d747b828990979ea5ac",
+    "plaintext": "0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a4754616e7b8895a2afbcc9d6e3f0fd0a1724313e4b5865727f8c99a6b3c0cddae7f4010e1b2835424f5c697683909daab7c4d1deebf805121f2c394653606d7a8794a1aebbc8d5e2effc091623303d4a5764717e8b98a5b2bfccd9e6f3000d1a2734414e5b6875828f9ca9b6c3d0ddeaf704111e2b3845525f6c798693a0adbac7d4e1eefb0815222f3c495663707d8a97a4b1becbd8e5f2ff0c192633404d5a6774818e9ba8b5c2cfdce9f603101d2a3744515e6b7885929facb9c6d3e0edfa0714212e3b4855626f7c8996a3b0bdcad7e4f1fe0b",
+    "box": "226b10a8d9a46a2c9f7e9dddbd82f3b94b61dcd44731b17d0e08e27547947fff749298fb826bf6a380d95bd94f51b1ba93addcbd18524e348a52701dad539d21efb286924abd616975725805d80be4d31bbfc1c89a01fd0367ef947084a2b275b6ed12d31765f78d9ce8ab4801de3e5834145ab9e45370346c1d8b99879b30bc0b3763a0c9a8bd7dbe622a75b4ffffbbbbf4051034b092b398c2a49db8bc20d4c0c24cf831dbfcf1848c84ef4d0fcb395610444a0df585f238adf0a61f928b4d1dbf6d79dfeef5560cc92872f65af2f3c5d401de6f0b96ee14d280f86fcb6d594edbf5a4e3a5f78f95a88258a5151cc6783f192842d099bf0c5faaa70e47c24ee8645b220755526a928a9b25ec5a6bbcb2",
+    "nativeFunction": "0x36bc7c",
+    "nativeOpenFunction": "0x1f8f08",
+    "nativeRoundtripEqual": true,
+    "nativeCorruptMacRejected": true
+  }
+]

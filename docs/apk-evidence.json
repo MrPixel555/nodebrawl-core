@@ -1,0 +1,1062 @@
+{
+  "sha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
+  "bytes": 104298365,
+  "package": "com.supercell.clashroyale",
+  "versionName": "3.1.0",
+  "versionCode": 400,
+  "contentVersion": "3.1945.13",
+  "contentFingerprint": "8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc",
+  "bundledLibrarySha256": "6020d2fb42fa13c81ac755cbec31621b3b104ebfdbfb65ae4b1a4356b7b0a46a",
+  "bundledLibraryIsExactStringsDecryptedOriginal": true,
+  "csvTables": 149,
+  "fingerprintAssetsVerified": 1075,
+  "fingerprintAssetsAbsent": 125,
+  "androidClientTested": false,
+  "manifest": {
+    "versionCode": 400,
+    "versionName": "3.1.0",
+    "package": "com.supercell.clashroyale"
+  },
+  "tables": [
+    {
+      "path": "csv_client/animations.csv",
+      "namedRecords": 60,
+      "dataRows": 60,
+      "decodedSha256": "243f4c574a9a0c0f62bcb4fa8e8b7857fca4980b707b0ef67a92546dce033f22"
+    },
+    {
+      "path": "csv_client/background_decos.csv",
+      "namedRecords": 0,
+      "dataRows": 0,
+      "decodedSha256": "a12f24288c6b8d871fda9d4f670b0b915e84015d7862cbf5a56fefd4c5ac85de"
+    },
+    {
+      "path": "csv_client/billing_packages.csv",
+      "namedRecords": 47,
+      "dataRows": 47,
+      "decodedSha256": "0694061a31d4fc86b474d6bda621a9f10961b1b8ec11b35292167f5b50dc09d1"
+    },
+    {
+      "path": "csv_client/client_globals.csv",
+      "namedRecords": 305,
+      "dataRows": 553,
+      "decodedSha256": "4c81f6bc957be0fafc540481f7e0e0539af996df46e043c531bd8ec13ea9c828"
+    },
+    {
+      "path": "csv_client/credits.csv",
+      "namedRecords": 64,
+      "dataRows": 64,
+      "decodedSha256": "8039640a5078f7b067ccd9ba251dfbc5e132ffef2a3c640123777b9feb878647"
+    },
+    {
+      "path": "csv_client/effects.csv",
+      "namedRecords": 978,
+      "dataRows": 2651,
+      "decodedSha256": "7658e36f3c0c94ac13e351d1533b909dcb8d76c32a3778826c3c3d81bd7c53d9"
+    },
+    {
+      "path": "csv_client/event_output.csv",
+      "namedRecords": 23,
+      "dataRows": 23,
+      "decodedSha256": "b5b2213513431e24054d7930ff37ff8391230359925dad94e673a50654d6b5da"
+    },
+    {
+      "path": "csv_client/health_bars.csv",
+      "namedRecords": 10,
+      "dataRows": 10,
+      "decodedSha256": "16a8cbfa0f76ed66162be51e84af777c32fec0ca8926f1a4cf0d40816608d009"
+    },
+    {
+      "path": "csv_client/helpshift.csv",
+      "namedRecords": 5,
+      "dataRows": 5,
+      "decodedSha256": "f9ec8844edb077b996e680129ec1211d0a32210b4fd949b155212cd3b5b2afb1"
+    },
+    {
+      "path": "csv_client/hints.csv",
+      "namedRecords": 185,
+      "dataRows": 185,
+      "decodedSha256": "160ef0623106efacc095a3e4761c14e51353f3e8834eff8dfee40191f9d4e98a"
+    },
+    {
+      "path": "csv_client/locales.csv",
+      "namedRecords": 25,
+      "dataRows": 27,
+      "decodedSha256": "23e2eb33dfb4eab959b1c2e462c3780f7e077b11ec12622e2b6bc1931c16fd58"
+    },
+    {
+      "path": "csv_client/music.csv",
+      "namedRecords": 12,
+      "dataRows": 16,
+      "decodedSha256": "d07ab062539cbe7cacdc12ba2465b4af88c79a86e6705bf60c2a746de226deae"
+    },
+    {
+      "path": "csv_client/news.csv",
+      "namedRecords": 1,
+      "dataRows": 1,
+      "decodedSha256": "c7ed6361540d47ab30c5cabc2aa7192a425246498470e419200789af4d4b4b56"
+    },
+    {
+      "path": "csv_client/particle_emitters.csv",
+      "namedRecords": 798,
+      "dataRows": 1785,
+      "decodedSha256": "0dca2d342d804db1484f83291e9a52f90a70bb8b8893daca402c8c19102d5f90"
+    },
+    {
+      "path": "csv_client/sorted_regions/CNT_regions.csv",
+      "namedRecords": 261,
+      "dataRows": 261,
+      "decodedSha256": "a6fed0257b726c0d5f913373f620b70d4fb5cd3054c160bbc936423f786cac85"
+    },
+    {
+      "path": "csv_client/sorted_regions/CN_regions.csv",
+      "namedRecords": 261,
+      "dataRows": 261,
+      "decodedSha256": "91b0d89ad876e9662a7829f250ec5f81d996294b59945b35366fd1d7d792661d"
+    },
+    {
+      "path": "csv_client/sorted_regions/JP_regions.csv",
+      "namedRecords": 261,
+      "dataRows": 261,
+      "decodedSha256": "02cd5e789e4c45920f2d501d805197db32e5f1c4711a365a3b9933564b02a13d"
+    },
+    {
+      "path": "csv_client/sorted_regions/KR_regions.csv",
+      "namedRecords": 261,
+      "dataRows": 261,
+      "decodedSha256": "ca9eacca74f1b92c2eb2d896ca21e45118ff50f85488604439026d9097ed9f38"
+    },
+    {
+      "path": "csv_client/sounds.csv",
+      "namedRecords": 741,
+      "dataRows": 939,
+      "decodedSha256": "21f49dd983558c466800cefaf4b43e46fba3b7cb9c88c03a34c6ea9236dd6c45"
+    },
+    {
+      "path": "csv_client/texts.csv",
+      "namedRecords": 4038,
+      "dataRows": 4039,
+      "decodedSha256": "4663f16b211f29ee437e505b0ba453443c7a51803c33bf49cbe742d0f8dddecf"
+    },
+    {
+      "path": "csv_client/texts_patch.csv",
+      "namedRecords": 15,
+      "dataRows": 15,
+      "decodedSha256": "6068b7d7455f8dc69a10f4f1bf344555848fd426ffd8422f09edac1e5c992bb9"
+    },
+    {
+      "path": "csv_logic/achievement_badges.csv",
+      "namedRecords": 16,
+      "dataRows": 16,
+      "decodedSha256": "dd5c681cfd7c65b87b1be58bbb89f40ca843e2da12cd74b1808f71052bfdf253"
+    },
+    {
+      "path": "csv_logic/achievements.csv",
+      "namedRecords": 30,
+      "dataRows": 30,
+      "decodedSha256": "2924b6be577a135980e76f6b8e35d31e414bfde6746c88c9a1fb2a7056c881e9"
+    },
+    {
+      "path": "csv_logic/alliance_badges.csv",
+      "namedRecords": 180,
+      "dataRows": 180,
+      "decodedSha256": "9246f245b5424703735c492ffc79fe3a460fb4dd473055d120645baac36bf15b"
+    },
+    {
+      "path": "csv_logic/alliance_roles.csv",
+      "namedRecords": 5,
+      "dataRows": 5,
+      "decodedSha256": "882d12e20f41ff40fc153d5ebb81ab93dc457c1366ea5da391b9a8232e64aaca"
+    },
+    {
+      "path": "csv_logic/area_effect_objects.csv",
+      "namedRecords": 31,
+      "dataRows": 31,
+      "decodedSha256": "2d7d4901073b345eac8a1a706dad55a7b4d57c1a23231d5361a24509ba51cbce"
+    },
+    {
+      "path": "csv_logic/arenas.csv",
+      "namedRecords": 38,
+      "dataRows": 60,
+      "decodedSha256": "4ee7d8cefec96ecbcb5a08cfaa8694197bf68bdcc669c5ff578f5fc76874eab1"
+    },
+    {
+      "path": "csv_logic/buildings.csv",
+      "namedRecords": 50,
+      "dataRows": 50,
+      "decodedSha256": "038be6324e4a6bf1eb3cfe64f0f871750017dbbd999b9d1ec3ed0adfe829f574"
+    },
+    {
+      "path": "csv_logic/character_buffs.csv",
+      "namedRecords": 33,
+      "dataRows": 33,
+      "decodedSha256": "df0af915a0eb0e5da4b40f75e0c33c8bb4212cfc052dd0fea41ad4b8ac55d85b"
+    },
+    {
+      "path": "csv_logic/characters.csv",
+      "namedRecords": 79,
+      "dataRows": 79,
+      "decodedSha256": "bc35aa5bb1077dbd86f1b7e49cdbfad6504cbe765e42d249f815cdc795e4fa43"
+    },
+    {
+      "path": "csv_logic/chest_order.csv",
+      "namedRecords": 14,
+      "dataRows": 369,
+      "decodedSha256": "7d6bc103e71d42aaf4afdbd0d18f1e5b1c9eb5ae2fb07c9e48bd037f6edcc8f5"
+    },
+    {
+      "path": "csv_logic/clan_leagues.csv",
+      "namedRecords": 10,
+      "dataRows": 50,
+      "decodedSha256": "bb671278ff4450988c69d3dee51a5f48dc863c6fb61e8b0228f34bfaec04f4a4"
+    },
+    {
+      "path": "csv_logic/clan_war_globals.csv",
+      "namedRecords": 43,
+      "dataRows": 153,
+      "decodedSha256": "4cddc110224aa6b8454b8d134a7f2a95880ba91225e3828b0ba9d58de4dff037"
+    },
+    {
+      "path": "csv_logic/content_tests.csv",
+      "namedRecords": 21,
+      "dataRows": 21,
+      "decodedSha256": "8cf7458b93a3a89bda4f1f0174b151186ea563d8b1dc889a380a80c43e04bf0f"
+    },
+    {
+      "path": "csv_logic/decos.csv",
+      "namedRecords": 598,
+      "dataRows": 600,
+      "decodedSha256": "ebda0a9819e67ed9097753c943ae41b92ae92ea86ba492d6dbdae1378f7e977d"
+    },
+    {
+      "path": "csv_logic/decos_season.csv",
+      "namedRecords": 0,
+      "dataRows": 0,
+      "decodedSha256": "701f4f940e6129f95a22aae7425bc0b4db123582d39ebe2f146d4660732342e7"
+    },
+    {
+      "path": "csv_logic/draft_deck.csv",
+      "namedRecords": 15,
+      "dataRows": 136,
+      "decodedSha256": "67da397363300d0b57beb0aba7760dd00cba399346b33bb6ac098b9ae7c003de"
+    },
+    {
+      "path": "csv_logic/event_categories.csv",
+      "namedRecords": 5,
+      "dataRows": 23,
+      "decodedSha256": "55ecdfcaeff05934e0e3dee3acb5185c4450f1a46f445e56099d8b889390f47f"
+    },
+    {
+      "path": "csv_logic/exp_levels.csv",
+      "namedRecords": 13,
+      "dataRows": 13,
+      "decodedSha256": "71a1327f2857e188a1845639e9f0d59c78b3053b33c0fdf163626ab66bf19f74"
+    },
+    {
+      "path": "csv_logic/fortune.csv",
+      "namedRecords": 6,
+      "dataRows": 6,
+      "decodedSha256": "834e247e93eb1248a909bdcc2567b627080c804e9ee50b788c3b82daf903f8fa"
+    },
+    {
+      "path": "csv_logic/game_modes.csv",
+      "namedRecords": 203,
+      "dataRows": 260,
+      "decodedSha256": "75a3f7c7b5a7f2c5dcdf4f8a37ebcab48ff1b3a696188a95fc7ff9a7146da148"
+    },
+    {
+      "path": "csv_logic/globals.csv",
+      "namedRecords": 384,
+      "dataRows": 543,
+      "decodedSha256": "90f17820593f04d7fa9b7520100879b66cec80ce9d85d2d9fa5b42f4f1b589cf"
+    },
+    {
+      "path": "csv_logic/heroes.csv",
+      "namedRecords": 6,
+      "dataRows": 6,
+      "decodedSha256": "639cc6949e9f925541461ad4343b5dd64809e8c17f011fb208ec2668a2836cc5"
+    },
+    {
+      "path": "csv_logic/locations.csv",
+      "namedRecords": 53,
+      "dataRows": 53,
+      "decodedSha256": "aa1817d9741957f73b787f7f0d69f22cf1e806b8edae355f523124cac93bb434"
+    },
+    {
+      "path": "csv_logic/npcs.csv",
+      "namedRecords": 59,
+      "dataRows": 59,
+      "decodedSha256": "e1aa72e761c067ac7e28906b7826b483cf0148337c08f149f4e4ee5d97bb50f8"
+    },
+    {
+      "path": "csv_logic/predefined_decks.csv",
+      "namedRecords": 156,
+      "dataRows": 1205,
+      "decodedSha256": "a4eeaa8327263a8182676a7fd580da11bac2267e74f8664c82a6ef9145826454"
+    },
+    {
+      "path": "csv_logic/projectiles.csv",
+      "namedRecords": 71,
+      "dataRows": 71,
+      "decodedSha256": "614d74d078481abb6dbb1651b4685901b13361fca108bb722c12e1cb28200870"
+    },
+    {
+      "path": "csv_logic/pve_gamemodes.csv",
+      "namedRecords": 18,
+      "dataRows": 66,
+      "decodedSha256": "d81fa73af3927c57a0c738435f7b5461a5b1ceb76a61eaf7fca7ce64f84f57fc"
+    },
+    {
+      "path": "csv_logic/quest_main_rewards.csv",
+      "namedRecords": 28,
+      "dataRows": 28,
+      "decodedSha256": "76413dd363c537f2fdc1d287224e38a0a1037f4c20fb03405dba68d235afa14a"
+    },
+    {
+      "path": "csv_logic/quest_order.csv",
+      "namedRecords": 14,
+      "dataRows": 70,
+      "decodedSha256": "03b185d61ace59cae7ba64aed31c6661efba41807cfc590811b5022838af94d2"
+    },
+    {
+      "path": "csv_logic/quests/attack.csv",
+      "namedRecords": 57,
+      "dataRows": 57,
+      "decodedSha256": "f3d8f066d9ece28a3fdfa293b2001727e5d1f36cdc8cd596e6f234dffd8cc00c"
+    },
+    {
+      "path": "csv_logic/quests/cast.csv",
+      "namedRecords": 101,
+      "dataRows": 173,
+      "decodedSha256": "5ebed4928845c6f6ac1b3072ece505d909341871ad2243dce0a9f684280a8883"
+    },
+    {
+      "path": "csv_logic/quests/collect.csv",
+      "namedRecords": 6,
+      "dataRows": 6,
+      "decodedSha256": "1e212a6780a47f8d95879a98489b30bba355ba7c36b54b4eacae18e3b1aae06c"
+    },
+    {
+      "path": "csv_logic/quests/daily.csv",
+      "namedRecords": 32,
+      "dataRows": 120,
+      "decodedSha256": "f695b817bb574d7680f1e7d069e472ba9565ab1862b4c47ca0ee3d06232aa64b"
+    },
+    {
+      "path": "csv_logic/quests/donate.csv",
+      "namedRecords": 10,
+      "dataRows": 10,
+      "decodedSha256": "47b1e9ca4195059c35d42df406bbf7c0176a541abd55e5b0d42b28cab410ec8b"
+    },
+    {
+      "path": "csv_logic/quests/play.csv",
+      "namedRecords": 53,
+      "dataRows": 136,
+      "decodedSha256": "bc6f155863f0b8d36193a9c97194f595ff567cdbde6d92ce7fce0eab3823b6d1"
+    },
+    {
+      "path": "csv_logic/quests/pve.csv",
+      "namedRecords": 19,
+      "dataRows": 19,
+      "decodedSha256": "bf03c8a3fc7daa89972f37824cbf98c2d5f61799f45ef9220eae5c1dd45c01f9"
+    },
+    {
+      "path": "csv_logic/rarities.csv",
+      "namedRecords": 5,
+      "dataRows": 50,
+      "decodedSha256": "57986ec3868685c02b0f98142939abc301def82c90e887b91a1caae412b6a819"
+    },
+    {
+      "path": "csv_logic/regions.csv",
+      "namedRecords": 261,
+      "dataRows": 261,
+      "decodedSha256": "3a39bc3d61d791419e8a20d6702f314253a65fa1bb5fae52a07f20c5bd79464c"
+    },
+    {
+      "path": "csv_logic/resource_packs.csv",
+      "namedRecords": 3,
+      "dataRows": 3,
+      "decodedSha256": "17444e924dfb778e4cf429039605ffc4bd2820f4226800a2aa019ba3b7590404"
+    },
+    {
+      "path": "csv_logic/resources.csv",
+      "namedRecords": 52,
+      "dataRows": 52,
+      "decodedSha256": "5401ca59a7a8ad1614c91f98cce2f21922b2cc8b485e01e6e93d31ef7fa83c95"
+    },
+    {
+      "path": "csv_logic/season_default.csv",
+      "namedRecords": 1,
+      "dataRows": 1,
+      "decodedSha256": "a261093164299137d4f4d8e92cdfe896546211460004ea33c7972fab130e1893"
+    },
+    {
+      "path": "csv_logic/season_pass_pro.csv",
+      "namedRecords": 4,
+      "dataRows": 288,
+      "decodedSha256": "7be27f2a14439c09b18a5eec39a21fd3d5daa98647e99e830e59b967e6e01ae1"
+    },
+    {
+      "path": "csv_logic/season_pass_rookie.csv",
+      "namedRecords": 1,
+      "dataRows": 72,
+      "decodedSha256": "294cf6593e31062f430ed805aae0147ebc400c9eb0bda0d4372a92a420d9d832"
+    },
+    {
+      "path": "csv_logic/shop.csv",
+      "namedRecords": 56,
+      "dataRows": 58,
+      "decodedSha256": "93aaa39c0af08bb5c332eec5a4ff4aacfb6bfa3ac1b80dc99776ad75889b3467"
+    },
+    {
+      "path": "csv_logic/shop_chests.csv",
+      "namedRecords": 10,
+      "dataRows": 13,
+      "decodedSha256": "e863105dc9d11207eb3fe750a76772bfa5b133def5da3eeceab72c32d13834ea"
+    },
+    {
+      "path": "csv_logic/shop_cycle.csv",
+      "namedRecords": 24,
+      "dataRows": 125,
+      "decodedSha256": "a2e3448aa0042432f63985e6dcdcdca279b522da97d5584d958a42185a05ea29"
+    },
+    {
+      "path": "csv_logic/skin_sets.csv",
+      "namedRecords": 8,
+      "dataRows": 9,
+      "decodedSha256": "336362bb9c039e451a4f8e7d4a5fe1082298967df86d266faaca749d9861fb2e"
+    },
+    {
+      "path": "csv_logic/skins.csv",
+      "namedRecords": 16,
+      "dataRows": 16,
+      "decodedSha256": "03fc5c6819bb005b5e574e92d639c948e898e6b2a1fe6545c31a4b8b0060f4ef"
+    },
+    {
+      "path": "csv_logic/spell_sets.csv",
+      "namedRecords": 194,
+      "dataRows": 3200,
+      "decodedSha256": "5ca9efdb2153842c6c7eea53b9b59f2cfb598be82390cfcf1d2dede746828e35"
+    },
+    {
+      "path": "csv_logic/spells_buildings.csv",
+      "namedRecords": 17,
+      "dataRows": 17,
+      "decodedSha256": "7839ed563ec27a26024538f1348fc3d56389c93f1f8de0caf14aeef6a2aa3582"
+    },
+    {
+      "path": "csv_logic/spells_characters.csv",
+      "namedRecords": 72,
+      "dataRows": 73,
+      "decodedSha256": "c84aac2de8cefed5ae7e60e22e74658d753a3c624d8d7aa5e37ca735b438c824"
+    },
+    {
+      "path": "csv_logic/spells_hero_abilities.csv",
+      "namedRecords": 9,
+      "dataRows": 9,
+      "decodedSha256": "e4258f8bf61d2659ddd81f77dcd6af8d3c0f8a764e52d56829cfc01d9566cd14"
+    },
+    {
+      "path": "csv_logic/spells_heroes.csv",
+      "namedRecords": 6,
+      "dataRows": 6,
+      "decodedSha256": "cadf594afaab31b4fc07d5975c0d9f4e7a67f80b9c9eb0ffabec2f3f7147f102"
+    },
+    {
+      "path": "csv_logic/spells_other.csv",
+      "namedRecords": 20,
+      "dataRows": 20,
+      "decodedSha256": "5623e02739184643002d46620575efc473224864881fc1a539a6b5068ada1210"
+    },
+    {
+      "path": "csv_logic/survival_modes.csv",
+      "namedRecords": 16,
+      "dataRows": 208,
+      "decodedSha256": "c36be4000070d7e0b65e83ab458c55150a98f32c394048c2a875ecdb2ba11b47"
+    },
+    {
+      "path": "csv_logic/taunts.csv",
+      "namedRecords": 21,
+      "dataRows": 21,
+      "decodedSha256": "c757f24de82becc9bf4607eb37c47d587b8b228a52ada4e74184b6b2d8b60f37"
+    },
+    {
+      "path": "csv_logic/tournament_tiers.csv",
+      "namedRecords": 20,
+      "dataRows": 20,
+      "decodedSha256": "b85b0e6540e93eec557094d47c40bc982e1811f7f64e00567233695c6c37d0a3"
+    },
+    {
+      "path": "csv_logic/treasure_chests.csv",
+      "namedRecords": 414,
+      "dataRows": 417,
+      "decodedSha256": "2290b02afa49f13adb1e4b8ea8c29037a6a6ef95eab0b9c13bd410d79f3b0f1f"
+    },
+    {
+      "path": "csv_logic/tribes.csv",
+      "namedRecords": 8,
+      "dataRows": 8,
+      "decodedSha256": "004a5a71f62217aa46d3f8d966e8d6387a5f313932371c3bd5207115d51f06ed"
+    },
+    {
+      "path": "csv_logic/trophy_road.csv",
+      "namedRecords": 1,
+      "dataRows": 68,
+      "decodedSha256": "3e99c57eece50a842cfff05c80a5de9caf17607c2f27d1f17845e72a2e8b030d"
+    },
+    {
+      "path": "csv_logic/trophy_road_season.csv",
+      "namedRecords": 3,
+      "dataRows": 83,
+      "decodedSha256": "64c036a9657aaffa1a9326df3ed420329e88eb54210fd3be390f204dd09f9414"
+    },
+    {
+      "path": "csv_logic/tutorial_chest_order.csv",
+      "namedRecords": 3,
+      "dataRows": 15,
+      "decodedSha256": "c5f15f38826d4359bf2661da342ce61f71f84ea41e22feb6973145ab592feb35"
+    },
+    {
+      "path": "csv_logic/tutorials_home.csv",
+      "namedRecords": 16,
+      "dataRows": 24,
+      "decodedSha256": "bf32758c654ac1b4798491cbeedd2353d8baea541f3d9199edcd13f5412735ca"
+    },
+    {
+      "path": "csv_logic/tutorials_npc.csv",
+      "namedRecords": 52,
+      "dataRows": 53,
+      "decodedSha256": "7a34f5665114442dda9c6f5a3023e5c05717e6acffdf2e74e18957a803ab9ee5"
+    },
+    {
+      "path": "csv_logic/tve_gamemodes.csv",
+      "namedRecords": 3,
+      "dataRows": 11,
+      "decodedSha256": "eef05aab023120abf0453145f1eda1da70c1d310f66d3adb5252b8c2d0249a0c"
+    },
+    {
+      "path": "locations/barbarian_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 201,
+      "decodedSha256": "7c05c6bebe242bafdf6fc2aeb9a5aa685e47037d6c7186c0b940b2c010bc3d8b"
+    },
+    {
+      "path": "locations/barbarian_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 205,
+      "decodedSha256": "7527f82ea0910003044db92d0d9193a118b5d96df9b0a71ff9f3ef456a63cb08"
+    },
+    {
+      "path": "locations/boat_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 163,
+      "decodedSha256": "27188bf60cf8efe67e69a18a130e299d171809ef0476fe20b68df125fafb320a"
+    },
+    {
+      "path": "locations/boat_arena_2.csv",
+      "namedRecords": 2,
+      "dataRows": 208,
+      "decodedSha256": "ec5c83117fb6fcddcb3f82416794f9bf17deb29536d75f80fbcbe853816cec2e"
+    },
+    {
+      "path": "locations/boat_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 162,
+      "decodedSha256": "c931645fa197cee3ff07cc0703eb6530a30c21257f0bcb4c4d9aa8580c833077"
+    },
+    {
+      "path": "locations/boat_arena_2v2_2.csv",
+      "namedRecords": 2,
+      "dataRows": 208,
+      "decodedSha256": "ec5c83117fb6fcddcb3f82416794f9bf17deb29536d75f80fbcbe853816cec2e"
+    },
+    {
+      "path": "locations/bone_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 128,
+      "decodedSha256": "b4e573aa6eab3e0f283546b98467a69732b256884bcd466176730a9040ce0f5f"
+    },
+    {
+      "path": "locations/bone_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 132,
+      "decodedSha256": "fd6899b9dada230d55dad79126ec667443e56e8706bd9c8919483e3feece6a36"
+    },
+    {
+      "path": "locations/builder_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 191,
+      "decodedSha256": "00ec0dd250d9a83f87a1f087bbb16909f90dfbf73b37c9956bc948d61142bff9"
+    },
+    {
+      "path": "locations/builder_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 195,
+      "decodedSha256": "25b3dc9c18c2d9ca383768527097279c0089d4094da5f84ef933fe39dc27398d"
+    },
+    {
+      "path": "locations/champion2_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 92,
+      "decodedSha256": "3de1f6c0ce608e19ec6d6d90354ad6fad35c469f51367c0b5874a2700079d1c0"
+    },
+    {
+      "path": "locations/champion_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 92,
+      "decodedSha256": "9af638f661988a2fa8100e10a28304848e493940524f06b375fa914d75234ad7"
+    },
+    {
+      "path": "locations/champion_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 92,
+      "decodedSha256": "e30fd0d2af101a4be3aec179c98eb9412194bc512cb02dd2943873dbbfde0476"
+    },
+    {
+      "path": "locations/clan_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 152,
+      "decodedSha256": "afc1ab50797d7c7ecc7d7cc682ff82b61c15547f5d11608681c8897ec4e07000"
+    },
+    {
+      "path": "locations/clan_arena_t1.csv",
+      "namedRecords": 2,
+      "dataRows": 138,
+      "decodedSha256": "b393133bea3bd3f32cce893caafac981c5a58dc955c7a3e238a07dccc605f842"
+    },
+    {
+      "path": "locations/clan_arena_t2.csv",
+      "namedRecords": 2,
+      "dataRows": 138,
+      "decodedSha256": "8aff283ca69404c1eff11be6f53ed767af74cc8a7ac57ea043f9dcc5c38ec436"
+    },
+    {
+      "path": "locations/clan_arena_t3.csv",
+      "namedRecords": 2,
+      "dataRows": 138,
+      "decodedSha256": "47ad7614fa15271d65a714d6f1394b48aa5c5a9cc1220011b62b46c55a8fd06e"
+    },
+    {
+      "path": "locations/clan_arena_t4.csv",
+      "namedRecords": 2,
+      "dataRows": 138,
+      "decodedSha256": "7e9ddfbe2c354db982ceaf32e68482e5f42116fa0f20036f318e98047bab80e7"
+    },
+    {
+      "path": "locations/dark_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 132,
+      "decodedSha256": "d8f9aa2818f23c0926c552201d915cc34dabbd689e222802d46be8d7832bc073"
+    },
+    {
+      "path": "locations/dark_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 132,
+      "decodedSha256": "ff35758003d1b3dce93a992b3ba0499668240022485576c673123f0fb3d6afed"
+    },
+    {
+      "path": "locations/electric_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 264,
+      "decodedSha256": "7badcba1bd5863404be322a15ee2738442c7f0306d75fe6d404b318c9f6beaaf"
+    },
+    {
+      "path": "locations/electric_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 264,
+      "decodedSha256": "5450d20877e86b8d023a5e6a10163556743a60308204390c9a65ab4f61bcb7d6"
+    },
+    {
+      "path": "locations/flood_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 232,
+      "decodedSha256": "831a7da400555e1a1e1c6efd164a09235c092755f8397819fc845bed776bdfb9"
+    },
+    {
+      "path": "locations/goblin_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 322,
+      "decodedSha256": "0ea68211b47927980f724571eb3924c810ec6ca66606ea465fdc168691e4fbf6"
+    },
+    {
+      "path": "locations/goblin_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 326,
+      "decodedSha256": "8177c85b1fe589358c11b4b422f03303ddddcaa65068ab7b327f1601448bd59f"
+    },
+    {
+      "path": "locations/goblin_party_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 80,
+      "decodedSha256": "437a4c72eaf17cbc5ebde3553869f914e43280d7588e2134dc7e1266423dd58a"
+    },
+    {
+      "path": "locations/goblin_party_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 84,
+      "decodedSha256": "3048c64c161e85423399636048cc1073f52df63d1f9fed7aa97d7db45ea6f512"
+    },
+    {
+      "path": "locations/halloween_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 155,
+      "decodedSha256": "732e33093094c0281365260b4210f68b5c481af0151aa96fb4cc1b41684604bd"
+    },
+    {
+      "path": "locations/ice_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 244,
+      "decodedSha256": "000fc9ad1a64ce275183db99924c3fd5c2a8f3c7c3d50aff9decb1ef31e72e4b"
+    },
+    {
+      "path": "locations/ice_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 248,
+      "decodedSha256": "ad73befac022880cd91efc2f5d83eb1f34200e3206c5e80ce2b38e7edf521375"
+    },
+    {
+      "path": "locations/jungle_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 205,
+      "decodedSha256": "79b64960de6337cb73e4908c0fde488fcec4ddbc596d0d6cc000da97db7b306b"
+    },
+    {
+      "path": "locations/jungle_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 212,
+      "decodedSha256": "a0515a5d614f62ae0b7cb4b0bc55ad02121dd0ac04a3f060a24789c42ff9f234"
+    },
+    {
+      "path": "locations/kingofthehill_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 4,
+      "decodedSha256": "6fb87596185d39d11939fba72433fdca323727a9a5213a672e43c0cce8ce32b9"
+    },
+    {
+      "path": "locations/legendary_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 80,
+      "decodedSha256": "437a4c72eaf17cbc5ebde3553869f914e43280d7588e2134dc7e1266423dd58a"
+    },
+    {
+      "path": "locations/legendary_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 84,
+      "decodedSha256": "3048c64c161e85423399636048cc1073f52df63d1f9fed7aa97d7db45ea6f512"
+    },
+    {
+      "path": "locations/royal_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 152,
+      "decodedSha256": "afc1ab50797d7c7ecc7d7cc682ff82b61c15547f5d11608681c8897ec4e07000"
+    },
+    {
+      "path": "locations/royal_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 160,
+      "decodedSha256": "c674df63c85249f155a19e478f4d76eb88cb85d2d0e0af8553a44bdda952a22e"
+    },
+    {
+      "path": "locations/royal_arena_3v3.csv",
+      "namedRecords": 2,
+      "dataRows": 152,
+      "decodedSha256": "afc1ab50797d7c7ecc7d7cc682ff82b61c15547f5d11608681c8897ec4e07000"
+    },
+    {
+      "path": "locations/spell_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 292,
+      "decodedSha256": "dee48ae0a37eafa55a297248019aa644ed626df6150caaf92d654b15868146d9"
+    },
+    {
+      "path": "locations/spell_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 292,
+      "decodedSha256": "a7499e861f1073a9457a9ba58bd7b6684ee7ce72cdb428128c447923e081a928"
+    },
+    {
+      "path": "locations/spooky_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 161,
+      "decodedSha256": "7ad1c2fbd0aefdc87fd93493af7e8e51a13d8c3fccd16b8191e8b651f8fb6811"
+    },
+    {
+      "path": "locations/spooky_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 161,
+      "decodedSha256": "ea2fb1763c698218ec6aaa06e047d079c64901dfe8c81c16acd08af6cca8deff"
+    },
+    {
+      "path": "locations/titan_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 76,
+      "decodedSha256": "12786139ce7658dcb89a0a114c5a92dfbec9754a6a2783c7c1aa844701592fef"
+    },
+    {
+      "path": "locations/touchdown_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 282,
+      "decodedSha256": "9ddb7c9ec72b3d1b292b0c4346bf353bea12d17a17484d2d7078602d92f12406"
+    },
+    {
+      "path": "locations/training_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 221,
+      "decodedSha256": "d6a682ea07fd9df26c2262ca3ff5a74cd20354fb5ed3981046a2659dd3a2524a"
+    },
+    {
+      "path": "locations/training_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 221,
+      "decodedSha256": "d6a682ea07fd9df26c2262ca3ff5a74cd20354fb5ed3981046a2659dd3a2524a"
+    },
+    {
+      "path": "locations/training_arena_tve.csv",
+      "namedRecords": 2,
+      "dataRows": 221,
+      "decodedSha256": "09c8935c7f449f56632f38ca549fa998aaead264fb3de54c0d61a7e7421750b1"
+    },
+    {
+      "path": "locations/xmas_arena.csv",
+      "namedRecords": 2,
+      "dataRows": 295,
+      "decodedSha256": "5b9cf46426c8bc6186586de3802656d759022e80e4865758d8d8654af3ca674f"
+    },
+    {
+      "path": "locations/xmas_arena_2v2.csv",
+      "namedRecords": 2,
+      "dataRows": 299,
+      "decodedSha256": "c0b417c626e1240597f199f9b83ba6d9b630fee6b841eb44f2f7a5c49f9b515b"
+    },
+    {
+      "path": "offline_emotes.csv",
+      "namedRecords": 27,
+      "dataRows": 27,
+      "decodedSha256": "55704ac520e166e6c6dea6eef9d7ddfb90a5184350747b8b01a6bad97d5e181c"
+    },
+    {
+      "path": "offline_skins.csv",
+      "namedRecords": 2,
+      "dataRows": 2,
+      "decodedSha256": "8bf7d5aa068c56f50b0f33cb8dc2b7260c7a155b0412614bca9432ed914ee14f"
+    },
+    {
+      "path": "tilemaps/tilemap.csv",
+      "namedRecords": 1,
+      "dataRows": 78,
+      "decodedSha256": "4d8fe0ef7ed5c194405710225c686ac5d8bea95bd454ad1156c57c9973c7e1df"
+    },
+    {
+      "path": "tilemaps/tilemap_2v2.csv",
+      "namedRecords": 1,
+      "dataRows": 85,
+      "decodedSha256": "54ba42a1ad8629b1d60a6e290e96a875dc5d42ce4a1fd08dd97fc3c9b2cefda6"
+    },
+    {
+      "path": "tilemaps/tilemap_3v3.csv",
+      "namedRecords": 1,
+      "dataRows": 78,
+      "decodedSha256": "0b997be292d5f7ee964efedb121a9e4efe9593f9c77c2d0cbfd2a755a5a7688b"
+    },
+    {
+      "path": "tilemaps/tilemap_bushes.csv",
+      "namedRecords": 1,
+      "dataRows": 99,
+      "decodedSha256": "201bca067a20b46fcb827b5c72f40dde10fba0995cb2a7abbef2e2a5e6612cf9"
+    },
+    {
+      "path": "tilemaps/tilemap_kingofthehill.csv",
+      "namedRecords": 1,
+      "dataRows": 71,
+      "decodedSha256": "380a493d4e910f86ea12fcab3f4e87f4675541ee1c9f9884a495488be4ecbb45"
+    },
+    {
+      "path": "tilemaps/tilemap_kingofthehill_2v2.csv",
+      "namedRecords": 1,
+      "dataRows": 73,
+      "decodedSha256": "0b05a6fc45fb82a757ac7c6fd1360953dfbd5590a9bca9ca7e48b82e71880af6"
+    },
+    {
+      "path": "tilemaps/tilemap_notowers.csv",
+      "namedRecords": 1,
+      "dataRows": 71,
+      "decodedSha256": "2b5ebb86d07cb98af98bce2587cae80bd446022fc41b65b264cbafc8b3ee6461"
+    },
+    {
+      "path": "tilemaps/tilemap_pve.csv",
+      "namedRecords": 1,
+      "dataRows": 76,
+      "decodedSha256": "2dfa77d32c471e058f4933a7effbf5b5b203a1f9cb1c9916aa21376cdcfff97b"
+    },
+    {
+      "path": "tilemaps/tilemap_pve1.csv",
+      "namedRecords": 1,
+      "dataRows": 76,
+      "decodedSha256": "724e934a64f35ec6b414495cd7ad418e5be7370065fd663b63efb89afe96c64a"
+    },
+    {
+      "path": "tilemaps/tilemap_touchdown.csv",
+      "namedRecords": 1,
+      "dataRows": 71,
+      "decodedSha256": "2ca3a962b0703e751f70c38aee4f24b6f30623a3f89f3acffa29dada6e56803e"
+    },
+    {
+      "path": "tilemaps/tilemap_touchdown_2v2.csv",
+      "namedRecords": 1,
+      "dataRows": 73,
+      "decodedSha256": "89d938f5cfa358c5c68148eb5a389d102886752d0b0fa3e3b024f33995fcd8b5"
+    },
+    {
+      "path": "tilemaps/tilemap_tve.csv",
+      "namedRecords": 1,
+      "dataRows": 77,
+      "decodedSha256": "914d44d0aac11ad63531b209ed3c736e6e994664786c177cd96451d2e567404a"
+    }
+  ],
+  "missingFingerprintAssets": [
+    "sc/building_barbarian_hut_highres_tex.sc",
+    "sc/building_basic_cannon_highres_tex.sc",
+    "sc/building_bomb_tower_highres_tex.sc",
+    "sc/building_elixir_collector_highres_tex.sc",
+    "sc/building_firespirit_hut_highres_tex.sc",
+    "sc/building_heist_safe_dl.sc",
+    "sc/building_inferno_tower_highres_tex.sc",
+    "sc/building_mortar_highres_tex.sc",
+    "sc/building_prestige_dl.sc",
+    "sc/building_tesla_highres_tex.sc",
+    "sc/building_tombstone_highres_tex.sc",
+    "sc/building_xbow_highres_tex.sc",
+    "sc/chr_axe_man_highres_tex.sc",
+    "sc/chr_balloon_highres_tex.sc",
+    "sc/chr_barbarian_barrel_dl.sc",
+    "sc/chr_barbarian_highres_tex.sc",
+    "sc/chr_battle_ram_highres_tex.sc",
+    "sc/chr_black_knight_highres_tex.sc",
+    "sc/chr_bowler_highres_tex.sc",
+    "sc/chr_dark_witch_highres_tex.sc",
+    "sc/chr_electro_dragon_dl.sc",
+    "sc/chr_electro_wizard_highres_tex.sc",
+    "sc/chr_elixir_golem_dl.sc",
+    "sc/chr_fisherman_dl.sc",
+    "sc/chr_flying_machine_highres_tex.sc",
+    "sc/chr_ghost_dl.sc",
+    "sc/chr_giant_skeleton_highres_tex.sc",
+    "sc/chr_goblin_blowdart_highres_tex.sc",
+    "sc/chr_goblin_giant_dl.sc",
+    "sc/chr_goblin_thug_dl.sc",
+    "sc/chr_golem_dl.sc",
+    "sc/chr_golemite_highres_tex.sc",
+    "sc/chr_guard02_dl.sc",
+    "sc/chr_hog_rider_highres_tex.sc",
+    "sc/chr_hunter_dl.sc",
+    "sc/chr_ice_wizard_highres_tex.sc",
+    "sc/chr_lava_hound_highres_tex.sc",
+    "sc/chr_magic_archer_dl.sc",
+    "sc/chr_mega_knight_highres_tex.sc",
+    "sc/chr_mega_minion_highres_tex.sc",
+    "sc/chr_miner_highres_tex.sc",
+    "sc/chr_movingcannon_highres_tex.sc",
+    "sc/chr_prestige2_dl.sc",
+    "sc/chr_prestige3_dl.sc",
+    "sc/chr_prestige4_dl.sc",
+    "sc/chr_prestige5_dl.sc",
+    "sc/chr_prestige6_dl.sc",
+    "sc/chr_prestige7_dl.sc",
+    "sc/chr_prestige_dl.sc",
+    "sc/chr_prince_highres_tex.sc",
+    "sc/chr_princess_highres_tex.sc",
+    "sc/chr_rage_barbarian_highres_tex.sc",
+    "sc/chr_ram_rider_dl.sc",
+    "sc/chr_rascals_dl.sc",
+    "sc/chr_royal_giant_highres_tex.sc",
+    "sc/chr_royal_hog_dl.sc",
+    "sc/chr_skeleton_balloon_highres_tex.sc",
+    "sc/chr_skeleton_warrior_highres_tex.sc",
+    "sc/chr_zappies_dl.sc",
+    "sc/level_2019_halloween_dl.sc",
+    "sc/level_barbarian_arena_highres_tex.sc",
+    "sc/level_boat_arena_highres_tex.sc",
+    "sc/level_bone_arena_highres_tex.sc",
+    "sc/level_builder_arena_highres_tex.sc",
+    "sc/level_champion_arena_highres_tex.sc",
+    "sc/level_clan_arena_highres_tex.sc",
+    "sc/level_dark_arena_highres_tex.sc",
+    "sc/level_electric_arena_highres_tex.sc",
+    "sc/level_goblin_arena_highres_tex.sc",
+    "sc/level_ice_arena_highres_tex.sc",
+    "sc/level_jungle_arena_highres_tex.sc",
+    "sc/level_legendary_arena_highres_tex.sc",
+    "sc/level_royal_arena_highres_tex.sc",
+    "sc/level_shipwreck_arena_highres_tex.sc",
+    "sc/level_spell_arena_highres_tex.sc",
+    "sc/level_touchdown_arena_highres_tex.sc",
+    "sc/map_dl.sc",
+    "sc/season_3_legendary_dl.sc",
+    "sc/season_4_halloween_dl.sc",
+    "sc/spell_prestige_dl.sc",
+    "sc/spell_snowball_dl.sc",
+    "sc/ui_spell_barb_barrel.sc",
+    "sc/ui_spell_earthquake.sc",
+    "sc/ui_spell_electro_dragon.sc",
+    "sc/ui_spell_elixir_golem.sc",
+    "sc/ui_spell_fisherman.sc",
+    "sc/ui_spell_ghost.sc",
+    "sc/ui_spell_goblin_cage.sc",
+    "sc/ui_spell_goblin_giant.sc",
+    "sc/ui_spell_hunter.sc",
+    "sc/ui_spell_magic_archer.sc",
+    "sc/ui_spell_ram_rider.sc",
+    "sc/ui_spell_rascals.sc",
+    "sc/ui_spell_royal_hog.sc",
+    "sc/ui_spell_royal_recruits.sc",
+    "sc/ui_spell_zappies.sc",
+    "sc3d/clan_wars_chest_rest.pvr",
+    "sc3d/clan_wars_main_body_color.pvr",
+    "sc3d/clan_wars_main_league1_color.pvr",
+    "sc3d/clan_wars_main_league2_color.pvr",
+    "sc3d/clan_wars_main_league3_color.pvr",
+    "sc3d/clan_wars_main_league4_color.pvr",
+    "sc3d/clan_wars_main_league_spec.pvr",
+    "sc3d/clan_wars_main_rank1_color.pvr",
+    "sc3d/clan_wars_main_rank2_color.pvr",
+    "sc3d/clan_wars_main_rank3_color.pvr",
+    "sc3d/clan_wars_main_rank_spec.pvr",
+    "sc3d/diffuse_lightmap.pvr",
+    "sc3d/fortune_dif_color.pvr",
+    "sc3d/fortune_diff_bonus.pvr",
+    "sc3d/fortune_spec.pvr",
+    "sc3d/kings_difuse_color.pvr",
+    "sc3d/kings_inside_color.pvr",
+    "sc3d/kings_specular.pvr",
+    "sc3d/legend_pillow_diffuse.pvr",
+    "sc3d/legendary_difuse.pvr",
+    "sc3d/legendary_specular.pvr",
+    "sc3d/lighting_chest_color.pvr",
+    "sc3d/lightning_spec_map.pvr",
+    "sc3d/pillow_diffuse_color.pvr",
+    "sc3d/pillow_shadow.pvr",
+    "sc3d/pillow_specular.pvr",
+    "sc3d/shadow_ground.pvr",
+    "sc3d/specular_lightmap.pvr",
+    "sc3d/wars_chest_rest_spec.pvr"
+  ],
+  "homeObservations": {
+    "nativeEncoder": "0x4bce90",
+    "nativeDecoder": "0x154440",
+    "canonicalEmptyHomeBytes": 416,
+    "nativeDecodeConsumed": 416,
+    "nativeReencodeEqual": true,
+    "commodityGroups": 9,
+    "commodityCountCheck": "0x43bda4",
+    "runtimeState": "Protocol VM with zero-initialized game globals",
+    "androidClientAccepted": false,
+    "gameStateImplemented": false
+  },
+  "notes": [
+    "APK reconstructed from all four uploaded parts; all per-part and final SHA-256 hashes verified.",
+    "Bundled library compared byte-for-byte against the strings-decrypted original: zero differences.",
+    "Present fingerprint assets verified by SHA-1 against fingerprint.json. Missing assets are reported, not silently accepted as verified.",
+    "APK signing scheme and certificate presence were inspected; signature cryptographic validity and publisher authenticity were not verified.",
+    "Actual Android startup, encrypted handshake and playable Home remain untested."
+  ]
+}
