@@ -54,5 +54,14 @@
       "rangeBytes": 372
     }
   ],
+  "jniFrame": {
+    "class": "com/supercell/titan/GameApp",
+    "methodCount": 34,
+    "methodTable": "0xa5b670",
+    "methodIndex": 15,
+    "name": "update",
+    "signature": "()Z",
+    "entry": "0x3f3f9c"
+  },
   "scope": "Static coverage of original hook prologues; does not execute Android or disable integrity checks"
 }

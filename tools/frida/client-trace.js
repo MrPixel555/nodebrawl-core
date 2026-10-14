@@ -1,9 +1,10 @@
-/* global Process, Module, Interceptor, Memory, configuration, clientCrypto, clientProbes, Frida, Script, Stalker, setInterval, setImmediate */
+/* global Process, Module, Interceptor, Memory, configuration, clientCrypto, clientProbes, clientFrame, Frida, Script, Stalker, ptr */
 'use strict'
 
 const sockets = new Set()
 const installed = new Set()
 const temporaries = new Map()
+const registrationRoots = []
 let probes = null
 let peerActive = Boolean(configuration.serverPublicKey)
 function record (event, fields = {}) { console.log(JSON.stringify({ event, ...fields })) }
@@ -17,14 +18,8 @@ function clearTemporary (thread) {
   if (value) value.pointer.writeByteArray(Array(value.size).fill(0))
   temporaries.delete(thread)
 }
-function follow (thread = Process.getCurrentThreadId()) {
-  if (!peerActive || !probes) return
-  try {
-    if (probes.follow(thread)) record('stalker-thread', { thread })
-  } catch (error) { record('stalker-follow-error', { thread, message: error.message }) }
-}
-
 function instrument (module) {
+  if (probes && module.name !== 'libg.so') Stalker.exclude({ base: module.base, size: module.size })
   if (module.name !== 'libg.so' || installed.has(module.base.toString())) return
   if (Process.arch !== 'arm64') { record('unsupported-architecture', { arch: Process.arch }); return }
   if (module.size < 0x41e924) { record('library-profile-mismatch', { reason: 'module too small' }); return }
@@ -37,9 +32,10 @@ function instrument (module) {
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), 4) !== expected) { record('library-profile-mismatch', { offset }); return }
   }
+  if (hex(module.base.add(0x3f3f9c), 16) !== 'f30f1ef8fd7b01a9fd430091c84b00f0') { record('library-profile-mismatch', { reason: 'JNI update entry' }); return }
   installed.add(module.base.toString())
   if (configuration.serverPublicKey) installDevelopmentPeer(module)
-  record('library-profile-matched', { module: module.name, buildId, base: module.base.toString(), nativeInlineHooks: 0, mode: configuration.serverPublicKey ? 'stalker-peer' : 'sockets' })
+  record('library-profile-matched', { module: module.name, buildId, base: module.base.toString(), nativeInlineHooks: 0, mode: configuration.serverPublicKey ? 'jni-scoped-peer' : 'sockets' })
 }
 
 function installDevelopmentPeer (module) {
@@ -60,7 +56,6 @@ function installDevelopmentPeer (module) {
         record('development-peer-error', { message: error.message, thread })
         peerActive = false
         clearTemporary(thread)
-        setImmediate(() => probes.unfollowAll())
       }
     }
   }
@@ -103,17 +98,75 @@ function installDevelopmentPeer (module) {
       clearTemporary(thread)
       record('development-peer-open-result', { result: context.x0.toInt32() })
       peerActive = false
-      // Never tear down Stalker from inside its own callout.
-      setImmediate(() => probes.unfollowAll())
+      // The JNI wrapper ends tracing after the complete native frame returns.
     })],
   ]
   probes = clientProbes.createStalkerProbes(definitions.map(([offset, action]) => ({ address: module.base.add(offset), callback: action })))
-  // Keep ART/Java dispatch visible so JNI calls back into libg are traced too.
-  // Only GL and game-socket threads are followed, until the first reply opens.
+  // Never relocate ART's non-ABI interpreter or other system-library code.
+  // JNI registration gives us an exact native frame boundary on every update.
   for (const other of Process.enumerateModules()) {
-    if (/^(libc\.so|libm\.so|libdl\.so|liblog\.so|libGLES[^/]*\.so|libEGL\.so)$/.test(other.name)) Stalker.exclude({ base: other.base, size: other.size })
+    if (other.name !== 'libg.so') Stalker.exclude({ base: other.base, size: other.size })
   }
-  record('development-peer-enabled', { publicKey: configuration.serverPublicKey, method: 'stalker', nativeInlineHooks: 0 })
+  installNativeFrame(module)
+}
+
+function installNativeFrame (module) {
+  const art = Process.findModuleByName('libart.so')
+  const addresses = new Set()
+  if (art) {
+    for (const symbol of art.enumerateSymbols()) {
+      if (symbol.name.includes('RegisterNatives') && symbol.name.includes('JNI') && !symbol.name.includes('CheckJNI')) addresses.add(symbol.address.toString())
+    }
+  }
+  if (!addresses.size) {
+    peerActive = false
+    record('development-peer-unavailable', { reason: 'ART RegisterNatives entry not found; no thread tracing started' })
+    return
+  }
+  let registered = false
+  const seenThreads = new Set()
+  for (const address of addresses) {
+    Interceptor.attach(ptr(address), {
+      onEnter (args) {
+        const count = args[3].toInt32()
+        if (registered || count < 1 || count > 512) return
+        const methods = args[2]
+        for (let n = 0; n < count; n++) {
+          const row = methods.add(n * 24)
+          if (!row.add(16).readPointer().equals(module.base.add(0x3f3f9c))) continue
+          if (row.readPointer().readUtf8String() !== 'update' || row.add(8).readPointer().readUtf8String() !== '()Z') continue
+          const replacement = clientFrame.createNativeFrame(module.base.add(0x3f3f9c), 'uint8', ['pointer', 'pointer'], {
+            probes,
+            shouldTrace: () => peerActive,
+            onEnter (thread) {
+              if (!seenThreads.has(thread)) { seenThreads.add(thread); record('native-frame-scope-started', { thread, method: 'GameApp.update', interpreterExcluded: true }) }
+            },
+            onLeave: clearTemporary,
+            onError (error) { peerActive = false; record('development-peer-error', { message: error.message }) },
+          })
+          // Clone the whole JNI table: its original bytes belong to libg's
+          // protected data, so only RegisterNatives receives the replacement.
+          const copy = Memory.alloc(count * 24)
+          copy.writeByteArray(methods.readByteArray(count * 24))
+          copy.add(n * 24 + 16).writePointer(replacement)
+          registrationRoots.push({ copy, replacement })
+          args[2] = copy
+          this.replaced = true
+          registered = true
+          break
+        }
+      },
+      onLeave (result) {
+        if (!this.replaced) return
+        if (result.toInt32() === 0) record('jni-frame-registered', { method: 'GameApp.update', signature: '()Z', nativeInlineHooks: 0 })
+        else {
+          peerActive = false
+          record('development-peer-error', { message: 'JNI RegisterNatives rejected the copied table', result: result.toInt32() })
+        }
+      },
+    })
+  }
+  record('development-peer-enabled', { publicKey: configuration.serverPublicKey, method: 'stalker-jni-scope', nativeInlineHooks: 0, spawnRequired: true })
 }
 
 Interceptor.attach(api('connect'), {
@@ -145,7 +198,6 @@ Interceptor.attach(api('connect'), {
   onLeave (result) {
     if (this.socket === undefined) return
     record('game-connect-result', { socket: this.socket, result: result.toInt32(), errno: this.errno })
-    follow()
   },
 })
 
@@ -166,7 +218,6 @@ for (const name of ['send', 'recv']) {
         fields.candidateHeader = { id: header[0] * 256 + header[1], bytes: header[2] * 65536 + header[3] * 256 + header[4], version: header[5] * 256 + header[6] }
       }
       record('socket-' + name, fields)
-      follow()
     },
   })
 }
@@ -180,12 +231,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-if (configuration.serverPublicKey) {
-  // Android names GLThread inside run(), after the thread starts. Polling also
-  // works on Frida versions without a thread observer, before the first Login.
-  setInterval(() => {
-    if (!peerActive || !probes) return
-    for (const thread of Process.enumerateThreads()) if (/^GLThread\b/.test(thread.name || '')) follow(thread.id)
-  }, 100)
-}
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0 })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'jni-update-only' })

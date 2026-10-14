@@ -169,10 +169,13 @@ The connection caller's initial state is set explicitly by the harness.
 [Adapter observation](native-development-peer.json) records the scope.
 The VM also asserts that every executable PT_LOAD byte is unchanged. This proves
 the protocol argument transformation in that model, not Android Stalker execution
-or an Android UI test. The actual Stalker helper separately passed an optional
-Frida 17.23.3 Linux x86-64 smoke test: a native call's argument changed and its
-original code stayed identical. Reproduce with `python3 tools/check-frida-stalker.py`
-on Linux x86-64 with Python `frida` and `cc` installed.
+or an Android UI test. The actual JNI-style wrapper separately passed an optional
+Frida 17.15.4 Linux x86-64 smoke test: cloning a method table, two native frame
+invocations, native argument overrides, unchanged original code/table, an excluded
+direct interpreter call, and untraced calls between native scopes. On ARM64,
+Stalker's indirect-call exclusions also cover JNI's BLR calls. This test does not
+execute ART or validate that ARM64 behavior on a device. Reproduce with
+`python3 tools/check-frida-stalker.py` on Linux x86-64 with Python `frida` and `cc`.
 
 **OwnHomeData:** the native encoder/decoder call nested LogicClientHome and
 LogicClientAvatar serializers. A further probe showed that the avatar decoder at
@@ -251,12 +254,30 @@ records the exact intersections. A PC inside Android's CFI shadow is the invalid
 branch destination here; it is not evidence of a failed Android CFI check.
 The crash target and integrity checks are not patched or suppressed.
 
+The subsequent whole-GLThread Stalker script also crashed on the device with
+Frida 17.15.4. Its anonymous executable PC and the ART `nterp_helper` / Java stack,
+immediately after `stalker-thread` and before `game-connect`, are consistent with
+relocating the interpreter. That test rules out calling the whole-thread strategy
+device-compatible; the previous Linux scalar-call test did not cover ART.
+
 The revised script uses libc hooks for sockets and Stalker call-site probes for
 the development peer. Without a development key there are no native-library
-probes and no Stalker activity. With a key, GL threads are discovered by name and
-game-socket threads at libc callbacks, and tracing stops after the first reply's
-authenticated-open returns. ART is kept visible so its JNI callbacks remain
-traceable. This temporary tracing can slow loading. Architecture, build ID and
+probes and no Stalker activity. With a key, an observer of ART's `RegisterNatives`
+clones the registration table when it finds exactly `GameApp.update()Z` at
+`libg+0x3f3f9c`. The original method table is untouched. `JNI_OnLoad` registers
+34 GameApp methods from `0xa5b670`; update is entry 15. This metadata is exported
+by `inspect_hook_integrity.py` in the coverage report.
+
+A NativeCallback wrapper follows the invoking thread only during the original
+native update, called through NativeFunction with cooperative scheduling and
+`traps:'all'`. A finally block unfollows it and reclaims completed Stalker contexts
+before returning to ART. All other modules, including ART, are excluded. There
+is no GL-thread polling or thread activation from socket callbacks. Nested native
+scopes retain their outer trace; subsequent frames use an untraced bridge after
+the authenticated-open result. Socket Interceptor hooks remain active in that
+bridge. Missing RegisterNatives symbols leave tracing disabled with a diagnostic.
+This requires spawn-time script loading before JNI registration, using `-f`.
+Temporary tracing can slow loading. Architecture, build ID, update entry and
 all call-site instructions must match before probes activate. A key-pair check
 guards reads of the Messaging slots. A profile mismatch leaves the peer unchanged.
 The IPv4 target redirect handles IPv4 and IPv4-mapped IPv6 sockets on port 9339.
@@ -264,9 +285,9 @@ Private keys, account tokens and payload contents are not logged. Events use
 console output, captured by Frida CLI `-o`; ordinary Android logcat is not that
 console. See README for device commands and the public-key distinction.
 
-The original inline-hook script is confirmed to crash on the user's device.
-The revised Stalker script still requires a new Android test; no successful
-device Login or playable Home has been observed.
+Both the original inline-hook and whole-GLThread scripts are confirmed to crash
+on the user's device. The JNI-scoped replacement still requires a new Android
+test; no successful device Login or playable Home has been observed.
 
 The native VM models single-thread mutexes, condition notifications, static
 initialization guards and reads from `/dev/urandom`. Contention, unrelated file

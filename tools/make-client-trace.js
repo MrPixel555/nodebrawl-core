@@ -20,7 +20,9 @@ const bundle = `const clientCrypto = (() => { const module = { exports: {} }; ${
 const source = fs.readFileSync(path.join(__dirname, 'frida/client-trace.js'), 'utf8')
 const probes = fs.readFileSync(path.join(__dirname, 'frida/stalker-probes.js'), 'utf8')
 const probeBundle = `const clientProbes = (() => { const module = { exports: {} }; ${probes}; return module.exports })()\n`
+const frame = fs.readFileSync(path.join(__dirname, 'frida/native-frame.js'), 'utf8')
+const frameBundle = `const clientFrame = (() => { const module = { exports: {} }; ${frame}; return module.exports })()\n`
 fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true })
-fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + probeBundle + source, { flag: 'wx' })
+fs.writeFileSync(output, `const configuration = ${JSON.stringify({ host, port, serverPublicKey })}\n` + bundle + probeBundle + frameBundle + source, { flag: 'wx' })
 console.log(`Created ${output}; logs metadata only; ${host ? `redirects port 9339 to ${host}:${port}` : 'keeps the original connection address'}.`)
-console.log(serverPublicKey ? 'Development peer uses Stalker callouts; no inline hooks in libg.so. Android verification is required; Home compatibility still requires a separate client test.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')
+console.log(serverPublicKey ? 'Development peer uses JNI-scoped Stalker; spawn with -f before native registration. No inline hooks in libg.so. Android verification is required.' : 'Socket metadata only: no libg.so hooks; client encryption is unchanged.')

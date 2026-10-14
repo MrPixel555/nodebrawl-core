@@ -22,9 +22,12 @@ function createStalkerProbes (probes) {
       threads.add(threadId)
       return true
     },
-    unfollowAll () {
-      for (const threadId of threads) Stalker.unfollow(threadId)
-      threads.clear()
+    unfollow (threadId) {
+      if (!threads.has(threadId)) return
+      Stalker.unfollow(threadId)
+      threads.delete(threadId)
+      // A scope may run once per frame; reclaim completed translation contexts.
+      Stalker.garbageCollect()
     },
   }
 }
