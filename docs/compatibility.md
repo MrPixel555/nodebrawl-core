@@ -258,8 +258,9 @@ The decoded tables include 52 named resource records, 72 character spells,
 17 building spells, 20 other spells, six hero spells, 38 arenas, and 203 game modes.
 Rows and continuation rows are distinguished; table IDs and gameplay effects
 are not guessed from filenames. The 1,075 original assets are now committed in
-`content/assets/` for byte-exact HTTP delivery; the 125 absent entries remain
-explicitly missing. [Content delivery and Training scope](content-training.md).
+`content/assets/` for byte-exact HTTP delivery. The 125 absent APK entries have
+now also been restored from the original HTTPS CDN and verified against every
+original hash; all 1,200 assets are present. [Content delivery and Training scope](content-training.md).
 [APK evidence](apk-evidence.json) records identities and per-table counts/hashes.
 
 Reassemble, inspect and decode an APK without optional analysis dependencies:
@@ -449,15 +450,22 @@ limits. The user's next device report confirms that Home displays with the
 corrected levels. [Device confirmation](device-lobby.json) records that result;
 Training, battle simulation, shop and clan membership remain incomplete.
 
-**Content and Training update:** the original 1,075 available APK assets and
-pinned fingerprint are served on HTTP 9338, with both content URL vectors
-populated in LoginOk. Original native Messaging accepted those vectors alongside
-the starter Home and KeepAlive. Missing downloads are SHA-1 checked before
-publication, and recognized client metadata yields bounded download diagnostics.
-125 assets remain absent; this cloud environment's proxy rejected the upstream
-check, so old-version CDN availability is unverified. Three more native codecs
-cover 10953/17967 Training requests and 12405 HomeLogicStopped; their gameplay
-handlers are not implemented. Six new native Training fixtures, three startup
-fixtures, 613 Node tests, lint and three real CLI server modes pass. The current
-catalogue is 284 messages with 167 verified wire codecs. [Detailed evidence,
-reproduction and limits](content-training.md).
+**Content and Training update:** all 1,200 original assets are now present,
+176,402,252 bytes. The 125 absent APK entries were restored from the original
+HTTPS CDN after the network change, with every original SHA-1 matched and the
+manifest unchanged. The new device trace confirms download attempts to the old
+HTTP URL fail with code zero, while the phone browser reaches HTTP9338. Static
+manifest analysis finds target SDK28 without cleartext opt-in; Java DEX analysis
+shows request exceptions before getResponseCode leave the reported code at zero.
+The exact device exception was not captured. The advertised URL now defaults to
+the verified HTTPS CDN; a previous CONTENT_URL environment override must also be
+replaced. All local content remains served on HTTP9338 for checks or behind a
+trusted HTTPS proxy. No Android policy or TLS check is bypassed. Original native
+Messaging accepted both HTTPS LoginOk vectors alongside starter Home/KeepAlive.
+Three more native codecs cover 10953/17967 Training requests and 12405
+HomeLogicStopped; their gameplay handlers are not implemented. Six native
+Training fixtures, three startup fixtures, 614 Node tests, nine APK-tool tests,
+lint and three real CLI server modes pass. The catalogue is 284 messages with
+167 verified wire codecs. Download completion on the device with this update
+and Training gameplay remain unverified. [Detailed evidence, reproduction and
+limits](content-training.md).

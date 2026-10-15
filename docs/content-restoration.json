@@ -1,0 +1,768 @@
+{
+  "sourceBaseUrl": "https://game-assets.clashroyaleapp.com",
+  "urlLayout": "/<fingerprint>/<asset-path>",
+  "retrievedAt": "2026-10-15T15:29:34.211846+00:00",
+  "fingerprint": "8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc",
+  "version": "3.1945.13",
+  "originalApkPresentFiles": 1075,
+  "restoredFiles": 125,
+  "restoredBytes": 85136942,
+  "verifiedFiles": 1200,
+  "verifiedBytes": 176402252,
+  "missingFiles": 0,
+  "manifestUnchanged": true,
+  "manifestSha256": "89d48ec5e1eb9b68153960844dc013fbb636858eb1424ea7252f80d8a9717e52",
+  "verification": "All 1,200 original SHA-1 entries matched. HTTPS certificate verification and expected hashes were retained.",
+  "files": [
+    {
+      "file": "sc/building_barbarian_hut_highres_tex.sc",
+      "sha1": "af09a08c00d97c6fb18d5ca5eed945d5dae72d71",
+      "bytes": 54119,
+      "sha256": "6ba3f4740922991a1b1196e4a2385929f80feeed1312fd6487fed5dfa4f252c6"
+    },
+    {
+      "file": "sc/building_basic_cannon_highres_tex.sc",
+      "sha1": "fc3276deb17cb331ef28eba6c410b1c08575b87e",
+      "bytes": 196415,
+      "sha256": "276250a03db095ba1cc3a89ca1977324448b5605e35eea52f52fbf5acd0e25c3"
+    },
+    {
+      "file": "sc/building_bomb_tower_highres_tex.sc",
+      "sha1": "e2e250256efc71da1a340455d3f4411d8bb1040a",
+      "bytes": 32488,
+      "sha256": "f3464e52fe6a030762277eed2f76b80574393042b072633b9a8e18d0199ad522"
+    },
+    {
+      "file": "sc/building_elixir_collector_highres_tex.sc",
+      "sha1": "5584163bc200fe223ad68488d170c105df5d96e6",
+      "bytes": 139897,
+      "sha256": "46720247faa97988183af4a3b89a5de4ce035e1ea948b195d5e30aaecb4cf6c3"
+    },
+    {
+      "file": "sc/building_firespirit_hut_highres_tex.sc",
+      "sha1": "c5870c37410c80c59c3b2b07b41069e2d135fcb0",
+      "bytes": 38281,
+      "sha256": "c12df04daa40c61d5b2ff20b7314a904ea538542f18b857d760061bb9ec5ce78"
+    },
+    {
+      "file": "sc/building_heist_safe_dl.sc",
+      "sha1": "bd37a88999ec6c68d34b5e9765a75731d2b5378d",
+      "bytes": 34105,
+      "sha256": "769806a2ff01ea1647f396d492becc8fda8d0e37fd8e143064e2f3d1e0eef092"
+    },
+    {
+      "file": "sc/building_inferno_tower_highres_tex.sc",
+      "sha1": "d511d52bf5a40ecd834f68594900c727185a92df",
+      "bytes": 25109,
+      "sha256": "15d3644077c4528b18409a75710856aba3a4287f1a0a1422340c6d23901152a4"
+    },
+    {
+      "file": "sc/building_mortar_highres_tex.sc",
+      "sha1": "7cb207320113171019d4e87cbe9de982088df7b2",
+      "bytes": 36043,
+      "sha256": "85c08f8e31cd314bf80933ea952471bde2c8b5e1d74457624ad12e95db94de90"
+    },
+    {
+      "file": "sc/building_prestige_dl.sc",
+      "sha1": "723989f53a46f820dde33c55d3fc018fe608389c",
+      "bytes": 736254,
+      "sha256": "09ca67d837efb76ad75c6e43bd5f82b23a9830bd7e38d7dbd7795090fc15148a"
+    },
+    {
+      "file": "sc/building_tesla_highres_tex.sc",
+      "sha1": "1780a311774b0e2cdd6ccf67afa90bdea2628330",
+      "bytes": 88069,
+      "sha256": "fb954d221ace1137c915428cde42e1deeb6a4239f696d490c53198e903007bf9"
+    },
+    {
+      "file": "sc/building_tombstone_highres_tex.sc",
+      "sha1": "2869188540555aaf4a5b50bd87480675d7da6391",
+      "bytes": 53957,
+      "sha256": "193a90ff578fd145437142eecc457143bf95c4ee3a9795cc10e0988f5f361a28"
+    },
+    {
+      "file": "sc/building_xbow_highres_tex.sc",
+      "sha1": "5aa73df8ff167cdb25757e21d74c6bf72e5cbb98",
+      "bytes": 180251,
+      "sha256": "fca88d71b1173656a1c62c4030cbb4614ce7fc41e066dd6536fa0c91513a4bdf"
+    },
+    {
+      "file": "sc/chr_axe_man_highres_tex.sc",
+      "sha1": "d523b29e39b190224164440fb312e5e545ef289b",
+      "bytes": 806668,
+      "sha256": "8bdf05f4c1675fc4f157e618e81cdb1f6a46a3025071fb960046660a492f9730"
+    },
+    {
+      "file": "sc/chr_balloon_highres_tex.sc",
+      "sha1": "8df3b1030fbb299690c838ef0aba75d0200f65b9",
+      "bytes": 24332,
+      "sha256": "aabccf1f383d0aeddc5ca56acedf83a28f341a9e68086636a9613ce488e34a9c"
+    },
+    {
+      "file": "sc/chr_barbarian_barrel_dl.sc",
+      "sha1": "9eb04fdcf324725dc3b7dfbb9c9d87474e507b53",
+      "bytes": 96430,
+      "sha256": "813262daa0fd6a97fe0207331d92410ccd4d3e25efd5d43c9a8b969f52384565"
+    },
+    {
+      "file": "sc/chr_barbarian_highres_tex.sc",
+      "sha1": "21903d58c89914e28bc0deaf9d52d44239fac07d",
+      "bytes": 1377089,
+      "sha256": "619cbed5ba0b080f8d76559b0081b305510ddc152519614fa6191715da74086f"
+    },
+    {
+      "file": "sc/chr_battle_ram_highres_tex.sc",
+      "sha1": "869bf74e040b1c99c60dee5bfa242f9dec3346d9",
+      "bytes": 537460,
+      "sha256": "115fad0ce4acdb5890fb76123aaf0e02ed435e989939729495db8d9fa16d6837"
+    },
+    {
+      "file": "sc/chr_black_knight_highres_tex.sc",
+      "sha1": "b1fd6709d8925c43391b9fbc68af48f73e6f2f69",
+      "bytes": 1689025,
+      "sha256": "741dc2a7f388933a3b45d13ed19da752ec147dde7782bb65b0338e0af42427d3"
+    },
+    {
+      "file": "sc/chr_bowler_highres_tex.sc",
+      "sha1": "03a8ff19054fc366941cd93675168d1cf5d6d436",
+      "bytes": 1057981,
+      "sha256": "ad42eda725ae7e127a19317a65dc859b108f2809cb14a171f5b0413d08c610cb"
+    },
+    {
+      "file": "sc/chr_dark_witch_highres_tex.sc",
+      "sha1": "25afb778fa89198e2f180bde906b2954bf2b42f6",
+      "bytes": 873860,
+      "sha256": "0d113904b747b19e23abd49fbe4c89e3adb4834d29db53bfcb35a9381f07c043"
+    },
+    {
+      "file": "sc/chr_electro_dragon_dl.sc",
+      "sha1": "c64047ab24db92587946a6d447bd3b4d4356f874",
+      "bytes": 2335145,
+      "sha256": "609f8ec5c112edba3651f573e071cf0a5d69fed80d80ac5eac36e0a1587b294c"
+    },
+    {
+      "file": "sc/chr_electro_wizard_highres_tex.sc",
+      "sha1": "21105aac0e1236ba85fe8a794ee536e0780ed5b7",
+      "bytes": 661620,
+      "sha256": "da0e5d15d4dbfa2f3d491424739c26c3a5431dbffaa26007dfae72d92caeedce"
+    },
+    {
+      "file": "sc/chr_elixir_golem_dl.sc",
+      "sha1": "0168841480cc3536a70303f4355cf33fc4327ef6",
+      "bytes": 4576721,
+      "sha256": "df3d944e0c394569d7bf311db29021effad61facaf2fceadcf3d762d0daf566c"
+    },
+    {
+      "file": "sc/chr_fisherman_dl.sc",
+      "sha1": "4e4dda074e54b0446c8c8445e8268462c958c451",
+      "bytes": 3999578,
+      "sha256": "5eb3c3ba41ac65158241a1e7b02a5240e8d1f34033e42e784ce5a3c0d6385178"
+    },
+    {
+      "file": "sc/chr_flying_machine_highres_tex.sc",
+      "sha1": "14646d107910689802c321d4d17d8cb45ba6ded5",
+      "bytes": 104541,
+      "sha256": "c445ce689b6ca3a227e1e0eaf65c070429eae35a6ddeb9c9b693740885147d9c"
+    },
+    {
+      "file": "sc/chr_ghost_dl.sc",
+      "sha1": "b8e5923374e07964286caa1c7c27331e83431ba4",
+      "bytes": 1493017,
+      "sha256": "209958c377d684c1395d60b09072770e36dbe2e814234ef42778ca56b695767d"
+    },
+    {
+      "file": "sc/chr_giant_skeleton_highres_tex.sc",
+      "sha1": "3fa5e633cbf62242feea7fd4cd05806f79ab20d5",
+      "bytes": 1362856,
+      "sha256": "1acc6af8fc33d68b6bd618a13b85c982f105b63b220de8cc281353a2381a2298"
+    },
+    {
+      "file": "sc/chr_goblin_blowdart_highres_tex.sc",
+      "sha1": "2374cc6ab3b3752b620ecd212fd81b7a22617916",
+      "bytes": 561841,
+      "sha256": "34f16bce302db4fd67e268be52bb4c7fb92389db31645e488945211afc916019"
+    },
+    {
+      "file": "sc/chr_goblin_giant_dl.sc",
+      "sha1": "e89dc7face7063bdcdf00cdf76ae2a33bfb9cbda",
+      "bytes": 1781800,
+      "sha256": "54d7be87da4791f17c34551de07b04475cf465a2d570ae0e651d08a806463175"
+    },
+    {
+      "file": "sc/chr_goblin_thug_dl.sc",
+      "sha1": "3bd2596b117a82dce279959fddf93d7b0d5c2b45",
+      "bytes": 2137000,
+      "sha256": "6a8fd9293fd82cf51c02e245af9ccd86f90957bec1329cdf29243f32d7add33f"
+    },
+    {
+      "file": "sc/chr_golem_dl.sc",
+      "sha1": "58002a292c3ba50dfb97c334e28934f5af549eae",
+      "bytes": 1228664,
+      "sha256": "a1c428ecd245eb4d325f011d3e48c5dbe5c89b9243d89387445eac19832c6c2f"
+    },
+    {
+      "file": "sc/chr_golemite_highres_tex.sc",
+      "sha1": "542cd90549b7eae5dccbca9a0be3db17c256180b",
+      "bytes": 532265,
+      "sha256": "2117935a582828611b758bb5d080af5de755fd982899babd3f1634868279cf07"
+    },
+    {
+      "file": "sc/chr_guard02_dl.sc",
+      "sha1": "51f15c772ac199eca4aa0ee3a2197a68b0ee91ba",
+      "bytes": 1664464,
+      "sha256": "8cc9df730528868c3210cf903cf804cbe0aff7e6b42ba6f1a7f2eb0c77ddc3ba"
+    },
+    {
+      "file": "sc/chr_hog_rider_highres_tex.sc",
+      "sha1": "e73a95a838c0b590cc30a53cb448ad94d3ff3c15",
+      "bytes": 912966,
+      "sha256": "1eefd0bb0f5dff67204a7333e0d1c6206c0494cb1af2a5260551aa078e9332c2"
+    },
+    {
+      "file": "sc/chr_hunter_dl.sc",
+      "sha1": "dbed78ce375b9756211b8a0a3466bfb7be15b81e",
+      "bytes": 1517915,
+      "sha256": "ffd545184e778e5fdf2c039bee73584fd023809d767276e7e31e452d7b2e1290"
+    },
+    {
+      "file": "sc/chr_ice_wizard_highres_tex.sc",
+      "sha1": "ca4799b5486394e02fe7c1a7c1378f3e46ec765c",
+      "bytes": 757904,
+      "sha256": "da2bce285bf8d59b27b4eeec8dd0c5f50f7decf0d9104422ccc0c86c7150452f"
+    },
+    {
+      "file": "sc/chr_lava_hound_highres_tex.sc",
+      "sha1": "3018ae37531d140c7a437f9f47aa8ce296afcb7e",
+      "bytes": 992908,
+      "sha256": "ebde6a465f513e3c91f8c2f6552e5c44086898dbeaacca4aaaf595772e9acf1a"
+    },
+    {
+      "file": "sc/chr_magic_archer_dl.sc",
+      "sha1": "c23613b8a3972c571e1889c30c84d34176b41724",
+      "bytes": 2018638,
+      "sha256": "413d53358aed8f5bbf5bd289e06d017f7c20ea899dfba25cafcee12e9d307e8a"
+    },
+    {
+      "file": "sc/chr_mega_knight_highres_tex.sc",
+      "sha1": "b8e9c39ed840d276797f172f3a9cb8fe2d6a7cc9",
+      "bytes": 1804320,
+      "sha256": "560cb440aff70777317d64462242f8c5e9d9a5a17e95d6b7b8df85099c8130c9"
+    },
+    {
+      "file": "sc/chr_mega_minion_highres_tex.sc",
+      "sha1": "ef76e4453e5e8b97b895a989dd292ac8f313ea32",
+      "bytes": 719969,
+      "sha256": "942076db60c61e8ca7034e68579b4dd176cd8ebdec4521a293ecf8362bdd8f0a"
+    },
+    {
+      "file": "sc/chr_miner_highres_tex.sc",
+      "sha1": "aff233fc9202eb62f5f1dce4692a4fa9a70b5153",
+      "bytes": 921033,
+      "sha256": "40478cb826a5afe1b010fdead1d6a5b7178df2b0393a33a8793bb42ce076c4b5"
+    },
+    {
+      "file": "sc/chr_movingcannon_highres_tex.sc",
+      "sha1": "096e1a2483e446aa8f9cd5d25322cff3103d0696",
+      "bytes": 208982,
+      "sha256": "4efc9a93759a4fd2a0eded444113d9bcd836db9b2c218499beb2ff4f52032536"
+    },
+    {
+      "file": "sc/chr_prestige2_dl.sc",
+      "sha1": "482db1fd44d9821998c71b6121eb5e20f02a01db",
+      "bytes": 905614,
+      "sha256": "7ae9559c0666724bcc93e3788fc58aabed3710dfee787a3b27e337afc62dba61"
+    },
+    {
+      "file": "sc/chr_prestige3_dl.sc",
+      "sha1": "893257b918c0898973e5f13eddd0649f68a9a714",
+      "bytes": 935270,
+      "sha256": "8feb3184f842a8a4c4d849da6114c12c187915f5cd3cbe9e0d047e49356711b0"
+    },
+    {
+      "file": "sc/chr_prestige4_dl.sc",
+      "sha1": "658231d94d3183aa62ef701784934c9ecd25b18d",
+      "bytes": 1809894,
+      "sha256": "d7a6a368f14254c8747a7465f5f5c33f217bedebde5a563d13ee103c6153868d"
+    },
+    {
+      "file": "sc/chr_prestige5_dl.sc",
+      "sha1": "dde061cbe65fd084ce0e24e1fc4e4af62e1f6309",
+      "bytes": 1273079,
+      "sha256": "c68db0b146ec88cf1b0d5e54457122b49ea6062e8fe2aac01146d5f8ad5d5569"
+    },
+    {
+      "file": "sc/chr_prestige6_dl.sc",
+      "sha1": "0145ea69865cd2f197c2e8432f3b11f8a44eec64",
+      "bytes": 391691,
+      "sha256": "6c6b678e7b51b5d5d33a53962b12ecb22e1d2deaf2d935a39525634338b82199"
+    },
+    {
+      "file": "sc/chr_prestige7_dl.sc",
+      "sha1": "2f1044005c1fbd11c39a1c7caaf1e6955d3cf03e",
+      "bytes": 116000,
+      "sha256": "9d44c9271eaabb1abe8c4de4c4ca7518167daf6e093e8b1644f3e1353a4760a3"
+    },
+    {
+      "file": "sc/chr_prestige_dl.sc",
+      "sha1": "55d6e0e884be3f1e93d6867ef9d6e2de0fd1f3fb",
+      "bytes": 1296222,
+      "sha256": "aebdf6ca21e5323a146bd5502b0d32b9bb3a1ca93be9c51b7b5f4571e64e9bcd"
+    },
+    {
+      "file": "sc/chr_prince_highres_tex.sc",
+      "sha1": "df3b0d9c07e811f70c1394e4c4281c06c928015d",
+      "bytes": 1553345,
+      "sha256": "e73b951ae29a7d5b62e96b540467370009cff7b842c344f09e8c6119ec0d862f"
+    },
+    {
+      "file": "sc/chr_princess_highres_tex.sc",
+      "sha1": "0edcdaf85d10382978f35f991ad65167ece61be7",
+      "bytes": 1923411,
+      "sha256": "86d24b49cf69a8f153e007d36e0f1da3d409c232a90b82f61670e04827402e01"
+    },
+    {
+      "file": "sc/chr_rage_barbarian_highres_tex.sc",
+      "sha1": "fbd82abebbbcb6adf905cba4288cf72bb207db3e",
+      "bytes": 862685,
+      "sha256": "78667cb5589f596dbc38d725b3e6318a105fedf3128c4f86655c19fd2b627990"
+    },
+    {
+      "file": "sc/chr_ram_rider_dl.sc",
+      "sha1": "54ab8f3db42f18dae76371756592ad406f5fc919",
+      "bytes": 1403049,
+      "sha256": "bc136dedf0f0d13e441d1ac09665d7a49ca1dcb23e352fe089552882f5b809e2"
+    },
+    {
+      "file": "sc/chr_rascals_dl.sc",
+      "sha1": "e9e9e84e64da115c920dc1cf816646ad55ab334c",
+      "bytes": 1059000,
+      "sha256": "337a54de68fd654229789fc3fe37fd4757b2ee3a491eb11bd0e6f4a532a74ed5"
+    },
+    {
+      "file": "sc/chr_royal_giant_highres_tex.sc",
+      "sha1": "064d49c6d85c022e06569c25843b74fddca2997e",
+      "bytes": 1597340,
+      "sha256": "79ecf0a76c4a5678b6b627b2d25d4ff4b7f50305fa88f047d319e9a5eb205046"
+    },
+    {
+      "file": "sc/chr_royal_hog_dl.sc",
+      "sha1": "12f946098768667b91426b14403167f72ff0ff58",
+      "bytes": 1046358,
+      "sha256": "ddb3d38ea80840dda287945e18774b42f38308de4cac5b92b31d26498e85daf3"
+    },
+    {
+      "file": "sc/chr_skeleton_balloon_highres_tex.sc",
+      "sha1": "b4bf3402753b5967cb5efbd73926a1b4da26e53b",
+      "bytes": 11791,
+      "sha256": "786b78d9e2a221588d742e72e26c558218afa8f2d52f009b0d7a3c6601c95e75"
+    },
+    {
+      "file": "sc/chr_skeleton_warrior_highres_tex.sc",
+      "sha1": "184b0ba77984ae5f79e34b13500d16f68d1cdc16",
+      "bytes": 749773,
+      "sha256": "030e8bcbb4eb5d546aef42f76036197085ecbcfb74b2d6efe02b0b7eed8aff7d"
+    },
+    {
+      "file": "sc/chr_zappies_dl.sc",
+      "sha1": "32b10fd4869dcd88c81fffb8009af1747828c1be",
+      "bytes": 138255,
+      "sha256": "345eb10c3c2cf43ba191e669399daf090f8bfc45d107f82ba8899c444c46d6f4"
+    },
+    {
+      "file": "sc/level_2019_halloween_dl.sc",
+      "sha1": "6642f142364338d1559014bb02826ce30ef695b6",
+      "bytes": 1368663,
+      "sha256": "a1c4a338998e0e4fe0f0d5109ae5aba1b435e5abaf13182a1f9388896c9461a9"
+    },
+    {
+      "file": "sc/level_barbarian_arena_highres_tex.sc",
+      "sha1": "fcfbdb185655fb0b129efc65aead9abb8565fc08",
+      "bytes": 1359150,
+      "sha256": "1146b871e89c1d7385bf548e2e60442a6ad95276ea4d2129876942c9f114022d"
+    },
+    {
+      "file": "sc/level_boat_arena_highres_tex.sc",
+      "sha1": "6c4efc9d20868616dd73049498004a758dfc02f8",
+      "bytes": 748591,
+      "sha256": "f42fdef0942458e413bfce661ca16c826b78d5680a9394192ad91ca08e4ec4c2"
+    },
+    {
+      "file": "sc/level_bone_arena_highres_tex.sc",
+      "sha1": "4f346633a7adaebc72f424097053594d21e3a8fd",
+      "bytes": 1295113,
+      "sha256": "419a072c166152bde8382023b36eae3b53570982f9ef8ef0e046cd77ead36c69"
+    },
+    {
+      "file": "sc/level_builder_arena_highres_tex.sc",
+      "sha1": "61462c2ae5767918cce743c7b060f13a95861296",
+      "bytes": 1119301,
+      "sha256": "71274e1de13365696b0b897ca108d5a43d885525d69dece92a149a990a1b155e"
+    },
+    {
+      "file": "sc/level_champion_arena_highres_tex.sc",
+      "sha1": "de363984ce37edeaffd3567b29e48d99d46ae815",
+      "bytes": 849051,
+      "sha256": "5ae1c84ce413bfc110ca63b0402b2dc78059b07381b4d68b012e2f7f90e1bdee"
+    },
+    {
+      "file": "sc/level_clan_arena_highres_tex.sc",
+      "sha1": "66449ae6b6c607c9a8ac1b3ab74e3f02ab0a2b95",
+      "bytes": 1044878,
+      "sha256": "821e7a0f0befd0d497dc08291cebc65b1be3bd15b67f462edb4096f0950bd3c9"
+    },
+    {
+      "file": "sc/level_dark_arena_highres_tex.sc",
+      "sha1": "1276503b8def8fb1f060345612d1d39f66aeb41d",
+      "bytes": 1210053,
+      "sha256": "80ecf23b2cb59de20ee21214fa452dff89211e236aba9f068e108e45b4024c5c"
+    },
+    {
+      "file": "sc/level_electric_arena_highres_tex.sc",
+      "sha1": "6fe2be604d9bb8b2ce7951c4bda125fed9a4ab6f",
+      "bytes": 728226,
+      "sha256": "c66bc9b2480ffc5eca7552f2ac359bbce8c7c88dd18a536999ea4da502e03c59"
+    },
+    {
+      "file": "sc/level_goblin_arena_highres_tex.sc",
+      "sha1": "415a8233376b2585bb01700c89600ed79c39b5da",
+      "bytes": 1264986,
+      "sha256": "e1c5f30507c500aa158fb21c154cde2bd92a4a29879519762caa1da7ba66421b"
+    },
+    {
+      "file": "sc/level_ice_arena_highres_tex.sc",
+      "sha1": "4e66d801ca2b69c308aae6906a66b065441d53d2",
+      "bytes": 811952,
+      "sha256": "e2d7d2bf80fecf229d29a1ff37f27c58112a1b7d18f058330e16ab4dc39d593b"
+    },
+    {
+      "file": "sc/level_jungle_arena_highres_tex.sc",
+      "sha1": "f8c98b8a0711a4462dd76fdce099358fc0f82b38",
+      "bytes": 559596,
+      "sha256": "864786eb2e055ea90eaccab461ac422ff88162200c867cd8c37e3b60f179fc96"
+    },
+    {
+      "file": "sc/level_legendary_arena_highres_tex.sc",
+      "sha1": "c11724658cd2909b79279df4cd988b8747a0a2f1",
+      "bytes": 1206967,
+      "sha256": "032b1f2df50fb266384014a85799cfa5535c46df706e85c0fe5d11c9e33b72da"
+    },
+    {
+      "file": "sc/level_royal_arena_highres_tex.sc",
+      "sha1": "a8fb13c9d83d9e3a9e49c59202c59c3d050bca05",
+      "bytes": 941380,
+      "sha256": "bf75afc36dca71134e7ca39abb3864dc1d14c7f59b59c710ba5507a69449f6c3"
+    },
+    {
+      "file": "sc/level_shipwreck_arena_highres_tex.sc",
+      "sha1": "e0abe7783bda778e30205fc857dd3e090235a56c",
+      "bytes": 1245394,
+      "sha256": "86070fa595672276b5311c0220d90b039a9671e828ff664e088c778be4c99213"
+    },
+    {
+      "file": "sc/level_spell_arena_highres_tex.sc",
+      "sha1": "c7ea41a5266be29d720c52101a6d7e96992b29a4",
+      "bytes": 798345,
+      "sha256": "daa6aa8189c7b0bfadb01a1d29ea02ecd7f5053db76b65feb3696bc23b805bd0"
+    },
+    {
+      "file": "sc/level_touchdown_arena_highres_tex.sc",
+      "sha1": "b80fe2fe57329cab17dff41b0501d86b7ee4913b",
+      "bytes": 356836,
+      "sha256": "344effc9a70478c1ad7a0351eaf0be887f539667d0244dcdeb07347904270a3e"
+    },
+    {
+      "file": "sc/map_dl.sc",
+      "sha1": "b3bf295ea5d6010cb951639d2dc2d18e3e95a5ea",
+      "bytes": 1959648,
+      "sha256": "a4eccd7a6dab5511a4fd5da17910c78bc9a9fc1538f00a433af70ee6dad040c1"
+    },
+    {
+      "file": "sc/season_3_legendary_dl.sc",
+      "sha1": "c103c56c77c587f8718fa849f4cd566464fa8091",
+      "bytes": 2635014,
+      "sha256": "5859c44bfdaf5b0e4bdab1e2fd6cb22760133764d9282b430728583bbdb1742d"
+    },
+    {
+      "file": "sc/season_4_halloween_dl.sc",
+      "sha1": "f60fb2b635dc2e0fe0a073c1e1013fce4d795cd3",
+      "bytes": 2673737,
+      "sha256": "8c2e8a3fa84f6788a76bc1c22d245409076ffa3b9823b33be4e54491edf93fc3"
+    },
+    {
+      "file": "sc/spell_prestige_dl.sc",
+      "sha1": "99c6fdf60fa819c7cfb181f0dfb6c1c818a3ef9c",
+      "bytes": 878305,
+      "sha256": "d6983e7c8cc8bee632b7d5498475b1e154c118cc2574aa7be14afa874356f605"
+    },
+    {
+      "file": "sc/spell_snowball_dl.sc",
+      "sha1": "e855cfa35d4437d94e3c2c34ef890d8c03091410",
+      "bytes": 76643,
+      "sha256": "63e172900807b63350cc765cbcf91061bdac6581e188d1ec1b39e4292e2cc03f"
+    },
+    {
+      "file": "sc/ui_spell_barb_barrel.sc",
+      "sha1": "beae99e1b9c8776b522ab1a365d6b222e8439c5f",
+      "bytes": 51689,
+      "sha256": "2b312b4ea07e135d987365bc637c8411fd4fa02ce90a88d9eb6a13197659c1a5"
+    },
+    {
+      "file": "sc/ui_spell_earthquake.sc",
+      "sha1": "6c39a07963d4a3e74b18cc5d0bc295379ea18357",
+      "bytes": 39088,
+      "sha256": "c7b65dff829113811b18e0897ba0994f854ec38d5238fb7e1b49c1badf6bbd28"
+    },
+    {
+      "file": "sc/ui_spell_electro_dragon.sc",
+      "sha1": "af6d66de54a53bf9bdbb001949835a4a7386e7c5",
+      "bytes": 46840,
+      "sha256": "ed1604dcbb6ef2e8ee1174f2204dba4e0db9d8975a8ab5eea231ae0c445b3a0b"
+    },
+    {
+      "file": "sc/ui_spell_elixir_golem.sc",
+      "sha1": "5c48d536916a4e91a1fed5d22b233dedbd7a921b",
+      "bytes": 41615,
+      "sha256": "6f34e1910677aabcbc61c2e2056e06a227a50ed96849dd07545d24c632e7ee1d"
+    },
+    {
+      "file": "sc/ui_spell_fisherman.sc",
+      "sha1": "3232a8023889b4f094df3e240a120badc5f83daa",
+      "bytes": 67417,
+      "sha256": "ec9a77e729f7a5a3213dd6e33a03a23ebe33969da82e826fe682242b7c4947b2"
+    },
+    {
+      "file": "sc/ui_spell_ghost.sc",
+      "sha1": "cd6468e657e1a3afd1a376dfbc59beeb0858a0da",
+      "bytes": 49726,
+      "sha256": "8d85805da5535f6bea03348431cc438d3684b223397a9eb8c5b7b950afa1091a"
+    },
+    {
+      "file": "sc/ui_spell_goblin_cage.sc",
+      "sha1": "baeea4b977d41de3d6901b99d1a6e10cad222f3e",
+      "bytes": 49289,
+      "sha256": "9105784d5a8c6c088a2a0528ff0186958242580b303b0496bf3de9be49e1b98f"
+    },
+    {
+      "file": "sc/ui_spell_goblin_giant.sc",
+      "sha1": "28b8de4f903b686b226daba2479c875af2b7af84",
+      "bytes": 58825,
+      "sha256": "577b6b578f00d720ee42017b828a60519c350496882c0b2f96345ad60e8e4bbf"
+    },
+    {
+      "file": "sc/ui_spell_hunter.sc",
+      "sha1": "1b856c39f4a254f768d408983db427cbc59ba033",
+      "bytes": 60049,
+      "sha256": "bc361544e1c9151765d2e8800d4107d7da2b59e02382a9f81af3fd74a414c8bd"
+    },
+    {
+      "file": "sc/ui_spell_magic_archer.sc",
+      "sha1": "3e914570fe8a3498081c31f91b7500d9478e9e2d",
+      "bytes": 45211,
+      "sha256": "f433cdd71f7ce3bac9e53ba2987a7212e0720fcfd9edf4c841a2d87df25f2442"
+    },
+    {
+      "file": "sc/ui_spell_ram_rider.sc",
+      "sha1": "34e22327655dfb06752a20b2f3b7e1f027953f30",
+      "bytes": 53127,
+      "sha256": "e85f0d0461fea870121564e134388a3a7966f9cf7eb9e610c6d552d6fdf14b89"
+    },
+    {
+      "file": "sc/ui_spell_rascals.sc",
+      "sha1": "cf5791b8952aae22baf9de1d15504d4de31efa05",
+      "bytes": 50654,
+      "sha256": "7af764fa0c32a1525e877f5eed0265addca9b1858e430b7838e00b6249c04ba5"
+    },
+    {
+      "file": "sc/ui_spell_royal_hog.sc",
+      "sha1": "bd8abe3a5933b979a14198faf7385d4671dc13e2",
+      "bytes": 51380,
+      "sha256": "cfff4517c3dd77b791a0cc27583fbfd7d37afe8cfccfea14c1a1fb3ede19211d"
+    },
+    {
+      "file": "sc/ui_spell_royal_recruits.sc",
+      "sha1": "e84d7905f77529a831743d8115c477f3432eda57",
+      "bytes": 59812,
+      "sha256": "973a5858eede7f73ac7add998dda2eed5ffbea78f8decc46e927e5e073a03c3a"
+    },
+    {
+      "file": "sc/ui_spell_zappies.sc",
+      "sha1": "dddee6e47531fbcceaf3ad85cb95f53059ee48a8",
+      "bytes": 63827,
+      "sha256": "01f7a420192588b0e793a6662f16da817eb53b76b2c878906d92f101c4e92165"
+    },
+    {
+      "file": "sc3d/clan_wars_chest_rest.pvr",
+      "sha1": "3c67561756161a5763d031498d74445fd8dcf344",
+      "bytes": 174939,
+      "sha256": "edb7b7cffa744e7011e5aa3d46dfc7fd7a7a5200eeebcc68a21c8a76e66f86da"
+    },
+    {
+      "file": "sc3d/clan_wars_main_body_color.pvr",
+      "sha1": "edc2df8513905b7e47fdc919ae0a2fe6c1edc10a",
+      "bytes": 699227,
+      "sha256": "6a2c429c35b21c8c8fe571da6218e26daf884ee4740a0938c02bbd93eb597fa5"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league1_color.pvr",
+      "sha1": "44ada0e88aa20e907348dc88b3497e0339be8ba8",
+      "bytes": 11099,
+      "sha256": "3e7ba517f53817726ab26b6b59d947994b61e0ecf77f4633dd82813ef84f1f52"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league2_color.pvr",
+      "sha1": "1a3785b5519d7d691a216757b98ef248c8c2bc44",
+      "bytes": 43867,
+      "sha256": "23b3bf2ce06876f5290fb9563d8548d2a69530c106cf88a40c260b23bd5006c7"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league3_color.pvr",
+      "sha1": "c8d953707fa2f35ab97e0504c6e8f0dddcdc282e",
+      "bytes": 11099,
+      "sha256": "0af863c39b335ab7f16f21c7e4c93eef8f10dd9a7cbe3a92a7af6871c9e871f7"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league4_color.pvr",
+      "sha1": "808c919446b0b557a0da2477564b7c6b1fd4907f",
+      "bytes": 11099,
+      "sha256": "db904fc6382f7e9a2dff0ba3cb05da959d9d7068d70fdb233a8b0f088a3e49c3"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league_spec.pvr",
+      "sha1": "0848b7f8478db111fe857c1bbc9f59f7f7acad7d",
+      "bytes": 11099,
+      "sha256": "7b93b32a50f3f495f4f60437d78926db2a6313df6867795b1b70cade47d4d74b"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank1_color.pvr",
+      "sha1": "d68865f6a83e77e9b613e3f5c420a098081daf3b",
+      "bytes": 43867,
+      "sha256": "37e04d66941abcac89595e2961e33a592f6f2031fc49d4b795fb46fcff40ba12"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank2_color.pvr",
+      "sha1": "89cf8fec76f25ae17d1d6a867e183cb72f3cc5a1",
+      "bytes": 43867,
+      "sha256": "6b827a51fe915bc95c7a7f31c209c6e826890bf17e4f69c991ff42750241e957"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank3_color.pvr",
+      "sha1": "f9c78b6463b4f5817d828e91443e88a50785be5a",
+      "bytes": 43867,
+      "sha256": "25eaefc905517e23c890fff420e72aa0c1230b049108224fa5609849230cfd75"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank_spec.pvr",
+      "sha1": "5bea8a95f8e9e259e0afff75407123b3af5391a0",
+      "bytes": 11099,
+      "sha256": "0e4478e9b2c9d69d399d2cecd057239bdc6ab39cca04c3d744120fbae337714d"
+    },
+    {
+      "file": "sc3d/diffuse_lightmap.pvr",
+      "sha1": "0bdbc004db16fed686e46a3023078cf1b0f85e92",
+      "bytes": 2883,
+      "sha256": "535492c488f1a68e71d9678f4c962a4f47510fd47337577893dd35ee3569a24c"
+    },
+    {
+      "file": "sc3d/fortune_dif_color.pvr",
+      "sha1": "04a86f7815a78e1070623ba345aed3fa743eda88",
+      "bytes": 43867,
+      "sha256": "12853bb197024d1e28325536466492ed8efb552cf15cff40d548d2c2f5d65ae3"
+    },
+    {
+      "file": "sc3d/fortune_diff_bonus.pvr",
+      "sha1": "ad87587502e423632d0f444e476689cc286d8581",
+      "bytes": 43867,
+      "sha256": "39e7dda7f174733ba6dd77bc07e2317a05a9f28560b58375941dba44b1883efa"
+    },
+    {
+      "file": "sc3d/fortune_spec.pvr",
+      "sha1": "9c147f7d4186744ab83a56f4fff5c375db688298",
+      "bytes": 43867,
+      "sha256": "81165b0cc021302cd5f971f6c1edfde3d3309049964f6a763c3b34453e98273a"
+    },
+    {
+      "file": "sc3d/kings_difuse_color.pvr",
+      "sha1": "34d84c83ea01419122f52723603cee4f0249b60b",
+      "bytes": 43867,
+      "sha256": "71b69ec902b01c5cd4b4d8f07a27b1fd87c91bafe0d4ff3a81345a434859ea31"
+    },
+    {
+      "file": "sc3d/kings_inside_color.pvr",
+      "sha1": "2fd979884a1bd9ffde974c3bd3f82a0d65ad51ef",
+      "bytes": 2907,
+      "sha256": "f8032ae3966b940f2f918faa97e96f9239217245c460b1ca78aa1889fcaa3791"
+    },
+    {
+      "file": "sc3d/kings_specular.pvr",
+      "sha1": "ee1386f95034d2f9f042f489bb13f4ddb4cca793",
+      "bytes": 43867,
+      "sha256": "4621b50dc23affdbbdd88766a063b65a46db99f7328ab6741f4698a7d86b3159"
+    },
+    {
+      "file": "sc3d/legend_pillow_diffuse.pvr",
+      "sha1": "83e9d1284eb23110ebf695324b871aaa042e8b91",
+      "bytes": 11099,
+      "sha256": "e26b4ac77e3df87ed7fe08f59f93c14265e60eada64e1511c9e48b7059fbc100"
+    },
+    {
+      "file": "sc3d/legendary_difuse.pvr",
+      "sha1": "e9946fa402b8ceb5d4b5365c4f4dbeedab99b2cc",
+      "bytes": 43867,
+      "sha256": "fbb7994e71d969a592c099d6556f6637e066a7070691bb4eb2b6794f75e16b5a"
+    },
+    {
+      "file": "sc3d/legendary_specular.pvr",
+      "sha1": "c5bb7f96fac696817416b5c27a63055cb9cc903d",
+      "bytes": 43867,
+      "sha256": "8f67875d133ad9ae371ecb291e9c994dd4b0a792f4b017ce9f030c71e122af10"
+    },
+    {
+      "file": "sc3d/lighting_chest_color.pvr",
+      "sha1": "8e07a8a6506a87717db96ad30c94cd50d2d7b1bd",
+      "bytes": 43867,
+      "sha256": "ebce1f85b1cd588522172a73fb1692d530a6a9ac45aa4891ff34314e12716408"
+    },
+    {
+      "file": "sc3d/lightning_spec_map.pvr",
+      "sha1": "a2de195f7b13005ad510c2bb11fabfaed6d67f6d",
+      "bytes": 43867,
+      "sha256": "e8e75ecbb42bc638f5d5550b6493b931d47a716e4545867aba982788a8bb9386"
+    },
+    {
+      "file": "sc3d/pillow_diffuse_color.pvr",
+      "sha1": "36009468d97fe4bf07e17d4c7048e893fb570e22",
+      "bytes": 43867,
+      "sha256": "91d475e76439854c30efed88069e525d84af46946a194d7f4ee1113517b98e0d"
+    },
+    {
+      "file": "sc3d/pillow_shadow.pvr",
+      "sha1": "94a70808fb4a22d0e4e352cc4d85e551a101ef34",
+      "bytes": 11099,
+      "sha256": "b312bed4febf003d768ea71b012aee9d1fc710547a939715b4a1d80b7ca43ad1"
+    },
+    {
+      "file": "sc3d/pillow_specular.pvr",
+      "sha1": "2a402afec057d7a4569aa42a72648b20b52e83b4",
+      "bytes": 11099,
+      "sha256": "4436b5da0912cad27497460ab07d8e4243d4076adf90e56e3dbe481c0924bb11"
+    },
+    {
+      "file": "sc3d/shadow_ground.pvr",
+      "sha1": "f9c8988a46dd708ba4791a897c555f8c050ebe70",
+      "bytes": 2907,
+      "sha256": "65144d475be2ea8131ea8e0be2d99da1451d6695b175a097ea6dff56362eb852"
+    },
+    {
+      "file": "sc3d/specular_lightmap.pvr",
+      "sha1": "27038ffa59fe869313831cd61ff57492bb5bfb62",
+      "bytes": 11075,
+      "sha256": "6ed56f7c87ac9f51bc06bd82419a820881d672c8551e26802f4bbbe8058cbb7e"
+    },
+    {
+      "file": "sc3d/wars_chest_rest_spec.pvr",
+      "sha1": "86a6aa995a29a184c7ce6f1ecac4e014341be5d4",
+      "bytes": 174939,
+      "sha256": "eff740215596d5906e52b7c3bd7b1f9316e83a63593f0c46164ddb2dbf203ddf"
+    }
+  ]
+}

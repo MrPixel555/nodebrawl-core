@@ -76,7 +76,7 @@ def inspect_apk(source, destination):
             'assets': assets,
             'fingerprintCandidates': [a['path'] for a in assets if PurePosixPath(a['path']).name == 'fingerprint.json'],
             'csvCandidates': [a['path'] for a in assets if a['path'].endswith('.csv')],
-            'manifest': manifest_identity((root / 'AndroidManifest.xml').read_bytes()) if (root / 'AndroidManifest.xml').is_file() else None,
+            'manifest': manifest_identity((root / 'AndroidManifest.xml').read_bytes(), include_network=True) if (root / 'AndroidManifest.xml').is_file() else None,
             'exactVersionVerified': (root / 'AndroidManifest.xml').is_file(),
             'notes': ['Manifest version and content fingerprint version are distinct.', 'APK signing certificates have not been verified by this inspection tool.'],
         }

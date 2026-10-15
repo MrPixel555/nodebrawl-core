@@ -2,69 +2,103 @@
 
 The user confirmed that network-v6 displays Home on the supplied Android device.
 [Device evidence](device-lobby.json) records that result separately from VM tests.
-The subsequent Training/download-failure trace contains startup messages,
-heartbeat and repeated metadata reports, but no observed Training request. It
-does not establish which missing asset causes the failure or that Training's
-server-side game logic has executed.
+The subsequent network-v6 trace reports MandatoryDownloadStarted/Failed for
+`sc/map_dl.sc`, `sc/level_2019_halloween_dl.sc` and other files with error code
+zero. No asset HTTP receipt or Training request appears in the supplied server
+trace. The user confirms the same phone browser displays
+`http://223.223.223.1:9338/fingerprint.json`. Browser access establishes basic
+reachability, not the app's network policy.
 
-## Original content and HTTP delivery
+## Restored original content
 
 The APK fingerprint is `8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc`, version
-`3.1945.13`. Its original manifest contains 1,200 entries. The checkout includes
-the 1,075 available original files, totaling 91,265,310 bytes, and records the
-125 absent entries in [the inventory](../content/inventory.json). Absent files
-include `sc/map_dl.sc`, additional character assets and high-resolution textures.
-The server pins the complete manifest's SHA-256 as well as its version and SHA;
-each present file must match its original SHA-1 before it is served.
+`3.1945.13`. Its unchanged manifest contains 1,200 entries. The APK provided
+1,075 files (91,265,310 bytes); [the original inventory](../content/inventory.json)
+preserves the 125 absent entries. After the environment's network change,
+the original CDN returned 200 for `sc/map_dl.sc`. All 125 absent files were then
+retrieved over verified HTTPS and matched their original SHA-1 entries.
 
-`npm start` binds the game on 9339 and HTTP content on 9338. `CONTENT_URL` is the
-URL reachable from the phone; the checked-in development value is
-`http://223.223.223.1:9338`. It is independent of `CONTENT_HOST`, the bind address.
-Both TCP ports must be reachable. `CONTENT_ROOT` can point to another directory
-containing the same original `fingerprint.json` and `assets/` layout.
+The checkout now contains **all 1,200 original assets, 176,402,252 bytes**, with
+**zero missing files**. [Restoration evidence](content-restoration.json) records
+the source, 125 per-file sizes/SHA-1/SHA-256 hashes and the unchanged manifest
+hash. The largest file is 7,148,412 bytes. No replacement assets, patched game
+files or changed fingerprints were used. The server pins the complete manifest's
+SHA-256 and checks every present file before it is served. `.gitattributes`
+disables line-ending conversion for assets and the pinned manifest on Windows.
 
-LoginOk now carries this URL in native vectors `field_0x128` and `field_0x130`.
-The native LoginOk dispatcher reads them through getters `0x434c58` and
-`0x4c0ea8`, at calls `0x722864` and `0x7230ec`. The former flows through
-`0x65a108` into the configuration collection at `0x118a18()+0x280`; the latter
-reaches its collection at +0x298. Their broader business semantics are not
-inferred from those offsets. The encrypted native Messaging test accepts both
-populated vectors and compares their decoded UTF-8 values with Node's source
-values; [the report](native-starter-transport.json) records
-`nativeContentUrlVectorsMatched: true`. Phone HTTP delivery still needs a device
-run with this server update.
-
-HTTP GET/HEAD support the original fingerprint and manifest-listed assets at
-`/<asset-path>`, `/<fingerprint>/<asset-path>` and
-`/<individual-file-SHA1>/<asset-path>`. Assets are sent in their original stored
-format, with byte ranges, content length, SHA-1 ETags and immutable caching.
-Unknown paths and traversal are rejected. A changed or corrupt file is not
-served as a valid asset. `.gitattributes` disables line-ending conversion for the
-pinned manifest and assets, including on Windows checkouts.
-
-When a file is absent, an optional HTTPS upstream can supply
-`/<fingerprint>/<asset-path>`. On-demand requests are deduplicated, with four
-active downloads, bounded queue/body size and timeout. A temporary file is
-published atomically only when its original SHA-1 matches; existing files are
-never overwritten. The default development upstream is
-`https://game-assets.clashroyaleapp.com`. **Its availability and retention of
-this old content have not been verified.** This environment's egress proxy
-rejected the attempted CONNECT with 403. That is not a CDN 404 and does not prove
-the files are unavailable at the origin. An additive domain allowance was saved
-in the environment draft; saving a draft does not apply it to the running task.
-
-To prefetch from an accessible source preserving that layout:
+To verify files and restore any entries later deleted from the checkout:
 
 ```bash
 node tools/fetch-content.js --base-url https://game-assets.clashroyaleapp.com
 ```
 
-The command exits nonzero for missing, corrupt or failed files. To use another
-verified HTTPS mirror, set `CONTENT_UPSTREAM_URL` and use its base URL for the
-prefetch command. No missing files have been fabricated or marked restored.
-`content/inventory.json` describes the original APK baseline; runtime startup
-rescans actual files, so successful later downloads reduce the runtime missing
-count without changing that historical inventory.
+In this Node 24 cloud environment, the successful restore used
+`node --use-env-proxy tools/fetch-content.js --base-url https://game-assets.clashroyaleapp.com`
+to honor the configured HTTPS proxy. The tool preserves certificate and original
+SHA checks, bounds concurrency/body size/timeouts, deduplicates on-demand work
+and atomically publishes verified files without overwriting existing files.
+The result was `present:1075, downloaded:125, failed:0`. A repeat uses only
+verified local files and does not redownload them.
+
+## Android policy and the advertised HTTPS URL
+
+The supplied APK manifest has min SDK 16, target SDK 28, no
+`usesCleartextTraffic` opt-in and no `networkSecurityConfig` reference. On
+Android 9+, this manifest does not permit cleartext HTTP by default. See the
+[Android network security configuration documentation](https://developer.android.com/privacy-and-security/security-config#CleartextTrafficPermitted).
+The server's previous default advertised `http://223.223.223.1:9338`, which was
+incompatible with that default policy despite working in the browser.
+
+DEX analysis identifies the actual HTTP path:
+`NativeHTTPClientManager.startGetRequest` creates `com.supercell.titan.cz`.
+Its private `c()Z` opens a Java HttpURLConnection and calls `getInputStream()`
+at bytecode offset 0x22, then `getResponseCode()` at 0x30 and stores the result
+in field `h:I` at 0x38. Field h initially contains zero. `run()V` catches a
+request exception and reports failure; an exception before the response code
+leaves h at zero. Thus error zero does not mean an HTTP server returned status
+zero. The device exception text was not captured, so the exact thrown exception
+remains unobserved. [Sanitized evidence](device-download-failure.json) distinguishes
+static findings and device observations. `tools/inspect-apk.py` now reports
+literal manifest network attributes without optional Android-analysis packages;
+external referenced security XML is explicitly unresolved.
+
+The default advertised URL is now **`https://game-assets.clashroyaleapp.com`**.
+Both LoginOk URL vectors receive this base URL. Clients download the original
+content over trusted HTTPS directly from the CDN. Existing environment variables
+survive a Git pull: replace a previously set HTTP URL explicitly in Windows CMD:
+
+```bat
+set CONTENT_URL=https://game-assets.clashroyaleapp.com
+npm start
+```
+
+The game TCP endpoint remains `223.223.223.1:9339`; the server key and ready
+Frida script are unchanged. Download completion on the phone after this change
+has not yet been verified. No TLS trust check or Android network policy is
+bypassed. For independent content hosting, put the complete local content service
+behind a trusted HTTPS reverse proxy and set CONTENT_URL to its HTTPS base URL.
+The HTTP listener on 9338 remains useful for internal checks; advertising it
+directly produces a startup explanation about this APK's policy.
+
+LoginOk native getters `0x434c58` and `0x4c0ea8` read vectors field_0x128 and
+field_0x130, at dispatcher calls `0x722864` and `0x7230ec`. The former flows
+through `0x65a108` into the configuration collection at `0x118a18()+0x280`;
+the latter reaches +0x298. Their broader business semantics are not inferred
+from those offsets. The encrypted native Messaging test accepts both populated
+HTTPS vectors and compares their decoded UTF-8 values with Node's source
+values; [the report](native-starter-transport.json) records the URL and
+`nativeContentUrlVectorsMatched: true`.
+
+The local HTTP service supports GET/HEAD of the original fingerprint and
+manifest-listed assets at `/<asset-path>`, `/<fingerprint>/<asset-path>` and
+`/<individual-file-SHA1>/<asset-path>`. Byte ranges, content length, SHA-1 ETags
+and immutable caching preserve the original bytes. Unknown/traversal paths and
+corruption are rejected. `content-http-response` records status, method and a
+known asset name or fixed route category for every completed local response,
+including rejected paths. It does not retain unknown paths, queries, addresses
+or headers. Malformed HTTP yields a fixed diagnostic without raw request data.
+With the default HTTPS CDN URL, phone asset requests correctly do not appear in
+the local HTTP log; client metadata still reports known download phases.
 
 ## Download diagnostics
 
@@ -130,7 +164,7 @@ GAME_ANALYSIS_DIR=/workspace/game-analysis /workspace/game-analysis/venv/bin/pyt
 The CLI check starts isolated real servers and validates encrypted starter login,
 both URL vectors, byte-exact HTTP fingerprint/assets, post-login messages and
 heartbeat. It also checks disabled-Home encrypted login and plaintext starter
-mode. It preserves the existing server key and account directory. Node's 613
+mode. It preserves the existing server key and account directory. Node's 614
 tests include HTTP ranges, caching, corrupt/escaped paths, verified download
 publication, concurrent fetch deduplication and shutdown cancellation. Native VM
 checks require the retained analysis environment and original library; ordinary

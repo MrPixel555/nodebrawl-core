@@ -1,0 +1,37 @@
+{
+  "source": "Supplied APK manifest/DEX, user network-v6 download trace and browser reachability confirmation",
+  "apkSha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
+  "manifest": {
+    "versionCode": 400,
+    "versionName": "3.1.0",
+    "package": "com.supercell.clashroyale",
+    "networkPolicy": {
+      "minSdkVersion": 16,
+      "targetSdkVersion": 28,
+      "usesCleartextTraffic": null,
+      "networkSecurityConfig": null,
+      "cleartextTrafficPermittedByManifest": false
+    }
+  },
+  "deviceObservations": {
+    "browserHttpFingerprintAccessible": true,
+    "nativeHomeConsumedBytes": 625,
+    "loginReplyOpened": true,
+    "mandatoryDownloadFailures": true,
+    "downloadErrorCode": 0,
+    "httpServerAssetReceiptsObserved": false
+  },
+  "javaHttpClient": {
+    "class": "com.supercell.titan.cz",
+    "getMethod": "c()Z",
+    "inputStreamBytecodeOffset": "0x22",
+    "responseCodeBytecodeOffset": "0x30",
+    "responseCodeStoreBytecodeOffset": "0x38",
+    "responseCodeField": "h:I",
+    "exceptionHandlerMethod": "run()V",
+    "responseCodeInitially": 0,
+    "inference": "A request exception before getResponseCode leaves h at zero. Cleartext HTTP is disallowed by this manifest on Android 9+; the actual device exception text was not supplied."
+  },
+  "fix": "Advertise the verified HTTPS CDN by default; local HTTP remains available behind a trusted HTTPS reverse proxy.",
+  "scope": "Static manifest/DEX analysis and original asset verification. Download completion on the device and Training/battle gameplay remain unverified."
+}

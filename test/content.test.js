@@ -132,6 +132,21 @@ test('changed manifests are rejected even when their declared fingerprint is unc
   await assert.rejects(loadContent({ root: f.root }), /manifest hash/)
 })
 
+test('HTTP diagnostics cover rejected and missing routes without exposing private request data', async t => {
+  const f = await fixture(t, false)
+  await f.request('/private-account?token=secret', { Authorization: 'private-credential' })
+  await f.request('/%2e%2e/private-account?token=secret')
+  await f.request('/' + entry.file + '?token=secret')
+  await f.request('/fingerprint.json?token=secret', {}, 'HEAD')
+  assert.deepEqual(f.logs.filter(e => e.event === 'content-http-response'), [
+    { event: 'content-http-response', method: 'GET', route: 'unrecognized', status: 404 },
+    { event: 'content-http-response', method: 'GET', route: 'unrecognized', status: 400 },
+    { event: 'content-http-response', method: 'GET', route: 'asset', file: entry.file, status: 404 },
+    { event: 'content-http-response', method: 'HEAD', route: 'fingerprint', status: 200 },
+  ])
+  for (const value of ['private-account', 'private-credential', 'secret']) assert(!JSON.stringify(f.logs).includes(value))
+})
+
 test('content shutdown aborts an active upstream request and leaves no published file', async t => {
   let started
   const seen = new Promise(resolve => { started = resolve })

@@ -44,6 +44,7 @@ report = {'nativeLoginOkAccepted': True, 'nativeStarterHomeConsumed': vector['ho
           'nativeAccountBindingsMatched': True, 'nativeKeepAliveAccepted': True,
           'nativeHomeLevel': 1, 'nativeAvatarLevel': 1,
           'nativeContentUrlVectorsMatched': True,
+          'nativeContentUrls': vector['contentUrls'],
           'scope': 'Node starter provider to native session parser with synthetic handshake fields and CSV data adapters',
           'androidLobbyVerified': False}
 (ROOT / 'native-starter-transport.json').write_text(json.dumps(report, indent=2) + '\n')

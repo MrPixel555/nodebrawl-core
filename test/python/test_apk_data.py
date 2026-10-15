@@ -11,8 +11,9 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 
-def manifest():
-    values = ['manifest', 'package', 'versionName', 'versionCode', 'com.supercell.clashroyale', '3.1.0']
+def manifest(target=None, cleartext=None, security_config=None):
+    values = ['manifest', 'package', 'versionName', 'versionCode', 'com.supercell.clashroyale', '3.1.0',
+              'uses-sdk', 'targetSdkVersion', 'application', 'usesCleartextTraffic', 'networkSecurityConfig']
     texts, offsets = bytearray(), []
     for text in values:
         offsets.append(len(texts))
@@ -24,6 +25,13 @@ def manifest():
                      for key, raw, kind, value in [(1, 4, 3, 4), (2, 5, 3, 5), (3, 0xffffffff, 16, 400)])
     element = struct.pack('<HHIII', 0x102, 16, 36 + len(attrs), 1, 0xffffffff)
     element += struct.pack('<IIHHHHHH', 0xffffffff, 0, 20, 20, 3, 0, 0, 0) + attrs
+    def extra(tag, fields):
+        attrs = b''.join(struct.pack('<IIIHBBI', 0xffffffff, key, 0xffffffff, 8, 0, kind, value) for key, kind, value in fields)
+        return struct.pack('<HHIII', 0x102, 16, 36 + len(attrs), 1, 0xffffffff) + struct.pack('<IIHHHHHH', 0xffffffff, tag, 20, 20, len(fields), 0, 0, 0) + attrs
+    if target is not None:
+        element += extra(6, [(7, 16, target)])
+    fields = ([] if cleartext is None else [(9, 18, int(cleartext))]) + ([] if security_config is None else [(10, 1, security_config)])
+    element += extra(8, fields)
     return struct.pack('<HHI', 3, 8, 8 + len(pool) + len(element)) + pool + element
 
 
@@ -34,6 +42,20 @@ class ApkDataTests(unittest.TestCase):
     def test_manifest_rejects_truncation(self):
         with self.assertRaises(ValueError):
             module.manifest_identity(manifest()[:-1])
+
+    def test_android_cleartext_default_changes_at_target_28(self):
+        for target in [27, 28, 34]:
+            policy = module.manifest_identity(manifest(target=target), include_network=True)['networkPolicy']
+            self.assertEqual(policy['targetSdkVersion'], target)
+            self.assertIs(policy['cleartextTrafficPermittedByManifest'], target < 28)
+            self.assertIsNone(policy['usesCleartextTraffic'])
+
+    def test_literal_cleartext_override_and_unresolved_network_config(self):
+        for explicit in [True, False]:
+            policy = module.manifest_identity(manifest(target=28, cleartext=explicit), include_network=True)['networkPolicy']
+            self.assertIs(policy['cleartextTrafficPermittedByManifest'], explicit)
+        policy = module.manifest_identity(manifest(target=28, security_config=0x7f010001), include_network=True)['networkPolicy']
+        self.assertIsNone(policy['cleartextTrafficPermittedByManifest'])
 
     def test_supercell_lzma_roundtrip(self):
         source = b'Name,Value\nstring,int\nGold,100\n'

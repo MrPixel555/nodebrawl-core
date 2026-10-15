@@ -71,10 +71,13 @@ async function handle (frame) {
       const metadata = await fetch(url + 'fingerprint.json', { signal: AbortSignal.timeout(4000) })
       assert.equal(metadata.status, 200)
       assert.equal((await metadata.json()).sha, manifest.sha)
-      const entry = manifest.files[0]
-      const asset = await fetch(url + entry.file, { signal: AbortSignal.timeout(4000) })
-      assert.equal(asset.status, 200)
-      assert.equal(createHash('sha1').update(Buffer.from(await asset.arrayBuffer())).digest('hex'), entry.sha)
+      // Cover both a bundled APK file and the mandatory map which was absent
+      // from that APK and blocked the user's download path.
+      for (const entry of [manifest.files[0], manifest.files.find(entry => entry.file === 'sc/map_dl.sc')]) {
+        const asset = await fetch(url + entry.file, { signal: AbortSignal.timeout(4000) })
+        assert.equal(asset.status, 200)
+        assert.equal(createHash('sha1').update(Buffer.from(await asset.arrayBuffer())).digest('hex'), entry.sha)
+      }
     }
     stage = 'home'
   } else if (stage === 'home') {
@@ -105,7 +108,7 @@ async function handle (frame) {
     stage = 'done'
     finish()
     console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search and heartbeat`)
-    if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original asset SHA-1')
+    if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original/restored map asset SHA-1')
     console.log('Starter Home display was confirmed on the supplied Android device; this smoke check does not verify battle gameplay.')
   } else {
     assert.equal(frame.id, 20103)

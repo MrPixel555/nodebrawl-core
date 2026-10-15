@@ -4,6 +4,7 @@ const { createStarterHomeProvider } = require('../server/home')
 const { encodeMessage, loginOk } = require('../lib/protocol/messages')
 const { keyPair, boxKey } = require('../lib/protocol/salsa17')
 const { sealLoginReply, SessionCipher } = require('../lib/protocol/transport')
+const development = require('../server/data/development.json')
 
 async function main () {
   const account = { id: [0, 8192], name: 'بازیکن', token: 'synthetic-token', createdAt: '2026-01-01T00:00:00.000Z' }
@@ -15,7 +16,7 @@ async function main () {
   const sessionKey = Buffer.alloc(32, 11)
   const sharedKey = boxKey(peer, secret)
   const home = await createStarterHomeProvider()(account)
-  const contentUrls = ['http://223.223.223.1:9338']
+  const contentUrls = [development.contentUrl]
   const payload = encodeMessage(20758, loginOk(account, { field_0x90: 3, field_0x94: 0, field_0x98: 1945 }, new Date('2026-01-02T00:00:00.000Z'), contentUrls))
   const loginBox = sealLoginReply({ payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverNonce, sessionKey })
   const cipher = new SessionCipher(sessionKey, serverNonce)

@@ -102,6 +102,10 @@ function byteRange (header, size) {
 
 function createContentServer (content) {
   const server = http.createServer((request, response) => {
+    // Include rejected routes in diagnostics, without retaining raw paths,
+    // query strings, client addresses or headers.
+    const receipt = { event: 'content-http-response', method: ['GET', 'HEAD'].includes(request.method) ? request.method : 'OTHER', route: 'unrecognized' }
+    response.once('finish', () => content.logger({ ...receipt, status: response.statusCode }))
     const run = async () => {
       if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405, { Allow: 'GET, HEAD' }); response.end(); return }
       let route
@@ -110,6 +114,7 @@ function createContentServer (content) {
       let name = route.slice(1)
       if (name.startsWith(fingerprintSha + '/')) name = name.slice(41)
       if (name === 'fingerprint.json') {
+        receipt.route = 'fingerprint'
         response.writeHead(200, { 'Content-Type': 'application/json', 'Content-Length': content.bytes.length, 'Cache-Control': 'public, max-age=31536000, immutable' })
         response.end(request.method === 'HEAD' ? undefined : content.bytes)
         return
@@ -121,6 +126,7 @@ function createContentServer (content) {
         if (content.entries.get(name)?.sha !== sha) { response.writeHead(404); response.end(); return }
       }
       if (!assetName(name) || !content.entries.has(name)) { response.writeHead(404); response.end(); return }
+      receipt.route = 'asset'; receipt.file = name
       let asset = await content.open(name)
       if (!asset && await content.restore(name)) asset = await content.open(name)
       if (!asset) {
@@ -152,6 +158,11 @@ function createContentServer (content) {
       if (response.headersSent) response.destroy()
       else { response.writeHead(503); response.end() }
     })
+  })
+  server.on('clientError', (error, socket) => {
+    if (error.code === 'ECONNRESET') { socket.destroy(); return }
+    content.logger({ event: 'content-http-invalid', reason: 'Invalid HTTP request; use HTTP on the local content port or a separate trusted HTTPS endpoint' })
+    if (socket.writable) socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n')
   })
   server.maxConnections = 64
   server.requestTimeout = 30000

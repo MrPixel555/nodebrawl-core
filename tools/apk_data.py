@@ -13,8 +13,8 @@ import tempfile
 MAX_CSV = 32 * 1024 * 1024
 
 
-def manifest_identity(data):
-    """Read literal manifest-root attributes from Android binary XML, without executing it."""
+def manifest_identity(data, include_network=False):
+    """Read literal identity and optional network attributes from Android binary XML."""
     def u16(pos): return struct.unpack_from('<H', data, pos)[0]
     def u32(pos): return struct.unpack_from('<I', data, pos)[0]
     def length(pos, wide=False):
@@ -27,7 +27,7 @@ def manifest_identity(data):
         return value, pos
     if len(data) < 8 or u16(0) != 3 or u32(4) != len(data):
         raise ValueError('Invalid Android binary XML header')
-    strings, pos = [], u16(2)
+    strings, pos, result, network = [], u16(2), None, {}
     while pos < len(data):
         kind, header, size = struct.unpack_from('<HHI', data, pos)
         if size < header or header < 8 or pos + size > len(data):
@@ -49,19 +49,38 @@ def manifest_identity(data):
                 strings.append(text)
         elif kind == 0x102:
             ext = pos + header
-            if strings[u32(ext + 4)] == 'manifest':
+            tag = strings[u32(ext + 4)]
+            names = {'manifest': ('package', 'versionCode', 'versionName'),
+                     'uses-sdk': ('minSdkVersion', 'targetSdkVersion'),
+                     'application': ('usesCleartextTraffic', 'networkSecurityConfig')}
+            if tag in names:
                 count, start, stride = u16(ext + 12), u16(ext + 8), u16(ext + 10)
-                result = {}
+                attributes = {}
                 if stride < 20 or ext + start + count * stride > pos + size:
                     raise ValueError('Invalid XML attributes')
                 for n in range(count):
                     attr = ext + start + n * stride
                     name, raw, value = strings[u32(attr + 4)], u32(attr + 8), u32(attr + 16)
-                    if name in ('package', 'versionCode', 'versionName'):
-                        result[name] = strings[raw] if raw != 0xffffffff else (strings[value] if data[attr + 15] == 3 else value)
-                return result
+                    if name in names[tag]:
+                        kind = data[attr + 15]
+                        attributes[name] = strings[raw] if raw != 0xffffffff else (strings[value] if kind == 3 else bool(value) if kind == 18 else value)
+                if tag == 'manifest':
+                    result = attributes
+                    if not include_network:
+                        return result
+                else:
+                    network.update(attributes)
         pos += size
-    raise ValueError('Manifest root was not found')
+    if result is None:
+        raise ValueError('Manifest root was not found')
+    if include_network:
+        target, explicit = network.get('targetSdkVersion'), network.get('usesCleartextTraffic')
+        # A referenced XML security configuration needs separate resource
+        # resolution; do not assume what its per-domain policy permits.
+        permitted = None if network.get('networkSecurityConfig') is not None else (explicit if isinstance(explicit, bool) else target < 28 if isinstance(target, int) else None)
+        result['networkPolicy'] = {key: network.get(key) for key in ('minSdkVersion', 'targetSdkVersion', 'usesCleartextTraffic', 'networkSecurityConfig')}
+        result['networkPolicy']['cleartextTrafficPermittedByManifest'] = permitted
+    return result
 
 
 def decompress_csv(data):
