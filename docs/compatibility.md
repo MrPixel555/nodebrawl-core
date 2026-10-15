@@ -20,7 +20,7 @@ Clash Royale library. It is **not yet a playable, fully compatible game server**
 | MessageFactory function | `0x622544` |
 | Factory observations | Created 268 unique IDs using factory flags 0 and 1; 275 creation observations |
 | Flat message codecs | 155 unique IDs after rejecting duplicate base-class placeholders |
-| Additional codecs | Handshake, startup, clan, turns and Training: current total 167 wire codecs; see packet-coverage.json |
+| Additional codecs | Handshake, startup, clan, turns and Training: current total 166 wire codecs; deferred GameMode 28991 remains unresolved; see packet-coverage.json |
 
 `lib/protocol/libg-profile.json` preserves each vtable, encode/decode address,
 field order/type/offset, extraction limitations, and observed factory versions.

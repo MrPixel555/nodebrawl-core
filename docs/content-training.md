@@ -130,7 +130,7 @@ table. The observed outgoing branches are:
 | Message | Native encode / decode | Wire fields | Current server behavior |
 | --- | --- | --- | --- |
 | 17967 | `0x6ed88c` / `0x7499d4` | DataReference kind 18 at +0x80 | Verified codec; no battle handler |
-| 10953 | `0x1cfe5c` / `0x2c68c0` | DataReference kind 79 at +0x80, kind 18 at +0x88 | Verified codec; kind 79 business meaning unresolved |
+| 10953 | `0x1cfe5c` / `0x2c68c0` | PvE reference kind 79 at +0x80, NPC kind 18 at +0x88 | Verified codec; no battle handler |
 | 12405 | `0x480d04` / `0x410668` | Two VInts, bounded native command list | HomeLogicStopped codec; no transition handler |
 
 The 17967 branch runs through `0x5ebae8 -> 0x41c7d4`; the extra-data branch
@@ -138,19 +138,25 @@ constructs 10953 through `0x246340 -> 0x1b5568`. HomeLogicStopped uses the same
 nested command format as EndClientTurn, but has no trailing byte-array field.
 
 Six fixtures execute the original ARM64 encoders and decoders twice. NPC lookup
-uses the supplied table's actual named-row order; kind 79 uses explicitly
-synthetic data objects to establish the reference format, not a usable game
-mode. The HomeLogicStopped fixtures cover empty and mixed 703/805 command lists.
+uses the supplied table's actual named-row order. The native file manifest
+`0x3f8548` now identifies kind 79 as `csv_logic/pve_gamemodes.csv`; the harness
+uses its actual record order too. These are still lookup adapters, not a
+constructed playable game mode. [Native CSV verification](native-csv.md) checks
+the original parser and record constructors separately. The HomeLogicStopped
+fixtures cover empty and mixed 703/805 command lists.
 Malformed lengths, unknown commands and trailing data are rejected in Node.
 
 These codecs do **not** implement the battle-start response, simulation,
 matchmaking or results. During analysis, message 22177 was traced to UDP setup
 and message 22871 to a BattleResult handler; neither is assumed to be a Training
 start packet. No guessed packet is sent to force the client past a state check.
-[The full catalogue](packet-coverage.json) lists all 284 message IDs, 167 verified
+[The full catalogue](packet-coverage.json) lists all 284 message IDs, 166 verified
 wire codecs and the actual runtime handlers separately. There are also 135
 native command IDs with 91 verified command codecs; starter runtime supports
 563/703/805 and initial naming 948. These actions do not start a battle.
+Message 28991's deferred raw/zlib GameMode stream and acknowledgement 15263
+have since been identified; its former empty-body classification was wrong.
+Its full snapshot remains unresolved. See [the native battle path](battle-snapshot.md).
 
 ## Reproduce the checks
 

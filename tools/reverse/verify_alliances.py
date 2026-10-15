@@ -86,7 +86,7 @@ def roundtrip(vm, kind, encoder, decoder, fields, payload, variant):
 def main():
     model = StarterHome()
     install_csv(model, 16, 'alliance_badges')
-    install_csv(model, 57, 'locations')
+    install_csv(model, 57, 'regions')
     vm = model.vm
     fixtures, headers = [], []
     for variant in (0, 1):

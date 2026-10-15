@@ -24,7 +24,7 @@ zlib integrity, and rejects truncated, oversized, concatenated or trailing
 compressed data. The inner snapshot remains an opaque Buffer. These are server
 resource limits, not recovered native game limits.
 
-After the outer consumer succeeds, `0x51ccc8` constructs **15263** via
+After invoking the outer consumer, `0x51ccc8` constructs **15263** via
 `0x145f08`, vtable `0xa2e478`, and sends it. This identifies a snapshot
 acknowledgement; it does not prove completion of UI loading or a playable battle.
 

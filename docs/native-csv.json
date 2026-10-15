@@ -1,0 +1,404 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "manifestFunction": "0x3f8548",
+  "manifestEntries": [
+    {
+      "path": "csv_logic/globals.csv",
+      "kind": 3,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/resources.csv",
+      "kind": 5,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/character_buffs.csv",
+      "kind": 9,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/projectiles.csv",
+      "kind": 10,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/predefined_decks.csv",
+      "kind": 12,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/rarities.csv",
+      "kind": 14,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/locations.csv",
+      "kind": 15,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/npcs.csv",
+      "kind": 18,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/treasure_chests.csv",
+      "kind": 19,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/area_effect_objects.csv",
+      "kind": 22,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spells_characters.csv",
+      "kind": 26,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spells_buildings.csv",
+      "kind": 27,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spells_other.csv",
+      "kind": 28,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spells_heroes.csv",
+      "kind": 71,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spells_hero_abilities.csv",
+      "kind": 70,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/characters.csv",
+      "kind": 34,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/buildings.csv",
+      "kind": 35,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/heroes.csv",
+      "kind": 69,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/decos.csv",
+      "kind": 42,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/decos_season.csv",
+      "kind": 98,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tutorials_home.csv",
+      "kind": 45,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/exp_levels.csv",
+      "kind": 46,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tutorials_npc.csv",
+      "kind": 48,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/spell_sets.csv",
+      "kind": 51,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/chest_order.csv",
+      "kind": 52,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/taunts.csv",
+      "kind": 53,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/arenas.csv",
+      "kind": 54,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/resource_packs.csv",
+      "kind": 55,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/regions.csv",
+      "kind": 57,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/alliance_roles.csv",
+      "kind": 59,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/alliance_badges.csv",
+      "kind": 16,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/achievements.csv",
+      "kind": 60,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tournament_tiers.csv",
+      "kind": 63,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/survival_modes.csv",
+      "kind": 65,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/shop.csv",
+      "kind": 66,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/draft_deck.csv",
+      "kind": 68,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/game_modes.csv",
+      "kind": 72,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/pve_gamemodes.csv",
+      "kind": 79,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tve_gamemodes.csv",
+      "kind": 81,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tutorial_chest_order.csv",
+      "kind": 82,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/skins.csv",
+      "kind": 83,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/quest_order.csv",
+      "kind": 84,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/shop_cycle.csv",
+      "kind": 86,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/skin_sets.csv",
+      "kind": 87,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/shop_chests.csv",
+      "kind": 88,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/fortune.csv",
+      "kind": 90,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/quest_main_rewards.csv",
+      "kind": 91,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/clan_war_globals.csv",
+      "kind": 92,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/clan_leagues.csv",
+      "kind": 93,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/achievement_badges.csv",
+      "kind": 95,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/tribes.csv",
+      "kind": 96,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/trophy_road.csv",
+      "kind": 99,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/trophy_road_season.csv",
+      "kind": 100,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/season_default.csv",
+      "kind": 102,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/season_pass_rookie.csv",
+      "kind": 106,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/season_pass_pro.csv",
+      "kind": 103,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/event_categories.csv",
+      "kind": 67,
+      "mode": 0
+    },
+    {
+      "path": "csv_logic/content_tests.csv",
+      "kind": 64,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/locales.csv",
+      "kind": 1,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/music.csv",
+      "kind": 41,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/background_decos.csv",
+      "kind": 50,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/billing_packages.csv",
+      "kind": 2,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/sounds.csv",
+      "kind": 4,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/effects.csv",
+      "kind": 11,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/particle_emitters.csv",
+      "kind": 21,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/health_bars.csv",
+      "kind": 40,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/client_globals.csv",
+      "kind": 20,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/credits.csv",
+      "kind": 56,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/news.csv",
+      "kind": 58,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/hints.csv",
+      "kind": 61,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/helpshift.csv",
+      "kind": 62,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/animations.csv",
+      "kind": 89,
+      "mode": 0
+    },
+    {
+      "path": "csv_client/texts.csv",
+      "kind": 0,
+      "mode": 1
+    },
+    {
+      "path": "",
+      "kind": 1,
+      "mode": 1
+    }
+  ],
+  "csvStaticInitializer": "0xe1140",
+  "csvParser": "0x4a461c",
+  "dataTableLoader": "0x41c214",
+  "verifiedTables": [
+    {
+      "kind": 15,
+      "path": "csv_logic/locations.csv",
+      "decodedSha256": "aa1817d9741957f73b787f7f0d69f22cf1e806b8edae355f523124cac93bb434",
+      "nativeRecords": 53,
+      "nativeNamesAndGlobalIdsMatched": true,
+      "trainingCampFile": "locations/training_arena.csv"
+    },
+    {
+      "kind": 18,
+      "path": "csv_logic/npcs.csv",
+      "decodedSha256": "e1aa72e761c067ac7e28906b7826b483cf0148337c08f149f4e4ee5d97bb50f8",
+      "nativeRecords": 59,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 79,
+      "path": "csv_logic/pve_gamemodes.csv",
+      "decodedSha256": "d81fa73af3927c57a0c738435f7b5461a5b1ceb76a61eaf7fca7ce64f84f57fc",
+      "nativeRecords": 18,
+      "nativeNamesAndGlobalIdsMatched": true
+    }
+  ],
+  "scope": "Original CSV parser and record constructors; libc adapters only. Cross-table field linking, battle snapshots, simulation and Android battle UI remain unverified."
+}

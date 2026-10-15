@@ -1,4 +1,5 @@
 import struct
+import re
 from pathlib import Path
 import os
 from collections import deque
@@ -10,13 +11,16 @@ ROOT=Path(os.environ['GAME_ANALYSIS_DIR'])
 class NativeVM:
     READ_TYPES={0x13de78:'vint',0x2bf360:'int',0x2da5c8:'int',0x314530:'string',0x37e628:'string-object',0x1cba10:'long',0x3ff2c4:'bytes'}
 
-    def __init__(self, trace_instructions=True):
+    def __init__(self, trace_instructions=True, heap_size=0x1000000):
+        if not isinstance(heap_size,int) or heap_size<0x1000 or heap_size>0x10000000 or heap_size%0x1000:
+            raise ValueError('VM heap size must be page-aligned and at most 256 MiB')
         self.uc=Uc(UC_ARCH_ARM64,UC_MODE_ARM)
         self.memory=(ROOT/'memory.bin').read_bytes()
         self.uc.mem_map(0,(len(self.memory)+4095)&~4095)
         self.uc.mem_write(0,self.memory)
-        self.uc.mem_map(0x10000000,0x1000000)
+        self.uc.mem_map(0x10000000,heap_size)
         self.heap=0x10000000
+        self.heap_limit=self.heap+heap_size
         self.uc.mem_map(0x20000000,0x200000)
         self.uc.reg_write(UC_ARM64_REG_SP,0x201f0000)
         self.uc.reg_write(UC_ARM64_REG_TPIDR_EL0,0x20000000)
@@ -47,9 +51,10 @@ class NativeVM:
         if not self.trace_instructions and address not in self.imports and address not in self.READ_TYPES:
             self.point_hooks.append(self.uc.hook_add(UC_HOOK_CODE,self.on_code,begin=address,end=address))
     def alloc(self,size):
-        assert 0<=size<0x400000, f'Allocation too large: {size}'
-        ptr=self.heap;self.heap+=(max(size,16)+15)&~15
-        assert self.heap<0x11000000
+        assert isinstance(size,int) and 0<=size<0x400000, f'Allocation too large: {size}'
+        ptr=self.heap;end=ptr+((max(size,16)+15)&~15)
+        assert end<=self.heap_limit, 'VM heap exhausted'
+        self.heap=end
         self.uc.mem_write(ptr,bytes(max(size,16)))
         return ptr
     def reg(self,n): return self.uc.reg_read(UC_ARM64_REG_X0+n)
@@ -99,6 +104,7 @@ class NativeVM:
         if name=='__cxa_guard_abort':return self.ret()
         if name=='__cxa_atexit':return self.ret(0) # VM has no process teardown.
         if name in ['malloc','_Znwm','_Znam']:return self.ret(self.alloc(a))
+        if name=='calloc':return self.ret(self.alloc(a*b))
         if name in ['free','_ZdlPv','_ZdaPv']:return self.ret()
         if name in ['memcpy','memmove','__memcpy_chk','__memmove_chk']:
             self.uc.mem_write(a,bytes(self.uc.mem_read(b,c)));return self.ret(a)
@@ -111,23 +117,42 @@ class NativeVM:
         if name=='strncpy':
             text=self.string(b)[:c];self.uc.mem_write(a,text+bytes(c-len(text)));return self.ret(a)
         if name=='strcmp':return self.ret((self.string(a)>self.string(b))-(self.string(a)<self.string(b)))
+        if name=='strcasecmp':
+            # CSV type names are ASCII; bytes.lower preserves the C-locale
+            # behavior without applying Python Unicode case folding.
+            left,right=self.string(a).lower(),self.string(b).lower()
+            return self.ret((left>right)-(left<right))
+        if name=='atoi':
+            match=re.match(rb'[\t\n\v\f\r ]*([+-]?[0-9]+)',self.string(a))
+            value=int(match.group(1)) if match else 0
+            if not -2147483648<=value<=2147483647:raise RuntimeError('VM atoi overflow is unsupported')
+            return self.ret(value)
         if name=='memcmp':return self.ret((bytes(self.uc.mem_read(a,c))>bytes(self.uc.mem_read(b,c)))-(bytes(self.uc.mem_read(a,c))<bytes(self.uc.mem_read(b,c))))
         if name in ['gettimeofday','clock_gettime']:
             ptr=a if name=='gettimeofday' else b
             self.uc.mem_write(ptr,struct.pack('<QQ',1,0));return self.ret()
+        if name=='time':
+            if a:self.uc.mem_write(a,struct.pack('<q',1))
+            return self.ret(1) # Same deterministic VM clock as gettimeofday.
         if name=='vsnprintf':raise RuntimeError(f'Native formatted diagnostic: {self.string(c)!r}')
         raise RuntimeError(f'Unsupported import {name} at {address:x}')
     def on_intr(self,uc,intno,_):
         if self.reg(8)==169: # gettimeofday in Arxan opaque predicates
             self.uc.mem_write(self.reg(0),struct.pack('<QQ',1,0));self.uc.reg_write(UC_ARM64_REG_X0,0)
         else:raise RuntimeError(f'Unsupported syscall {self.reg(8)}')
-    def call(self,address,*args,count=3000000,timeout=60000000):
+    def call(self,address,*args,count=3000000,timeout=60000000,max_slices=1):
+        if not isinstance(max_slices,int) or not 1<=max_slices<=10:raise ValueError('Invalid VM execution slice count')
         for n,a in enumerate(args):self.uc.reg_write(UC_ARM64_REG_X0+n,a)
         self.uc.reg_write(UC_ARM64_REG_LR,self.stop)
-        try:self.uc.emu_start(address,self.stop,count=count,timeout=timeout)
-        except Exception as e:raise RuntimeError(f'{e}; PC={self.uc.reg_read(UC_ARM64_REG_PC):x}; trace={list(self.trace)}') from e
-        if self.uc.reg_read(UC_ARM64_REG_PC)!=self.stop:raise RuntimeError(f'Native instruction/time budget exhausted; PC={self.uc.reg_read(UC_ARM64_REG_PC):x}; trace={list(self.trace)}')
-        return self.reg(0)
+        # Large CSV parsers may need several bounded slices. Resume the exact
+        # machine state; resetting args/LR/SP would corrupt a suspended call.
+        current=address
+        for _ in range(max_slices):
+            try:self.uc.emu_start(current,self.stop,count=count,timeout=timeout)
+            except Exception as e:raise RuntimeError(f'{e}; PC={self.uc.reg_read(UC_ARM64_REG_PC):x}; trace={list(self.trace)}') from e
+            current=self.uc.reg_read(UC_ARM64_REG_PC)
+            if current==self.stop:return self.reg(0)
+        raise RuntimeError(f'Native instruction/time budget exhausted; PC={current:x}; trace={list(self.trace)}')
     def stream(self,payload=b''):
         stream=self.alloc(0x70);buf=self.alloc(max(len(payload),0x10000))
         self.uc.mem_write(buf,payload)

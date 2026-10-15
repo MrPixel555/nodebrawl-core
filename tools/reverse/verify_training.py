@@ -2,7 +2,7 @@
 import json
 
 from native_vm import ROOT
-from starter_home import StarterHome, qword, word
+from starter_home import StarterHome
 from verify_alliances import install_csv, wire_fields, roundtrip
 from verify_schemas import vint
 
@@ -10,16 +10,10 @@ from verify_schemas import vint
 def main():
     model = StarterHome()
     install_csv(model, 18, 'npcs')
-    # Type 79's business table is unresolved. These two explicit synthetic data
-    # objects test reference coding only; they are not claimed valid game modes.
+    # The native file manifest at 0x3f8548 identifies kind 79. These remain
+    # lookup adapters, now populated in actual pve_gamemodes.csv row order.
+    install_csv(model, 79, 'pve_gamemodes')
     vm = model.vm
-    pointers = []
-    for index in range(2):
-        pointer = vm.alloc(0x100)
-        word(vm, pointer + 0x20, 79000000 + index)
-        model.data[79000000 + index] = pointer
-        pointers.append(pointer)
-    model.install_table(79, pointers, qword(vm, next(iter(model.tables))))
     fixtures = []
     for variant in range(2):
         fields = {'field_0x80': [18, variant]}
@@ -37,7 +31,7 @@ def main():
         wire += b''.join(bytes.fromhex(c['payloadHex']) for c in selected)
         fixtures.append(roundtrip(vm, 12405, 0x480d04, 0x410668, fields, wire, variant))
     (ROOT / 'native-training.json').write_text(json.dumps(fixtures, indent=2) + '\n')
-    print('Training request refs 10953/17967 and HomeLogicStopped 12405: 6 native codec fixtures PASS (type 79 adapter is synthetic; no battle engine claimed)')
+    print('Training refs 10953/17967 and HomeLogicStopped 12405: 6 native codec fixtures PASS (NPC/PvE CSV lookup adapters; no battle engine claimed)')
 
 
 if __name__ == '__main__':
