@@ -49,7 +49,7 @@ function client (publicKey, profileMatches = true, traceHome = false) {
   const art = { name: 'libart.so', size: 0x10000, base: new Pointer(0x50000000), enumerateSymbols: () => [{ name: '_ZN3art3JNI_RegisterNatives', address: new Pointer(0x50001000) }] }
   blocks.set(base.value, Buffer.from('7f454c46', 'hex'))
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
-  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6'], [0x71b388, 'f50300aa'], [0x71b3cc, 'f50300aa'], [0x207320, 'ffc301d1f91300f9f85f03a9f65704a9'], [0x6a5bc8, '48ff5fc8'], [0x6a5c14, '68420591']]
+  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6'], [0x71b3a4, 'e00313aa'], [0x71b3d4, 'fd7b43a9'], [0x207320, 'ffc301d1f91300f9f85f03a9f65704a9'], [0x6a5bc4, 'd785ed97'], [0x6a5c10, 'c485ed97'], [0x6a5c14, '68420591']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
   blocks.set(base.value + 0x154440, Buffer.from('f50f1df8f44f01a9fd7b02a9fd830091', 'hex'))
   blocks.set(base.value + 0x1544f4, Buffer.from('fd7b42a9f44f41a9', 'hex'))
@@ -482,11 +482,13 @@ test('Login receive and send-worker diagnostics preserve registers and omit mess
   c.worker('send', () => {
     c.state(login, 3)
     c.probe(0x250bbc, { x0: c.object })
-    c.probe(0x71b388, { x0: new c.Pointer(0), x19: c.object })
-    const registers = c.probe(0x207320, { x0: c.object, x2: message })
+    c.probe(0x71b3d4, { x21: new c.Pointer(0), x19: c.object })
+    c.probe(0x250bbc, { x0: c.object })
+    c.probe(0x71b3a4, { x0: new c.Pointer(0), x21: message, x19: c.object })
+    const registers = c.probe(0x6a5bc4, { x0: c.object, x2: message })
     assert.equal(registers.x0, c.object)
     assert.equal(registers.x2, message)
-    c.probe(0x6a5bc8)
+    c.probe(0x6a5c14)
     return new c.Pointer(0)
   })
   const read = c.logs.find(log => log.event === 'native-messaging-read-return')
@@ -494,6 +496,7 @@ test('Login receive and send-worker diagnostics preserve registers and omit mess
   assert.equal(read.state, 3)
   assert.equal(read.hasMessage, false)
   assert(read.durationMs >= 0)
+  assert.deepEqual(c.logs.filter(log => log.event === 'native-messaging-read-return').map(log => log.hasMessage), [false, true])
   const send = c.logs.find(log => log.event === 'native-send-worker-dispatch')
   assert.equal(send.id, 10101)
   assert.equal(send.version, 4)
@@ -501,4 +504,14 @@ test('Login receive and send-worker diagnostics preserve registers and omit mess
   assert(c.logs.some(log => log.event === 'native-send-worker-return'))
   assert(!JSON.stringify(c.logs).includes('private-login-body'))
   assert(!JSON.stringify(c.logs).includes(login.clientSecret))
+})
+
+test('packet writer is excluded and return observations avoid shared_ptr exclusive loops', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
+  assert(c.excluded.some(range => range.base.equals(c.base.add(0x207320)) && range.size === 0x278))
+  c.frame(() => {
+    for (const pc of [0x207320, 0x6a5bc8, 0x71b388, 0x71b3cc]) assert(!c.callouts.has(pc))
+    for (const pc of [0x6a5bc4, 0x6a5c10, 0x6a5c14, 0x71b3a4, 0x71b3d4]) assert(c.callouts.has(pc))
+    return 0
+  })
 })

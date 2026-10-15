@@ -50,9 +50,9 @@ function instrument (module) {
     [0x7c92b0, '080040f9014940f920001fd6'],
     [0x154440, 'f50f1df8f44f01a9fd7b02a9fd830091'],
     [0x1544f4, 'fd7b42a9f44f41a9'],
-    [0x71b388, 'f50300aa'], [0x71b3cc, 'f50300aa'],
+    [0x71b3a4, 'e00313aa'], [0x71b3d4, 'fd7b43a9'],
     [0x207320, 'ffc301d1f91300f9f85f03a9f65704a9'],
-    [0x6a5bc8, '48ff5fc8'], [0x6a5c14, '68420591'],
+    [0x6a5bc4, 'd785ed97'], [0x6a5c10, 'c485ed97'], [0x6a5c14, '68420591'],
   ]
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
@@ -142,7 +142,7 @@ function installDevelopmentPeer (module) {
     const progress = readProgress.get(thread)
     if (!progress) return
     readProgress.delete(thread)
-    record('native-messaging-read-return', { thread, initialState: progress.state, state: progress.object.add(0x254).readU32(), durationMs: Date.now() - progress.started, hasMessage: !context.x0.isNull() })
+    record('native-messaging-read-return', { thread, initialState: progress.state, state: progress.object.add(0x254).readU32(), durationMs: Date.now() - progress.started, hasMessage: !context.x21.isNull() })
   }
   function sendReturned () {
     const thread = Process.getCurrentThreadId()
@@ -171,16 +171,16 @@ function installDevelopmentPeer (module) {
       record('native-login-encode', { version: object.add(8).readU32(), major: object.add(0x90).readU32(), minor: object.add(0x94).readU32(), build: object.add(0x98).readU32() })
     })],
     [0x3affd4, observe(context => record('native-login-build', { state: context.x0.add(0x254).readU32() }))],
-    [0x71b388, observe(readReturned)], [0x71b3cc, observe(readReturned)],
-    [0x207320, observe(context => {
+    [0x71b3a4, observe(readReturned)], [0x71b3d4, observe(readReturned)],
+    ...[0x6a5bc4, 0x6a5c10].map(offset => [offset, observe(context => {
       const thread = Process.getCurrentThreadId()
       const message = context.x2
       const serialized = !message.isNull() && message.readPointer().equals(module.base.add(0xa2cae8))
       if (sendProgress.size >= 8) sendProgress.clear()
       sendProgress.set(thread, { started: Date.now() })
       record('native-send-worker-dispatch', { thread, state: context.x0.add(0x254).readU32(), serialized, ...(serialized ? { id: message.add(0x7c).readU32(), version: message.add(8).readU32() } : {}) })
-    })],
-    [0x6a5bc8, observe(sendReturned)], [0x6a5c14, observe(sendReturned)],
+    })]),
+    [0x6a5c14, observe(sendReturned)],
   )
   if (configuration.traceHome) {
     definitions.push(
@@ -211,6 +211,12 @@ function installDevelopmentPeer (module) {
   for (const other of Process.enumerateModules()) {
     if (other.name !== 'libg.so') Stalker.exclude({ base: other.base, size: other.size })
   }
+  // Run the complete synchronous packet writer, including nested calls,
+  // outside Stalker. It does not construct the handshake key/nonce; those
+  // probes remain in the native Login builders and reader. Observe its caller
+  // before BL and after the shared_ptr exclusive loop instead of probing LDAXR.
+  Stalker.exclude({ base: module.base.add(0x207320), size: 0x278 })
+  record('native-send-tracing-excluded', { offset: '0x207320', size: 0x278, callerTracing: true })
   installNativeFrame(module)
   installMessagingWorkers(module)
 }
@@ -429,4 +435,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v7', homeTrace: Boolean(configuration.traceHome) })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v8', homeTrace: Boolean(configuration.traceHome) })
