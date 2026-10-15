@@ -1,0 +1,66 @@
+[
+  {
+    "id": 13597,
+    "variant": 0,
+    "fields": {
+      "field_0x88": 37,
+      "field_0x8c": 12345,
+      "commands": [],
+      "field_0x98": null
+    },
+    "payloadHex": "25b9c00100ffffffff",
+    "nativeDecodeConsumed": 9,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 13597,
+    "variant": 1,
+    "fields": {
+      "field_0x88": 8192,
+      "field_0x8c": -8192,
+      "commands": [
+        {
+          "id": 703,
+          "fields": {
+            "field_0x10": 12345,
+            "field_0xc": 12345,
+            "field_0x14": [
+              7,
+              -234567
+            ],
+            "field_0x1c": 12345
+          }
+        },
+        {
+          "id": 948,
+          "fields": {
+            "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+            "field_0x10": -8192,
+            "field_0xc": -8192,
+            "field_0x14": [
+              7,
+              -234567
+            ]
+          }
+        },
+        {
+          "id": 987,
+          "fields": {
+            "field_0x10": -8192,
+            "field_0xc": -8192,
+            "field_0x14": [
+              7,
+              -234567
+            ],
+            "field_0x1c": -8192,
+            "field_0x20": true
+          }
+        }
+      ],
+      "field_0x98": null
+    },
+    "payloadHex": "808001c0807f03bf0ab9c001b9c00107f9ae63b9c001b40e0000000cd8a8d8a7d8b2db8cdaa9d986c0807fc0807f07f9ae639b0fc0807fc0807f07f9ae63c0807f01ffffffff",
+    "nativeDecodeConsumed": 70,
+    "nativeReencodeEqual": true
+  }
+]

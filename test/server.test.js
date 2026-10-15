@@ -10,6 +10,8 @@ const { AccountStore } = require('../server/accounts')
 const { createGameServer } = require('../server/core')
 const { loadHomeTemplate, createStarterHomeProvider } = require('../server/home')
 const { createHash } = require('node:crypto')
+const { createStarterHandlers } = require('../server/starter-handlers')
+const { Writer } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
 
@@ -111,6 +113,64 @@ test('separate stores sharing a directory serialize account IDs without losing a
   for (const account of accounts) assert.deepEqual((await stores[0].login(account.id, account.token)).id, account.id)
 })
 
+test('deck selection persists without changing credentials or another account', async t => {
+  const { directory } = await setup(t)
+  const first = new AccountStore(directory)
+  const second = new AccountStore(directory)
+  const account = await first.login([0, 0], null)
+  const other = await second.login([0, 0], null)
+  const [one, two] = await Promise.all([first.selectDeck(account, 1), second.selectDeck(account, 4)])
+  assert.equal(one.starter.selectedDeck, 1)
+  assert.equal(two.starter.selectedDeck, 4)
+  assert.deepEqual(await new AccountStore(directory).login(account.id, account.token), { ...account, starter: { selectedDeck: 4 } })
+  assert.deepEqual(await first.login(other.id, other.token), other)
+  const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
+  for (const deck of [-1, 5, NaN, 1.5]) await assert.rejects(first.selectDeck(account, deck), /deck selection/)
+  await assert.rejects(first.selectDeck({ ...account, token: 'incorrect' }, 2), /credentials/)
+  await assert.rejects(first.selectDeck(null, 2), /credentials/)
+  assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), before)
+})
+
+test('TCP starter turns preserve deck selection across login and reject unsupported batches atomically', { timeout: 5000 }, async t => {
+  const { game, port, directory } = await setup(t, { homeProvider: createStarterHomeProvider() })
+  const entries = []
+  const handlers = createStarterHandlers({ store: new AccountStore(directory), logger: entry => entries.push(entry), traceNetwork: true })
+  // Both servers use the same account directory; reconnect through the other
+  // instance to prove it reloads persistent state rather than a session cache.
+  const active = createGameServer({ store: new AccountStore(directory), homeProvider: createStarterHomeProvider(), handlers })
+  active.server.listen(0, '127.0.0.1')
+  await once(active.server, 'listening')
+  t.after(() => active.stop())
+  const c = await client(active.server.address().port)
+  c.send(10101, { field_0x80: [0, 0] }, 4)
+  const ok = decodeMessage(20758, (await c.receive()).payload)
+  await c.receive()
+  const selection = deck => ({ id: 703, fields: { field_0x1c: deck } })
+  c.send(13597)
+  c.send(13597, { commands: [selection(1), selection(4)] })
+  c.send(10108)
+  assert.equal((await c.receive()).id, 20108)
+  assert.equal((await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90)).starter.selectedDeck, 4)
+  c.send(13597, { commands: [selection(2), { id: 948, fields: { field_0x20: 'must not persist' } }] })
+  const unknown = new Writer().vint(0).vint(0).vint(2).raw(require('../lib/protocol/commands').encodeCommand(selection(3))).vint(563).toBuffer()
+  c.socket.write(encodeFrame(13597, 0, unknown))
+  c.send(10108)
+  assert.equal((await c.receive()).id, 20108)
+  c.socket.destroy()
+  assert.ok(entries.some(entry => entry.event === 'unsupported-turn' && entry.applied === false))
+  assert.ok(entries.some(entry => entry.event === 'unsupported-turn-command' && entry.id === 563 && entry.applied === false))
+  assert.ok(!JSON.stringify(entries).includes('must not persist'))
+  // A fresh server instance must emit the independently native-encoded Home.
+  const next = await client(port)
+  next.send(10101, { field_0x80: ok.field_0x80, field_0x88: ok.field_0x90 }, 4)
+  assert.equal((await next.receive()).id, 20758)
+  const home = await next.receive()
+  const expected = require('./fixtures/native-starter-home.json').find(fixture => fixture.accountId[1] === 1 && fixture.selectedDeck === 4)
+  assert.equal(home.payload.toString('hex'), expected.payloadHex)
+  assert.equal(game.statistics.logins, 1)
+  next.socket.destroy()
+})
+
 test('malformed account databases and IDs cannot allocate duplicate or invalid identities', async t => {
   const { directory } = await setup(t)
   const store = new AccountStore(directory)
@@ -165,7 +225,9 @@ for (const starterHome of [false, true]) {
     const secret = Buffer.alloc(32, 13); const peer = keyPair(secret).publicKey
     const clientSecret = Buffer.alloc(32, 7); const clientPublicKey = keyPair(clientSecret).publicKey
     const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
-    const { game, port } = await setup(t, { transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+    const handlers = new Map()
+    const { game, port, directory } = await setup(t, { handlers, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+    if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
     const c = await client(port)
     c.send(10100)
     const hello = decodeMessage(20100, (await c.receive()).payload)
@@ -182,12 +244,17 @@ for (const starterHome of [false, true]) {
     assert.equal(home.id, 21217)
     const expected = starterHome ? Buffer.from(require('./fixtures/native-starter-home.json').find(f => f.accountId[1] === 1).payloadHex, 'hex') : Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY')
     assert.deepEqual(receive.decrypt(home.payload), expected)
+    if (starterHome) {
+      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
+      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }] }))))
+    }
     for (let n = 0; n < 2; n++) {
       c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
       const response = await c.receive()
       assert.equal(response.id, 20108); assert.equal(receive.decrypt(response.payload).length, 0)
     }
     assert.equal(game.statistics.logins, 1)
+    if (starterHome) assert.equal((await new AccountStore(directory).login(account.field_0x80, account.field_0x90)).starter.selectedDeck, 4)
     receive.close(); send.close()
   })
 }

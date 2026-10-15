@@ -396,3 +396,14 @@ The ready network-v4 script retains native Home decoder observations only when
 requested with `--trace-home 1`, and stops changing crypto arguments after the
 first reply. Android Home/UI, progression handlers and battle simulation remain
 unverified or incomplete. No native-empty Home is presented as a playable lobby.
+
+**Native turn commands:** EndClientTurn is 13597 in this library. Its complete
+native encode/decode/reencode fixtures cover empty and mixed-command batches.
+The native command factory creates 135 types in IDs 1..1000; 89 command codecs
+pass two native round trips each and 46 stay unresolved. Runtime starter handling
+is limited to empty turns and SelectDeck 703, whose original executor changes
+Home in six native VM cases with a UI observer adapter. The selected index now
+persists atomically and is restored by the native-backed Home provider; encrypted
+TCP checks cover that flow. No command simulation checksum, rename pricing or
+deck-content editing is claimed. [Command evidence](commands.md) explains the
+scope and reproduction. The current Node suite has 584 passing tests.

@@ -90,13 +90,13 @@ class StarterHome:
         vm.register_hook(0x344840, self.observe_home_id)
         vm.register_hook(0x241ecc, self.observe_avatar_id)
         vm.register_hook(0x5e0f60, self.observe_name)
+        vm.register_hook(0x45d234, self.observe_selection)
         vm.register_hook(0x1544f4, self.observe_decode_return)
         self.decoded_message = None
 
     def observe_decode_return(self, vm):
         # Same saved X19 register and offsets used by the device Home callout.
         self.decoded_message = vm.reg(19)
-        assert self.decoded_message + 0x10 == vm.input_stream
 
     def install_table(self, kind, pointers, vtable):
         table = self.vm.alloc(8)
@@ -126,8 +126,14 @@ class StarterHome:
         if vm.reg(0) == self.stream and vm.reg(1) == self.avatar + 0x60:
             self.bindings.append({'offset': read_u32(vm, self.stream + 0x14), 'bytes': 4 + len(self.name.encode()), 'field': 'name', 'type': 'string'})
 
-    def make(self, account_id=(0, 37), name='Player'):
+    def observe_selection(self, vm):
+        if vm.reg(0) == self.stream and vm.uc.reg_read(UC_ARM64_REG_LR) == 0x34c6c0:
+            self.bindings.append({'offset': read_u32(vm, self.stream + 0x14), 'bytes': 1, 'field': 'selectedDeck', 'type': 'vint'})
+
+    def make(self, account_id=(0, 37), name='Player', selected_deck=0):
         vm = self.vm
+        assert selected_deck in range(5)
+        word(vm, self.home + 0x2a0, selected_deck)
         self.name = name
         def vint_size(value):
             return next((n for n, limit in enumerate([64, 8192, 1048576, 134217728], 1) if abs(value) < limit), 5)
@@ -142,11 +148,12 @@ class StarterHome:
         self.stream = self.object + 0x10
         payload = encode(vm, self.object, self.buffer)
         self.stream = None
-        assert len(self.bindings) == 5, self.bindings
+        assert len(self.bindings) == 6, self.bindings
         # The complete native decoder must resolve all cards/resources/arena and
         # reproduce the full message, not merely accept its length prefix.
         second, buffer, consumed, reads = decode(vm, payload)
         assert self.decoded_message == second
+        assert self.decoded_message + 0x10 == vm.input_stream
         assert consumed == len(payload)
         assert encode(vm, second, buffer) == payload
         avatar = qword(vm, second + 0x88)
@@ -156,6 +163,7 @@ class StarterHome:
         gold = qword(vm, qword(vm, qword(vm, avatar + 0x90)))
         assert qword(vm, gold) == self.records[5, 'Gold'] and read_u32(vm, gold + 8) == 100
         home = qword(vm, second + 0x80)
+        assert read_u32(vm, home + 0x2a0) == selected_deck
         assert read_u32(vm, home + 0x134) == 8
         for n, expected in enumerate(self.deck):
             card = qword(vm, home + 0x20 + n * 8)
@@ -186,6 +194,9 @@ def main():
     fixtures = [{'accountId': [0, 37], 'name': 'Player', 'payloadHex': payload.hex()}]
     for account_id, name in [((0, 1), 'Player'), ((0, 8192), 'بازیکن'), ((0, 2147483647), 'Starter player with a longer name')]:
         fixtures.append({'accountId': list(account_id), 'name': name, 'payloadHex': model.make(account_id, name).hex()})
+    for selected in (1, 4):
+        fixtures.append({'accountId': [0, 1], 'name': 'Player', 'selectedDeck': selected,
+                         'payloadHex': model.make((0, 1), 'Player', selected).hex()})
     (ROOT / 'starter-home-fixture.json').write_text(json.dumps(fixtures, indent=2) + '\n')
     print(f'Starter Home: {len(payload)} bytes, 8 resolved cards, 5 decks, native decode/reencode PASS')
 

@@ -21,6 +21,9 @@ for frame in vector['frames']:
     expected = {20758: 0xa62c90, 21217: 0xa6d260, 20108: 0xa735c8}[frame['id']]
     assert message and qword(model.vm, message) == expected
     if frame['id'] == 21217:
+        # Messaging owns its nested stream; verify against its returned message,
+        # not the standalone seed decoder's previous input_stream recorder.
+        assert data.decoded_message == message
         assert word(model.vm, message + 0x24) == vector['homeBytes']
         home = qword(model.vm, message + 0x80)
         avatar = qword(model.vm, message + 0x88)

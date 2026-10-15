@@ -1,0 +1,3793 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "factory": "0x41a1dc",
+  "enumeratedRange": [
+    1,
+    1000
+  ],
+  "commands": [
+    {
+      "id": 2,
+      "vtable": "0xa6ad10",
+      "encode": "0x74639c",
+      "decode": "0x2fbda0",
+      "execute": "0x5deac4",
+      "fields": null,
+      "unresolvedReason": "control flow/transform mrs at 0x7463b8"
+    },
+    {
+      "id": 18,
+      "vtable": "0xa6c0b8",
+      "encode": "0x5e1d64",
+      "decode": "0x1ed6f0",
+      "execute": "0x6340d4",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 28,
+      "vtable": "0xa3cda0",
+      "encode": "0x13b16c",
+      "decode": "0x1272fc",
+      "execute": "0x2ab0b0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 49,
+      "vtable": "0xa4c2c8",
+      "encode": "0x193804",
+      "decode": "0x5d82b8",
+      "execute": "0x137614",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x193824"
+    },
+    {
+      "id": 57,
+      "vtable": "0xa5f4f0",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x140720",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 203,
+      "vtable": "0xa4c580",
+      "encode": "0x424448",
+      "decode": "0x541bec",
+      "execute": "0x3fbc58",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 235,
+      "vtable": "0xa5c770",
+      "encode": "0x57bf68",
+      "decode": "0x44d24c",
+      "execute": "0x68c938",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x57bf88"
+    },
+    {
+      "id": 252,
+      "vtable": "0xa69a38",
+      "encode": "0x18dd84",
+      "decode": "0x3ff25c",
+      "execute": "0x585728",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x18dda8"
+    },
+    {
+      "id": 254,
+      "vtable": "0xa4a698",
+      "encode": "0x4a485c",
+      "decode": "0x4d8978",
+      "execute": "0x2c2d68",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x21",
+          "offset": 33,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 255,
+      "vtable": "0xa62738",
+      "encode": "0x3dc49c",
+      "decode": "0x380e10",
+      "execute": "0x2e1d94",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x21",
+          "offset": 33,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 261,
+      "vtable": "0xa5f278",
+      "encode": "0x6ddce4",
+      "decode": "0x575fc8",
+      "execute": "0x13e304",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x6ddd3c"
+    },
+    {
+      "id": 265,
+      "vtable": "0xa62e68",
+      "encode": "0x342efc",
+      "decode": "0x40ba58",
+      "execute": "0x51c090",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 278,
+      "vtable": "0xa540d0",
+      "encode": "0x6a7ca8",
+      "decode": "0x33b754",
+      "execute": "0x29e27c",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x6a7cf8"
+    },
+    {
+      "id": 287,
+      "vtable": "0xa2bc88",
+      "encode": "0x5dd740",
+      "decode": "0x2218d8",
+      "execute": "0x66c634",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "int",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 291,
+      "vtable": "0xa57510",
+      "encode": "0x4b2a74",
+      "decode": "0x5acd5c",
+      "execute": "0x540a30",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 292,
+      "vtable": "0xa3a890",
+      "encode": "0x58bc74",
+      "decode": "0x5a8d18",
+      "execute": "0x4680d0",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 301,
+      "vtable": "0xa51538",
+      "encode": "0x5c53b8",
+      "decode": "0x2209d4",
+      "execute": "0x3dc630",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x5c53f0"
+    },
+    {
+      "id": 312,
+      "vtable": "0xa527b0",
+      "encode": "0x6aaba8",
+      "decode": "0x4198fc",
+      "execute": "0x30270c",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "long",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 314,
+      "vtable": "0xa3fa18",
+      "encode": "0x1b545c",
+      "decode": "0x529f64",
+      "execute": "0x2e1414",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x1b548c"
+    },
+    {
+      "id": 320,
+      "vtable": "0xa4d300",
+      "encode": "0x629610",
+      "decode": "0x66e1b4",
+      "execute": "0x206e58",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "long",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 322,
+      "vtable": "0xa496b0",
+      "encode": "0x42257c",
+      "decode": "0x178af4",
+      "execute": "0x4cfa28",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 327,
+      "vtable": "0xa5b590",
+      "encode": "0x303d68",
+      "decode": "0x499374",
+      "execute": "0x6b2ed0",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x303d98"
+    },
+    {
+      "id": 334,
+      "vtable": "0xa3b0b0",
+      "encode": "0x592d98",
+      "decode": "0x468158",
+      "execute": "0x20db10",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x592e04"
+    },
+    {
+      "id": 345,
+      "vtable": "0xa4ab58",
+      "encode": "0x35a360",
+      "decode": "0x63e71c",
+      "execute": "0x230d04",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x35a394"
+    },
+    {
+      "id": 358,
+      "vtable": "0xa42bd8",
+      "encode": "0x2d8e98",
+      "decode": "0x6af2bc",
+      "execute": "0x37376c",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "int",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 365,
+      "vtable": "0xa33df0",
+      "encode": "0x6d1ae0",
+      "decode": "0x228760",
+      "execute": "0x11c4b0",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x6d1b18"
+    },
+    {
+      "id": 368,
+      "vtable": "0xa33608",
+      "encode": "0x3dfbf0",
+      "decode": "0x4a8b70",
+      "execute": "0x6dac0c",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 370,
+      "vtable": "0xa6fdb8",
+      "encode": "0x2f7548",
+      "decode": "0x737930",
+      "execute": "0x1c8c18",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x38",
+          "offset": 56,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x3c",
+          "offset": 60,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 391,
+      "vtable": "0xa67870",
+      "encode": "0x6fdaf4",
+      "decode": "0x4aea08",
+      "execute": "0x2be1d8",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x6fdb2c"
+    },
+    {
+      "id": 421,
+      "vtable": "0xa3b5f8",
+      "encode": "0x5d5f04",
+      "decode": "0x1a9714",
+      "execute": "0x4c0cfc",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 433,
+      "vtable": "0xa2df38",
+      "encode": "0x53c5b0",
+      "decode": "0x6da154",
+      "execute": "0x5db6f4",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x53c5d0"
+    },
+    {
+      "id": 440,
+      "vtable": "0xa5f7d0",
+      "encode": "0x2fe01c",
+      "decode": "0x22aa30",
+      "execute": "0x5e66bc",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x2fe03c"
+    },
+    {
+      "id": 445,
+      "vtable": "0xa3e480",
+      "encode": "0x14ec3c",
+      "decode": "0x6b5ae4",
+      "execute": "0x21d784",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x14ecb0"
+    },
+    {
+      "id": 450,
+      "vtable": "0xa4d400",
+      "encode": "0x380bb8",
+      "decode": "0x44dae4",
+      "execute": "0x4c0410",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x380bdc"
+    },
+    {
+      "id": 454,
+      "vtable": "0xa73e88",
+      "encode": "0x6dc178",
+      "decode": "0x129a08",
+      "execute": "0x4535f4",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x6dc190"
+    },
+    {
+      "id": 469,
+      "vtable": "0xa61fe8",
+      "encode": "0x55063c",
+      "decode": "0x5e4144",
+      "execute": "0x3f4180",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x2c",
+          "offset": 44,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x34",
+          "offset": 52,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x38",
+          "offset": 56,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 477,
+      "vtable": "0xa5ecf8",
+      "encode": "0x3f19a0",
+      "decode": "0x55e580",
+      "execute": "0x6dbf30",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x3f19d8"
+    },
+    {
+      "id": 479,
+      "vtable": "0xa36a78",
+      "encode": "0x221b58",
+      "decode": "0x5ff87c",
+      "execute": "0x630e54",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "long",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 490,
+      "vtable": "0xa5c020",
+      "encode": "0x479f44",
+      "decode": "0x11f950",
+      "execute": "0x1a5898",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 503,
+      "vtable": "0xa42b08",
+      "encode": "0x72a0e4",
+      "decode": "0x567018",
+      "execute": "0x6bb594",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "int",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 521,
+      "vtable": "0xa58358",
+      "encode": "0x476534",
+      "decode": "0x4b4118",
+      "execute": "0x1ade8c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 523,
+      "vtable": "0xa4ed80",
+      "encode": "0x29b4f0",
+      "decode": "0x6bf9a8",
+      "execute": "0x4c125c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 527,
+      "vtable": "0xa60908",
+      "encode": "0x2e13b8",
+      "decode": "0x7193ec",
+      "execute": "0x370930",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 532,
+      "vtable": "0xa31df0",
+      "encode": "0x12fb68",
+      "decode": "0x40893c",
+      "execute": "0x204678",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 541,
+      "vtable": "0xa47ac0",
+      "encode": "0x59cc50",
+      "decode": "0x5f0400",
+      "execute": "0x637c64",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 547,
+      "vtable": "0xa61f68",
+      "encode": "0x5fc358",
+      "decode": "0x4a6700",
+      "execute": "0x6bc17c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 556,
+      "vtable": "0xa5cb20",
+      "encode": "0x699818",
+      "decode": "0x5cfcf4",
+      "execute": "0x2a7780",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 560,
+      "vtable": "0xa6a630",
+      "encode": "0x3d2e58",
+      "decode": "0x190a94",
+      "execute": "0x2a54a8",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x3d2ebc"
+    },
+    {
+      "id": 562,
+      "vtable": "0xa6ecb0",
+      "encode": "0x4b83b4",
+      "decode": "0x73f594",
+      "execute": "0x63d4e4",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x4b83d8"
+    },
+    {
+      "id": 563,
+      "vtable": "0xa4c648",
+      "encode": "0x33863c",
+      "decode": "0x2f5474",
+      "execute": "0x6750b0",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x338670"
+    },
+    {
+      "id": 565,
+      "vtable": "0xa3a190",
+      "encode": "0x4c6ab4",
+      "decode": "0x29a510",
+      "execute": "0x40e7d0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 571,
+      "vtable": "0xa539d8",
+      "encode": "0x6da1c8",
+      "decode": "0x1d6388",
+      "execute": "0x4c19f8",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 577,
+      "vtable": "0xa71410",
+      "encode": "0x5614a0",
+      "decode": "0x432a78",
+      "execute": "0x48c0f0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 580,
+      "vtable": "0xa54778",
+      "encode": "0x496ec4",
+      "decode": "0x5eb474",
+      "execute": "0x32a348",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x496eec"
+    },
+    {
+      "id": 581,
+      "vtable": "0xa48798",
+      "encode": "0x5d6380",
+      "decode": "0x64be44",
+      "execute": "0x181bf0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 589,
+      "vtable": "0xa5a450",
+      "encode": "0x6544e4",
+      "decode": "0x61e718",
+      "execute": "0x3ca728",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x65453c"
+    },
+    {
+      "id": 590,
+      "vtable": "0xa61a50",
+      "encode": "0x5ba244",
+      "decode": "0x2de8e4",
+      "execute": "0x425060",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 593,
+      "vtable": "0xa6d4a0",
+      "encode": "0x237038",
+      "decode": "0x3f2204",
+      "execute": "0x49fa74",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x23705c"
+    },
+    {
+      "id": 595,
+      "vtable": "0xa5f570",
+      "encode": "0x4670a0",
+      "decode": "0x58288c",
+      "execute": "0x59b664",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x4670e8"
+    },
+    {
+      "id": 596,
+      "vtable": "0xa35b30",
+      "encode": "0x63a5d0",
+      "decode": "0x56840c",
+      "execute": "0x1e83fc",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 602,
+      "vtable": "0xa58c80",
+      "encode": "0x387e5c",
+      "decode": "0x69b3f0",
+      "execute": "0x119b48",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 616,
+      "vtable": "0xa3eb28",
+      "encode": "0x1df47c",
+      "decode": "0x692774",
+      "execute": "0x220678",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x1df4a4"
+    },
+    {
+      "id": 622,
+      "vtable": "0xa59580",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x39ef20",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 623,
+      "vtable": "0xa52600",
+      "encode": "0x5dd2b8",
+      "decode": "0x4c3f24",
+      "execute": "0x538b40",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x5dd308"
+    },
+    {
+      "id": 628,
+      "vtable": "0xa4c408",
+      "encode": "0x64a1c4",
+      "decode": "0x1d4760",
+      "execute": "0x107144",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 638,
+      "vtable": "0xa4fc60",
+      "encode": "0x479238",
+      "decode": "0x41d858",
+      "execute": "0x43fcec",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 640,
+      "vtable": "0xa43aa8",
+      "encode": "0x38c228",
+      "decode": "0x1c0188",
+      "execute": "0x4c3db8",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x38c25c"
+    },
+    {
+      "id": 650,
+      "vtable": "0xa5b2a8",
+      "encode": "0x737880",
+      "decode": "0x13e220",
+      "execute": "0x12c84c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 653,
+      "vtable": "0xa2c4a8",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x5cf4ec",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 656,
+      "vtable": "0xa6d7e0",
+      "encode": "0x3ee780",
+      "decode": "0xfd720",
+      "execute": "0x121030",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 658,
+      "vtable": "0xa4d608",
+      "encode": "0x4c39a8",
+      "decode": "0x6ecf94",
+      "execute": "0x448d1c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 660,
+      "vtable": "0xa5dec8",
+      "encode": "0x58896c",
+      "decode": "0x56fde0",
+      "execute": "0x3dc314",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 664,
+      "vtable": "0xa4be80",
+      "encode": "0x6509a4",
+      "decode": "0x2de0dc",
+      "execute": "0x4719a4",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 668,
+      "vtable": "0xa2e540",
+      "encode": "0x5c44e4",
+      "decode": "0x332160",
+      "execute": "0x1a8d98",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 670,
+      "vtable": "0xa52178",
+      "encode": "0x7146e4",
+      "decode": "0x244204",
+      "execute": "0x69e5f4",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 676,
+      "vtable": "0xa30c60",
+      "encode": "0x3c7cac",
+      "decode": "0x51b884",
+      "execute": "0x1b586c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x21",
+          "offset": 33,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 682,
+      "vtable": "0xa414b8",
+      "encode": "0x4d4440",
+      "decode": "0x2e5978",
+      "execute": "0x359e2c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 687,
+      "vtable": "0xa5c818",
+      "encode": "0x11a520",
+      "decode": "0x3750a4",
+      "execute": "0x1be468",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x11a548"
+    },
+    {
+      "id": 691,
+      "vtable": "0xa64a40",
+      "encode": "0x604b64",
+      "decode": "0x398e48",
+      "execute": "0x4a4b0c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 693,
+      "vtable": "0xa56cb0",
+      "encode": "0x2a1234",
+      "decode": "0x43c318",
+      "execute": "0x49a670",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 696,
+      "vtable": "0xa627e0",
+      "encode": "0x6e8ba4",
+      "decode": "0x418d68",
+      "execute": "0x59a0bc",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 703,
+      "vtable": "0xa323b8",
+      "encode": "0x30864c",
+      "decode": "0x20bdcc",
+      "execute": "0x32f870",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 705,
+      "vtable": "0xa4b3c8",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x65b778",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 715,
+      "vtable": "0xa59e90",
+      "encode": "0x1ff3e8",
+      "decode": "0x33d878",
+      "execute": "0x4521f8",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 716,
+      "vtable": "0xa70ad0",
+      "encode": "0x4842a8",
+      "decode": "0xf9074",
+      "execute": "0x5d63b4",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x4842e4"
+    },
+    {
+      "id": 717,
+      "vtable": "0xa2ae18",
+      "encode": "0x43fcc0",
+      "decode": "0x749b50",
+      "execute": "0x485148",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "long",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 723,
+      "vtable": "0xa656f0",
+      "encode": "0x2ff6e4",
+      "decode": "0x6061d0",
+      "execute": "0x61433c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 732,
+      "vtable": "0xa72c00",
+      "encode": "0x103324",
+      "decode": "0x3bfa84",
+      "execute": "0x6e34f4",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x103344"
+    },
+    {
+      "id": 738,
+      "vtable": "0xa2c088",
+      "encode": "0x37cb2c",
+      "decode": "0x1653a8",
+      "execute": "0x63a510",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 742,
+      "vtable": "0xa2ff20",
+      "encode": "0x72f968",
+      "decode": "0x39ac24",
+      "execute": "0x32f090",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 744,
+      "vtable": "0xa2af70",
+      "encode": "0x39d1ec",
+      "decode": "0x490eec",
+      "execute": "0x60520c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 751,
+      "vtable": "0xa630c8",
+      "encode": "0x1e0394",
+      "decode": "0x105fd0",
+      "execute": "0x347c54",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x1e03b4"
+    },
+    {
+      "id": 762,
+      "vtable": "0xa5fe18",
+      "encode": "0x30788c",
+      "decode": "0x2ea430",
+      "execute": "0x460fac",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 775,
+      "vtable": "0xa309c8",
+      "encode": "0x541b48",
+      "decode": "0x3463f0",
+      "execute": "0x4296d0",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 780,
+      "vtable": "0xa5dc10",
+      "encode": "0x1827c4",
+      "decode": "0x317a98",
+      "execute": "0x63798c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "long",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 783,
+      "vtable": "0xa3db50",
+      "encode": "0x1315c0",
+      "decode": "0x6c4388",
+      "execute": "0x545570",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 798,
+      "vtable": "0xa2e1c8",
+      "encode": "0x649498",
+      "decode": "0x61bb7c",
+      "execute": "0x69d39c",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x6494b8"
+    },
+    {
+      "id": 804,
+      "vtable": "0xa62d78",
+      "encode": "0x541384",
+      "decode": "0x61cba8",
+      "execute": "0x58bad0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 805,
+      "vtable": "0xa5ffe0",
+      "encode": "0x3d97fc",
+      "decode": "0x2c1b28",
+      "execute": "0x474628",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 810,
+      "vtable": "0xa50ac0",
+      "encode": "0x2fe498",
+      "decode": "0x4b2404",
+      "execute": "0x1dd900",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x2fe4c0"
+    },
+    {
+      "id": 819,
+      "vtable": "0xa6e430",
+      "encode": "0x33257c",
+      "decode": "0x42e3e0",
+      "execute": "0x112f28",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "int",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 820,
+      "vtable": "0xa6ef88",
+      "encode": "0x1584e0",
+      "decode": "0x35e480",
+      "execute": "0x4493d8",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x158500"
+    },
+    {
+      "id": 827,
+      "vtable": "0xa36410",
+      "encode": "0x2b441c",
+      "decode": "0x724b9c",
+      "execute": "0x6655a8",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 834,
+      "vtable": "0xa489e0",
+      "encode": "0x34e558",
+      "decode": "0x516b6c",
+      "execute": "0x578044",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 835,
+      "vtable": "0xa4adf8",
+      "encode": "0x6f0140",
+      "decode": "0x14adf0",
+      "execute": "0x6e3694",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 836,
+      "vtable": "0xa48e00",
+      "encode": "0x3ee680",
+      "decode": "0x2c6a28",
+      "execute": "0x1d14cc",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x21",
+          "offset": 33,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 837,
+      "vtable": "0xa2bf00",
+      "encode": "0x3935a4",
+      "decode": "0x7554b8",
+      "execute": "0x4414e8",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 839,
+      "vtable": "0xa4d088",
+      "encode": "0x5ac554",
+      "decode": "0x2be074",
+      "execute": "0x644904",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 841,
+      "vtable": "0xa59ab8",
+      "encode": "0x6bf1dc",
+      "decode": "0x706f54",
+      "execute": "0x59b170",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 845,
+      "vtable": "0xa44960",
+      "encode": "0xfc6b8",
+      "decode": "0x1b07f4",
+      "execute": "0x63d8d8",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 852,
+      "vtable": "0xa4bc38",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x2cba3c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 863,
+      "vtable": "0xa5a048",
+      "encode": "0x20cc48",
+      "decode": "0x5e323c",
+      "execute": "0x2c0e9c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 869,
+      "vtable": "0xa61690",
+      "encode": "0x2994fc",
+      "decode": "0x364400",
+      "execute": "0x59ed34",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 870,
+      "vtable": "0xa6c9b0",
+      "encode": "0x707d34",
+      "decode": "0x6005f8",
+      "execute": "0x15af10",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 875,
+      "vtable": "0xa48f98",
+      "encode": "0x152cf4",
+      "decode": "0x5c5fe8",
+      "execute": "0x59a2e4",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "long",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 885,
+      "vtable": "0xa6c930",
+      "encode": "0x346478",
+      "decode": "0x5389e8",
+      "execute": "0x315544",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cbz at 0x346498"
+    },
+    {
+      "id": 888,
+      "vtable": "0xa6ce30",
+      "encode": "0x223330",
+      "decode": "0x306a9c",
+      "execute": "0x5dcb38",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x24",
+          "offset": 36,
+          "type": "int",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 911,
+      "vtable": "0xa5d9a0",
+      "encode": "0x170914",
+      "decode": "0x4216b8",
+      "execute": "0x3601ec",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x170950"
+    },
+    {
+      "id": 912,
+      "vtable": "0xa59bb0",
+      "encode": "0x379e24",
+      "decode": "0x57bc98",
+      "execute": "0x2c5320",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x379e44"
+    },
+    {
+      "id": 914,
+      "vtable": "0xa53af0",
+      "encode": "0x49f694",
+      "decode": "0x3072fc",
+      "execute": "0x3e140c",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x49f6b8"
+    },
+    {
+      "id": 921,
+      "vtable": "0xa6d040",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x4472a4",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 926,
+      "vtable": "0xa2a9c0",
+      "encode": "0x333208",
+      "decode": "0x702eb4",
+      "execute": "0x237fe8",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 929,
+      "vtable": "0xa73b08",
+      "encode": "0x3bfb14",
+      "decode": "0x202538",
+      "execute": "0x4263d4",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x3bfb38"
+    },
+    {
+      "id": 947,
+      "vtable": "0xa4afb0",
+      "encode": "0x3846b4",
+      "decode": "0x29ff80",
+      "execute": "0x1c68cc",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 948,
+      "vtable": "0xa2f168",
+      "encode": "0x555780",
+      "decode": "0x2c0ac4",
+      "execute": "0x19b0a0",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "string",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 959,
+      "vtable": "0xa331a0",
+      "encode": "0x49ced4",
+      "decode": "0x23cd38",
+      "execute": "0x38875c",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x49cef4"
+    },
+    {
+      "id": 963,
+      "vtable": "0xa71390",
+      "encode": "0x245fb4",
+      "decode": "0x5cfbc4",
+      "execute": "0x139cf4",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x245fdc"
+    },
+    {
+      "id": 965,
+      "vtable": "0xa5ec78",
+      "encode": "0x22559c",
+      "decode": "0x627050",
+      "execute": "0x18c78c",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x225678"
+    },
+    {
+      "id": 966,
+      "vtable": "0xa4c6c8",
+      "encode": "0x4df5f4",
+      "decode": "0x727a4c",
+      "execute": "0x741720",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 967,
+      "vtable": "0xa41418",
+      "encode": "0x25079c",
+      "decode": "0x5fed08",
+      "execute": "0x2c2b08",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 968,
+      "vtable": "0xa501c8",
+      "encode": "0x2c0f80",
+      "decode": "0x5c6a38",
+      "execute": "0x1e6538",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 981,
+      "vtable": "0xa6a1d0",
+      "encode": "0x56e8d4",
+      "decode": "0x6cc070",
+      "execute": "0x241b80",
+      "fields": null,
+      "unresolvedReason": "control flow/transform cmp at 0x56e910"
+    },
+    {
+      "id": 987,
+      "vtable": "0xa40950",
+      "encode": "0x1e2060",
+      "decode": "0x169960",
+      "execute": "0x17152c",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "bool",
+          "storage": "value"
+        }
+      ],
+      "unresolvedReason": null
+    },
+    {
+      "id": 988,
+      "vtable": "0xa4b268",
+      "encode": "0x658c8c",
+      "decode": "0x12d4c8",
+      "execute": "0x755660",
+      "fields": null,
+      "unresolvedReason": "unknown call at 0x658cac"
+    },
+    {
+      "id": 990,
+      "vtable": "0xa57490",
+      "encode": "0x6d44d8",
+      "decode": "0x314790",
+      "execute": "0x2d3b28",
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "long",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        }
+      ],
+      "unresolvedReason": null
+    }
+  ]
+}

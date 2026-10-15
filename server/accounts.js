@@ -3,6 +3,7 @@ const fs = require('node:fs/promises')
 const path = require('node:path')
 const { randomBytes, timingSafeEqual } = require('node:crypto')
 const { ProtocolError } = require('../lib/protocol/stream')
+const { selectedDeck } = require('./starter-state')
 
 const queues = new Map()
 
@@ -30,6 +31,7 @@ class AccountStore {
       for (const account of data.accounts) {
         if (!account || !Array.isArray(account.id) || account.id.length !== 2 || account.id[0] !== 0 || !Number.isInteger(account.id[1]) || account.id[1] < 1 || account.id[1] >= data.nextId || ids.has(account.id[1]) || typeof account.token !== 'string' || !/^[0-9a-f]{40}$/.test(account.token) || typeof account.name !== 'string' || typeof account.createdAt !== 'string' || !Number.isFinite(Date.parse(account.createdAt))) throw new Error('Invalid account database')
         ids.add(account.id[1])
+        selectedDeck(account)
       }
       return data
     } catch (error) {
@@ -61,6 +63,20 @@ class AccountStore {
       const account = { id: [0, database.nextId++], token: randomBytes(20).toString('hex'), name: 'Player', createdAt: new Date().toISOString() }
       database.accounts.push(account)
       await this.save(database)
+      return account
+    })
+  }
+
+  selectDeck (identity, deck) {
+    return this.serial(async () => {
+      selectedDeck({ starter: { selectedDeck: deck } })
+      const database = await this.load()
+      const account = database.accounts.find(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
+      if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+      if (selectedDeck(account) !== deck) {
+        account.starter = { ...account.starter, selectedDeck: deck }
+        await this.save(database)
+      }
       return account
     })
   }

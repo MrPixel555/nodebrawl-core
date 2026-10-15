@@ -4,6 +4,7 @@ const { createHash } = require('node:crypto')
 const { profile } = require('../lib/protocol/messages')
 const { Writer, ProtocolError } = require('../lib/protocol/stream')
 const starter = require('./data/starter-home.json')
+const { selectedDeck } = require('./starter-state')
 
 // External templates bind fixed-width account IDs explicitly. The starter
 // profile below uses typed bindings generated from the native nested codecs.
@@ -39,6 +40,7 @@ function createStarterHomeProvider () {
       else if (part.field === 'accountId' && part.type === 'long') writer.long(account.id)
       else if (part.field === 'accountId' && part.type === 'vlong') { writer.vint(account.id[0]); writer.vint(account.id[1]) }
       else if (part.field === 'name' && part.type === 'string') writer.string(account.name)
+      else if (part.field === 'selectedDeck' && part.type === 'vint') writer.vint(selectedDeck(account))
       else throw new Error('Invalid starter Home binding')
     }
     return { payload: writer.toBuffer(), version: starter.version }

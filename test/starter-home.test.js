@@ -7,7 +7,7 @@ const fixtures = require('./fixtures/native-starter-home.json')
 test('starter player identity bindings match full native Home outputs, including VInt boundaries and UTF-8', async () => {
   const provider = createStarterHomeProvider()
   for (const fixture of fixtures) {
-    const home = await provider({ id: fixture.accountId, name: fixture.name })
+    const home = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: fixture.selectedDeck ?? 0 } })
     assert.equal(home.version, 0)
     assert.equal(home.payload.toString('hex'), fixture.payloadHex)
   }
@@ -20,6 +20,7 @@ test('starter Home rejects identities exceeding the native limits', async () => 
   const provider = createStarterHomeProvider()
   for (const id of [[], [0], [0, 1.5], [0, 2147483648]]) await assert.rejects(provider({ id, name: 'Player' }))
   for (const name of ['', null, 'ا'.repeat(101)]) await assert.rejects(provider({ id: [0, 1], name }), /identity/)
+  for (const starter of [null, [], {}, { selectedDeck: -1 }, { selectedDeck: 5 }, { selectedDeck: 1.5 }]) await assert.rejects(provider({ id: [0, 1], name: 'Player', starter }), /deck selection/)
 })
 
 test('Home mode selection preserves the disabled default and rejects conflicting configuration', async () => {

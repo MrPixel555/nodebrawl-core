@@ -1,0 +1,3006 @@
+[
+  {
+    "id": 18,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "12b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 14,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 18,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "12c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 14,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 28,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "1cb9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 17,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 28,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "1cc0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 17,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 57,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "39b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 11,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 57,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "39c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 11,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 203,
+    "variant": 0,
+    "fields": {
+      "field_0x20": 345678,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8b030005464eb9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 203,
+    "variant": 1,
+    "fields": {
+      "field_0x20": -123456,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8b03fffe1dc0c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 254,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": false,
+      "field_0x21": false,
+      "field_0x24": 12345,
+      "field_0x28": 12345
+    },
+    "payloadHex": "be03b9c001b9c001b9c00107f9ae6300b9c001b9c001",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 254,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": true,
+      "field_0x21": true,
+      "field_0x24": -8192,
+      "field_0x28": -8192
+    },
+    "payloadHex": "be03c0807fc0807fc0807f07f9ae6303c0807fc0807f",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 255,
+    "variant": 0,
+    "fields": {
+      "field_0x20": false,
+      "field_0x21": false,
+      "field_0x24": 12345,
+      "field_0x30": "protocol-check",
+      "field_0x28": 12345,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "bf0300b9c0010000000e70726f746f636f6c2d636865636bb9c001b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 40,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 255,
+    "variant": 1,
+    "fields": {
+      "field_0x20": true,
+      "field_0x21": true,
+      "field_0x24": -8192,
+      "field_0x30": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x28": -8192,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "bf0303c0807f0000000cd8a8d8a7d8b2db8cdaa9d986c0807fc0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 38,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 265,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x24": 12345,
+      "field_0x28": 12345
+    },
+    "payloadHex": "8904b9c001b9c001b9c00107f9ae63b9c001b9c001b9c001",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 265,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x24": -8192,
+      "field_0x28": -8192
+    },
+    "payloadHex": "8904c0807fc0807fc0807f07f9ae63c0807fc0807fc0807f",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 287,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 345678
+    },
+    "payloadHex": "9f04b9c001b9c001b9c00107f9ae630005464e",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 287,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -123456
+    },
+    "payloadHex": "9f04c0807fc0807fc0807f07f9ae63fffe1dc0",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 291,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a304b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 291,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a304c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 292,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x24": 12345
+    },
+    "payloadHex": "a404b9c001b9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 292,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x24": -8192
+    },
+    "payloadHex": "a404c0807fc0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 312,
+    "variant": 0,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x28": 12345,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b80400000007fffc6bb9b9c001b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 26,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 312,
+    "variant": 1,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x28": -8192,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b80400000007fffc6bb9c0807fc0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 26,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 320,
+    "variant": 0,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "800500000007fffc6bb9b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 23,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 320,
+    "variant": 1,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "800500000007fffc6bb9c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 23,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 322,
+    "variant": 0,
+    "fields": {
+      "field_0x20": "protocol-check",
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "82050000000e70726f746f636f6c2d636865636bb9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 33,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 322,
+    "variant": 1,
+    "fields": {
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "82050000000cd8a8d8a7d8b2db8cdaa9d986c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 31,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 358,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 345678
+    },
+    "payloadHex": "a605b9c001b9c001b9c00107f9ae630005464e",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 358,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -123456
+    },
+    "payloadHex": "a605c0807fc0807fc0807f07f9ae63fffe1dc0",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 368,
+    "variant": 0,
+    "fields": {
+      "field_0x20": 12345,
+      "field_0x28": "protocol-check",
+      "field_0x30": false,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b005b9c0010000000e70726f746f636f6c2d636865636b00b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 37,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 368,
+    "variant": 1,
+    "fields": {
+      "field_0x20": -8192,
+      "field_0x28": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x30": true,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b005c0807f0000000cd8a8d8a7d8b2db8cdaa9d98601c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 35,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 370,
+    "variant": 0,
+    "fields": {
+      "field_0x20": "protocol-check",
+      "field_0x38": 345678,
+      "field_0x3c": false,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b2050000000e70726f746f636f6c2d636865636b0005464e00b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 38,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 370,
+    "variant": 1,
+    "fields": {
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x38": -123456,
+      "field_0x3c": true,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b2050000000cd8a8d8a7d8b2db8cdaa9d986fffe1dc001c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 36,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 421,
+    "variant": 0,
+    "fields": {
+      "field_0x20": 345678,
+      "field_0x24": 345678,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a5060005464e0005464eb9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 23,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 421,
+    "variant": 1,
+    "fields": {
+      "field_0x20": -123456,
+      "field_0x24": -123456,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a506fffe1dc0fffe1dc0c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 23,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 469,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x24": 12345,
+      "field_0x28": 12345,
+      "field_0x2c": 12345,
+      "field_0x34": 12345,
+      "field_0x38": false,
+      "field_0x30": 12345
+    },
+    "payloadHex": "9507b9c001b9c001b9c00107f9ae63b9c001b9c001b9c001b9c001b9c00100b9c001",
+    "nativeDecodeConsumed": 34,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 469,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x24": -8192,
+      "field_0x28": -8192,
+      "field_0x2c": -8192,
+      "field_0x34": -8192,
+      "field_0x38": true,
+      "field_0x30": -8192
+    },
+    "payloadHex": "9507c0807fc0807fc0807f07f9ae63c0807fc0807fc0807fc0807fc0807f01c0807f",
+    "nativeDecodeConsumed": 34,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 479,
+    "variant": 0,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x28": false,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9f0700000007fffc6bb900b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 479,
+    "variant": 1,
+    "fields": {
+      "field_0x20": [
+        7,
+        -234567
+      ],
+      "field_0x28": true,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9f0700000007fffc6bb901c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 490,
+    "variant": 0,
+    "fields": {
+      "field_0x20": 345678,
+      "field_0x1c": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "aa070005464eb9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 490,
+    "variant": 1,
+    "fields": {
+      "field_0x20": -123456,
+      "field_0x1c": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "aa07fffe1dc0c0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 503,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false,
+      "field_0x24": 345678
+    },
+    "payloadHex": "b707b9c001b9c00107f9ae63b9c001000005464e",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 503,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true,
+      "field_0x24": -123456
+    },
+    "payloadHex": "b707c0807fc0807f07f9ae63c0807f01fffe1dc0",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 521,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "8908b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 521,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "8908c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 523,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "8b08b9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 523,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "8b08c0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 527,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x1c": false,
+      "field_0x24": 12345
+    },
+    "payloadHex": "8f08b9c001b9c00107f9ae63b9c00100b9c001",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 527,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x1c": true,
+      "field_0x24": -8192
+    },
+    "payloadHex": "8f08c0807fc0807f07f9ae63c0807f01c0807f",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 532,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "9408b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 532,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "9408c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 541,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false
+    },
+    "payloadHex": "9d08b9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 541,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true
+    },
+    "payloadHex": "9d08c0807fc0807f07f9ae63c0807f01",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 547,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "a308b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 547,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "a308c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 556,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "ac08b9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 556,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "ac08c0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 565,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b508b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 565,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b508c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 571,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": false
+    },
+    "payloadHex": "bb08b9c001b9c00107f9ae6300",
+    "nativeDecodeConsumed": 13,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 571,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": true
+    },
+    "payloadHex": "bb08c0807fc0807f07f9ae6301",
+    "nativeDecodeConsumed": 13,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 577,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": "protocol-check"
+    },
+    "payloadHex": "8109b9c001b9c00107f9ae630000000e70726f746f636f6c2d636865636b",
+    "nativeDecodeConsumed": 30,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 577,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646"
+    },
+    "payloadHex": "8109c0807fc0807f07f9ae630000000cd8a8d8a7d8b2db8cdaa9d986",
+    "nativeDecodeConsumed": 28,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 581,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "8509b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 581,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "8509c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 590,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8e09b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 590,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8e09c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 596,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": false
+    },
+    "payloadHex": "9409b9c001b9c00107f9ae6300",
+    "nativeDecodeConsumed": 13,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 596,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": true
+    },
+    "payloadHex": "9409c0807fc0807f07f9ae6301",
+    "nativeDecodeConsumed": 13,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 602,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x1c": 12345,
+      "field_0x24": false
+    },
+    "payloadHex": "9a09b9c001b9c00107f9ae63b9c001b9c00100",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 602,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x1c": -8192,
+      "field_0x24": true
+    },
+    "payloadHex": "9a09c0807fc0807f07f9ae63c0807fc0807f01",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 622,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "ae09b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 622,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "ae09c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 628,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "b409b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 628,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "b409c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 638,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "be09b9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 638,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "be09c0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 650,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8a0ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 650,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8a0ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 653,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8d0ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 653,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8d0ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 656,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "900ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 656,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "900ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 658,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false
+    },
+    "payloadHex": "920ab9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 658,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true
+    },
+    "payloadHex": "920ac0807fc0807f07f9ae63c0807f01",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 660,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "940ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 660,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "940ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 664,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false
+    },
+    "payloadHex": "980ab9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 664,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true
+    },
+    "payloadHex": "980ac0807fc0807f07f9ae63c0807f01",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 668,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x24": 12345,
+      "field_0x20": 12345,
+      "field_0x28": 12345
+    },
+    "payloadHex": "9c0ab9c001b9c00107f9ae63b9c001b9c001b9c001b9c001",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 668,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x24": -8192,
+      "field_0x20": -8192,
+      "field_0x28": -8192
+    },
+    "payloadHex": "9c0ac0807fc0807f07f9ae63c0807fc0807fc0807fc0807f",
+    "nativeDecodeConsumed": 24,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 670,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "9e0ab9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 670,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "9e0ac0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 676,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false,
+      "field_0x21": false
+    },
+    "payloadHex": "a40ab9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 676,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true,
+      "field_0x21": true
+    },
+    "payloadHex": "a40ac0807fc0807f07f9ae63c0807f03",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 682,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "aa0ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 682,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "aa0ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 691,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "b30ab9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 691,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "b30ac0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 693,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345,
+      "field_0x24": 12345
+    },
+    "payloadHex": "b50ab9c001b9c00107f9ae63b9c001b9c001b9c001",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 693,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192,
+      "field_0x24": -8192
+    },
+    "payloadHex": "b50ac0807fc0807f07f9ae63c0807fc0807fc0807f",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 696,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b80ab9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 696,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b80ac0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 703,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "bf0ab9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 703,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "bf0ac0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 705,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "810bb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 705,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "810bc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 715,
+    "variant": 0,
+    "fields": {
+      "field_0x20": "protocol-check",
+      "field_0x28": "protocol-check",
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8b0b0000000e70726f746f636f6c2d636865636b0000000e70726f746f636f6c2d636865636bb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 48,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 715,
+    "variant": 1,
+    "fields": {
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x28": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8b0b0000000cd8a8d8a7d8b2db8cdaa9d9860000000cd8a8d8a7d8b2db8cdaa9d986c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 44,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 717,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8d0bb9c001b9c00107f9ae6300000007fffc6bb9",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 717,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8d0bc0807fc0807f07f9ae6300000007fffc6bb9",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 723,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x1c": false
+    },
+    "payloadHex": "930bb9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 723,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x1c": true
+    },
+    "payloadHex": "930bc0807fc0807f07f9ae63c0807f01",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 738,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a20bb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 738,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a20bc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 742,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345,
+      "field_0x24": false
+    },
+    "payloadHex": "a60bb9c001b9c00107f9ae63b9c001b9c00100",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 742,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192,
+      "field_0x24": true
+    },
+    "payloadHex": "a60bc0807fc0807f07f9ae63c0807fc0807f01",
+    "nativeDecodeConsumed": 19,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 744,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a80bb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 744,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a80bc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 762,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "ba0bb9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 762,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "ba0bc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 775,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": 12345,
+      "field_0x20": 12345,
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870cb9c001b9c001b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 775,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": -8192,
+      "field_0x20": -8192,
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870cc0807fc0807fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 780,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": "protocol-check",
+      "field_0x28": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8c0cb9c001b9c00107f9ae630000000e70726f746f636f6c2d636865636b00000007fffc6bb9",
+    "nativeDecodeConsumed": 38,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 780,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x28": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "8c0cc0807fc0807f07f9ae630000000cd8a8d8a7d8b2db8cdaa9d98600000007fffc6bb9",
+    "nativeDecodeConsumed": 36,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 783,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "8f0cb9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 783,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "8f0cc0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 804,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "a40cb9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 804,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "a40cc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 805,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a50cb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 805,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a50cc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 819,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x28": 345678,
+      "field_0x1c": 12345,
+      "field_0x20": 12345,
+      "field_0x24": 12345
+    },
+    "payloadHex": "b30cb9c001b9c00107f9ae630005464eb9c001b9c001b9c001",
+    "nativeDecodeConsumed": 25,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 819,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x28": -123456,
+      "field_0x1c": -8192,
+      "field_0x20": -8192,
+      "field_0x24": -8192
+    },
+    "payloadHex": "b30cc0807fc0807f07f9ae63fffe1dc0c0807fc0807fc0807f",
+    "nativeDecodeConsumed": 25,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 827,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": false,
+      "field_0x20": 12345
+    },
+    "payloadHex": "bb0cb9c001b9c00107f9ae6300b9c001",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 827,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": true,
+      "field_0x20": -8192
+    },
+    "payloadHex": "bb0cc0807fc0807f07f9ae6301c0807f",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 834,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "820db9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 834,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "820dc0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 835,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "830db9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 835,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "830dc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 836,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false,
+      "field_0x21": false
+    },
+    "payloadHex": "840db9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 836,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true,
+      "field_0x21": true
+    },
+    "payloadHex": "840dc0807fc0807f07f9ae63c0807f03",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 837,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345,
+      "field_0x24": 12345
+    },
+    "payloadHex": "850db9c001b9c00107f9ae63b9c001b9c001b9c001",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 837,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192,
+      "field_0x24": -8192
+    },
+    "payloadHex": "850dc0807fc0807f07f9ae63c0807fc0807fc0807f",
+    "nativeDecodeConsumed": 21,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 839,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870db9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 839,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870dc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 841,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "890db9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 841,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "890dc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 845,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "8d0db9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 845,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "8d0dc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 852,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "940db9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 852,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "940dc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 863,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9f0db9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 863,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9f0dc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 869,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "a50db9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 869,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "a50dc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 870,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a60db9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 870,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "a60dc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 875,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "ab0db9c001b9c00107f9ae6300000007fffc6bb9",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 875,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "ab0dc0807fc0807f07f9ae6300000007fffc6bb9",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 888,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": 12345,
+      "field_0x1c": 12345,
+      "field_0x24": 345678
+    },
+    "payloadHex": "b80db9c001b9c00107f9ae63b9c001b9c0010005464e",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 888,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x20": -8192,
+      "field_0x1c": -8192,
+      "field_0x24": -123456
+    },
+    "payloadHex": "b80dc0807fc0807f07f9ae63c0807fc0807ffffe1dc0",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 921,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "990eb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 921,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "990ec0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 926,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": 12345
+    },
+    "payloadHex": "9e0eb9c001b9c00107f9ae63b9c001b9c001",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 926,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": -8192
+    },
+    "payloadHex": "9e0ec0807fc0807f07f9ae63c0807fc0807f",
+    "nativeDecodeConsumed": 18,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 947,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "b30eb9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 947,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "b30ec0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 948,
+    "variant": 0,
+    "fields": {
+      "field_0x20": "protocol-check",
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b40e0000000e70726f746f636f6c2d636865636bb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 30,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 948,
+    "variant": 1,
+    "fields": {
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "b40e0000000cd8a8d8a7d8b2db8cdaa9d986c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 28,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 966,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345
+    },
+    "payloadHex": "860fb9c001b9c00107f9ae63b9c001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 966,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192
+    },
+    "payloadHex": "860fc0807fc0807f07f9ae63c0807f",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 967,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870fb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 967,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "870fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 968,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "880fb9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 968,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "880fc0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 987,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": 12345,
+      "field_0x20": false
+    },
+    "payloadHex": "9b0fb9c001b9c00107f9ae63b9c00100",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 987,
+    "variant": 1,
+    "fields": {
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ],
+      "field_0x1c": -8192,
+      "field_0x20": true
+    },
+    "payloadHex": "9b0fc0807fc0807f07f9ae63c0807f01",
+    "nativeDecodeConsumed": 16,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 990,
+    "variant": 0,
+    "fields": {
+      "field_0x1c": [
+        7,
+        -234567
+      ],
+      "field_0x10": 12345,
+      "field_0xc": 12345,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9e0f00000007fffc6bb9b9c001b9c00107f9ae63",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 990,
+    "variant": 1,
+    "fields": {
+      "field_0x1c": [
+        7,
+        -234567
+      ],
+      "field_0x10": -8192,
+      "field_0xc": -8192,
+      "field_0x14": [
+        7,
+        -234567
+      ]
+    },
+    "payloadHex": "9e0f00000007fffc6bb9c0807fc0807f07f9ae63",
+    "nativeDecodeConsumed": 20,
+    "nativeReencodeEqual": true
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "messageId": 13597,
+  "commandId": 703,
+  "nativeExecute": "0x32f870",
+  "observations": [
+    {
+      "requestedDeck": 1,
+      "nativeResult": 0,
+      "selectedDeck": 1
+    },
+    {
+      "requestedDeck": 4,
+      "nativeResult": 0,
+      "selectedDeck": 4
+    },
+    {
+      "requestedDeck": 4,
+      "nativeResult": 4,
+      "selectedDeck": 4
+    },
+    {
+      "requestedDeck": 0,
+      "nativeResult": 0,
+      "selectedDeck": 0
+    },
+    {
+      "requestedDeck": 5,
+      "nativeResult": 3,
+      "selectedDeck": 0
+    },
+    {
+      "requestedDeck": -1,
+      "nativeResult": 3,
+      "selectedDeck": 0
+    }
+  ],
+  "observerCallbacks": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      4,
+      0
+    ]
+  ],
+  "scope": "Original command/Home logic with CSV lookup adapters and a UI observer callback; not Android UI or gameplay checksum validation"
+}
