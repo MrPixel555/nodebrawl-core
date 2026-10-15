@@ -313,45 +313,55 @@ test('Socket reader uses the inline Login stack slot and authenticates without d
   transport.close()
 })
 
-test('Home tracing keeps the reader after LoginOk and stops after decoded card metadata', () => {
-  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'), true, true)
-  const message = c.memory.alloc(0xa8)
-  const home = c.memory.alloc(0x730)
-  const avatar = c.memory.alloc(0x1a0)
-  message.add(0x80).writePointer(home)
-  message.add(0x88).writePointer(avatar)
-  message.add(0x24).writeByteArray(Buffer.from([0x6f, 2, 0, 0]))
-  home.add(0x134).writeByteArray(Buffer.from([8, 0, 0, 0]))
-  home.add(0x15c).writeByteArray(Buffer.from([5, 0, 0, 0]))
-  avatar.add(0xd8).writeByteArray(Buffer.from([1, 0, 0, 0]))
-  const ids = require('../server/data/starter-home.json').starter.deckIds
-  for (let n = 0; n < 8; n++) {
-    const card = c.memory.alloc(0x40)
-    const data = c.memory.alloc(0x30)
-    const id = Buffer.alloc(4); id.writeUInt32LE(ids[n])
-    data.add(0x20).writeByteArray(id)
-    card.add(8).writePointer(data)
-    home.add(0x20 + n * 8).writePointer(card)
-  }
-  c.worker('socket', () => {
-    c.state(login, 4)
-    c.probe(0x27ead8)
-    assert(c.following.has(45), 'Successful reply must retain the Home decoder scope when requested')
-    const original = new c.Pointer(1234)
-    assert.equal(c.probe(0x2641e4, { x2: original }).x2, original, 'Peer overrides must stop after the first reply')
-    c.probe(0x154440, { x0: message })
-    c.probe(0x1544f4, { x19: message })
-    assert.equal(c.following.size, 0)
-    return new c.Pointer(0)
+for (const eventsPresent of [false, true]) {
+  test(`Home tracing keeps the reader and reports event catalogue presence ${eventsPresent}`, () => {
+    const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'), true, true)
+    const message = c.memory.alloc(0xa8)
+    const home = c.memory.alloc(0x730)
+    const avatar = c.memory.alloc(0x1a0)
+    message.add(0x80).writePointer(home)
+    message.add(0x88).writePointer(avatar)
+    message.add(0x24).writeByteArray(Buffer.from([eventsPresent ? 0x71 : 0x6f, 2, 0, 0]))
+    if (eventsPresent) {
+      const manager = c.memory.alloc(0xf0)
+      const events = c.memory.alloc(0x18)
+      home.add(0x4f8).writePointer(manager)
+      manager.add(0x10).writePointer(events)
+    }
+    home.add(0x134).writeByteArray(Buffer.from([8, 0, 0, 0]))
+    home.add(0x15c).writeByteArray(Buffer.from([5, 0, 0, 0]))
+    avatar.add(0xd8).writeByteArray(Buffer.from([1, 0, 0, 0]))
+    const ids = require('../server/data/starter-home.json').starter.deckIds
+    for (let n = 0; n < 8; n++) {
+      const card = c.memory.alloc(0x40)
+      const data = c.memory.alloc(0x30)
+      const id = Buffer.alloc(4); id.writeUInt32LE(ids[n])
+      data.add(0x20).writeByteArray(id)
+      card.add(8).writePointer(data)
+      home.add(0x20 + n * 8).writePointer(card)
+    }
+    c.worker('socket', () => {
+      c.state(login, 4)
+      c.probe(0x27ead8)
+      assert(c.following.has(45), 'Successful reply must retain the Home decoder scope when requested')
+      const original = new c.Pointer(1234)
+      assert.equal(c.probe(0x2641e4, { x2: original }).x2, original, 'Peer overrides must stop after the first reply')
+      c.probe(0x154440, { x0: message })
+      c.probe(0x1544f4, { x19: message })
+      assert.equal(c.following.size, 0)
+      return new c.Pointer(0)
+    })
+    const observed = c.logs.find(log => log.event === 'native-home-decode-complete')
+    assert.equal(observed.consumedBytes, eventsPresent ? 625 : 623)
+    assert.equal(observed.eventsPresent, eventsPresent)
+    assert.equal(observed.eventCount, eventsPresent ? 0 : null)
+    assert.deepEqual(observed.cards, ids)
+    assert.equal(observed.decks, 5)
+    assert.equal(observed.level, 1)
+    assert(c.logs.some(log => log.event === 'development-peer-tracing-stopped' && log.reason === 'home-decoded'))
+    assert(!JSON.stringify(c.logs).includes(login.clientSecret))
   })
-  const observed = c.logs.find(log => log.event === 'native-home-decode-complete')
-  assert.equal(observed.consumedBytes, 623)
-  assert.deepEqual(observed.cards, ids)
-  assert.equal(observed.decks, 5)
-  assert.equal(observed.level, 1)
-  assert(c.logs.some(log => log.event === 'development-peer-tracing-stopped' && log.reason === 'home-decoded'))
-  assert(!JSON.stringify(c.logs).includes(login.clientSecret))
-})
+}
 
 test('A new connection resumes existing native workers after a closed socket', () => {
   const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))

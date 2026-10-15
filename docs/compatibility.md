@@ -407,3 +407,15 @@ persists atomically and is restored by the native-backed Home provider; encrypte
 TCP checks cover that flow. No command simulation checksum, rename pricing or
 deck-content editing is claimed. [Command evidence](commands.md) explains the
 scope and reproduction. The current Node suite has 584 passing tests.
+
+**Device Home and post-decode crash:** the device subsequently opened LoginOk,
+decoded the full old 623-byte Home and resolved every intended card and Arena1.
+Its GL-thread crash at 0x243198/0x14 is reproduced by the native event query when
+Home+0x4f8's catalogue is absent. The provider includes a native empty catalogue
+(revision -1), producing 625 bytes for the small test identity; original queries
+0x551634 and 0x4c29a0 accept it. 10459 has a native-verified two-string codec, and
+validated 10459/11485 startup receipts are handled without logging their contents
+or inventing responses. The ready script is network-v5 and reports event
+catalogue presence/count. All 588 Node tests pass. [Crash evidence](lobby-crash.md)
+distinguishes decoded device state, native regression verification and the still
+pending corrected Android lobby run.

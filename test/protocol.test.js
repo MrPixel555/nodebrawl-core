@@ -4,7 +4,7 @@ const assert = require('node:assert/strict')
 const { Reader, Writer, ProtocolError } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
-const fixtures = [...require('./fixtures/native-flat.json'), ...require('./fixtures/native-extra.json')]
+const fixtures = [...require('./fixtures/native-flat.json'), ...require('./fixtures/native-extra.json'), ...require('./fixtures/native-startup.json')]
 
 for (const fixture of fixtures) {
   test(`native libg.so codec ${fixture.id}, variant ${fixture.variant}`, () => {
@@ -37,6 +37,9 @@ test('strict lengths reject truncated, excessive and invalid UTF-8 payloads', ()
   }
   assert.throws(() => decodeMessage(10108, Buffer.from([0])), /trailing/)
   assert.throws(() => new Writer().vint(2147483648), /int32/)
+  const oversized = { field_0x80_0x8: 'ا'.repeat(513), field_0x80_0x20_json: '{}' }
+  assert.throws(() => encodeMessage(10459, oversized), /string limit/)
+  assert.throws(() => decodeMessage(10459, new Writer().string(oversized.field_0x80_0x8).string('{}').toBuffer()), /string length/)
 })
 
 test('frames decode at every split point and with coalesced frames', () => {

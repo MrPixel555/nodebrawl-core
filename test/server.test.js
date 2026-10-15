@@ -11,6 +11,7 @@ const { createGameServer } = require('../server/core')
 const { loadHomeTemplate, createStarterHomeProvider } = require('../server/home')
 const { createHash } = require('node:crypto')
 const { createStarterHandlers } = require('../server/starter-handlers')
+const { createStartupHandlers } = require('../server/startup-handlers')
 const { Writer } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
@@ -225,7 +226,8 @@ for (const starterHome of [false, true]) {
     const secret = Buffer.alloc(32, 13); const peer = keyPair(secret).publicKey
     const clientSecret = Buffer.alloc(32, 7); const clientPublicKey = keyPair(clientSecret).publicKey
     const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
-    const handlers = new Map()
+    const entries = []
+    const handlers = createStartupHandlers({ logger: entry => entries.push(entry), traceNetwork: true })
     const { game, port, directory } = await setup(t, { handlers, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
     if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
     const c = await client(port)
@@ -244,6 +246,9 @@ for (const starterHome of [false, true]) {
     assert.equal(home.id, 21217)
     const expected = starterHome ? Buffer.from(require('./fixtures/native-starter-home.json').find(f => f.accountId[1] === 1).payloadHex, 'hex') : Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY')
     assert.deepEqual(receive.decrypt(home.payload), expected)
+    const metadata = { field_0x80_0x8: 'private-event-name', field_0x80_0x20_json: '{"details":"private-event-value"}' }
+    c.socket.write(encodeFrame(10459, 0, send.encrypt(encodeMessage(10459, metadata))))
+    c.socket.write(encodeFrame(11485, 0, send.encrypt(Buffer.alloc(0))))
     if (starterHome) {
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }] }))))
@@ -254,10 +259,24 @@ for (const starterHome of [false, true]) {
       assert.equal(response.id, 20108); assert.equal(receive.decrypt(response.payload).length, 0)
     }
     assert.equal(game.statistics.logins, 1)
+    assert.equal(game.statistics.unsupported, 0)
+    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice'])
+    assert(!JSON.stringify(entries).includes('private-event'))
     if (starterHome) assert.equal((await new AccountStore(directory).login(account.field_0x80, account.field_0x90)).starter.selectedDeck, 4)
     receive.close(); send.close()
   })
 }
+
+test('client startup metadata is validated without retaining or logging its values', async () => {
+  const entries = []
+  const handlers = createStartupHandlers({ traceNetwork: true, logger: entry => entries.push(entry) })
+  for (const value of [null, 'not JSON']) {
+    const payload = encodeMessage(10459, { field_0x80_0x8: 'event', field_0x80_0x20_json: value })
+    await assert.rejects(handlers.get(10459)({}, null, { payload }), /Invalid client metadata/)
+  }
+  await assert.rejects(handlers.get(11485)({}, null, { payload: Buffer.from([1]) }), /trailing/)
+  assert.equal(entries.length, 0)
+})
 
 test('missing Home returns encrypted LoginFailed after encrypted Login', { timeout: 5000 }, async t => {
   const { NativeTransport } = require('../server/transport')

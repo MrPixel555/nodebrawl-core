@@ -87,6 +87,13 @@ class StarterHome:
         vm.uc.mem_write(self.avatar + 0x14d, b'\1')
         self.commodities(0, [('Gold', 100)])
         self.commodities(4, [('MaxScore', 0), ('MaxArena', 1), ('CardCount', 8)])
+        # The decoder accepts an absent event catalogue, but lobby queries
+        # 0x551634 -> 0x243178 dereference it without a null check. Preserve an
+        # actual native empty catalogue, including its default revision -1.
+        events = vm.alloc(0x18)
+        vm.call(0x6a22ec, events)
+        manager = qword(vm, self.home + 0x4f8)
+        vm.uc.mem_write(manager + 0x10, struct.pack('<Q', events))
         vm.register_hook(0x344840, self.observe_home_id)
         vm.register_hook(0x241ecc, self.observe_avatar_id)
         vm.register_hook(0x5e0f60, self.observe_name)
@@ -163,6 +170,10 @@ class StarterHome:
         gold = qword(vm, qword(vm, qword(vm, avatar + 0x90)))
         assert qword(vm, gold) == self.records[5, 'Gold'] and read_u32(vm, gold + 8) == 100
         home = qword(vm, second + 0x80)
+        events = qword(vm, qword(vm, home + 0x4f8) + 0x10)
+        assert events and read_u32(vm, events + 0x14) == 0
+        assert vm.call(0x551634, home) == 0
+        assert vm.call(0x4c29a0, home) == 0
         assert read_u32(vm, home + 0x2a0) == selected_deck
         assert read_u32(vm, home + 0x134) == 8
         for n, expected in enumerate(self.deck):

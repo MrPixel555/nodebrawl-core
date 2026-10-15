@@ -338,7 +338,9 @@ function installDevelopmentPeer (module) {
           return data.isNull() ? null : data.add(0x20).readU32()
         })
         const arena = avatar.add(0x158).readPointer()
-        record('native-home-decode-complete', { consumedBytes: message.add(0x24).readU32(), slots, cards, decks: home.add(0x15c).readU32(), level: avatar.add(0xd8).readU32(), arena: arena.isNull() ? null : arena.add(0x20).readU32() })
+        const manager = home.add(0x4f8).readPointer()
+        const events = manager.isNull() ? manager : manager.add(0x10).readPointer()
+        record('native-home-decode-complete', { consumedBytes: message.add(0x24).readU32(), slots, cards, decks: home.add(0x15c).readU32(), level: avatar.add(0xd8).readU32(), arena: arena.isNull() ? null : arena.add(0x20).readU32(), eventsPresent: !events.isNull(), eventCount: events.isNull() ? null : events.add(0x14).readU32() })
         stopPeerTracing('home-decoded')
       })],
     )
@@ -567,4 +569,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v4', homeTrace: Boolean(configuration.traceHome) })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v5', homeTrace: Boolean(configuration.traceHome) })

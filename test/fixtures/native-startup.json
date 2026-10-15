@@ -1,0 +1,24 @@
+[
+  {
+    "id": 10459,
+    "variant": 0,
+    "fields": {
+      "field_0x80_0x8": "home-open",
+      "field_0x80_0x20_json": "{\"screen\":\"home\",\"entry\":\"login\"}"
+    },
+    "payload": "00000009686f6d652d6f70656e000000217b2273637265656e223a22686f6d65222c22656e747279223a226c6f67696e227d",
+    "native_decode_consumed": 50,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 10459,
+    "variant": 1,
+    "fields": {
+      "field_0x80_0x8": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x80_0x20_json": "{}"
+    },
+    "payload": "0000000cd8a8d8a7d8b2db8cdaa9d986000000027b7d",
+    "native_decode_consumed": 22,
+    "native_reencode_equal": true
+  }
+]

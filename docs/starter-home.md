@@ -1,8 +1,10 @@
 # Starter Home for the supplied 3.1.0 library
 
-`HOME_MODE=starter` enables an initial player state for the next Android lobby
-test. It sends LoginOk and OwnHomeData instead of the deliberate missing-Home
-LoginFailed. This is not yet an Android-verified lobby or a playable server.
+`HOME_MODE=starter` enables an initial player state for Android lobby testing.
+The device decoded the old Home and resolved its cards/arena, then crashed on an
+absent event catalogue during UI setup. The provider now includes a native empty
+catalogue; its known crash chain passes in the VM. A new device UI run is pending.
+See [the crash analysis](lobby-crash.md).
 
 The generated profile in `server/data/starter-home.json` contains native-encoded
 constant sections and five typed identity bindings: one fixed-width Home Long,
@@ -28,20 +30,21 @@ battles are not implemented. See [command evidence and scope](commands.md).
 encoder and decoder in Unicorn. CSV data lookup is an explicit adapter: spell
 ordinal table 7 concatenates named character, building and other spell records;
 resource/arena tables preserve their named-row order. This does not initialize
-the entire Android game-data system. The next device trace reports the *actual*
-resolved card IDs to check that assumption. Unknown fields retain native decoded
+the entire Android game-data system. The device has now confirmed the *actual*
+resolved card IDs for this deck. Unknown fields retain native decoded
 defaults rather than taking the sample server's packet as an authoritative schema.
 
-Native decoding consumes all 623 bytes for ID [0,37]/name Player, and native
+Native decoding consumes all 625 bytes for ID [0,37]/name Player, and native
 re-encoding produces identical bytes. Six complete native fixtures cover a new
 account, multi-byte account IDs, the int32 boundary, longer names and Persian
 UTF-8 and selected decks 1 and 4. Node's actual provider matches these bytes. The
 [encrypted observation](native-starter-transport.json) verifies Node-generated
-LoginOk, the starter Home (635 bytes for its variable identity) and KeepAlive
+LoginOk, the starter Home (637 bytes for its variable identity) and KeepAlive
 through the original native session parser. The handshake fields and CSV lookup
 objects in that test are synthetic. This is separate from the
-[confirmed device transport](device-transport.json), which opened LoginFailed
-and did not yet receive this Home.
+[earlier device transport](device-transport.json). The subsequent
+[device Home evidence](device-home.json) confirms old Home decoding, followed
+by a UI crash; it does not yet validate the fixed catalogue on Android.
 
 Reproduce with the retained local analysis environment:
 

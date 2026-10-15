@@ -1,0 +1,22 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "oldHomeBytes": 623,
+  "fixedHomeBytes": 625,
+  "negative": {
+    "decodeConsumed": 623,
+    "cataloguePresent": false,
+    "nativeCrashPC": "0x243198",
+    "faultAddress": "0x14",
+    "x0": 8
+  },
+  "positive": {
+    "decodeConsumed": 625,
+    "nativeReencodeEqual": true,
+    "cataloguePresent": true,
+    "catalogueRevision": -1,
+    "eventCount": 0,
+    "nativeEventQuery": 0,
+    "nativeLobbyOfferQuery": 0
+  },
+  "scope": "Exact observed native null dereference reproduced with a guarded null page, then original query chain accepts Node Home with native empty event catalogue. CSV lookups are adapters; full Android UI still needs a device run."
+}

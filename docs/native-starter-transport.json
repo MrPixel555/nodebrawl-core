@@ -1,6 +1,6 @@
 {
   "nativeLoginOkAccepted": true,
-  "nativeStarterHomeConsumed": 635,
+  "nativeStarterHomeConsumed": 637,
   "nativeAccountBindingsMatched": true,
   "nativeKeepAliveAccepted": true,
   "scope": "Node starter provider to native session parser with synthetic handshake fields and CSV data adapters",

@@ -1,0 +1,25 @@
+{
+  "source": "User-provided Android Frida/server trace and crash-new.txt",
+  "libraryBuildId": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "fridaVersion": "17.15.4",
+  "oldHome": {
+    "loginReplyOpened": true,
+    "messagingState": 5,
+    "nativeDecodeConsumed": 623,
+    "cards": [26000000, 26000001, 26000003, 26000005, 26000014, 26000018, 28000000, 28000001],
+    "decks": 5,
+    "level": 1,
+    "arenaId": 54000001,
+    "postLoginMessageIds": [10459, 11485]
+  },
+  "crash": {
+    "threadRole": "GLThread",
+    "signal": "SIGSEGV",
+    "nativePC": "0x243198",
+    "faultAddress": "0x14",
+    "x0": 8,
+    "nativeCallChain": ["0x4c29a0", "0x551634", "0x243178", "0x4596f4"],
+    "cause": "Home event manager has no event catalogue; native UI query dereferences the absent catalogue"
+  },
+  "scope": "Device confirmed old Home decoding and card/arena lookup, then crashed before lobby. The new event-catalogue fix is reproduced in the native VM and still requires a new device run."
+}
