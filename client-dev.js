@@ -1,4 +1,4 @@
-const configuration = {"host":"223.223.223.1","port":9339,"serverPublicKey":"b82bd01df81e8eba890cb3659d2b2f083a47717dc8159106380ca146bb8b9745","traceHome":true}
+const configuration = {"host":"223.223.223.1","port":9339,"serverPublicKey":"8ddd4aa88e325e6cf7393740d2b9a9a952934477a44818bc0605d3b730cc5831","traceHome":true}
 const clientCrypto = (() => { const module = { exports: {} }; 'use strict'
 class ProtocolError extends Error {}
 const mask = (1n << 64n) - 1n
@@ -221,6 +221,9 @@ function instrument (module) {
     [0x7c92b0, '080040f9014940f920001fd6'],
     [0x154440, 'f50f1df8f44f01a9fd7b02a9fd830091'],
     [0x1544f4, 'fd7b42a9f44f41a9'],
+    [0x71b388, 'f50300aa'], [0x71b3cc, 'f50300aa'],
+    [0x207320, 'ffc301d1f91300f9f85f03a9f65704a9'],
+    [0x6a5bc8, '48ff5fc8'], [0x6a5c14, '68420591'],
   ]
   for (const [offset, expected] of locations) {
     if (hex(module.base.add(offset), expected.length / 2) !== expected) { record('library-profile-mismatch', { offset }); return }
@@ -300,13 +303,31 @@ function installDevelopmentPeer (module) {
     })],
   ]
   const lastStates = new Map()
+  const readProgress = new Map()
+  const sendProgress = new Map()
   function observe (action) {
     return context => { try { action(context) } catch (error) { record('observation-error', { message: error.message }) } }
+  }
+  function readReturned (context) {
+    const thread = Process.getCurrentThreadId()
+    const progress = readProgress.get(thread)
+    if (!progress) return
+    readProgress.delete(thread)
+    record('native-messaging-read-return', { thread, initialState: progress.state, state: progress.object.add(0x254).readU32(), durationMs: Date.now() - progress.started, hasMessage: !context.x0.isNull() })
+  }
+  function sendReturned () {
+    const thread = Process.getCurrentThreadId()
+    const progress = sendProgress.get(thread)
+    if (!progress) return
+    sendProgress.delete(thread)
+    record('native-send-worker-return', { thread, durationMs: Date.now() - progress.started })
   }
   definitions.push(
     [0x250bbc, observe(context => {
       const object = context.x0
       const state = object.add(0x254).readU32()
+      const thread = Process.getCurrentThreadId()
+      if (state <= 4) { if (readProgress.size >= 8) readProgress.clear(); readProgress.set(thread, { object, state, started: Date.now() }) }
       if (lastStates.get(object.toString()) === state) return
       if (lastStates.size >= 8) lastStates.clear()
       lastStates.set(object.toString(), state)
@@ -321,6 +342,16 @@ function installDevelopmentPeer (module) {
       record('native-login-encode', { version: object.add(8).readU32(), major: object.add(0x90).readU32(), minor: object.add(0x94).readU32(), build: object.add(0x98).readU32() })
     })],
     [0x3affd4, observe(context => record('native-login-build', { state: context.x0.add(0x254).readU32() }))],
+    [0x71b388, observe(readReturned)], [0x71b3cc, observe(readReturned)],
+    [0x207320, observe(context => {
+      const thread = Process.getCurrentThreadId()
+      const message = context.x2
+      const serialized = !message.isNull() && message.readPointer().equals(module.base.add(0xa2cae8))
+      if (sendProgress.size >= 8) sendProgress.clear()
+      sendProgress.set(thread, { started: Date.now() })
+      record('native-send-worker-dispatch', { thread, state: context.x0.add(0x254).readU32(), serialized, ...(serialized ? { id: message.add(0x7c).readU32(), version: message.add(8).readU32() } : {}) })
+    })],
+    [0x6a5bc8, observe(sendReturned)], [0x6a5c14, observe(sendReturned)],
   )
   if (configuration.traceHome) {
     definitions.push(
@@ -569,4 +600,4 @@ else {
   if (module) instrument(module)
   else throw new Error('This Frida version requires attaching after libg.so loads; use a current Frida release for spawn mode')
 }
-record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v6', homeTrace: Boolean(configuration.traceHome) })
+record('trace-ready', { fridaVersion: Frida.version, scriptRuntime: Script.runtime, redirected: Boolean(configuration.host), credentialsCaptured: false, developmentPeerRequested: Boolean(configuration.serverPublicKey), nativeInlineHooks: 0, tracingScope: 'messaging-workers-and-jni-update', diagnostics: 'network-v7', homeTrace: Boolean(configuration.traceHome) })

@@ -49,7 +49,7 @@ function client (publicKey, profileMatches = true, traceHome = false) {
   const art = { name: 'libart.so', size: 0x10000, base: new Pointer(0x50000000), enumerateSymbols: () => [{ name: '_ZN3art3JNI_RegisterNatives', address: new Pointer(0x50001000) }] }
   blocks.set(base.value, Buffer.from('7f454c46', 'hex'))
   blocks.set(base.value + 0x210, Buffer.from(profileMatches ? '6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4' : '0000000000000000000000000000000000000000', 'hex'))
-  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6']]
+  const instructions = [[0x3bcc68, '2c79fe97'], [0x3bcc84, 'febbfe97'], [0x3bcc88, '08000071'], [0x2641e4, 'cddb0394'], [0x264200, '9f1e0494'], [0x264204, '08000071'], [0x27eab4, '99710394'], [0x27ead4, '0de9fd97'], [0x27ead8, 'f4334091'], [0x250bbc, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x54c92c, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x41e914, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x3affd4, 'fc6fbaa9fa6701a9f85f02a9f65703a9'], [0x8011bc, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x16db08, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x6a5ab8, 'ffc301d1fa6702a9f85f03a9f65704a9'], [0x825b70, 'f44fbea9fd7b01a9fd430091f30300aa'], [0x7c92b0, '080040f9014940f920001fd6'], [0x71b388, 'f50300aa'], [0x71b3cc, 'f50300aa'], [0x207320, 'ffc301d1f91300f9f85f03a9f65704a9'], [0x6a5bc8, '48ff5fc8'], [0x6a5c14, '68420591']]
   for (const [offset, hex] of instructions) blocks.set(base.value + offset, Buffer.from(hex, 'hex'))
   blocks.set(base.value + 0x154440, Buffer.from('f50f1df8f44f01a9fd7b02a9fd830091', 'hex'))
   blocks.set(base.value + 0x1544f4, Buffer.from('fd7b42a9f44f41a9', 'hex'))
@@ -181,7 +181,7 @@ test('actual Stalker peer callouts produce matching Login and reply keys/nonces 
   assert(c.hooks.every(hook => typeof hook.address === 'string' || hook.address.value === 0x50001000))
   const transport = new NativeTransport(serverSecret)
   c.frame(() => {
-    assert.equal(c.callouts.size, 13)
+    assert.equal(c.callouts.size, 18)
     c.state(login, 3)
     const keyPointer = c.probe(0x3bcc68).x2
     const raw = Buffer.from(keyPointer.readByteArray(32))
@@ -470,4 +470,35 @@ test('socket diagnostics cover write/read and nested aliases without logging bod
   assert.equal(c.logs.find(log => log.event === 'game-socket-close').sentBytes, packet.length)
   assert(!JSON.stringify(c.logs).includes(body.toString()))
   assert(!JSON.stringify(c.logs).includes(body.toString('hex')))
+})
+
+test('Login receive and send-worker diagnostics preserve registers and omit message contents', () => {
+  const c = client(keyPair(Buffer.alloc(32, 29)).publicKey.toString('hex'))
+  const message = c.memory.alloc(0x80)
+  message.writePointer(c.base.add(0xa2cae8))
+  message.add(8).writeByteArray(Buffer.from([4, 0, 0, 0]))
+  message.add(0x7c).writeByteArray(Buffer.from([0x75, 0x27, 0, 0]))
+  message.add(0x10).writeByteArray(Buffer.from('private-login-body'))
+  c.worker('send', () => {
+    c.state(login, 3)
+    c.probe(0x250bbc, { x0: c.object })
+    c.probe(0x71b388, { x0: new c.Pointer(0), x19: c.object })
+    const registers = c.probe(0x207320, { x0: c.object, x2: message })
+    assert.equal(registers.x0, c.object)
+    assert.equal(registers.x2, message)
+    c.probe(0x6a5bc8)
+    return new c.Pointer(0)
+  })
+  const read = c.logs.find(log => log.event === 'native-messaging-read-return')
+  assert.equal(read.initialState, 3)
+  assert.equal(read.state, 3)
+  assert.equal(read.hasMessage, false)
+  assert(read.durationMs >= 0)
+  const send = c.logs.find(log => log.event === 'native-send-worker-dispatch')
+  assert.equal(send.id, 10101)
+  assert.equal(send.version, 4)
+  assert.equal(send.serialized, true)
+  assert(c.logs.some(log => log.event === 'native-send-worker-return'))
+  assert(!JSON.stringify(c.logs).includes('private-login-body'))
+  assert(!JSON.stringify(c.logs).includes(login.clientSecret))
 })
