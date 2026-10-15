@@ -6081,9 +6081,9 @@
       "encode": "0xfb52c",
       "decode": "0x200810",
       "type": "0x14b840",
-      "fields": [],
-      "unsupported_reason": null,
-      "codec_status": "flat",
+      "fields": null,
+      "unsupported_reason": "Deferred embedded stream: 0x540850 -> 0x2e66ac/0x23fc3c; GameMode snapshot unresolved",
+      "codec_status": "unresolved",
       "name": "Message28991",
       "factoryObservations": [
         {

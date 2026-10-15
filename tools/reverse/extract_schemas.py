@@ -49,6 +49,9 @@ def derive(address):
 registry=json.load(open(root/'registry.json'))
 for r in registry:
     r['fields'],r['unsupported_reason']=derive(int(r['encode'],16))
+    if r['id'] == 28991:
+        r['fields'] = None
+        r['unsupported_reason'] = 'Deferred embedded stream: 0x540850 -> 0x2e66ac/0x23fc3c; GameMode snapshot unresolved'
     r['codec_status']='flat' if r['fields'] is not None else 'unresolved'
 (root/'schemas.json').write_text(json.dumps(registry,indent=2))
 flat=[r for r in registry if r['fields'] is not None]

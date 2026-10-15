@@ -1,12 +1,14 @@
 'use strict'
 const { profile, schemaFor } = require('../lib/protocol/messages')
 const { commandCatalog } = require('../lib/protocol/commands')
-const recoveredNames = { 10453: 'CreateAlliance', 13882: 'ChangeAllianceSettings', 16592: 'SearchAlliances', 25074: 'AllianceSearchResult', 13597: 'EndClientTurn', 12405: 'HomeLogicStopped', 17967: 'TrainingNpcRequest', 10953: 'TrainingModeNpcRequest', 12373: 'PlayerProfileRequest', 22757: 'PlayerProfile', 26360: 'PlayerProfileFailed' }
+const recoveredNames = { 10453: 'CreateAlliance', 13882: 'ChangeAllianceSettings', 16592: 'SearchAlliances', 25074: 'AllianceSearchResult', 13597: 'EndClientTurn', 12405: 'HomeLogicStopped', 17967: 'TrainingNpcRequest', 10953: 'TrainingModeNpcRequest', 12373: 'PlayerProfileRequest', 22757: 'PlayerProfile', 26360: 'PlayerProfileFailed', 28991: 'DeferredGameModeSnapshot', 15263: 'GameModeSnapshotAck' }
 const runtime = { 10100: 'hello', 10101: 'login', 10108: 'heartbeat', 10459: 'metadata receipt and bounded content diagnostics', 11485: 'startup receipt', 13752: 'network report receipt', 13597: 'starter commands 563/703/805 and initial naming 948', 12373: 'persisted starter player profile lookup', 16592: 'empty clan name search', 20100: 'hello response', 20103: 'login failure', 20108: 'heartbeat response', 20758: 'login success and content URL vectors', 21217: 'persistent starter Home provider', 22757: 'native starter profile provider; general codec unresolved', 26360: 'absent player response', 25074: 'empty clan search result' }
 const messages = profile.messages.map(entry => {
   let schema = null
   try { schema = schemaFor(entry.id) } catch (_) {}
-  return { id: entry.id, name: recoveredNames[entry.id] || entry.name, codec: schema !== null, runtimeSupport: runtime[entry.id] || null, fields: schema, nativeEncode: entry.encode, nativeDecode: entry.decode, factoryObservations: entry.factoryObservations }
+  const result = { id: entry.id, name: recoveredNames[entry.id] || entry.name, codec: schema !== null, runtimeSupport: runtime[entry.id] || null, fields: schema, nativeEncode: entry.encode, nativeDecode: entry.decode, factoryObservations: entry.factoryObservations }
+  if (entry.id === 28991) result.envelopeSupport = 'verified raw/zlib envelope; inner GameMode snapshot unresolved; no runtime battle handler'
+  return result
 })
 const commands = [...commandCatalog.values()]
 if (process.argv.includes('--json')) console.log(JSON.stringify({ librarySha256: profile.library_sha256, messages, commands }, null, 2))

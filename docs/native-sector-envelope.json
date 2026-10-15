@@ -1,0 +1,27 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "message": 28991,
+  "vtable": "0xa4d488",
+  "streamGetter": "0x1c9004",
+  "consumer": "0x540850",
+  "compressedConsumer": "0x23fc3c",
+  "decompressor": "0x6a21bc",
+  "rawGameModeLoader": "0x2e66ac",
+  "snapshotDecoder": "0x431508",
+  "optionalInitializationDecoder": "0x6123b8",
+  "ack": {
+    "message": 15263,
+    "constructor": "0x145f08",
+    "vtable": "0xa2e478"
+  },
+  "envelope": "byte flag (1=zlib, other=native raw); compressed remainder: int32LE size + zlib bytes",
+  "nodeCanonicalFlags": [
+    0,
+    1
+  ],
+  "nativeRawAndCompressedMatched": true,
+  "adapters": [
+    "0x2e66ac captures decompressed bytes instead of loading an actual world"
+  ],
+  "scope": "Synthetic compression-envelope fixtures only. Initial GameMode/world state and playable Training/Party/PvP remain unresolved."
+}

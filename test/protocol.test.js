@@ -7,6 +7,17 @@ const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messa
 const fixtures = [...require('./fixtures/native-flat.json'), ...require('./fixtures/native-extra.json'), ...require('./fixtures/native-startup.json'), ...require('./fixtures/native-alliances.json'), ...require('./fixtures/native-training.json')]
 
 for (const fixture of fixtures) {
+  // Historical empty virtual-method observations do not cover the deferred
+  // GameMode consumer. Its envelope has separate native probes and tests.
+  if (fixture.id === 28991) {
+    test(`empty native virtual methods do not establish a 28991 codec, variant ${fixture.variant}`, () => {
+      assert.equal(fixture.payload, '')
+      assert.equal(fixture.native_decode_consumed, 0)
+      assert.throws(() => encodeMessage(28991, {}), /unresolved GameMode snapshot/)
+      assert.throws(() => decodeMessage(28991, Buffer.alloc(0)), /unresolved GameMode snapshot/)
+    })
+    continue
+  }
   test(`native libg.so codec ${fixture.id}, variant ${fixture.variant}`, () => {
     const fields = Object.fromEntries(Object.entries(fixture.fields).map(([key, value]) => [key, value?.hex !== undefined ? Buffer.from(value.hex, 'hex') : value]))
     const payload = Buffer.from(fixture.payload, 'hex')
@@ -57,7 +68,7 @@ test('frames decode at every split point and with coalesced frames', () => {
 test('catalog belongs to the uploaded ARM64 library', () => {
   assert.equal(profile.library_sha256, '4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a')
   assert.equal(profile.messages.length, 284)
-  assert.equal(profile.messages.filter(m => m.fields !== null).length, 155)
+  assert.equal(profile.messages.filter(m => m.fields !== null).length, 154)
   assert.equal(profile.messages.find(m => m.id === 10101).fields, null)
   assert.equal(profile.messages.find(m => m.id === 20103).fields, null)
 })

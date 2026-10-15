@@ -1856,7 +1856,7 @@
     },
     {
       "id": 15263,
-      "name": "Message15263",
+      "name": "GameModeSnapshotAck",
       "codec": true,
       "runtimeSupport": null,
       "fields": [],
@@ -5943,10 +5943,10 @@
     },
     {
       "id": 28991,
-      "name": "Message28991",
-      "codec": true,
+      "name": "DeferredGameModeSnapshot",
+      "codec": false,
       "runtimeSupport": null,
-      "fields": [],
+      "fields": null,
       "nativeEncode": "0xfb52c",
       "nativeDecode": "0x200810",
       "factoryObservations": [
@@ -5958,7 +5958,8 @@
           "factory_flag": 1,
           "version": 0
         }
-      ]
+      ],
+      "envelopeSupport": "verified raw/zlib envelope; inner GameMode snapshot unresolved; no runtime battle handler"
     },
     {
       "id": 29188,
