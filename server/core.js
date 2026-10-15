@@ -5,8 +5,11 @@ const { randomBytes } = require('node:crypto')
 const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, schemaFor, loginOk, loginFailed } = require('../lib/protocol/messages')
 const { ProtocolError } = require('../lib/protocol/stream')
+const { contentUrl } = require('./content')
 
-function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false } = {}) {
+function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false, contentUrls = [] } = {}) {
+  if (!Array.isArray(contentUrls) || contentUrls.length > 8) throw new TypeError('Invalid content URLs')
+  contentUrls = contentUrls.map(contentUrl)
   if (!store || typeof store.login !== 'function') throw new TypeError('Account store required')
   if (transportFactory !== null && typeof transportFactory !== 'function') throw new TypeError('Invalid transport factory')
   if (homeProvider !== null && typeof homeProvider !== 'function') throw new TypeError('Invalid Home provider')
@@ -86,7 +89,7 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         if (socket.destroyed) return
         if (!home || !Buffer.isBuffer(home.payload)) throw new Error('Home provider did not supply a payload')
         sendBatch([
-          { id: 20758, payload: encodeMessage(20758, loginOk(account, login)), version: 1 },
+          { id: 20758, payload: encodeMessage(20758, loginOk(account, login, new Date(), contentUrls)), version: 1 },
           { id: 21217, payload: home.payload, version: home.version ?? 0 },
         ])
         session.account = account

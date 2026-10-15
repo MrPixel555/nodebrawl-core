@@ -205,7 +205,7 @@ def main():
     output = {'schema': 1, 'librarySha256': hashlib.sha256((ROOT / 'libg.so').read_bytes()).hexdigest(),
               'messageId': 21217, 'version': 0, 'parts': parts,
               'starter': {'deckIds': model.deck_ids, 'gold': 100, 'gems': 100, 'level': 1, 'arena': 'Arena1'},
-              'androidLobbyVerified': False,
+              'androidLobbyVerified': True,  # User-confirmed network-v6; see docs/device-lobby.json.
               'scope': 'Native codec round trip with CSV-backed data lookup adapters; not Android gameplay'}
     (ROOT / 'starter-home.json').write_text(json.dumps(output, indent=2) + '\n')
     fixtures = [{'accountId': [0, 37], 'name': 'Player', 'payloadHex': payload.hex()}]

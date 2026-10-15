@@ -15,11 +15,12 @@ async function main () {
   const sessionKey = Buffer.alloc(32, 11)
   const sharedKey = boxKey(peer, secret)
   const home = await createStarterHomeProvider()(account)
-  const payload = encodeMessage(20758, loginOk(account, { field_0x90: 3, field_0x94: 0, field_0x98: 1945 }, new Date('2026-01-02T00:00:00.000Z')))
+  const contentUrls = ['http://223.223.223.1:9338']
+  const payload = encodeMessage(20758, loginOk(account, { field_0x90: 3, field_0x94: 0, field_0x98: 1945 }, new Date('2026-01-02T00:00:00.000Z'), contentUrls))
   const loginBox = sealLoginReply({ payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer, serverNonce, sessionKey })
   const cipher = new SessionCipher(sessionKey, serverNonce)
   const frames = [{ id: 20758, version: 1, payload: loginBox.toString('hex') }, { id: 21217, version: home.version, payload: cipher.encrypt(home.payload).toString('hex') }, { id: 20108, version: 0, payload: cipher.encrypt(Buffer.alloc(0)).toString('hex') }]
   cipher.close()
-  console.log(JSON.stringify({ accountId: account.id, clientSecret: secret.toString('hex'), clientPublicKey: clientPublicKey.toString('hex'), clientNonce: clientNonce.toString('hex'), homeBytes: home.payload.length, frames }))
+  console.log(JSON.stringify({ accountId: account.id, contentUrls, clientSecret: secret.toString('hex'), clientPublicKey: clientPublicKey.toString('hex'), clientNonce: clientNonce.toString('hex'), homeBytes: home.payload.length, frames }))
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1 })

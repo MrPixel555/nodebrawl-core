@@ -1,0 +1,18 @@
+{
+  "source": "User confirms Home displayed, with accompanying network-v6 Frida and server logs",
+  "libraryBuildId": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "diagnostics": "network-v6",
+  "loginReplyOpened": true,
+  "homeDisplayed": true,
+  "nativeDecodeConsumed": 625,
+  "level": 1,
+  "homeLevel": 1,
+  "decks": 5,
+  "cards": [26000000, 26000001, 26000003, 26000005, 26000014, 26000018, 28000000, 28000001],
+  "arenaId": 54000001,
+  "eventsPresent": true,
+  "eventCount": 0,
+  "reportedProblems": ["Training could not be entered", "Content download failed after retries"],
+  "observedPostLoginMessageIds": [10459, 11485, 10108, 11712, 13597, 13752],
+  "scope": "Confirms the starter Home screen on this device. Does not establish Training, battles, clan membership, shop purchases or full gameplay compatibility. No Training request was seen in the supplied download-failure trace."
+}

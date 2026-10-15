@@ -71,8 +71,9 @@ the whole batch unapplied.
 The ready root `client-dev.js` is **network-v6**, with the same address/public
 key and crypto/thread strategy. Home observations now report **homeLevel** in
 addition to `level`, `eventsPresent` and `eventCount`; expect **1,1,true,0**.
-The full Android lobby remains unverified until the corrected state runs on
-the device. No game executable or native checks are patched.
+The user subsequently confirmed that the corrected state displays Home on the
+device. [Device confirmation](device-lobby.json) preserves that report separately
+from the VM evidence. No game executable or native checks are patched.
 
 ## Post-login messages
 
@@ -81,10 +82,13 @@ not disconnect because they were unsupported.
 
 10459 encoder `0x21c2d4` delegates to `0x610f54`: an inline string followed by a
 JSON serialization string. Decoder `0x581cc4`/`0x12f990` bounds these at 1024 and
-900000 bytes. Two native round trips cover string-valued JSON and Persian UTF-8.
+900000 bytes. Three native round trips cover string-valued JSON, Persian UTF-8
+and the recovered content-download failure shape.
 Node preserves the JSON string; it does not reproduce native JSON formatting
 or initialized literal globals. The authenticated startup handler validates
-JSON, discards values and logs only `client-metadata-accepted` and payload size.
+JSON and logs `client-metadata-accepted` and payload size. Recognized content
+events now also yield bounded phase/error/manifest-path diagnostics; arbitrary
+metadata, queries and credentials remain omitted. [Content diagnostics](content-training.md).
 
 11485 has an empty native codec and is sent by UI startup function `0x59edb8`
 before constructing a tab. Its handler validates the body and logs
@@ -99,9 +103,10 @@ The newer trace also contains **11712** (one fixed-width Long) and **13752**
 (VInt and string). Their wire codecs already exist. 11712 is constructed during
 UI setup at `0x59f208`; 13752 is constructed at `0x682ae8`, where a native float
 is converted to an integer and a socket-related string is supplied. Their server
-business behavior and response contracts are still unresolved, so the server
-continues to identify them as unsupported rather than inventing replies. Neither
-appears in the observed crashing native call chain.
+response contracts are unresolved. The server now accepts 13752 as a measured
+float*1000/socket report without retaining its string or inventing a response;
+11712 remains unsupported. Neither appears in the observed crashing native call
+chain.
 
 Reproduce in the retained analysis environment:
 

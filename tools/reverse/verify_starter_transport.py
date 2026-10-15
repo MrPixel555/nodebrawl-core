@@ -20,6 +20,15 @@ for frame in vector['frames']:
     message = model.receive(frame['id'], frame['version'], bytes.fromhex(frame['payload']))
     expected = {20758: 0xa62c90, 21217: 0xa6d260, 20108: 0xa735c8}[frame['id']]
     assert message and qword(model.vm, message) == expected
+    if frame['id'] == 20758:
+        for offset in (0x128, 0x130):
+            collection = qword(model.vm, message + offset)
+            assert word(model.vm, collection + 0xc) == len(vector['contentUrls'])
+            for index, url in enumerate(vector['contentUrls']):
+                text = qword(model.vm, qword(model.vm, collection) + index * 8)
+                size = word(model.vm, text + 4)
+                chars = text + 8 if size < 8 else qword(model.vm, text + 8)
+                assert bytes(model.vm.uc.mem_read(chars, size)).decode() == url
     if frame['id'] == 21217:
         # Messaging owns its nested stream; verify against its returned message,
         # not the standalone seed decoder's previous input_stream recorder.
@@ -34,6 +43,7 @@ assert model.state() == 5
 report = {'nativeLoginOkAccepted': True, 'nativeStarterHomeConsumed': vector['homeBytes'],
           'nativeAccountBindingsMatched': True, 'nativeKeepAliveAccepted': True,
           'nativeHomeLevel': 1, 'nativeAvatarLevel': 1,
+          'nativeContentUrlVectorsMatched': True,
           'scope': 'Node starter provider to native session parser with synthetic handshake fields and CSV data adapters',
           'androidLobbyVerified': False}
 (ROOT / 'native-starter-transport.json').write_text(json.dumps(report, indent=2) + '\n')

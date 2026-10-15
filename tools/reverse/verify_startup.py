@@ -12,7 +12,10 @@ def main():
     for variant, (name, details) in enumerate([
         ('home-open', '{"screen":"home","entry":"login"}'),
         ('بازیکن', '{}'),
+        ('Client_ContentDownloadFailed', '{"label":"Client","type":"ContentDownloadFailed","product":"download_url","productDetail":"https://content.example/8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc/csv_client/animations.csv?token=private","failCode":"404"}'),
     ]):
+        # Native JSON output escapes forward slashes, including URL separators.
+        details = details.replace('/', '\\/')
         wire = b''.join(struct.pack('>I', len(value.encode())) + value.encode() for value in (name, details))
         message = vm.alloc(0x100)
         stream, buffer = vm.stream(wire)
@@ -36,7 +39,7 @@ def main():
                          'payload': wire.hex(), 'native_decode_consumed': consumed,
                          'native_reencode_equal': True})
     (ROOT / 'native-startup.json').write_text(json.dumps(fixtures, indent=2) + '\n')
-    print('Native message 10459 nested strings encode/decode/reencode: 2 fixtures PASS')
+    print(f'Native message 10459 nested strings encode/decode/reencode: {len(fixtures)} fixtures PASS')
 
 
 if __name__ == '__main__':

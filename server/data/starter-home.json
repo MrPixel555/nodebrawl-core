@@ -54,6 +54,6 @@
     "level": 1,
     "arena": "Arena1"
   },
-  "androidLobbyVerified": false,
+  "androidLobbyVerified": true,
   "scope": "Native codec round trip with CSV-backed data lookup adapters; not Android gameplay"
 }

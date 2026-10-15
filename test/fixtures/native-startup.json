@@ -20,5 +20,16 @@
     "payload": "0000000cd8a8d8a7d8b2db8cdaa9d986000000027b7d",
     "native_decode_consumed": 22,
     "native_reencode_equal": true
+  },
+  {
+    "id": 10459,
+    "variant": 2,
+    "fields": {
+      "field_0x80_0x8": "Client_ContentDownloadFailed",
+      "field_0x80_0x20_json": "{\"label\":\"Client\",\"type\":\"ContentDownloadFailed\",\"product\":\"download_url\",\"productDetail\":\"https:\\/\\/content.example\\/8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc\\/csv_client\\/animations.csv?token=private\",\"failCode\":\"404\"}"
+    },
+    "payload": "0000001c436c69656e745f436f6e74656e74446f776e6c6f61644661696c6564000000db7b226c6162656c223a22436c69656e74222c2274797065223a22436f6e74656e74446f776e6c6f61644661696c6564222c2270726f64756374223a22646f776e6c6f61645f75726c222c2270726f6475637444657461696c223a2268747470733a5c2f5c2f636f6e74656e742e6578616d706c655c2f386633613033353062623163383766313637366463343537316664356138346366366166653564635c2f6373765f636c69656e745c2f616e696d6174696f6e732e6373763f746f6b656e3d70726976617465222c226661696c436f6465223a22343034227d",
+    "native_decode_consumed": 255,
+    "native_reencode_equal": true
   }
 ]

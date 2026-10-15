@@ -5,7 +5,9 @@ The device decoded Home and resolved its cards/arena. A missing event catalogue
 was corrected and confirmed present on the next device run, which then exposed
 a separate zero Home-level crash. The provider now keeps Home and Avatar at
 level one; the original native synchronization command passes in the VM.
-The corrected Android UI still needs a device run.
+The user subsequently confirmed that network-v6 displays Home on the Android
+device; both levels were one. [Device confirmation](device-lobby.json) also
+records the remaining content-download and Training failures.
 See [the crash analysis](lobby-crash.md).
 
 The generated profile in `server/data/starter-home.json` contains native-encoded
@@ -50,7 +52,9 @@ objects in that test are synthetic. This is separate from the
 [subsequent device run](device-home-v5.json) confirms the catalogue fix and
 heartbeat, followed by a distinct UI crash. The level-state correction changes
 one byte without changing packet length; it passes its
-[native regression](native-home-level-regression.json), not a full Android UI test.
+[native regression](native-home-level-regression.json). The subsequent
+[device confirmation](device-lobby.json) establishes that Home displays; it
+does not establish battle or Training compatibility.
 
 Reproduce with the retained local analysis environment:
 

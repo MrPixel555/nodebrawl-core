@@ -9,6 +9,8 @@ const { createAllianceHandlers } = require('./alliance-handlers')
 const { NativeTransport } = require('./transport')
 const { loadServerKey, publicKey } = require('./key')
 const { profile } = require('../lib/protocol/messages')
+const { loadContent, createContentServer, contentUrl } = require('./content')
+const development = require('./data/development.json')
 
 async function main () {
   const port = Number(process.env.PORT || 9339)
@@ -22,22 +24,32 @@ async function main () {
   const store = new AccountStore(process.env.DATA_DIR || path.resolve(__dirname, '../.local/accounts'))
   const logger = entry => console.log(JSON.stringify(entry))
   const traceNetwork = process.env.TRACE_NETWORK === '1'
+  const contentPort = Number(process.env.CONTENT_PORT ?? 9338)
+  if (!Number.isInteger(contentPort) || contentPort < 0 || contentPort > 65535) throw new Error('Invalid CONTENT_PORT')
+  const contentUrls = [contentUrl(process.env.CONTENT_URL || development.contentUrl)]
+  const content = await loadContent({ root: process.env.CONTENT_ROOT, upstream: process.env.CONTENT_UPSTREAM_URL ?? development.contentUpstreamUrl, logger })
+  const assets = createContentServer(content)
+  await new Promise((resolve, reject) => { assets.once('error', reject); assets.listen(contentPort, process.env.CONTENT_HOST || process.env.HOST || '127.0.0.1', resolve) })
   const handlers = createStartupHandlers({ logger, traceNetwork })
   for (const [id, handler] of createAllianceHandlers()) handlers.set(id, handler)
   if (process.env.HOME_MODE === 'starter') for (const [id, handler] of createStarterHandlers({ store, logger, traceNetwork })) handlers.set(id, handler)
-  const game = createGameServer({ store, homeProvider, transportFactory, handlers, traceNetwork, logger })
-  await new Promise((resolve, reject) => { game.server.once('error', reject); game.server.listen(port, process.env.HOST || '127.0.0.1', resolve) })
+  const game = createGameServer({ store, homeProvider, transportFactory, handlers, traceNetwork, logger, contentUrls })
+  try {
+    await new Promise((resolve, reject) => { game.server.once('error', reject); game.server.listen(port, process.env.HOST || '127.0.0.1', resolve) })
+  } catch (error) { content.close(); assets.close(); throw error }
   console.log(`Clash Royale protocol server listening on ${process.env.HOST || '127.0.0.1'}:${port}`)
   console.log(`libg.so SHA-256: ${profile.library_sha256}; transport: ${mode}`)
   if (process.env.TRACE_NETWORK === '1') console.log('Network metadata tracing enabled; payloads, credentials and keys are omitted.')
   if (secret) console.log(`Development server public key: ${publicKey(secret).toString('hex')}; client must use this peer key`)
   if (!homeProvider) console.log('Home data missing: login will return a clear LoginFailed response, rather than an invalid Home packet.')
-  if (process.env.HOME_MODE === 'starter') console.log('Starter Home enabled: 8 cards, 5 decks, Arena1, level 1. Native codec verified; Android lobby and gameplay remain unverified.')
+  if (process.env.HOME_MODE === 'starter') console.log('Starter Home enabled: 8 cards, 5 decks, Arena1, level 1. Home displayed on the supplied Android device; battle gameplay remains unverified.')
+  console.log(`Content server listening on ${process.env.CONTENT_HOST || process.env.HOST || '127.0.0.1'}:${assets.address().port}; advertised URL: ${contentUrls[0]}`)
+  console.log(`Content fingerprint ${content.manifest.sha}: ${content.entries.size - content.missing.length}/${content.entries.size} files verified; ${content.missing.length} missing, fetched with SHA-1 verification when requested if an upstream is configured.`)
   let stopping = false
   for (const signal of ['SIGINT', 'SIGTERM']) { process.on(signal, async () => {
     if (stopping) return
     stopping = true
-    try { await game.stop(); secret?.fill(0) } catch (error) { console.error(error.message); process.exitCode = 1 }
+    try { await game.stop(); content.close(); assets.closeAllConnections(); await new Promise((resolve, reject) => assets.close(error => error ? reject(error) : resolve())); secret?.fill(0) } catch (error) { console.error(error.message); process.exitCode = 1 }
   }) }
 }
 module.exports = { main }

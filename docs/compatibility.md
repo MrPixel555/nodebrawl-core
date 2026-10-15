@@ -20,7 +20,7 @@ Clash Royale library. It is **not yet a playable, fully compatible game server**
 | MessageFactory function | `0x622544` |
 | Factory observations | Created 268 unique IDs using factory flags 0 and 1; 275 creation observations |
 | Flat message codecs | 155 unique IDs after rejecting duplicate base-class placeholders |
-| Additional codecs | ServerHello, Login, LoginOk, LoginFailed: total 159 wire codecs |
+| Additional codecs | Handshake, startup, clan, turns and Training: current total 167 wire codecs; see packet-coverage.json |
 
 `lib/protocol/libg-profile.json` preserves each vtable, encode/decode address,
 field order/type/offset, extraction limitations, and observed factory versions.
@@ -257,7 +257,9 @@ these include high-resolution textures. Missing files are reported explicitly.
 The decoded tables include 52 named resource records, 72 character spells,
 17 building spells, 20 other spells, six hero spells, 38 arenas, and 203 game modes.
 Rows and continuation rows are distinguished; table IDs and gameplay effects
-are not guessed from filenames. The original assets are retained outside Git.
+are not guessed from filenames. The 1,075 original assets are now committed in
+`content/assets/` for byte-exact HTTP delivery; the 125 absent entries remain
+explicitly missing. [Content delivery and Training scope](content-training.md).
 [APK evidence](apk-evidence.json) records identities and per-table counts/hashes.
 
 Reassemble, inspect and decode an APK without optional analysis dependencies:
@@ -275,7 +277,8 @@ The data tool verifies present fingerprint assets before decoding bounded LZMA
 streams, writes CSVs and a `game-data.json` inventory, and refuses existing output.
 Neither tool verifies APK signature cryptographic validity or publisher identity.
 No Android emulator or `adb` is installed in this environment; Java alone does
-not run an ARM64 Android client. Client connection and gameplay remain unverified.
+not run an ARM64 Android client. User-supplied device evidence now confirms
+encrypted login and Home display. Battle gameplay remains unverified.
 
 ## Reproduce analysis
 
@@ -439,7 +442,22 @@ state; its QuestSlots helpers also execute with CSV row adapters. The negative
 regression supplies the device's invalid pointer for row -1 and reproduces the
 original crashing load, explicitly without emulating Android allocator contents.
 The starter handler accepts 805 unchanged alongside deck selection. Network-v6
-adds `homeLevel` to the observation. 11712/13752 wire codecs exist, but response
-contracts remain unresolved. [Crash analysis](lobby-crash.md) and
+adds `homeLevel` to the observation. 13752 is now accepted as a network report;
+11712 remains unresolved. [Crash analysis](lobby-crash.md) and
 [native evidence](native-home-level-regression.json) explain the verification
-limits; full Android lobby and gameplay are still unverified.
+limits. The user's next device report confirms that Home displays with the
+corrected levels. [Device confirmation](device-lobby.json) records that result;
+Training, battle simulation, shop and clan membership remain incomplete.
+
+**Content and Training update:** the original 1,075 available APK assets and
+pinned fingerprint are served on HTTP 9338, with both content URL vectors
+populated in LoginOk. Original native Messaging accepted those vectors alongside
+the starter Home and KeepAlive. Missing downloads are SHA-1 checked before
+publication, and recognized client metadata yields bounded download diagnostics.
+125 assets remain absent; this cloud environment's proxy rejected the upstream
+check, so old-version CDN availability is unverified. Three more native codecs
+cover 10953/17967 Training requests and 12405 HomeLogicStopped; their gameplay
+handlers are not implemented. Six new native Training fixtures, three startup
+fixtures, 613 Node tests, lint and three real CLI server modes pass. The current
+catalogue is 284 messages with 167 verified wire codecs. [Detailed evidence,
+reproduction and limits](content-training.md).

@@ -4,7 +4,7 @@ const assert = require('node:assert/strict')
 const { Reader, Writer, ProtocolError } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
-const fixtures = [...require('./fixtures/native-flat.json'), ...require('./fixtures/native-extra.json'), ...require('./fixtures/native-startup.json'), ...require('./fixtures/native-alliances.json')]
+const fixtures = [...require('./fixtures/native-flat.json'), ...require('./fixtures/native-extra.json'), ...require('./fixtures/native-startup.json'), ...require('./fixtures/native-alliances.json'), ...require('./fixtures/native-training.json')]
 
 for (const fixture of fixtures) {
   test(`native libg.so codec ${fixture.id}, variant ${fixture.variant}`, () => {

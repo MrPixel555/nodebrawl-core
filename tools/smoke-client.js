@@ -1,7 +1,7 @@
 'use strict'
 const net = require('node:net')
 const assert = require('node:assert/strict')
-const { randomBytes } = require('node:crypto')
+const { randomBytes, createHash } = require('node:crypto')
 const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage } = require('../lib/protocol/messages')
 const { keyPair, boxKey } = require('../lib/protocol/salsa17')
@@ -63,6 +63,19 @@ async function handle (frame) {
     }
     account = decodeMessage(20758, payload)
     assert.match(account.field_0x90, /^[a-f0-9]{40}$/)
+    if (process.env.EXPECT_CONTENT_URL) {
+      assert.deepEqual(account.field_0x128, [process.env.EXPECT_CONTENT_URL])
+      assert.deepEqual(account.field_0x130, [process.env.EXPECT_CONTENT_URL])
+      const manifest = require('../content/fingerprint.json')
+      const url = process.env.EXPECT_CONTENT_URL + '/' + manifest.sha + '/'
+      const metadata = await fetch(url + 'fingerprint.json', { signal: AbortSignal.timeout(4000) })
+      assert.equal(metadata.status, 200)
+      assert.equal((await metadata.json()).sha, manifest.sha)
+      const entry = manifest.files[0]
+      const asset = await fetch(url + entry.file, { signal: AbortSignal.timeout(4000) })
+      assert.equal(asset.status, 200)
+      assert.equal(createHash('sha1').update(Buffer.from(await asset.arrayBuffer())).digest('hex'), entry.sha)
+    }
     stage = 'home'
   } else if (stage === 'home') {
     assert.equal(frame.id, 21217)
@@ -92,7 +105,8 @@ async function handle (frame) {
     stage = 'done'
     finish()
     console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search and heartbeat`)
-    console.log('Starter Home matches its native codec profile; Android lobby and gameplay remain unverified.')
+    if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original asset SHA-1')
+    console.log('Starter Home display was confirmed on the supplied Android device; this smoke check does not verify battle gameplay.')
   } else {
     assert.equal(frame.id, 20103)
     assert.equal(frame.version, 4)

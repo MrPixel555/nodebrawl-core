@@ -1,0 +1,2 @@
+content/assets/** -text -diff
+content/fingerprint.json -text

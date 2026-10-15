@@ -1,0 +1,561 @@
+{
+  "source": "Original uploaded APK; baseline inventory before remote recovery",
+  "fingerprint": "8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc",
+  "version": "3.1945.13",
+  "present": 1075,
+  "presentBytes": 91265310,
+  "missingCount": 125,
+  "missing": [
+    {
+      "defer": true,
+      "file": "sc/building_barbarian_hut_highres_tex.sc",
+      "sha": "af09a08c00d97c6fb18d5ca5eed945d5dae72d71"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_basic_cannon_highres_tex.sc",
+      "sha": "fc3276deb17cb331ef28eba6c410b1c08575b87e"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_bomb_tower_highres_tex.sc",
+      "sha": "e2e250256efc71da1a340455d3f4411d8bb1040a"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_elixir_collector_highres_tex.sc",
+      "sha": "5584163bc200fe223ad68488d170c105df5d96e6"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_firespirit_hut_highres_tex.sc",
+      "sha": "c5870c37410c80c59c3b2b07b41069e2d135fcb0"
+    },
+    {
+      "file": "sc/building_heist_safe_dl.sc",
+      "sha": "bd37a88999ec6c68d34b5e9765a75731d2b5378d"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_inferno_tower_highres_tex.sc",
+      "sha": "d511d52bf5a40ecd834f68594900c727185a92df"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_mortar_highres_tex.sc",
+      "sha": "7cb207320113171019d4e87cbe9de982088df7b2"
+    },
+    {
+      "file": "sc/building_prestige_dl.sc",
+      "sha": "723989f53a46f820dde33c55d3fc018fe608389c"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_tesla_highres_tex.sc",
+      "sha": "1780a311774b0e2cdd6ccf67afa90bdea2628330"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_tombstone_highres_tex.sc",
+      "sha": "2869188540555aaf4a5b50bd87480675d7da6391"
+    },
+    {
+      "defer": true,
+      "file": "sc/building_xbow_highres_tex.sc",
+      "sha": "5aa73df8ff167cdb25757e21d74c6bf72e5cbb98"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_axe_man_highres_tex.sc",
+      "sha": "d523b29e39b190224164440fb312e5e545ef289b"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_balloon_highres_tex.sc",
+      "sha": "8df3b1030fbb299690c838ef0aba75d0200f65b9"
+    },
+    {
+      "file": "sc/chr_barbarian_barrel_dl.sc",
+      "sha": "9eb04fdcf324725dc3b7dfbb9c9d87474e507b53"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_barbarian_highres_tex.sc",
+      "sha": "21903d58c89914e28bc0deaf9d52d44239fac07d"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_battle_ram_highres_tex.sc",
+      "sha": "869bf74e040b1c99c60dee5bfa242f9dec3346d9"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_black_knight_highres_tex.sc",
+      "sha": "b1fd6709d8925c43391b9fbc68af48f73e6f2f69"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_bowler_highres_tex.sc",
+      "sha": "03a8ff19054fc366941cd93675168d1cf5d6d436"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_dark_witch_highres_tex.sc",
+      "sha": "25afb778fa89198e2f180bde906b2954bf2b42f6"
+    },
+    {
+      "file": "sc/chr_electro_dragon_dl.sc",
+      "sha": "c64047ab24db92587946a6d447bd3b4d4356f874"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_electro_wizard_highres_tex.sc",
+      "sha": "21105aac0e1236ba85fe8a794ee536e0780ed5b7"
+    },
+    {
+      "file": "sc/chr_elixir_golem_dl.sc",
+      "sha": "0168841480cc3536a70303f4355cf33fc4327ef6"
+    },
+    {
+      "file": "sc/chr_fisherman_dl.sc",
+      "sha": "4e4dda074e54b0446c8c8445e8268462c958c451"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_flying_machine_highres_tex.sc",
+      "sha": "14646d107910689802c321d4d17d8cb45ba6ded5"
+    },
+    {
+      "file": "sc/chr_ghost_dl.sc",
+      "sha": "b8e5923374e07964286caa1c7c27331e83431ba4"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_giant_skeleton_highres_tex.sc",
+      "sha": "3fa5e633cbf62242feea7fd4cd05806f79ab20d5"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_goblin_blowdart_highres_tex.sc",
+      "sha": "2374cc6ab3b3752b620ecd212fd81b7a22617916"
+    },
+    {
+      "file": "sc/chr_goblin_giant_dl.sc",
+      "sha": "e89dc7face7063bdcdf00cdf76ae2a33bfb9cbda"
+    },
+    {
+      "file": "sc/chr_goblin_thug_dl.sc",
+      "sha": "3bd2596b117a82dce279959fddf93d7b0d5c2b45"
+    },
+    {
+      "file": "sc/chr_golem_dl.sc",
+      "sha": "58002a292c3ba50dfb97c334e28934f5af549eae"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_golemite_highres_tex.sc",
+      "sha": "542cd90549b7eae5dccbca9a0be3db17c256180b"
+    },
+    {
+      "file": "sc/chr_guard02_dl.sc",
+      "sha": "51f15c772ac199eca4aa0ee3a2197a68b0ee91ba"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_hog_rider_highres_tex.sc",
+      "sha": "e73a95a838c0b590cc30a53cb448ad94d3ff3c15"
+    },
+    {
+      "file": "sc/chr_hunter_dl.sc",
+      "sha": "dbed78ce375b9756211b8a0a3466bfb7be15b81e"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_ice_wizard_highres_tex.sc",
+      "sha": "ca4799b5486394e02fe7c1a7c1378f3e46ec765c"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_lava_hound_highres_tex.sc",
+      "sha": "3018ae37531d140c7a437f9f47aa8ce296afcb7e"
+    },
+    {
+      "file": "sc/chr_magic_archer_dl.sc",
+      "sha": "c23613b8a3972c571e1889c30c84d34176b41724"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_mega_knight_highres_tex.sc",
+      "sha": "b8e9c39ed840d276797f172f3a9cb8fe2d6a7cc9"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_mega_minion_highres_tex.sc",
+      "sha": "ef76e4453e5e8b97b895a989dd292ac8f313ea32"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_miner_highres_tex.sc",
+      "sha": "aff233fc9202eb62f5f1dce4692a4fa9a70b5153"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_movingcannon_highres_tex.sc",
+      "sha": "096e1a2483e446aa8f9cd5d25322cff3103d0696"
+    },
+    {
+      "file": "sc/chr_prestige2_dl.sc",
+      "sha": "482db1fd44d9821998c71b6121eb5e20f02a01db"
+    },
+    {
+      "file": "sc/chr_prestige3_dl.sc",
+      "sha": "893257b918c0898973e5f13eddd0649f68a9a714"
+    },
+    {
+      "file": "sc/chr_prestige4_dl.sc",
+      "sha": "658231d94d3183aa62ef701784934c9ecd25b18d"
+    },
+    {
+      "file": "sc/chr_prestige5_dl.sc",
+      "sha": "dde061cbe65fd084ce0e24e1fc4e4af62e1f6309"
+    },
+    {
+      "file": "sc/chr_prestige6_dl.sc",
+      "sha": "0145ea69865cd2f197c2e8432f3b11f8a44eec64"
+    },
+    {
+      "file": "sc/chr_prestige7_dl.sc",
+      "sha": "2f1044005c1fbd11c39a1c7caaf1e6955d3cf03e"
+    },
+    {
+      "file": "sc/chr_prestige_dl.sc",
+      "sha": "55d6e0e884be3f1e93d6867ef9d6e2de0fd1f3fb"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_prince_highres_tex.sc",
+      "sha": "df3b0d9c07e811f70c1394e4c4281c06c928015d"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_princess_highres_tex.sc",
+      "sha": "0edcdaf85d10382978f35f991ad65167ece61be7"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_rage_barbarian_highres_tex.sc",
+      "sha": "fbd82abebbbcb6adf905cba4288cf72bb207db3e"
+    },
+    {
+      "file": "sc/chr_ram_rider_dl.sc",
+      "sha": "54ab8f3db42f18dae76371756592ad406f5fc919"
+    },
+    {
+      "file": "sc/chr_rascals_dl.sc",
+      "sha": "e9e9e84e64da115c920dc1cf816646ad55ab334c"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_royal_giant_highres_tex.sc",
+      "sha": "064d49c6d85c022e06569c25843b74fddca2997e"
+    },
+    {
+      "file": "sc/chr_royal_hog_dl.sc",
+      "sha": "12f946098768667b91426b14403167f72ff0ff58"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_skeleton_balloon_highres_tex.sc",
+      "sha": "b4bf3402753b5967cb5efbd73926a1b4da26e53b"
+    },
+    {
+      "defer": true,
+      "file": "sc/chr_skeleton_warrior_highres_tex.sc",
+      "sha": "184b0ba77984ae5f79e34b13500d16f68d1cdc16"
+    },
+    {
+      "file": "sc/chr_zappies_dl.sc",
+      "sha": "32b10fd4869dcd88c81fffb8009af1747828c1be"
+    },
+    {
+      "file": "sc/level_2019_halloween_dl.sc",
+      "sha": "6642f142364338d1559014bb02826ce30ef695b6"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_barbarian_arena_highres_tex.sc",
+      "sha": "fcfbdb185655fb0b129efc65aead9abb8565fc08"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_boat_arena_highres_tex.sc",
+      "sha": "6c4efc9d20868616dd73049498004a758dfc02f8"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_bone_arena_highres_tex.sc",
+      "sha": "4f346633a7adaebc72f424097053594d21e3a8fd"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_builder_arena_highres_tex.sc",
+      "sha": "61462c2ae5767918cce743c7b060f13a95861296"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_champion_arena_highres_tex.sc",
+      "sha": "de363984ce37edeaffd3567b29e48d99d46ae815"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_clan_arena_highres_tex.sc",
+      "sha": "66449ae6b6c607c9a8ac1b3ab74e3f02ab0a2b95"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_dark_arena_highres_tex.sc",
+      "sha": "1276503b8def8fb1f060345612d1d39f66aeb41d"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_electric_arena_highres_tex.sc",
+      "sha": "6fe2be604d9bb8b2ce7951c4bda125fed9a4ab6f"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_goblin_arena_highres_tex.sc",
+      "sha": "415a8233376b2585bb01700c89600ed79c39b5da"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_ice_arena_highres_tex.sc",
+      "sha": "4e66d801ca2b69c308aae6906a66b065441d53d2"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_jungle_arena_highres_tex.sc",
+      "sha": "f8c98b8a0711a4462dd76fdce099358fc0f82b38"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_legendary_arena_highres_tex.sc",
+      "sha": "c11724658cd2909b79279df4cd988b8747a0a2f1"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_royal_arena_highres_tex.sc",
+      "sha": "a8fb13c9d83d9e3a9e49c59202c59c3d050bca05"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_shipwreck_arena_highres_tex.sc",
+      "sha": "e0abe7783bda778e30205fc857dd3e090235a56c"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_spell_arena_highres_tex.sc",
+      "sha": "c7ea41a5266be29d720c52101a6d7e96992b29a4"
+    },
+    {
+      "defer": true,
+      "file": "sc/level_touchdown_arena_highres_tex.sc",
+      "sha": "b80fe2fe57329cab17dff41b0501d86b7ee4913b"
+    },
+    {
+      "file": "sc/map_dl.sc",
+      "sha": "b3bf295ea5d6010cb951639d2dc2d18e3e95a5ea"
+    },
+    {
+      "file": "sc/season_3_legendary_dl.sc",
+      "sha": "c103c56c77c587f8718fa849f4cd566464fa8091"
+    },
+    {
+      "file": "sc/season_4_halloween_dl.sc",
+      "sha": "f60fb2b635dc2e0fe0a073c1e1013fce4d795cd3"
+    },
+    {
+      "file": "sc/spell_prestige_dl.sc",
+      "sha": "99c6fdf60fa819c7cfb181f0dfb6c1c818a3ef9c"
+    },
+    {
+      "file": "sc/spell_snowball_dl.sc",
+      "sha": "e855cfa35d4437d94e3c2c34ef890d8c03091410"
+    },
+    {
+      "file": "sc/ui_spell_barb_barrel.sc",
+      "sha": "beae99e1b9c8776b522ab1a365d6b222e8439c5f"
+    },
+    {
+      "file": "sc/ui_spell_earthquake.sc",
+      "sha": "6c39a07963d4a3e74b18cc5d0bc295379ea18357"
+    },
+    {
+      "file": "sc/ui_spell_electro_dragon.sc",
+      "sha": "af6d66de54a53bf9bdbb001949835a4a7386e7c5"
+    },
+    {
+      "file": "sc/ui_spell_elixir_golem.sc",
+      "sha": "5c48d536916a4e91a1fed5d22b233dedbd7a921b"
+    },
+    {
+      "file": "sc/ui_spell_fisherman.sc",
+      "sha": "3232a8023889b4f094df3e240a120badc5f83daa"
+    },
+    {
+      "file": "sc/ui_spell_ghost.sc",
+      "sha": "cd6468e657e1a3afd1a376dfbc59beeb0858a0da"
+    },
+    {
+      "file": "sc/ui_spell_goblin_cage.sc",
+      "sha": "baeea4b977d41de3d6901b99d1a6e10cad222f3e"
+    },
+    {
+      "file": "sc/ui_spell_goblin_giant.sc",
+      "sha": "28b8de4f903b686b226daba2479c875af2b7af84"
+    },
+    {
+      "file": "sc/ui_spell_hunter.sc",
+      "sha": "1b856c39f4a254f768d408983db427cbc59ba033"
+    },
+    {
+      "file": "sc/ui_spell_magic_archer.sc",
+      "sha": "3e914570fe8a3498081c31f91b7500d9478e9e2d"
+    },
+    {
+      "file": "sc/ui_spell_ram_rider.sc",
+      "sha": "34e22327655dfb06752a20b2f3b7e1f027953f30"
+    },
+    {
+      "file": "sc/ui_spell_rascals.sc",
+      "sha": "cf5791b8952aae22baf9de1d15504d4de31efa05"
+    },
+    {
+      "file": "sc/ui_spell_royal_hog.sc",
+      "sha": "bd8abe3a5933b979a14198faf7385d4671dc13e2"
+    },
+    {
+      "file": "sc/ui_spell_royal_recruits.sc",
+      "sha": "e84d7905f77529a831743d8115c477f3432eda57"
+    },
+    {
+      "file": "sc/ui_spell_zappies.sc",
+      "sha": "dddee6e47531fbcceaf3ad85cb95f53059ee48a8"
+    },
+    {
+      "file": "sc3d/clan_wars_chest_rest.pvr",
+      "sha": "3c67561756161a5763d031498d74445fd8dcf344"
+    },
+    {
+      "file": "sc3d/clan_wars_main_body_color.pvr",
+      "sha": "edc2df8513905b7e47fdc919ae0a2fe6c1edc10a"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league1_color.pvr",
+      "sha": "44ada0e88aa20e907348dc88b3497e0339be8ba8"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league2_color.pvr",
+      "sha": "1a3785b5519d7d691a216757b98ef248c8c2bc44"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league3_color.pvr",
+      "sha": "c8d953707fa2f35ab97e0504c6e8f0dddcdc282e"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league4_color.pvr",
+      "sha": "808c919446b0b557a0da2477564b7c6b1fd4907f"
+    },
+    {
+      "file": "sc3d/clan_wars_main_league_spec.pvr",
+      "sha": "0848b7f8478db111fe857c1bbc9f59f7f7acad7d"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank1_color.pvr",
+      "sha": "d68865f6a83e77e9b613e3f5c420a098081daf3b"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank2_color.pvr",
+      "sha": "89cf8fec76f25ae17d1d6a867e183cb72f3cc5a1"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank3_color.pvr",
+      "sha": "f9c78b6463b4f5817d828e91443e88a50785be5a"
+    },
+    {
+      "file": "sc3d/clan_wars_main_rank_spec.pvr",
+      "sha": "5bea8a95f8e9e259e0afff75407123b3af5391a0"
+    },
+    {
+      "file": "sc3d/diffuse_lightmap.pvr",
+      "sha": "0bdbc004db16fed686e46a3023078cf1b0f85e92"
+    },
+    {
+      "file": "sc3d/fortune_dif_color.pvr",
+      "sha": "04a86f7815a78e1070623ba345aed3fa743eda88"
+    },
+    {
+      "file": "sc3d/fortune_diff_bonus.pvr",
+      "sha": "ad87587502e423632d0f444e476689cc286d8581"
+    },
+    {
+      "file": "sc3d/fortune_spec.pvr",
+      "sha": "9c147f7d4186744ab83a56f4fff5c375db688298"
+    },
+    {
+      "file": "sc3d/kings_difuse_color.pvr",
+      "sha": "34d84c83ea01419122f52723603cee4f0249b60b"
+    },
+    {
+      "file": "sc3d/kings_inside_color.pvr",
+      "sha": "2fd979884a1bd9ffde974c3bd3f82a0d65ad51ef"
+    },
+    {
+      "file": "sc3d/kings_specular.pvr",
+      "sha": "ee1386f95034d2f9f042f489bb13f4ddb4cca793"
+    },
+    {
+      "file": "sc3d/legend_pillow_diffuse.pvr",
+      "sha": "83e9d1284eb23110ebf695324b871aaa042e8b91"
+    },
+    {
+      "file": "sc3d/legendary_difuse.pvr",
+      "sha": "e9946fa402b8ceb5d4b5365c4f4dbeedab99b2cc"
+    },
+    {
+      "file": "sc3d/legendary_specular.pvr",
+      "sha": "c5bb7f96fac696817416b5c27a63055cb9cc903d"
+    },
+    {
+      "file": "sc3d/lighting_chest_color.pvr",
+      "sha": "8e07a8a6506a87717db96ad30c94cd50d2d7b1bd"
+    },
+    {
+      "file": "sc3d/lightning_spec_map.pvr",
+      "sha": "a2de195f7b13005ad510c2bb11fabfaed6d67f6d"
+    },
+    {
+      "file": "sc3d/pillow_diffuse_color.pvr",
+      "sha": "36009468d97fe4bf07e17d4c7048e893fb570e22"
+    },
+    {
+      "file": "sc3d/pillow_shadow.pvr",
+      "sha": "94a70808fb4a22d0e4e352cc4d85e551a101ef34"
+    },
+    {
+      "file": "sc3d/pillow_specular.pvr",
+      "sha": "2a402afec057d7a4569aa42a72648b20b52e83b4"
+    },
+    {
+      "file": "sc3d/shadow_ground.pvr",
+      "sha": "f9c8988a46dd708ba4791a897c555f8c050ebe70"
+    },
+    {
+      "file": "sc3d/specular_lightmap.pvr",
+      "sha": "27038ffa59fe869313831cd61ff57492bb5bfb62"
+    },
+    {
+      "file": "sc3d/wars_chest_rest_spec.pvr",
+      "sha": "86a6aa995a29a184c7ce6f1ecac4e014341be5d4"
+    }
+  ]
+}

@@ -234,7 +234,8 @@ for (const starterHome of [false, true]) {
     const entries = []
     const handlers = createStartupHandlers({ logger: entry => entries.push(entry), traceNetwork: true })
     for (const [id, handler] of createAllianceHandlers()) handlers.set(id, handler)
-    const { game, port, directory } = await setup(t, { handlers, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+    const contentUrls = ['http://127.0.0.1:9338']
+    const { game, port, directory } = await setup(t, { handlers, contentUrls, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
     if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
     const c = await client(port)
     c.send(10100)
@@ -246,6 +247,8 @@ for (const starterHome of [false, true]) {
     const opened = openLoginReply({ box: reply.payload, sharedKey, clientNonce, clientPublicKey, serverPublicKey: peer })
     const account = decodeMessage(20758, opened.payload)
     assert.equal(account.field_0x80[1], 1)
+    assert.deepEqual(account.field_0x128, contentUrls)
+    assert.deepEqual(account.field_0x130, contentUrls)
     const receive = new SessionCipher(opened.sessionKey, opened.serverNonce)
     const send = new SessionCipher(opened.sessionKey, clientNonce)
     const home = await c.receive()
@@ -255,6 +258,7 @@ for (const starterHome of [false, true]) {
     const metadata = { field_0x80_0x8: 'private-event-name', field_0x80_0x20_json: '{"details":"private-event-value"}' }
     c.socket.write(encodeFrame(10459, 0, send.encrypt(encodeMessage(10459, metadata))))
     c.socket.write(encodeFrame(11485, 0, send.encrypt(Buffer.alloc(0))))
+    c.socket.write(encodeFrame(13752, 0, send.encrypt(encodeMessage(13752, { field_0x7c: 1234, field_0x80: 'private-network-address' }))))
     for (const query of ['no-clan-yet', 'قبیله']) {
       c.socket.write(encodeFrame(16592, 0, send.encrypt(encodeMessage(16592, { field_0x80: query }))))
       const search = await c.receive()
@@ -272,8 +276,9 @@ for (const starterHome of [false, true]) {
     }
     assert.equal(game.statistics.logins, 1)
     assert.equal(game.statistics.unsupported, 0)
-    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice'])
+    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report'])
     assert(!JSON.stringify(entries).includes('private-event'))
+    assert(!JSON.stringify(entries).includes('private-network-address'))
     if (starterHome) assert.equal((await new AccountStore(directory).login(account.field_0x80, account.field_0x90)).starter.selectedDeck, 4)
     receive.close(); send.close()
   })

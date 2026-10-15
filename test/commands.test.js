@@ -48,3 +48,14 @@ test('EndClientTurn bounds command counts, nested text and binary lengths', () =
   assert.throws(() => decodeEndClientTurn(invalidBytes), /Truncated/)
   assert.throws(() => encodeCommand({ id: 703, fields: { field_0x14: [0] } }), /high, low/)
 })
+
+test('HomeLogicStopped has no trailing byte-array and bounds its command batches', () => {
+  for (const fixture of require('./fixtures/native-training.json').filter(f => f.id === 12405)) {
+    const payload = Buffer.from(fixture.payload, 'hex')
+    for (let n = 0; n < payload.length; n++) assert.throws(() => decodeMessage(12405, payload.subarray(0, n)))
+    assert.throws(() => decodeMessage(12405, Buffer.concat([payload, Buffer.alloc(4)])), /trailing/)
+  }
+  for (const count of [-1, 513, 2147483647]) assert.throws(() => decodeMessage(12405, new Writer().vint(0).vint(0).vint(count).toBuffer()), /collection/)
+  assert.throws(() => encodeMessage(12405, { commands: Array(513).fill({ id: 805 }) }), /count/)
+  assert.throws(() => decodeMessage(12405, new Writer().vint(0).vint(0).vint(1).vint(563).toBuffer()), UnverifiedCommandError)
+})

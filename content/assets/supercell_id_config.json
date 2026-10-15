@@ -1,0 +1,18 @@
+{
+  "Enabled": true,
+  "EnabledCountries": [
+    "ALL"
+  ],
+  "UseNativeCountries": [
+    "ALL"
+  ],
+  "ScFileName": "sc/supercell_id.sc",
+  "Game": "scroll",
+  "PreloadingEnabled":  true,
+  "UseNative": true,
+  "GameHelpLink": "https://supercell.helpshift.com/a/clash-royale/?p=web&s=supercell-id",
+  "InternalDomains": [
+    "www.google.com"
+  ]
+
+}

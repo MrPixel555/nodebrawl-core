@@ -5,6 +5,7 @@
   "nativeKeepAliveAccepted": true,
   "nativeHomeLevel": 1,
   "nativeAvatarLevel": 1,
+  "nativeContentUrlVectorsMatched": true,
   "scope": "Node starter provider to native session parser with synthetic handshake fields and CSV data adapters",
   "androidLobbyVerified": false
 }

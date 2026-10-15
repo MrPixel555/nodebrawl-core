@@ -1,0 +1,110 @@
+[
+  {
+    "id": 17967,
+    "variant": 0,
+    "fields": {
+      "field_0x80": [
+        18,
+        0
+      ]
+    },
+    "payload": "1200",
+    "native_decode_consumed": 2,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 10953,
+    "variant": 0,
+    "fields": {
+      "field_0x80": [
+        0,
+        0
+      ],
+      "field_0x88": [
+        18,
+        0
+      ]
+    },
+    "payload": "001200",
+    "native_decode_consumed": 3,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 17967,
+    "variant": 1,
+    "fields": {
+      "field_0x80": [
+        18,
+        1
+      ]
+    },
+    "payload": "1201",
+    "native_decode_consumed": 2,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 10953,
+    "variant": 1,
+    "fields": {
+      "field_0x80": [
+        79,
+        1
+      ],
+      "field_0x88": [
+        18,
+        1
+      ]
+    },
+    "payload": "8f01011201",
+    "native_decode_consumed": 5,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 12405,
+    "variant": 0,
+    "fields": {
+      "field_0x88": 0,
+      "field_0x8c": 1,
+      "commands": []
+    },
+    "payload": "000100",
+    "native_decode_consumed": 3,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 12405,
+    "variant": 1,
+    "fields": {
+      "field_0x88": 8192,
+      "field_0x8c": -37,
+      "commands": [
+        {
+          "id": 703,
+          "fields": {
+            "field_0x10": -8192,
+            "field_0xc": -8192,
+            "field_0x14": [
+              7,
+              -234567
+            ],
+            "field_0x1c": -8192
+          }
+        },
+        {
+          "id": 805,
+          "fields": {
+            "field_0x10": -8192,
+            "field_0xc": -8192,
+            "field_0x14": [
+              7,
+              -234567
+            ]
+          }
+        }
+      ]
+    },
+    "payload": "8080015b02bf0ac0807fc0807f07f9ae63c0807fa50cc0807fc0807f07f9ae63",
+    "native_decode_consumed": 32,
+    "native_reencode_equal": true
+  }
+]
