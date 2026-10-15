@@ -69,6 +69,19 @@ async function handle (frame) {
     const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
     const expected = await createStarterHomeProvider()({ id: account.field_0x80, name: 'Player' })
     assert.deepEqual(payload, expected.payload)
+    stage = 'alliance-search'
+    for (const [id, fields] of [
+      [10459, { field_0x80_0x8: 'smoke-client', field_0x80_0x20_json: '{"source":"smoke-client"}' }],
+      [11485, {}],
+      [16592, { field_0x80: 'smoke-check' }],
+    ]) {
+      const plain = encodeMessage(id, fields)
+      socket.write(encodeFrame(id, 0, sendCipher ? sendCipher.encrypt(plain) : plain))
+    }
+  } else if (stage === 'alliance-search') {
+    assert.equal(frame.id, 25074)
+    const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
+    assert.deepEqual(decodeMessage(25074, payload), { field_0x80: 'smoke-check', field_0x88: [] })
     stage = 'heartbeat'
     const body = sendCipher ? sendCipher.encrypt(Buffer.alloc(0)) : Buffer.alloc(0)
     socket.write(encodeFrame(10108, 0, body))
@@ -78,7 +91,7 @@ async function handle (frame) {
     assert.equal(payload.length, 0)
     stage = 'done'
     finish()
-    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home with matching account identity, and heartbeat`)
+    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search and heartbeat`)
     console.log('Starter Home matches its native codec profile; Android lobby and gameplay remain unverified.')
   } else {
     assert.equal(frame.id, 20103)

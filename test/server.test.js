@@ -12,6 +12,7 @@ const { loadHomeTemplate, createStarterHomeProvider } = require('../server/home'
 const { createHash } = require('node:crypto')
 const { createStarterHandlers } = require('../server/starter-handlers')
 const { createStartupHandlers } = require('../server/startup-handlers')
+const { createAllianceHandlers } = require('../server/alliance-handlers')
 const { Writer } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
@@ -228,6 +229,7 @@ for (const starterHome of [false, true]) {
     const clientNonce = Buffer.alloc(24, 5); const sharedKey = boxKey(peer, clientSecret)
     const entries = []
     const handlers = createStartupHandlers({ logger: entry => entries.push(entry), traceNetwork: true })
+    for (const [id, handler] of createAllianceHandlers()) handlers.set(id, handler)
     const { game, port, directory } = await setup(t, { handlers, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
     if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
     const c = await client(port)
@@ -249,6 +251,12 @@ for (const starterHome of [false, true]) {
     const metadata = { field_0x80_0x8: 'private-event-name', field_0x80_0x20_json: '{"details":"private-event-value"}' }
     c.socket.write(encodeFrame(10459, 0, send.encrypt(encodeMessage(10459, metadata))))
     c.socket.write(encodeFrame(11485, 0, send.encrypt(Buffer.alloc(0))))
+    for (const query of ['no-clan-yet', 'قبیله']) {
+      c.socket.write(encodeFrame(16592, 0, send.encrypt(encodeMessage(16592, { field_0x80: query }))))
+      const search = await c.receive()
+      assert.equal(search.id, 25074)
+      assert.deepEqual(decodeMessage(25074, receive.decrypt(search.payload)), { field_0x80: query, field_0x88: [] })
+    }
     if (starterHome) {
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }] }))))

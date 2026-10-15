@@ -419,3 +419,11 @@ or inventing responses. The ready script is network-v5 and reports event
 catalogue presence/count. All 588 Node tests pass. [Crash evidence](lobby-crash.md)
 distinguishes decoded device state, native regression verification and the still
 pending corrected Android lobby run.
+
+**Clan wire formats:** authenticated request 16592 now receives result 25074
+with an initialized empty list for the current empty clan registry. Native
+create/settings codecs (10453/13882) and complete 25074 header/list codecs pass
+seven original native round-trip fixtures with CSV badge/location adapters.
+Creation/membership/chat behavior remains unimplemented. [Clan scope](alliance-wire.md)
+records the UI call chains, native limits, nullable-list distinction and tests.
+The current total is 164 message codecs and 598 passing Node tests.

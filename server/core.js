@@ -3,7 +3,7 @@ const net = require('node:net')
 const { EventEmitter } = require('node:events')
 const { randomBytes } = require('node:crypto')
 const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
-const { encodeMessage, decodeMessage, catalog, loginOk, loginFailed } = require('../lib/protocol/messages')
+const { encodeMessage, decodeMessage, schemaFor, loginOk, loginFailed } = require('../lib/protocol/messages')
 const { ProtocolError } = require('../lib/protocol/stream')
 
 function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false } = {}) {
@@ -100,13 +100,15 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         session.send(20108)
       } else {
         if (session.state !== 'authenticated') throw new ProtocolError('Message before authentication')
-        const descriptor = catalog.get(frame.id)
-        const fields = descriptor?.fields ? decodeMessage(frame.id, frame.payload) : null
+        let codecAvailable = true
+        try { schemaFor(frame.id) } catch (_) { codecAvailable = false }
+        // Turn handlers must handle unknown nested command types atomically.
+        const fields = codecAvailable && frame.id !== 13597 ? decodeMessage(frame.id, frame.payload) : null
         const handler = handlers.get(frame.id)
         if (handler) await handler(session, fields, frame)
         else {
           statistics.unsupported++
-          logger({ event: 'unsupported-message', connectionId, id: frame.id, length: frame.payload.length, codecAvailable: fields !== null })
+          logger({ event: 'unsupported-message', connectionId, id: frame.id, length: frame.payload.length, codecAvailable })
           events.emit('unsupported', { id: frame.id, version: frame.version, length: frame.payload.length, fields })
         }
       }

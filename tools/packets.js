@@ -1,10 +1,11 @@
 'use strict'
 const { profile, schemaFor } = require('../lib/protocol/messages')
 const { commandCatalog } = require('../lib/protocol/commands')
+const recoveredNames = { 10453: 'CreateAlliance', 13882: 'ChangeAllianceSettings', 16592: 'SearchAlliances', 25074: 'AllianceSearchResult', 13597: 'EndClientTurn' }
 const messages = profile.messages.map(entry => {
   let schema = null
   try { schema = schemaFor(entry.id) } catch (_) {}
-  return { id: entry.id, name: entry.id === 13597 ? 'EndClientTurn' : entry.name, codec: schema !== null, fields: schema, nativeEncode: entry.encode, nativeDecode: entry.decode, factoryObservations: entry.factoryObservations }
+  return { id: entry.id, name: recoveredNames[entry.id] || entry.name, codec: schema !== null, fields: schema, nativeEncode: entry.encode, nativeDecode: entry.decode, factoryObservations: entry.factoryObservations }
 })
 const commands = [...commandCatalog.values()]
 if (process.argv.includes('--json')) console.log(JSON.stringify({ librarySha256: profile.library_sha256, messages, commands }, null, 2))
