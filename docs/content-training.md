@@ -1,6 +1,10 @@
 # Content delivery and Training protocol evidence
 
 The user confirmed that network-v6 displays Home on the supplied Android device.
+The latest network-v8 run also confirms content downloads complete; its server
+trace includes a Training NPC request 17967 and unresolved command 595. See
+[the current player-feature scope](player-state.md). The failure history below
+precedes that successful download run.
 [Device evidence](device-lobby.json) records that result separately from VM tests.
 The subsequent network-v6 trace reports MandatoryDownloadStarted/Failed for
 `sc/map_dl.sc`, `sc/level_2019_halloween_dl.sc` and other files with error code
@@ -73,8 +77,7 @@ npm start
 ```
 
 The game TCP endpoint remains `223.223.223.1:9339`; the server key and ready
-Frida script are unchanged. Download completion on the phone after this change
-has not yet been verified. No TLS trust check or Android network policy is
+Frida script are unchanged. The user subsequently confirmed download completion on the phone with network-v8. No TLS trust check or Android network policy is
 bypassed. For independent content hosting, put the complete local content service
 behind a trusted HTTPS reverse proxy and set CONTENT_URL to its HTTPS base URL.
 The HTTP listener on 9338 remains useful for internal checks; advertising it
@@ -146,8 +149,8 @@ and message 22871 to a BattleResult handler; neither is assumed to be a Training
 start packet. No guessed packet is sent to force the client past a state check.
 [The full catalogue](packet-coverage.json) lists all 284 message IDs, 167 verified
 wire codecs and the actual runtime handlers separately. There are also 135
-native command IDs with 89 verified command codecs; only 703/805 have starter
-runtime behavior.
+native command IDs with 91 verified command codecs; starter runtime supports
+563/703/805 and initial naming 948. These actions do not start a battle.
 
 ## Reproduce the checks
 

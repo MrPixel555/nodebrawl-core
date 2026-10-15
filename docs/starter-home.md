@@ -11,25 +11,27 @@ records the remaining content-download and Training failures.
 See [the crash analysis](lobby-crash.md).
 
 The generated profile in `server/data/starter-home.json` contains native-encoded
-constant sections and five typed identity bindings: one fixed-width Home Long,
+constant sections and 59 typed bindings, including one fixed-width Home Long,
 three avatar pairs of signed VInts, and a length-prefixed UTF-8 player name.
 These bindings use the persisted account ID/name from AccountStore; the LoginOk
 identity and credentials belong to that same account. Each response is freshly
 encoded, so different VInt widths and name lengths do not shift fixed offsets
 incorrectly. Server key/account files stay in `.local` and are not replaced.
-An additional typed VInt binding restores the persisted selected-deck index.
+Other bindings restore selected deck, all forty deck slots, eight active-card
+ordinals, gold/gems/free gems and name-set/count state. The active card order
+must agree with the selected deck; changing only deck arrays is insufficient.
 
 The candidate state contains five decks with the same eight spells, an active
 collection of eight native Card objects, level 1, Arena1, 100 gold and 100 gems.
 The spell IDs are 26000000, 26000001, 26000003, 26000005, 26000014, 26000018,
 28000000 and 28000001: Knight, Archers, Giant, Minions, Musketeer, Mini P.E.K.K.A,
 Fireball and Arrows in the supplied CSVs. Nine commodity groups are encoded,
-including gold and initial maximum-arena/card-count statistics. This is a fixed
-starter profile. Selecting one of its five decks is persisted through native
-command 703 inside EndClientTurn 13597; command 805 succeeds unchanged for this
-fixed level-one profile. All five decks still contain the same
-cards. Changing deck contents, name changes, resource changes, quests, shop and
-battles are not implemented. See [command evidence and scope](commands.md).
+including gold and initial maximum-arena/card-count statistics. Fresh accounts
+start at 100 gold/gems; subsequent Home responses bind persisted balances.
+Command 703 selects a deck, 563 changes its eight owned cards and 948 sets the
+initial player name. Command 805 succeeds unchanged at level one. Purchases,
+rewards, progression, quests, shop and battles remain unimplemented. See
+[command evidence](commands.md) and [persistent state/profile scope](player-state.md).
 
 `tools/reverse/starter_home.py` runs the original Home/card/avatar constructors,
 encoder and decoder in Unicorn. CSV data lookup is an explicit adapter: spell
@@ -40,9 +42,11 @@ resolved card IDs for this deck. Unknown fields retain native decoded
 defaults rather than taking the sample server's packet as an authoritative schema.
 
 Native decoding consumes all 625 bytes for ID [0,37]/name Player, and native
-re-encoding produces identical bytes. Six complete native fixtures cover a new
+re-encoding produces identical bytes. Eight complete native fixtures cover a new
 account, multi-byte account IDs, the int32 boundary, longer names and Persian
-UTF-8 and selected decks 1 and 4. Node's actual provider matches these bytes. The
+UTF-8, selected decks 1 and 4, unnamed status, variable resources and reordered
+cards. Node's actual provider matches these bytes. A separate 18-binding Profile
+provider matches complete native 22757 fixtures; Android Profile UI is unverified. The
 [encrypted observation](native-starter-transport.json) verifies Node-generated
 LoginOk, the starter Home (637 bytes for its variable identity) and KeepAlive
 through the original native session parser. The handshake fields and CSV lookup

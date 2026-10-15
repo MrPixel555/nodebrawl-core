@@ -3,7 +3,7 @@ const fs = require('node:fs/promises')
 const path = require('node:path')
 const { randomBytes, timingSafeEqual } = require('node:crypto')
 const { ProtocolError } = require('../lib/protocol/stream')
-const { selectedDeck } = require('./starter-state')
+const { playerState, applyCommands } = require('./starter-state')
 
 const queues = new Map()
 
@@ -31,7 +31,7 @@ class AccountStore {
       for (const account of data.accounts) {
         if (!account || !Array.isArray(account.id) || account.id.length !== 2 || account.id[0] !== 0 || !Number.isInteger(account.id[1]) || account.id[1] < 1 || account.id[1] >= data.nextId || ids.has(account.id[1]) || typeof account.token !== 'string' || !/^[0-9a-f]{40}$/.test(account.token) || typeof account.name !== 'string' || typeof account.createdAt !== 'string' || !Number.isFinite(Date.parse(account.createdAt))) throw new Error('Invalid account database')
         ids.add(account.id[1])
-        selectedDeck(account)
+        playerState(account)
       }
       return data
     } catch (error) {
@@ -60,7 +60,7 @@ class AccountStore {
         return account
       }
       if (database.nextId > 2147483647) throw new Error('Account ID space exhausted')
-      const account = { id: [0, database.nextId++], token: randomBytes(20).toString('hex'), name: 'Player', createdAt: new Date().toISOString() }
+      const account = { id: [0, database.nextId++], token: randomBytes(20).toString('hex'), name: 'Player', createdAt: new Date().toISOString(), starter: playerState({ starter: { selectedDeck: 0, nameSet: false, nameChangeCount: -1 } }) }
       database.accounts.push(account)
       await this.save(database)
       return account
@@ -68,16 +68,32 @@ class AccountStore {
   }
 
   selectDeck (identity, deck) {
+    return this.applyStarterTurn(identity, [{ id: 703, fields: { field_0x1c: deck } }])
+  }
+
+  findPlayer (id) {
     return this.serial(async () => {
-      selectedDeck({ starter: { selectedDeck: deck } })
+      if (!Array.isArray(id) || id.length !== 2 || !id.every(Number.isInteger)) throw new ProtocolError('Invalid player identity')
+      const account = (await this.load()).accounts.find(account => account.id[0] === id[0] && account.id[1] === id[1])
+      if (!account) return null
+      // Profile responses never include credentials or private gem/gold balances.
+      return { id: [...account.id], name: account.name, starter: { ...playerState(account), gold: 0, gems: 0, freeGems: 0 } }
+    })
+  }
+
+  applyStarterTurn (identity, commands) {
+    return this.serial(async () => {
+      if (!Array.isArray(commands) || commands.length > 512) throw new ProtocolError('Invalid command count')
       const database = await this.load()
-      const account = database.accounts.find(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
+      const index = database.accounts.findIndex(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
+      const account = database.accounts[index]
       if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
-      if (selectedDeck(account) !== deck) {
-        account.starter = { ...account.starter, selectedDeck: deck }
+      const next = applyCommands(account, commands)
+      if (JSON.stringify(next) !== JSON.stringify(account)) {
+        database.accounts[index] = next
         await this.save(database)
       }
-      return account
+      return next
     })
   }
 }

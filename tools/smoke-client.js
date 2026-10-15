@@ -6,7 +6,8 @@ const { FrameDecoder, encodeFrame } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage } = require('../lib/protocol/messages')
 const { keyPair, boxKey } = require('../lib/protocol/salsa17')
 const { sealLogin, openLoginReply, SessionCipher } = require('../lib/protocol/transport')
-const { createStarterHomeProvider } = require('../server/home')
+const { createStarterHomeProvider, createStarterProfileProvider } = require('../server/home')
+const { playerState } = require('../server/starter-state')
 const expectStarter = process.env.EXPECT_HOME === 'starter'
 if (process.env.EXPECT_HOME && !['missing', 'starter'].includes(process.env.EXPECT_HOME)) throw new Error('EXPECT_HOME must be missing or starter')
 const publicHex = process.env.SERVER_PUBLIC_KEY
@@ -24,6 +25,7 @@ let finished = false
 let receiveCipher = null
 let sendCipher = null
 let account = null
+let player = null
 let queue = Promise.resolve()
 function finish (error) {
   if (finished) return
@@ -83,7 +85,8 @@ async function handle (frame) {
   } else if (stage === 'home') {
     assert.equal(frame.id, 21217)
     const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
-    const expected = await createStarterHomeProvider()({ id: account.field_0x80, name: 'Player' })
+    player = { id: account.field_0x80, name: 'Player', starter: playerState({ starter: { selectedDeck: 0, nameSet: false, nameChangeCount: -1 } }) }
+    const expected = await createStarterHomeProvider()(player)
     assert.deepEqual(payload, expected.payload)
     stage = 'alliance-search'
     for (const [id, fields] of [
@@ -98,6 +101,21 @@ async function handle (frame) {
     assert.equal(frame.id, 25074)
     const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
     assert.deepEqual(decodeMessage(25074, payload), { field_0x80: 'smoke-check', field_0x88: [] })
+    stage = 'profile'
+    player.name = 'Smoke player'
+    Object.assign(player.starter, { selectedDeck: 3, nameSet: true, nameChangeCount: 0, gold: 0, gems: 0, freeGems: 0 })
+    player.starter.decks[3].reverse()
+    for (const [id, fields] of [
+      [13597, { commands: [{ id: 948, fields: { field_0x20: player.name } }, { id: 563, fields: { field_0x1c: 3, field_0x20: player.starter.decks[3] } }] }],
+      [12373, { field_0x80: player.id }],
+    ]) {
+      const plain = encodeMessage(id, fields)
+      socket.write(encodeFrame(id, 0, sendCipher ? sendCipher.encrypt(plain) : plain))
+    }
+  } else if (stage === 'profile') {
+    assert.equal(frame.id, 22757)
+    const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
+    assert.deepEqual(payload, (await createStarterProfileProvider()(player)).payload)
     stage = 'heartbeat'
     const body = sendCipher ? sendCipher.encrypt(Buffer.alloc(0)) : Buffer.alloc(0)
     socket.write(encodeFrame(10108, 0, body))
@@ -107,7 +125,7 @@ async function handle (frame) {
     assert.equal(payload.length, 0)
     stage = 'done'
     finish()
-    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search and heartbeat`)
+    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search, initial naming, deck contents, profile and heartbeat`)
     if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original/restored map asset SHA-1')
     console.log('Starter Home display was confirmed on the supplied Android device; this smoke check does not verify battle gameplay.')
   } else {

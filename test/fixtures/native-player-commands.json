@@ -1,0 +1,174 @@
+[
+  {
+    "id": 563,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 0,
+      "field_0x20": null,
+      "field_0x28": [
+        0,
+        37
+      ],
+      "field_0x30": false,
+      "field_0x38": null
+    },
+    "payloadHex": "b308000000250000000000000000002500",
+    "nativeDecodeConsumed": 17,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 595,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 0,
+      "field_0x20": 8192,
+      "field_0x28": [
+        0,
+        0
+      ],
+      "field_0x30": false
+    },
+    "payloadHex": "930900000025008080010000",
+    "nativeDecodeConsumed": 12,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 563,
+    "variant": 1,
+    "fields": {
+      "field_0x10": 8192,
+      "field_0xc": -37,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 1,
+      "field_0x20": [
+        28000001,
+        28000000,
+        26000018,
+        26000014,
+        26000005,
+        26000003,
+        26000001,
+        26000000
+      ],
+      "field_0x28": [
+        0,
+        37
+      ],
+      "field_0x30": true,
+      "field_0x38": null
+    },
+    "payloadHex": "b3088080015b0025010881fcd91a80fcd91a92eae5188eeae51885eae51883eae51881eae51880eae518000000000000002501",
+    "nativeDecodeConsumed": 51,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 595,
+    "variant": 1,
+    "fields": {
+      "field_0x10": 8192,
+      "field_0xc": -37,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 1,
+      "field_0x20": 8192,
+      "field_0x28": [
+        26,
+        0
+      ],
+      "field_0x30": true
+    },
+    "payloadHex": "93098080015b0025018080011a0001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 563,
+    "variant": 2,
+    "fields": {
+      "field_0x10": 8192,
+      "field_0xc": -37,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 2,
+      "field_0x20": [
+        28000001,
+        28000000,
+        26000018,
+        26000014,
+        26000005,
+        26000003,
+        26000001,
+        26000000
+      ],
+      "field_0x28": [
+        0,
+        37
+      ],
+      "field_0x30": true,
+      "field_0x38": [
+        7,
+        999
+      ]
+    },
+    "payloadHex": "b3088080015b0025020881fcd91a80fcd91a92eae5188eeae51885eae51883eae51881eae51880eae51800000000000000250300000007000003e7",
+    "nativeDecodeConsumed": 59,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 595,
+    "variant": 2,
+    "fields": {
+      "field_0x10": 8192,
+      "field_0xc": -37,
+      "field_0x14": [
+        0,
+        37
+      ],
+      "field_0x1c": 2,
+      "field_0x20": 8192,
+      "field_0x28": [
+        26,
+        0
+      ],
+      "field_0x30": true
+    },
+    "payloadHex": "93098080015b0025028080011a0001",
+    "nativeDecodeConsumed": 15,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 948,
+    "variant": "initial-name",
+    "fields": {
+      "field_0x20": "\u0628\u0627\u0632\u06cc\u06a9\u0646",
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        0
+      ]
+    },
+    "payloadHex": "b40e0000000cd8a8d8a7d8b2db8cdaa9d98600000000",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  }
+]

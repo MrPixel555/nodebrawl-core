@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "messageId": 22757,
+  "version": 0,
+  "parts": [
+    {
+      "hex": "00000108ff"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 0
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 1
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 2
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 3
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 4
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 5
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 6
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 7
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "accountId",
+      "type": "long"
+    },
+    {
+      "hex": "000001"
+    },
+    {
+      "field": "accountId",
+      "type": "vlong"
+    },
+    {
+      "field": "accountId",
+      "type": "vlong"
+    },
+    {
+      "field": "accountId",
+      "type": "vlong"
+    },
+    {
+      "field": "name",
+      "type": "string"
+    },
+    {
+      "hex": "02"
+    },
+    {
+      "field": "nameChangeCount",
+      "type": "vint"
+    },
+    {
+      "hex": "00000000000000000002000000000009010501"
+    },
+    {
+      "field": "gold",
+      "type": "vint"
+    },
+    {
+      "hex": "00000003050600051b0105080800000000"
+    },
+    {
+      "field": "gems",
+      "type": "vint"
+    },
+    {
+      "field": "freeGems",
+      "type": "vint"
+    },
+    {
+      "hex": "000100"
+    },
+    {
+      "field": "nameSet",
+      "type": "bit",
+      "mask": 1,
+      "base": 1
+    },
+    {
+      "hex": "0000000000000700000000000000000000000000000000"
+    }
+  ],
+  "starter": {
+    "deckIds": [
+      26000000,
+      26000001,
+      26000003,
+      26000005,
+      26000014,
+      26000018,
+      28000000,
+      28000001
+    ],
+    "cardOrdinals": {
+      "26000000": 1,
+      "26000001": 2,
+      "26000003": 4,
+      "26000005": 6,
+      "26000014": 15,
+      "26000018": 19,
+      "28000000": 90,
+      "28000001": 91
+    },
+    "gold": 100,
+    "gems": 100,
+    "level": 1,
+    "arena": "Arena1"
+  },
+  "scope": "Native profile codec round trip; decoded profile Home/card collection and Avatar present. Android profile UI unverified.",
+  "androidProfileVerified": false
+}

@@ -469,3 +469,14 @@ lint and three real CLI server modes pass. The catalogue is 284 messages with
 167 verified wire codecs. Download completion on the device with this update
 and Training gameplay remain unverified. [Detailed evidence, reproduction and
 limits](content-training.md).
+
+
+**Current player-state update:** the user now confirms content completion with
+network-v8. There are 91 command codecs, including newly verified 563/595 wire
+formats. Original executors 948 (initial name) and 563 (owned deck contents and
+selection) pass native regressions with explicit adapters. Resources, name flags
+and all decks persist. Player Profile request 12373 now receives native-backed
+22757, or 26360/reason 2 for an absent player. The 22757 provider is validated
+against full native decoding/reencoding; its general codec and Android UI remain
+unverified. Battle, Party, Training, emotes and tutorial progression are still
+incomplete. See [the current feature matrix and native routes](player-state.md).

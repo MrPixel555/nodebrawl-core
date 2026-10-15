@@ -941,9 +941,9 @@
     },
     {
       "id": 12373,
-      "name": "Message12373",
+      "name": "PlayerProfileRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "persisted starter player profile lookup",
       "fields": [
         {
           "type": "long",
@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "starter commands 703/805 only",
+      "runtimeSupport": "starter commands 563/703/805 and initial naming 948",
       "fields": [
         {
           "field": "field_0x88",
@@ -3754,7 +3754,7 @@
       "id": 21217,
       "name": "OwnHomeData",
       "codec": false,
-      "runtimeSupport": "starter Home provider",
+      "runtimeSupport": "persistent starter Home provider",
       "fields": null,
       "nativeEncode": "0x4bce90",
       "nativeDecode": "0x154440",
@@ -4151,9 +4151,9 @@
     },
     {
       "id": 22757,
-      "name": "Message22757",
+      "name": "PlayerProfile",
       "codec": false,
-      "runtimeSupport": null,
+      "runtimeSupport": "native starter profile provider; general codec unresolved",
       "fields": null,
       "nativeEncode": "0x37e848",
       "nativeDecode": "0x11c3bc",
@@ -5162,9 +5162,9 @@
     },
     {
       "id": 26360,
-      "name": "Message26360",
+      "name": "PlayerProfileFailed",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "absent player response",
       "fields": [
         {
           "type": "vint",
@@ -7664,8 +7664,52 @@
       "encode": "0x33863c",
       "decode": "0x2f5474",
       "execute": "0x6750b0",
-      "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x338670"
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "deckCards"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "long"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "bool"
+        },
+        {
+          "field": "field_0x38",
+          "offset": 56,
+          "type": "optionalLong"
+        }
+      ],
+      "verification": "tools/reverse/verify_player_commands.py"
     },
     {
       "id": 565,
@@ -7858,8 +7902,47 @@
       "encode": "0x4670a0",
       "decode": "0x58288c",
       "execute": "0x59b664",
-      "fields": null,
-      "unresolvedReason": "unknown call at 0x4670e8"
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "bool"
+        }
+      ],
+      "verification": "tools/reverse/verify_player_commands.py"
     },
     {
       "id": 596,

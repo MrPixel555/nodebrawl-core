@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "commands": [
+    {
+      "id": 563,
+      "vtable": "0xa4c648",
+      "encode": "0x33863c",
+      "decode": "0x2f5474",
+      "execute": "0x6750b0",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "deckCards"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "long"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "bool"
+        },
+        {
+          "field": "field_0x38",
+          "offset": 56,
+          "type": "optionalLong"
+        }
+      ],
+      "verification": "tools/reverse/verify_player_commands.py"
+    },
+    {
+      "id": 595,
+      "vtable": "0xa5f570",
+      "encode": "0x4670a0",
+      "decode": "0x58288c",
+      "execute": "0x59b664",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0x30",
+          "offset": 48,
+          "type": "bool"
+        }
+      ],
+      "verification": "tools/reverse/verify_player_commands.py"
+    }
+  ]
+}

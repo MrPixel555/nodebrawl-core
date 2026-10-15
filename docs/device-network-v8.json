@@ -1,0 +1,45 @@
+{
+  "source": "User-provided network-v8 Frida trace, attached server trace, and confirmation that Home and content downloads now work",
+  "attachedServerLogSha256": "56e0a6c3c6aacb7940ae5b9edbbe1146d4c217b04f63d5e73ae3673872ac784c",
+  "libraryBuildId": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "fridaVersion": "17.15.4",
+  "diagnostics": "network-v8",
+  "nativeSendExcluded": {
+    "offset": "0x207320",
+    "bytes": 632
+  },
+  "loginSendReturned": true,
+  "loginReplyOpened": true,
+  "homeDecoded": {
+    "bytes": 625,
+    "slots": 8,
+    "decks": 5,
+    "level": 1,
+    "homeLevel": 1,
+    "arenaId": 54000001,
+    "eventsPresent": true,
+    "eventCount": 0
+  },
+  "userConfirmed": {
+    "homeDisplayed": true,
+    "contentDownloadsCompleted": true
+  },
+  "observedUnsupportedRequests": [
+    11712,
+    17967,
+    13006
+  ],
+  "observedUnsupportedTurnCommand": 595,
+  "resourceReport": "User observes 100 gold and 100 gems on reconnect; no changed balance or changed identity was demonstrated",
+  "requestedMissingFeatures": [
+    "Party",
+    "normal battle",
+    "Training",
+    "emotes",
+    "persistent resources",
+    "Player Profile",
+    "initial name dialog",
+    "automatic Training Camp entry"
+  ],
+  "scope": "Device confirmation predates the persistent-state/profile changes. It does not validate those new UI paths or any battle engine."
+}

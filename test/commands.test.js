@@ -5,7 +5,7 @@ const { Writer } = require('../lib/protocol/stream')
 const { commandCatalog, encodeCommand, decodeCommand, encodeEndClientTurn, decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
 const { encodeMessage, decodeMessage } = require('../lib/protocol/messages')
 
-for (const fixture of require('./fixtures/native-commands.json')) {
+for (const fixture of [...require('./fixtures/native-commands.json'), ...require('./fixtures/native-player-commands.json')]) {
   test(`native command ${fixture.id} encode/decode, variant ${fixture.variant}`, () => {
     const command = { id: fixture.id, fields: fixture.fields }
     const payload = Buffer.from(fixture.payloadHex, 'hex')
@@ -30,8 +30,8 @@ for (const fixture of require('./fixtures/native-turns.json')) {
 
 test('command catalog retains unresolved native types and refuses to guess their sizes', () => {
   assert.equal(commandCatalog.size, 135)
-  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 89)
-  for (const id of [563, 1001, -1]) {
+  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 91)
+  for (const id of [1001, -1]) {
     assert.throws(() => encodeCommand({ id }), UnverifiedCommandError)
     assert.throws(() => decodeCommand(new Writer().vint(id).toBuffer()), error => error instanceof UnverifiedCommandError && error.id === id)
   }
@@ -57,5 +57,5 @@ test('HomeLogicStopped has no trailing byte-array and bounds its command batches
   }
   for (const count of [-1, 513, 2147483647]) assert.throws(() => decodeMessage(12405, new Writer().vint(0).vint(0).vint(count).toBuffer()), /collection/)
   assert.throws(() => encodeMessage(12405, { commands: Array(513).fill({ id: 805 }) }), /count/)
-  assert.throws(() => decodeMessage(12405, new Writer().vint(0).vint(0).vint(1).vint(563).toBuffer()), UnverifiedCommandError)
+  assert.throws(() => decodeMessage(12405, new Writer().vint(0).vint(0).vint(1).vint(1001).toBuffer()), UnverifiedCommandError)
 })

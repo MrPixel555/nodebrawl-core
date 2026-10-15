@@ -9,7 +9,326 @@
       "type": "long"
     },
     {
-      "hex": "000000000000050880eae51881eae51883eae51885eae5188eeae51892eae51880fcd91a81fcd91a0880eae51881eae51883eae51885eae5188eeae51892eae51880fcd91a81fcd91a0880eae51881eae51883eae51885eae5188eeae51892eae51880fcd91a81fcd91a0880eae51881eae51883eae51885eae5188eeae51892eae51880fcd91a81fcd91a0880eae51881eae51883eae51885eae5188eeae51892eae51880fcd91a81fcd91a08ff0101007f000000000201007f000000000401007f000000000601007f000000000f01007f000000001301007f000000009a0101007f000000009b0101007f0000000000"
+      "hex": "0000000000000508"
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 0
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 1
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 2
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 3
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 4
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 5
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 6
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 0,
+      "slot": 7
+    },
+    {
+      "hex": "08"
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 0
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 1
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 2
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 3
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 4
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 5
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 6
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 1,
+      "slot": 7
+    },
+    {
+      "hex": "08"
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 0
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 1
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 2
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 3
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 4
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 5
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 6
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 2,
+      "slot": 7
+    },
+    {
+      "hex": "08"
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 0
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 1
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 2
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 3
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 4
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 5
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 6
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 3,
+      "slot": 7
+    },
+    {
+      "hex": "08"
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 0
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 1
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 2
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 3
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 4
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 5
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 6
+    },
+    {
+      "field": "deckCard",
+      "type": "vint",
+      "deck": 4,
+      "slot": 7
+    },
+    {
+      "hex": "08ff"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 0
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 1
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 2
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 3
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 4
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 5
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 6
+    },
+    {
+      "hex": "01007f00000000"
+    },
+    {
+      "field": "activeCard",
+      "type": "vint",
+      "slot": 7
+    },
+    {
+      "hex": "01007f0000000000"
     },
     {
       "field": "selectedDeck",
@@ -35,7 +354,41 @@
       "type": "string"
     },
     {
-      "hex": "020000000000000000000002000000000009010501a40100000003050600051b0105080800000000a401a40100010001000000000000070000000000000000000000000000000000000000"
+      "hex": "02"
+    },
+    {
+      "field": "nameChangeCount",
+      "type": "vint"
+    },
+    {
+      "hex": "00000000000000000002000000000009010501"
+    },
+    {
+      "field": "gold",
+      "type": "vint"
+    },
+    {
+      "hex": "00000003050600051b0105080800000000"
+    },
+    {
+      "field": "gems",
+      "type": "vint"
+    },
+    {
+      "field": "freeGems",
+      "type": "vint"
+    },
+    {
+      "hex": "000100"
+    },
+    {
+      "field": "nameSet",
+      "type": "bit",
+      "mask": 1,
+      "base": 1
+    },
+    {
+      "hex": "000000000000070000000000000000000000000000000000000000"
     }
   ],
   "starter": {
@@ -49,11 +402,22 @@
       28000000,
       28000001
     ],
+    "cardOrdinals": {
+      "26000000": 1,
+      "26000001": 2,
+      "26000003": 4,
+      "26000005": 6,
+      "26000014": 15,
+      "26000018": 19,
+      "28000000": 90,
+      "28000001": 91
+    },
     "gold": 100,
     "gems": 100,
     "level": 1,
     "arena": "Arena1"
   },
   "androidLobbyVerified": true,
+  "androidLobbyVerificationScope": "Previous named starter Home; new-player naming, reordered decks and Profile UI need device verification",
   "scope": "Native codec round trip with CSV-backed data lookup adapters; not Android gameplay"
 }

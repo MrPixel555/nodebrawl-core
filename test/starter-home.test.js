@@ -1,13 +1,13 @@
 'use strict'
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const { createStarterHomeProvider, loadHomeProvider } = require('../server/home')
+const { createStarterHomeProvider, createStarterProfileProvider, loadHomeProvider } = require('../server/home')
 const fixtures = require('./fixtures/native-starter-home.json')
 
 test('starter player identity bindings match full native Home outputs, including VInt boundaries and UTF-8', async () => {
   const provider = createStarterHomeProvider()
   for (const fixture of fixtures) {
-    const home = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: fixture.selectedDeck ?? 0 } })
+    const home = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: fixture.selectedDeck ?? 0, ...fixture.starter } })
     assert.equal(home.version, 0)
     assert.equal(home.payload.toString('hex'), fixture.payloadHex)
   }
@@ -30,4 +30,12 @@ test('Home mode selection preserves the disabled default and rejects conflicting
   await assert.rejects(loadHomeProvider({ mode: 'unknown' }), /HOME_MODE/)
   await assert.rejects(loadHomeProvider({ mode: 'template' }), /requires HOME_TEMPLATE_PATH/)
   await assert.rejects(loadHomeProvider({ mode: 'starter', templatePath: 'example.json' }), /requires HOME_MODE=template/)
+})
+
+test('profile card collection and Avatar match native outputs for UTF-8 names, large IDs and reordered decks', async () => {
+  const provider = createStarterProfileProvider()
+  for (const fixture of require('./fixtures/native-starter-profile.json')) {
+    const result = await provider({ id: fixture.accountId, name: fixture.name, starter: fixture.starter })
+    assert.equal(result.payload.toString('hex'), fixture.payloadHex)
+  }
 })

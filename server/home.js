@@ -4,7 +4,8 @@ const { createHash } = require('node:crypto')
 const { profile } = require('../lib/protocol/messages')
 const { Writer, ProtocolError } = require('../lib/protocol/stream')
 const starter = require('./data/starter-home.json')
-const { selectedDeck } = require('./starter-state')
+const starterProfile = require('./data/starter-profile.json')
+const { playerState } = require('./starter-state')
 
 // External templates bind fixed-width account IDs explicitly. The starter
 // profile below uses typed bindings generated from the native nested codecs.
@@ -30,20 +31,32 @@ async function loadHomeTemplate (filename) {
 }
 
 function createStarterHomeProvider () {
-  if (starter.schema !== 1 || starter.librarySha256 !== profile.library_sha256 || starter.messageId !== 21217) throw new Error('Starter Home does not match this library')
-  const parts = starter.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
+  return createPlayerProvider(starter, 21217)
+}
+
+function createStarterProfileProvider () {
+  return createPlayerProvider(starterProfile, 22757)
+}
+
+function createPlayerProvider (data, messageId) {
+  if (data.schema !== 1 || data.librarySha256 !== profile.library_sha256 || data.messageId !== messageId) throw new Error('Starter player data does not match this library')
+  const parts = data.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
   return async account => {
     if (!Array.isArray(account.id) || account.id.length !== 2 || typeof account.name !== 'string' || !account.name || Buffer.byteLength(account.name, 'utf8') > 200) throw new ProtocolError('Invalid starter player identity')
     const writer = new Writer()
+    const state = playerState(account)
     for (const part of parts) {
       if (part.buffer) writer.raw(part.buffer)
       else if (part.field === 'accountId' && part.type === 'long') writer.long(account.id)
       else if (part.field === 'accountId' && part.type === 'vlong') { writer.vint(account.id[0]); writer.vint(account.id[1]) }
       else if (part.field === 'name' && part.type === 'string') writer.string(account.name)
-      else if (part.field === 'selectedDeck' && part.type === 'vint') writer.vint(selectedDeck(account))
+      else if (part.field === 'deckCard' && part.type === 'vint') writer.vint(state.decks[part.deck][part.slot])
+      else if (part.field === 'activeCard' && part.type === 'vint') writer.vint(starter.starter.cardOrdinals[state.decks[state.selectedDeck][part.slot]])
+      else if (part.field === 'nameSet' && part.type === 'bit') writer.byte((part.base & ~part.mask) | (state.nameSet ? part.mask : 0))
+      else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
       else throw new Error('Invalid starter Home binding')
     }
-    return { payload: writer.toBuffer(), version: starter.version }
+    return { payload: writer.toBuffer(), version: data.version }
   }
 }
 
@@ -56,4 +69,4 @@ async function loadHomeProvider ({ mode, templatePath } = {}) {
   return mode === 'template' ? loadHomeTemplate(templatePath) : null
 }
 
-module.exports = { loadHomeTemplate, createStarterHomeProvider, loadHomeProvider }
+module.exports = { loadHomeTemplate, createStarterHomeProvider, createStarterProfileProvider, loadHomeProvider }

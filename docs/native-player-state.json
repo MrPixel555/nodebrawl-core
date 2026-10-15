@@ -1,0 +1,26 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "command": 948,
+  "executor": "0x19b0a0",
+  "validation": "0x2160d4",
+  "initialNameChangeCount": -1,
+  "finalNameChangeCount": 0,
+  "nameSet": true,
+  "gemsUnchanged": true,
+  "homeNameChangeTick": 123,
+  "deckCommand": 563,
+  "deckExecutor": "0x6750b0",
+  "selectedDeck": 1,
+  "reorderedDeck": [
+    28000001,
+    28000000,
+    26000018,
+    26000014,
+    26000005,
+    26000003,
+    26000001,
+    26000000
+  ],
+  "activeCardOrderMatched": true,
+  "scope": "Original initial-name and deck-content executors with CSV/context/observer adapters; not Android UI, later paid renaming, card purchases or upgrades."
+}
