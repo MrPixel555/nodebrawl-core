@@ -12,20 +12,23 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     }
     // Validate the complete batch before making a persistent change. Known wire
     // formats alone do not implement their gameplay, prices or preconditions.
-    const unsupported = [...new Set(turn.commands.filter(command => command.id !== 703).map(command => command.id))]
+    // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
+    // at 1 in this starter profile, so its native executor returns 0 unchanged.
+    const unsupported = [...new Set(turn.commands.filter(command => ![703, 805].includes(command.id)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, extraData: turn.field_0x98 !== null, applied: false })
       return
     }
-    for (const command of turn.commands) {
+    const selections = turn.commands.filter(command => command.id === 703)
+    for (const command of selections) {
       const deck = command.fields.field_0x1c
       if (!Number.isInteger(deck) || deck < 0 || deck > 4) throw new ProtocolError('Invalid starter deck selection')
     }
-    if (turn.commands.length) {
-      const deck = turn.commands.at(-1).fields.field_0x1c
+    if (selections.length) {
+      const deck = selections.at(-1).fields.field_0x1c
       session.account = await store.selectDeck(session.account, deck)
       logger({ event: 'starter-deck-selected', selectedDeck: deck, commands: turn.commands.length })
-    } else if (traceNetwork) logger({ event: 'client-turn', commands: 0 })
+    } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
   }]])
 }
 

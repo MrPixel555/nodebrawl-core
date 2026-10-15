@@ -427,3 +427,19 @@ seven original native round-trip fixtures with CSV badge/location adapters.
 Creation/membership/chat behavior remains unimplemented. [Clan scope](alliance-wire.md)
 records the UI call chains, native limits, nullable-list distinction and tests.
 The current total is 164 message codecs and 598 passing Node tests.
+
+**Next device lobby crash:** network-v5 confirmed the event catalogue is present
+and empty, 625 Home bytes decode, and heartbeat is answered. The supplied next
+crash is at 0x549830, in native command 805's Home/Avatar level synchronization.
+The previous provider encoded Home+0x3c8 as zero while Avatar+d8 was one. The
+native executor requests 0 -> 2 and indexes `exp_levels` at -1 for the old level.
+Home now carries level one in both places (one changed byte, same total length).
+The original command returns zero unchanged for flags 1/2/3 on the corrected
+state; its QuestSlots helpers also execute with CSV row adapters. The negative
+regression supplies the device's invalid pointer for row -1 and reproduces the
+original crashing load, explicitly without emulating Android allocator contents.
+The starter handler accepts 805 unchanged alongside deck selection. Network-v6
+adds `homeLevel` to the observation. 11712/13752 wire codecs exist, but response
+contracts remain unresolved. [Crash analysis](lobby-crash.md) and
+[native evidence](native-home-level-regression.json) explain the verification
+limits; full Android lobby and gameplay are still unverified.

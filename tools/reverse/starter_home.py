@@ -84,6 +84,11 @@ class StarterHome:
             vm.uc.mem_write(self.avatar + offset, struct.pack('<Q', arena))
         for offset, value in [(0xd8, 1), (0xdc, 0), (0xe0, 100), (0xe4, 100), (0x144, 7)]:
             word(vm, self.avatar + offset, value)
+        # Home also carries the last applied avatar level. Leaving the seed's
+        # zero here makes native command 805 request a 0 -> 2 transition, and
+        # its level-data lookup indexes exp_levels at -1. Keep both copies at
+        # level 1 before encoding; this is a wire field, not a runtime patch.
+        word(vm, self.home + 0x3c8, 1)
         vm.uc.mem_write(self.avatar + 0x14d, b'\1')
         self.commodities(0, [('Gold', 100)])
         self.commodities(4, [('MaxScore', 0), ('MaxArena', 1), ('CardCount', 8)])
@@ -170,6 +175,7 @@ class StarterHome:
         gold = qword(vm, qword(vm, qword(vm, avatar + 0x90)))
         assert qword(vm, gold) == self.records[5, 'Gold'] and read_u32(vm, gold + 8) == 100
         home = qword(vm, second + 0x80)
+        assert read_u32(vm, home + 0x3c8) == read_u32(vm, avatar + 0xd8) == 1
         events = qword(vm, qword(vm, home + 0x4f8) + 0x10)
         assert events and read_u32(vm, events + 0x14) == 0
         assert vm.call(0x551634, home) == 0

@@ -47,6 +47,15 @@ prediction path. It does not yet validate the simulation checksum or command
 sequence semantics; do not use this development handler as a competitive game
 authority.
 
+Command **805**, executor `0x474628`, synchronizes Home +0x3c8 with Avatar +0xd8.
+With both at one, it returns zero unchanged for execution flags 1/2/3. The starter
+handler accepts this operation alone or alongside deck selection, without an
+account write for 805 alone. This is specific to the fixed starter level; it
+does not implement level progression. The
+[native level regression](native-home-level-regression.json) also demonstrates
+why encoding Home level zero caused the next device lobby crash. See
+[the call chain and CSV adapter limits](lobby-crash.md).
+
 Name-change command 948 has a verified string codec and an identified native
 executor, but its price, cooldown, counter and notification behavior are not
 implemented. Deck-content command 563 remains a nested unresolved codec. Thus

@@ -3,6 +3,8 @@
   "nativeStarterHomeConsumed": 637,
   "nativeAccountBindingsMatched": true,
   "nativeKeepAliveAccepted": true,
+  "nativeHomeLevel": 1,
+  "nativeAvatarLevel": 1,
   "scope": "Node starter provider to native session parser with synthetic handshake fields and CSV data adapters",
   "androidLobbyVerified": false
 }

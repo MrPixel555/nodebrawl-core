@@ -1,9 +1,11 @@
 # Starter Home for the supplied 3.1.0 library
 
 `HOME_MODE=starter` enables an initial player state for Android lobby testing.
-The device decoded the old Home and resolved its cards/arena, then crashed on an
-absent event catalogue during UI setup. The provider now includes a native empty
-catalogue; its known crash chain passes in the VM. A new device UI run is pending.
+The device decoded Home and resolved its cards/arena. A missing event catalogue
+was corrected and confirmed present on the next device run, which then exposed
+a separate zero Home-level crash. The provider now keeps Home and Avatar at
+level one; the original native synchronization command passes in the VM.
+The corrected Android UI still needs a device run.
 See [the crash analysis](lobby-crash.md).
 
 The generated profile in `server/data/starter-home.json` contains native-encoded
@@ -22,7 +24,8 @@ The spell IDs are 26000000, 26000001, 26000003, 26000005, 26000014, 26000018,
 Fireball and Arrows in the supplied CSVs. Nine commodity groups are encoded,
 including gold and initial maximum-arena/card-count statistics. This is a fixed
 starter profile. Selecting one of its five decks is persisted through native
-command 703 inside EndClientTurn 13597; all five decks still contain the same
+command 703 inside EndClientTurn 13597; command 805 succeeds unchanged for this
+fixed level-one profile. All five decks still contain the same
 cards. Changing deck contents, name changes, resource changes, quests, shop and
 battles are not implemented. See [command evidence and scope](commands.md).
 
@@ -43,13 +46,17 @@ LoginOk, the starter Home (637 bytes for its variable identity) and KeepAlive
 through the original native session parser. The handshake fields and CSV lookup
 objects in that test are synthetic. This is separate from the
 [earlier device transport](device-transport.json). The subsequent
-[device Home evidence](device-home.json) confirms old Home decoding, followed
-by a UI crash; it does not yet validate the fixed catalogue on Android.
+[device Home evidence](device-home.json) confirms initial decoding. The
+[subsequent device run](device-home-v5.json) confirms the catalogue fix and
+heartbeat, followed by a distinct UI crash. The level-state correction changes
+one byte without changing packet length; it passes its
+[native regression](native-home-level-regression.json), not a full Android UI test.
 
 Reproduce with the retained local analysis environment:
 
 ```bash
 GAME_ANALYSIS_DIR=/workspace/game-analysis /workspace/game-analysis/venv/bin/python tools/reverse/starter_home.py
+GAME_ANALYSIS_DIR=/workspace/game-analysis /workspace/game-analysis/venv/bin/python tools/reverse/verify_home_level.py
 GAME_ANALYSIS_DIR=/workspace/game-analysis /workspace/game-analysis/venv/bin/python tools/reverse/verify_starter_transport.py
 ```
 
@@ -60,6 +67,7 @@ The ready Frida client uses `--trace-home 1`. It stops peer key/nonce overrides
 after the first encrypted reply but retains bounded native tracing until
 OwnHomeData decoding finishes or the game socket closes. Expect
 `native-home-decode-start` and `native-home-decode-complete`, with consumed bytes,
-card IDs, deck count, level and arena ID. It does not log the packet body, account
+card IDs, deck count, Avatar level, Home level and arena ID. Both levels should
+be one. It does not log the packet body, account
 token, private scalar, player ID or player name. A completed native decode is
 not proof that the later Android UI initialization succeeds.

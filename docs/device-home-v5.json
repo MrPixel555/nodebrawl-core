@@ -1,0 +1,35 @@
+{
+  "source": "User-provided network-v5 Frida/server trace and accompanying crash-new.txt",
+  "libraryBuildId": "6e7c4084c38be82ffdb3e68fd64f10c71cfef2d4",
+  "fridaVersion": "17.15.4",
+  "home": {
+    "nativeDecodeConsumed": 625,
+    "cards": [26000000, 26000001, 26000003, 26000005, 26000014, 26000018, 28000000, 28000001],
+    "decks": 5,
+    "avatarLevel": 1,
+    "homeLevelObservedOnDevice": null,
+    "arenaId": 54000001,
+    "eventsPresent": true,
+    "eventCount": 0,
+    "heartbeatReplied": true,
+    "postLoginMessageIds": [10459, 11485, 10108, 11712, 13597, 10459, 13752, 10459, 10459]
+  },
+  "crash": {
+    "threadRole": "GLThread",
+    "signal": "SIGSEGV",
+    "nativePC": "0x549830",
+    "faultAddress": "0x2c2c2c2283",
+    "x0": "0x2c2c2c2273",
+    "nativeStackPCs": ["0x549830", "0x66aec8", "0x4746a8", "0x4b8ee0", "0x493bf0", "0x24b834"],
+    "identifiedNativeExecutor": "0x474628",
+    "commandId": 805
+  },
+  "analysis": {
+    "previousNodeProviderHomeLevel": 0,
+    "previousNodeProviderAvatarLevel": 1,
+    "nativeRequestedLevel": 2,
+    "nativeLevelTableIndices": [-1, 1],
+    "homeLevelSource": "Previous Node provider decoded in native VM; network-v5 did not record Home+0x3c8 on the device"
+  },
+  "scope": "Device confirms Home decoding, corrected event catalogue and heartbeat, then crashes before lobby UI. Native analysis identifies the previous provider's zero Home level and command 805's invalid level lookup. Network-v6 adds Home level observation; corrected Android UI remains unverified."
+}

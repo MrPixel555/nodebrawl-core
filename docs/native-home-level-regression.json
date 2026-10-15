@@ -1,0 +1,44 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "homeBytes": 625,
+  "changedWireBytes": 1,
+  "nativeExecute": "0x474628",
+  "commandId": 805,
+  "negative": {
+    "decodeConsumed": 625,
+    "homeLevel": 0,
+    "avatarLevel": 1,
+    "requestedLevel": 2,
+    "levelRowIndices": [
+      -1,
+      1
+    ],
+    "nativeCrashPC": "0x549830",
+    "faultAddress": "0x2c2c2c2283",
+    "x0": "0x2c2c2c2273",
+    "invalidPointerSource": "Device register supplied by the CSV lookup adapter for index -1"
+  },
+  "positive": {
+    "decodeConsumed": 625,
+    "nativeReencodeEqual": true,
+    "homeLevel": 1,
+    "avatarLevel": 1,
+    "executionFlags": [
+      1,
+      2,
+      3
+    ],
+    "nativeResults": [
+      0,
+      0,
+      0
+    ],
+    "levelRowIndicesDuringSynchronization": [],
+    "nativeQuestSlotsForLevels1To3": [
+      1,
+      2,
+      3
+    ]
+  },
+  "scope": "Original native command and level/QuestSlots helpers with CSV adapters. Negative adapter supplies the observed invalid pointer, not Android allocator contents. No full Android UI or gameplay verification."
+}

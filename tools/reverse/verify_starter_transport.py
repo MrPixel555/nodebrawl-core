@@ -29,9 +29,11 @@ for frame in vector['frames']:
         avatar = qword(model.vm, message + 0x88)
         assert bytes(model.vm.uc.mem_read(avatar + 0x10, 24)) == struct.pack('<ii', *vector['accountId']) * 3
         assert word(model.vm, home + 0x134) == 8
+        assert word(model.vm, home + 0x3c8) == word(model.vm, avatar + 0xd8) == 1
 assert model.state() == 5
 report = {'nativeLoginOkAccepted': True, 'nativeStarterHomeConsumed': vector['homeBytes'],
           'nativeAccountBindingsMatched': True, 'nativeKeepAliveAccepted': True,
+          'nativeHomeLevel': 1, 'nativeAvatarLevel': 1,
           'scope': 'Node starter provider to native session parser with synthetic handshake fields and CSV data adapters',
           'androidLobbyVerified': False}
 (ROOT / 'native-starter-transport.json').write_text(json.dumps(report, indent=2) + '\n')

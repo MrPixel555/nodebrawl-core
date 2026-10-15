@@ -149,17 +149,21 @@ test('TCP starter turns preserve deck selection across login and reject unsuppor
   await c.receive()
   const selection = deck => ({ id: 703, fields: { field_0x1c: deck } })
   c.send(13597)
-  c.send(13597, { commands: [selection(1), selection(4)] })
+  c.send(13597, { commands: [{ id: 805 }] })
+  c.send(13597, { commands: [selection(1), { id: 805 }, selection(4), { id: 805 }] })
   c.send(10108)
   assert.equal((await c.receive()).id, 20108)
   assert.equal((await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90)).starter.selectedDeck, 4)
-  c.send(13597, { commands: [selection(2), { id: 948, fields: { field_0x20: 'must not persist' } }] })
+  c.send(13597, { commands: [selection(2), { id: 805 }, { id: 948, fields: { field_0x20: 'must not persist' } }] })
   const unknown = new Writer().vint(0).vint(0).vint(2).raw(require('../lib/protocol/commands').encodeCommand(selection(3))).vint(563).toBuffer()
   c.socket.write(encodeFrame(13597, 0, unknown))
   c.send(10108)
   assert.equal((await c.receive()).id, 20108)
   c.socket.destroy()
   assert.ok(entries.some(entry => entry.event === 'unsupported-turn' && entry.applied === false))
+  assert.ok(entries.some(entry => entry.event === 'client-turn' && entry.commands === 1))
+  assert.ok(entries.some(entry => entry.event === 'starter-deck-selected' && entry.selectedDeck === 4 && entry.commands === 4))
+  assert.ok(!entries.some(entry => entry.commandIds?.includes(805)))
   assert.ok(entries.some(entry => entry.event === 'unsupported-turn-command' && entry.id === 563 && entry.applied === false))
   assert.ok(!JSON.stringify(entries).includes('must not persist'))
   // A fresh server instance must emit the independently native-encoded Home.
@@ -259,7 +263,7 @@ for (const starterHome of [false, true]) {
     }
     if (starterHome) {
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
-      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }] }))))
+      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }, { id: 805 }] }))))
     }
     for (let n = 0; n < 2; n++) {
       c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
