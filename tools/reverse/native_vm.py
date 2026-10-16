@@ -64,10 +64,15 @@ class NativeVM:
         self.uc.reg_write(UC_ARM64_REG_PC,self.uc.reg_read(UC_ARM64_REG_LR))
     def string(self,ptr):
         out=bytearray()
-        for n in range(100000):
-            b=self.uc.mem_read(ptr+n,1)[0]
-            if b==0:return bytes(out)
-            out.append(b)
+        # Stay inside each mapped page, but avoid one Unicorn/Python boundary
+        # crossing per byte when loading the multi-language text table.
+        while len(out)<100000:
+            address=ptr+len(out)
+            size=min(256,4096-(address&4095),100000-len(out))
+            block=bytes(self.uc.mem_read(address,size))
+            end=block.find(b'\0')
+            if end>=0:return bytes(out)+block[:end]
+            out.extend(block)
         raise ValueError('unterminated string')
     def on_code(self,uc,address,size,_):
         self.trace.append(hex(address))

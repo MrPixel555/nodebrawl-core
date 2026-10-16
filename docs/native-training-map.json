@@ -1,0 +1,74 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "decodedSourceSha256": {
+    "locations/training_arena.csv": "d6a682ea07fd9df26c2262ca3ff5a74cd20354fb5ed3981046a2659dd3a2524a",
+    "tilemaps/tilemap.csv": "4d8fe0ef7ed5c194405710225c686ac5d8bea95bd454ad1156c57c9973c7e1df"
+  },
+  "levelConstructor": "0x1bf3b4",
+  "sourceAssignment": "0x316148",
+  "tileParser": "0x21ba6c",
+  "width": 36,
+  "height": 64,
+  "nativeTerrainArrays": [
+    {
+      "offset": "0xa0",
+      "mask": "0x7f",
+      "cells": 2304,
+      "int32LittleEndianSha256": "b26825cb1f47f5508eff8b3ac117e6c5689978429020932f89ae9eb95fb8cb01",
+      "distinctValues": [
+        0,
+        1,
+        2,
+        16,
+        17,
+        18,
+        32
+      ],
+      "allCellsMatched": true
+    },
+    {
+      "offset": "0xa8",
+      "mask": "0x180",
+      "cells": 2304,
+      "int32LittleEndianSha256": "416f7e9f49406a40c867cbb7637dcd5a048e44850bd8209ab806c15c4c15ba8d",
+      "distinctValues": [
+        0,
+        128,
+        256
+      ],
+      "allCellsMatched": true
+    }
+  ],
+  "nativeCsvTowerCoordinates": {
+    "PrincessTower": [
+      [
+        29,
+        51
+      ],
+      [
+        7,
+        13
+      ],
+      [
+        7,
+        51
+      ],
+      [
+        29,
+        13
+      ]
+    ],
+    "KingTower": [
+      [
+        18,
+        6
+      ],
+      [
+        18,
+        58
+      ]
+    ]
+  },
+  "gameCodeAdapters": [],
+  "scope": "Native terrain extraction and CSV coordinates only. Does not instantiate towers/players or verify their stats, battle snapshot, physics, simulation or Android UI."
+}

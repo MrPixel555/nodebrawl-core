@@ -46,6 +46,22 @@ returns 15263.
 
 ## Remaining work
 
+`tools/reverse/verify_training_map.py` now executes the original LevelData
+constructor, source assignment and terrain parser `0x21ba6c` on the APK's
+Training arena and tile map. [The map report](native-training-map.json) verifies
+the **36 x 64** dimensions and all **4,608 values** in both masked terrain
+arrays against an independent CSV reader. Original native CSV getters also
+return four PrincessTower and two KingTower source coordinates. Inputs are
+pinned to the decoded APK hashes; no game-code/row lookup adapter is used.
+
+```bash
+GAME_ANALYSIS_DIR=/workspace/game-analysis \
+  /workspace/game-analysis/venv/bin/python tools/reverse/verify_training_map.py
+```
+
+Those coordinates are not instantiated towers. This check does not establish
+their HP, ownership, targeting, collision, players or a valid battle snapshot.
+
 The raw loader reads an optional initialization section through `0x6123b8`, then
 the full state through `0x431508`. Its world branch calls `0x546890` and depends
 on game-data tables, players, decks, towers, commands and simulation state.

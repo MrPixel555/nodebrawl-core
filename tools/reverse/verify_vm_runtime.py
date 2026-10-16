@@ -42,6 +42,21 @@ def main():
     assert vm.call(imports['time'], timestamp) == 1
     assert struct.unpack('<q', vm.uc.mem_read(timestamp, 8))[0] == 1
     assert vm.call(imports['time'], 0) == 1
+    # String reads cross page boundaries and stop at NUL before the next,
+    # unmapped page; chunking must retain the original bound and semantics.
+    vm.uc.mem_map(0x30000000, 8192)
+    vm.uc.mem_write(0x30000ffe, b'abcd\0')
+    assert vm.string(0x30000ffe) == b'abcd'
+    vm.uc.mem_write(0x30001ffc, b'end\0')
+    assert vm.string(0x30001ffc) == b'end'
+    unterminated = vm.alloc(100000)
+    vm.uc.mem_write(unterminated, b'x' * 100000)
+    try:
+        vm.string(unterminated)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Unterminated string bound ignored')
     # Original C++ variadic String formatter constructs its own AArch64
     # va_list. This checks the ABI boundary, not just a Python format helper.
     formatted = vm.alloc(24)
