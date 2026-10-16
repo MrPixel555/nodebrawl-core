@@ -2,7 +2,9 @@
 
 The supplied network-v8 trace reaches Home, and the user confirms content
 downloads complete. The attached server trace still shows unsupported request
-17967 (Training), request 13006, request 11712, and command 595. The accompanying
+17967 (Training), request 13006, request 11712, and command 595. The 11712 request
+now has a verified empty AvatarStream response; the other listed gameplay paths
+remain incomplete. The accompanying
 report names broken Party, battles, emotes, profile and onboarding. These are
 separate missing features; a successful Home decode does not implement them.
 
@@ -50,8 +52,23 @@ It is not labelled a Party or matchmaking action merely because it was observed
 near a Training attempt. Unknown or unsupported commands and non-null turn extra
 data leave the whole batch unapplied; no acknowledgement is invented for native
 client prediction. Command checksums and sequence validation remain incomplete.
-With TRACE_NETWORK enabled, `unresolved-command-data` reports up to eight of
-595's public game-data references; base fields and full payloads stay private.
+`unsupported-turn.commandIds` lists unsupported commands, while the new
+`turnCommandIds` lists **all** commands in that rejected turn. For example,
+`commandIds:[595], turnCommandIds:[948,595]` means initial naming was decoded
+but rejected along with the unsupported command, so it did not persist.
+`unresolved-command-data` reports up to eight of 595's public game-data
+references and selection fields even without TRACE_NETWORK; base fields,
+player names and full payloads stay private. The native Trophy Road UI uses
+595 (`0x524554`), and lobby entry can also enqueue it (`0x59f610`). Neither
+occurrence establishes what the device submitted when confirming a name.
+
+The user clarified that 11712 precedes name confirmation and is unrelated to
+that action. The original final-name callback `0x2b7f38` constructs command
+948, owns a copy of the submitted UTF-8 string, and queues that command through
+`0x6037ec`. A [native probe](native-name-submission.json) verifies that path
+with explicit text-widget/client/queue adapters. It does not verify Android
+dialog navigation or prove which commands the supplied device sent. The next
+device run must distinguish a mixed rejected turn from no 948 submission.
 
 ## Player Profile route
 
@@ -73,7 +90,10 @@ profiles, not every optional nested object or clan/season statistic. The general
 Missing accounts receive **26360**, reason **2**, with the requested ID. Native
 missing-player UI `0x1b1788` checks that reason at `0x1b17e0` before showing
 `popup_profile_deleted`. Message **11712 is not this profile request**; its
-startup occurrence remains separately unresolved.
+startup occurrence is an **AvatarStream request**. The self-only handler sends
+28299 containing an allocated empty list. Both codecs and the original stream
+consumer accept it, including a repeated response. This is separate from name
+registration and Player Profile; [native details](avatar-stream.md).
 
 ## Validation and outstanding features
 

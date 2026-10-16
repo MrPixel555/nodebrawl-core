@@ -850,9 +850,9 @@
     },
     {
       "id": 11712,
-      "name": "Message11712",
+      "name": "AvatarStreamRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "authenticated self AvatarStream request",
       "fields": [
         {
           "type": "long",
@@ -5837,9 +5837,9 @@
     },
     {
       "id": 28299,
-      "name": "Message28299",
+      "name": "AvatarStream",
       "codec": false,
-      "runtimeSupport": null,
+      "runtimeSupport": "only allocated empty AvatarStream supported; nonempty entry codecs unresolved",
       "fields": null,
       "nativeEncode": "0x2ebe8c",
       "nativeDecode": "0x2326c8",

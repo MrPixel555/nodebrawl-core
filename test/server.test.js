@@ -154,13 +154,14 @@ test('TCP starter turns preserve deck selection across login and reject unsuppor
   c.send(10108)
   assert.equal((await c.receive()).id, 20108)
   assert.equal((await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90)).starter.selectedDeck, 4)
-  c.send(13597, { commands: [selection(2), { id: 805 }, { id: 595 }] })
+  c.send(13597, { commands: [selection(2), { id: 805 }, { id: 948, fields: { field_0x20: 'must not persist' } }, { id: 595 }] })
   const unknown = new Writer().vint(0).vint(0).vint(2).raw(require('../lib/protocol/commands').encodeCommand(selection(3))).vint(1001).toBuffer()
   c.socket.write(encodeFrame(13597, 0, unknown))
   c.send(10108)
   assert.equal((await c.receive()).id, 20108)
   c.socket.destroy()
   assert.ok(entries.some(entry => entry.event === 'unsupported-turn' && entry.applied === false))
+  assert.ok(entries.some(entry => entry.event === 'unsupported-turn' && entry.turnCommandIds.join(',') === '703,805,948,595' && entry.commandIds.join(',') === '595'))
   assert.ok(entries.some(entry => entry.event === 'unresolved-command-data' && entry.id === 595 && entry.gameDataReferences[0][0] === 0 && entry.applied === false))
   assert.ok(entries.some(entry => entry.event === 'client-turn' && entry.commands === 1))
   assert.ok(entries.some(entry => entry.event === 'starter-deck-selected' && entry.selectedDeck === 4 && entry.commands === 4))
@@ -176,6 +177,49 @@ test('TCP starter turns preserve deck selection across login and reject unsuppor
   assert.deepEqual(home.payload, expected.payload)
   assert.equal(game.statistics.logins, 1)
   next.socket.destroy()
+})
+
+test('595 diagnostics identify a rejected naming batch without network tracing or retaining its name', async () => {
+  const entries = []
+  const handlers = createStarterHandlers({ store: { applyStarterTurn: () => assert.fail('Rejected batch must not mutate state') }, logger: entry => entries.push(entry) })
+  const commands = [{ id: 948, fields: { field_0x20: 'private-name' } }, { id: 595, fields: { field_0x1c: 3, field_0x20: 1, field_0x28: [54, 1], field_0x30: true } }]
+  await handlers.get(13597)({}, null, { payload: encodeMessage(13597, { commands }) })
+  assert.deepEqual(entries[0], { event: 'unsupported-turn', commandIds: [595], turnCommandIds: [948, 595], extraData: false, applied: false })
+  assert.deepEqual(entries[1].selectors, [commands[1].fields])
+  assert.equal(JSON.stringify(entries).includes('private-name'), false)
+})
+
+test('self AvatarStream roundtrips the native empty response repeatedly without resetting state or exposing another account', { timeout: 5000 }, async t => {
+  const { directory } = await setup(t)
+  const store = new AccountStore(directory)
+  const account = await store.login([0, 0], null)
+  const other = await store.login([0, 0], null)
+  const entries = []
+  const game = createGameServer({ store, homeProvider: createStarterHomeProvider(), handlers: createStarterHandlers({ store, traceNetwork: true, logger: entry => entries.push(entry) }) })
+  game.server.listen(0, '127.0.0.1')
+  await once(game.server, 'listening')
+  t.after(() => game.stop())
+  const c = await client(game.server.address().port)
+  c.send(10101, { field_0x80: account.id, field_0x88: account.token }, 4)
+  await c.receive(); await c.receive()
+  const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
+  for (let n = 0; n < 2; n++) {
+    c.send(11712, { field_0x80: account.id })
+    const response = await c.receive()
+    assert.equal(response.id, 28299)
+    assert.equal(response.version, 0)
+    assert.deepEqual(response.payload, Buffer.from(require('./fixtures/native-avatar-stream.json').emptyReply.payload, 'hex'))
+  }
+  c.send(10108)
+  assert.equal((await c.receive()).id, 20108)
+  assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), before)
+  assert.equal(entries.filter(entry => entry.event === 'avatar-stream-sent').length, 2)
+  assert.equal(game.statistics.unsupported, 0)
+  const closed = once(c.socket, 'close')
+  c.send(11712, { field_0x80: other.id })
+  await closed
+  assert.equal(entries.filter(entry => entry.event === 'avatar-stream-sent').length, 2)
+  assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), before)
 })
 
 test('new-player naming and deck contents persist through a new server and store without resetting resources', { timeout: 5000 }, async t => {
@@ -421,6 +465,10 @@ for (const starterHome of [false, true]) {
     assert.equal(friends.id, 21047)
     assert.deepEqual(receive.decrypt(friends.payload), Buffer.from(require('./fixtures/native-empty-friends.json')[0].payload, 'hex'))
     if (starterHome) {
+      c.socket.write(encodeFrame(11712, 0, send.encrypt(encodeMessage(11712, { field_0x80: account.field_0x80 }))))
+      const stream = await c.receive()
+      assert.equal(stream.id, 28299)
+      assert.deepEqual(receive.decrypt(stream.payload), Buffer.from(require('./fixtures/native-avatar-stream.json').emptyReply.payload, 'hex'))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }, { id: 805 }] }))))
     }

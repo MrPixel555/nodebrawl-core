@@ -5,7 +5,13 @@ const { createStarterProfileProvider } = require('./home')
 
 function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false }) {
   const profileProvider = createStarterProfileProvider()
-  return new Map([[12373, async (session, fields) => {
+  return new Map([[11712, async (session, fields) => {
+    // AvatarStream is private to the authenticated player. Its native consumer
+    // requires an allocated empty vector (00), and dereferences a null one (7f).
+    if (!fields.field_0x80.every((part, index) => part === session.account.id[index])) throw new ProtocolError('Avatar stream identity does not match session')
+    session.sendRaw(28299, Buffer.from([0]))
+    if (traceNetwork) logger({ event: 'avatar-stream-sent', count: 0 })
+  }], [12373, async (session, fields) => {
     const account = await store.findPlayer(fields.field_0x80)
     if (!account) {
       // Native profile UI 0x1b1788 handles reason 2 as an absent/deleted player.
@@ -29,13 +35,20 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
     const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 703, 805, 948].includes(command.id)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
-      logger({ event: 'unsupported-turn', commandIds: unsupported, extraData: turn.field_0x98 !== null, applied: false })
+      logger({ event: 'unsupported-turn', commandIds: unsupported, turnCommandIds: turn.commands.map(command => command.id), extraData: turn.field_0x98 !== null, applied: false })
       // 595's verified reference points to game data, not a player identity.
       // Retain at most eight such public IDs to identify its unresolved path;
       // never dump the base command fields or the whole turn payload.
+      // Keep the bounded public selectors for 595 even without TRACE_NETWORK:
+      // otherwise a rejected name turn containing it cannot be diagnosed.
+      const selectors = turn.commands.filter(command => command.id === 595).slice(0, 8).map(command => ({
+        field_0x1c: command.fields.field_0x1c,
+        field_0x20: command.fields.field_0x20,
+        field_0x28: command.fields.field_0x28,
+        field_0x30: command.fields.field_0x30,
+      }))
+      if (selectors.length) logger({ event: 'unresolved-command-data', id: 595, gameDataReferences: selectors.map(fields => fields.field_0x28), selectors, applied: false })
       if (traceNetwork) {
-        const references = turn.commands.filter(command => command.id === 595).slice(0, 8).map(command => command.fields.field_0x28)
-        if (references.length) logger({ event: 'unresolved-command-data', id: 595, gameDataReferences: references, applied: false })
         for (const command of turn.commands.filter(command => [527, 836].includes(command.id)).slice(0, 8)) {
           // Only these already-recovered public mode/reward selector fields;
           // omit base fields, account references and the complete turn bytes.

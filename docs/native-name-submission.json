@@ -1,0 +1,16 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "submissionCallback": "0x2b7f38",
+  "commandConstructor": "0x2d457c",
+  "nameSetter": "0x3cfe68",
+  "enqueue": "0x6037ec",
+  "command": 948,
+  "commandCount": 1,
+  "utf8SubmissionVerified": true,
+  "gameCodeAdapters": [
+    "0x301ce8 text widget getter",
+    "0x698448 GameClient getter",
+    "0x6037ec queue capture"
+  ],
+  "scope": "Original submission callback/command construction/serialization; no Android dialog navigation, validation or network delivery verified."
+}

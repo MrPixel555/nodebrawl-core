@@ -1,0 +1,32 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "request": 11712,
+  "requestConstructor": "0x535908",
+  "lobbySendCall": "0x59f208",
+  "requestEncoder": "0x65f3b0",
+  "requestDecoder": "0x48bc08",
+  "requestFields": "one fixed-width Big Endian int32 pair; no name string",
+  "response": 28299,
+  "responseEncoder": "0x2ebe8c",
+  "responseDecoder": "0x2326c8",
+  "emptyPayloadHex": "00",
+  "consumer": "0x6e6968",
+  "managerGlobal": "0xd4c300",
+  "loadedFlagOffset": "0x24",
+  "consumption": [
+    {
+      "result": 1,
+      "loaded": true,
+      "messageListOwnershipTransferred": true
+    },
+    {
+      "result": 1,
+      "loaded": true,
+      "messageListOwnershipTransferred": true
+    }
+  ],
+  "nullListRejectedByConsumer": true,
+  "nullListFaultPC": "0x6e6ab8",
+  "gameCodeAdapters": [],
+  "scope": "Original request/empty-response codecs and empty native stream consumer with unreadable null page. No nonempty stream entry codecs, populated stream manager, name UI or Android execution verified."
+}

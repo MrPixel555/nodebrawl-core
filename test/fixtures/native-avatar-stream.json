@@ -1,0 +1,40 @@
+{
+  "requests": [
+    {
+      "id": 11712,
+      "variant": 1,
+      "fields": {
+        "field_0x80": [
+          0,
+          1
+        ]
+      },
+      "payload": "0000000000000001",
+      "native_decode_consumed": 8,
+      "native_reencode_equal": true
+    },
+    {
+      "id": 11712,
+      "variant": 8192,
+      "fields": {
+        "field_0x80": [
+          0,
+          8192
+        ]
+      },
+      "payload": "0000000000002000",
+      "native_decode_consumed": 8,
+      "native_reencode_equal": true
+    }
+  ],
+  "emptyReply": {
+    "id": 28299,
+    "variant": "allocated-empty",
+    "fields": {
+      "entries": []
+    },
+    "payload": "00",
+    "native_decode_consumed": 1,
+    "native_reencode_equal": true
+  }
+}
