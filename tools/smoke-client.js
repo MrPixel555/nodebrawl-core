@@ -88,19 +88,19 @@ async function handle (frame) {
     player = { id: account.field_0x80, name: 'Player', starter: playerState({ starter: { selectedDeck: 0, nameSet: false, nameChangeCount: -1 } }) }
     const expected = await createStarterHomeProvider()(player)
     assert.deepEqual(payload, expected.payload)
-    stage = 'alliance-search'
+    stage = 'name-check'
     for (const [id, fields] of [
       [10459, { field_0x80_0x8: 'smoke-client', field_0x80_0x20_json: '{"source":"smoke-client"}' }],
       [11485, {}],
-      [16592, { field_0x80: 'smoke-check' }],
+      [16592, { field_0x80: 'Smoke player' }],
     ]) {
       const plain = encodeMessage(id, fields)
       socket.write(encodeFrame(id, 0, sendCipher ? sendCipher.encrypt(plain) : plain))
     }
-  } else if (stage === 'alliance-search') {
-    assert.equal(frame.id, 25074)
+  } else if (stage === 'name-check') {
+    assert.equal(frame.id, 20821)
     const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
-    assert.deepEqual(decodeMessage(25074, payload), { field_0x80: 'smoke-check', field_0x88: [] })
+    assert.deepEqual(decodeMessage(20821, payload), { field_0x7c: false, field_0x80: 0, field_0x88: null })
     stage = 'profile'
     player.name = 'Smoke player'
     Object.assign(player.starter, { selectedDeck: 3, nameSet: true, nameChangeCount: 0, gold: 0, gems: 0, freeGems: 0 })
@@ -125,7 +125,7 @@ async function handle (frame) {
     assert.equal(payload.length, 0)
     stage = 'done'
     finish()
-    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search, Arena1 boost/name/deck batch, profile and heartbeat`)
+    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, name preflight, Arena1 boost/name/deck batch, profile and heartbeat`)
     if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original/restored map asset SHA-1')
     console.log('Starter Home display was confirmed on the supplied Android device; this smoke check does not verify battle gameplay.')
   } else {

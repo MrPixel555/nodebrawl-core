@@ -1,0 +1,80 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "request": 16592,
+  "response": 20821,
+  "submission": "0x4b4e44",
+  "dispatcher": "0x71e538",
+  "listenerLookup": [
+    "0x22febc",
+    "0x148784"
+  ],
+  "successCallback": [
+    "0x61e61c",
+    "0x67494c"
+  ],
+  "acceptedFlag": false,
+  "rejectedReason": 1,
+  "acceptedTransitions": 2,
+  "rejectedTransitions": 1,
+  "queuedRequests": 1,
+  "fixtures": [
+    {
+      "id": 16592,
+      "variant": "candidate",
+      "fields": {
+        "field_0x80": "\u0628\u0627\u0632\u06cc\u06a9\u0646"
+      },
+      "payload": "0000000cd8a8d8a7d8b2db8cdaa9d986",
+      "native_decode_consumed": 16,
+      "native_reencode_equal": true
+    },
+    {
+      "id": 20821,
+      "variant": "accepted",
+      "fields": {
+        "field_0x7c": false,
+        "field_0x80": 0,
+        "field_0x88": null
+      },
+      "payload": "0000000000ffffffff",
+      "native_decode_consumed": 9,
+      "native_reencode_equal": true
+    },
+    {
+      "id": 20821,
+      "variant": "rejected",
+      "fields": {
+        "field_0x7c": true,
+        "field_0x80": 1,
+        "field_0x88": null
+      },
+      "payload": "0100000001ffffffff",
+      "native_decode_consumed": 9,
+      "native_reencode_equal": true
+    },
+    {
+      "id": 20821,
+      "variant": "accepted",
+      "fields": {
+        "field_0x7c": false,
+        "field_0x80": 0,
+        "field_0x88": null
+      },
+      "payload": "0000000000ffffffff",
+      "native_decode_consumed": 9,
+      "native_reencode_equal": true
+    }
+  ],
+  "former25074ReplyAdvancesNaming": false,
+  "gameCodeAdapters": [
+    "0x5f5ae8 window lookup",
+    "0x301ce8 text widget getter",
+    "0x7158ec request enqueue capture",
+    "0x1a0728 screen asset constructor",
+    "0x2c3a64 screen push capture",
+    "0x6aee80 localization lookup",
+    "0x617184 error text display",
+    "0x698448 disconnected GameClient for unrelated 25074 control"
+  ],
+  "scope": "Native preflight request, codecs, full response dispatch and confirmation-screen transition; no Android rendering, final command 948 or gameplay validation claimed."
+}

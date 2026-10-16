@@ -74,7 +74,12 @@ with explicit text-widget/client/queue adapters. It does not verify Android
 dialog navigation or prove which commands the supplied device sent. The next
 device log had `turnCommandIds:[595]` alone, with the Arena1 boost reference.
 It does not contain a submitted 948, so the mixed-turn hypothesis did not
-explain that observation. Name submission on Android remains unverified.
+explain that observation. The next network trace established the actual blocker: request 16592 received
+the unrelated clan response 25074. The corrected **16592 -> 20821** preflight
+advances the original native naming listener to the next confirmation screen.
+The candidate check does not persist the name; final command 948 does.
+[Native response dispatch and test evidence](name-check.md). Android confirmation
+of this correction remains pending.
 
 ## Player Profile route
 
@@ -124,8 +129,8 @@ with isolated temporary accounts and keys.
 | --- | --- |
 | Home and original content downloads | User confirmed on Android, network-v8 |
 | Persistent resources/name/five decks | Implemented and native/TCP verified, including gold-pack transactions |
-| Arena1 24-hour chest-speed boost, command 595 | Native/TCP verified with persisted remaining time and one-time claim; Android verification pending |
-| Initial name state and command 948 | Native/TCP verified; initial Android dialog still missing |
+| Arena1 24-hour chest-speed boost, command 595 | Native/TCP verified with persisted remaining time and one-time claim; User observed arena-boost-claimed; remaining-time UI not verified |
+| Name preflight 16592 -> 20821 and final command 948 | Native dispatch and TCP/restart verified; Android retest pending; automatic tutorial prompt remains incomplete |
 | Player Profile | User confirmed rendering before the expanded inventory update |
 | Normal battle, Training, Party | Battle-start state and simulation still missing |
 | Automatic Training Camp onboarding | Requires the missing battle-start and tutorial flow |

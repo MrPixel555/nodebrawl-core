@@ -28,15 +28,6 @@ test('clan creation and header codecs enforce native string and data-table types
   assert.throws(() => encodeMessage(25074, { field_0x88: [{ field_0x10: [26, 0] }] }), /reference type/)
 })
 
-test('authenticated clan search returns an initialized empty list for the current empty registry', async () => {
-  const handler = createAllianceHandlers().get(16592)
-  const sent = []
-  const session = { send: (id, fields) => sent.push({ id, fields }) }
-  await handler(session, { field_0x80: 'قبیله' })
-  assert.deepEqual(sent, [{ id: 25074, fields: { field_0x80: 'قبیله', field_0x88: [] } }])
-  for (const value of [null, 'a'.repeat(1025)]) await assert.rejects(handler(session, { field_0x80: value }), /search query/)
-})
-
 test('advanced clan search uses the native list-only response and rejects malformed/truncated filters', async () => {
   const sent = []
   await createAllianceHandlers().get(14783)({ send: (id, fields) => sent.push({ id, fields }) })

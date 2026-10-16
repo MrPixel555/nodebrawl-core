@@ -24,7 +24,18 @@ battle history, clan invitation or stream reward. Nonempty entry codecs and
 their gameplay remain unresolved, so the general 28299 codec remains marked
 unresolved in the packet catalogue.
 
-## Naming remains a separate investigation
+## Naming preflight blocker identified and corrected
+
+The later TRACE_NETWORK device log establishes the failure before final 948:
+**16592 arrived and the server incorrectly sent 25074**. This is a candidate-name
+check, and its proper response is **20821**, with a false error flag for success.
+The original naming listener advances to the next confirmation screen when it
+receives that response. The old clan reply never calls that listener.
+See [the native probe, runtime fix and retest instructions](name-check.md).
+
+The investigation below explains why the earlier 11712/595 observations alone
+could not identify this failure. The 595 Arena1 boost is a separate operation.
+
 
 The final name callback `0x2b7f38` constructs **948**, copies the UTF-8 name and
 queues it through `0x6037ec`. `verify_name_submission.py` executes that original

@@ -2231,9 +2231,9 @@
     },
     {
       "id": 16592,
-      "name": "SearchAlliances",
+      "name": "CheckName",
       "codec": true,
-      "runtimeSupport": "empty clan name search",
+      "runtimeSupport": "name preflight; no account mutation",
       "fields": [
         {
           "type": "string",
@@ -3710,9 +3710,9 @@
     },
     {
       "id": 20821,
-      "name": "Message20821",
+      "name": "CheckNameResult",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "name check result; false flag accepts candidate",
       "fields": [
         {
           "type": "bool",
@@ -4857,7 +4857,7 @@
       "id": 25074,
       "name": "AllianceSearchResult",
       "codec": true,
-      "runtimeSupport": "empty clan search result",
+      "runtimeSupport": null,
       "fields": [
         {
           "field": "field_0x80",

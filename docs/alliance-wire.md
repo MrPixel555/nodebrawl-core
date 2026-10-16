@@ -1,17 +1,19 @@
 # Clan search and recovered request formats
 
-Authenticated name-search request **16592** now receives **25074**, echoing the
-query and an initialized empty clan list. The server currently has no clan
-creation/membership implementation or clan records; an empty result is accurate.
-This completes the network search exchange. The Android clan UI has not yet been
-exercised against this handler.
+The runtime clan search route is **14783 -> 24184**, returning an allocated
+empty header list because clan creation/membership and stored clans remain
+unimplemented.
 
-The IDs come from the supplied library:
+**Correction:** request **16592 is a name preflight**, not a clan search.
+The previous 16592 -> 25074 pairing was wrong and left the naming dialog waiting.
+Native naming submit `0x4b4e44` builds 16592; the proper reply is **20821**.
+[Native dispatch evidence and verification](name-check.md).
 
-- Name-search UI builders `0x18148c`/`0x4b4e44` construct the request through
-  `0x3954ec`, whose vtable is `0xa3b5a8` and native message type is 16592.
+The clan wire evidence retained here is independent of that mistaken pairing:
+
 - The 25074 branch in dispatcher `0x71e538` enters at `0x720384`. Its list goes
   through `0x694358` to `0x7425e4`, which uses `TID_ALLIANCE_SEARCH_EMPTY`.
+  Its codec remains verified, but no request pairing/runtime handler is claimed.
 - Creation UI `0x5e7090` constructs 10453 through `0x1c3f4c`. Its two strings,
   badge reference, two VInts and location reference are encoded by `0x6c12fc`.
 - Settings request 13882 has one string, badge reference, two VInts and location
@@ -28,7 +30,7 @@ Header codecs `0x32ea04`/`0x4b5a14` write a fixed-width Long ID, name, badge
 reference, ten VInts, table-1/table-57 references, a boolean, three VInts and four
 packed booleans. Unknown semantics retain native field offsets in
 `lib/protocol/alliances.js`. The decoder bounds the list at 10000. Null wire lists
-and empty allocated lists are distinct; the live handler always sends the latter.
+and empty allocated lists are distinct. No live 25074 response is currently sent.
 
 `verify_alliances.py` runs the original codecs twice per fixture. Seven fixtures
 cover Persian UTF-8, settings text beyond the creation limit, nonzero badge and
@@ -56,9 +58,9 @@ negative/fixed-width integers, non-null region, ID vectors and string vectors.
 Encrypted TCP tests exercise the advanced exchange and a subsequent heartbeat.
 Clan creation, membership and chat remain unimplemented.
 
-Encrypted TCP tests send startup receipts, English/Persian searches, turns and
-heartbeat on one session. Actual CLI smoke also exercises startup receipts and
-empty search before heartbeat, in plaintext and nacl17 modes. Core decoding now
+Encrypted TCP tests send startup receipts, naming checks, advanced clan search, turns and
+heartbeat on one session. Actual CLI smoke exercises naming preflight, final
+name/deck turns and heartbeat in plaintext and nacl17 modes. Core decoding now
 uses the complete codec registry; EndClientTurn retains atomic handler treatment
 of unknown nested commands.
 
@@ -68,6 +70,6 @@ npm test
 npm run lint
 ```
 
-Training/battle simulation, matchmaking, purchases, clan creation/membership/chat
+Training/battle simulation, matchmaking, remaining shop actions, clan creation/membership/chat
 and progression still require server rules and additional state. Wire codec
 coverage is reported separately from those handlers.

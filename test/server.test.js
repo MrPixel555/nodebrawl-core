@@ -13,6 +13,7 @@ const { createHash } = require('node:crypto')
 const { createStarterHandlers } = require('../server/starter-handlers')
 const { createStartupHandlers } = require('../server/startup-handlers')
 const { createAllianceHandlers } = require('../server/alliance-handlers')
+const { createNameHandlers } = require('../server/name-handlers')
 const { Writer } = require('../lib/protocol/stream')
 const { encodeFrame, FrameDecoder } = require('../lib/protocol/frame')
 const { encodeMessage, decodeMessage, profile } = require('../lib/protocol/messages')
@@ -315,7 +316,9 @@ test('new-player naming and deck contents persist through a new server and store
   const entries = []
   async function start () {
     const store = new AccountStore(directory)
-    const game = createGameServer({ store, homeProvider: createStarterHomeProvider(), handlers: createStarterHandlers({ store, logger: entry => entries.push(entry) }) })
+    const handlers = createStarterHandlers({ store, logger: entry => entries.push(entry) })
+    for (const [id, handler] of createNameHandlers({ logger: entry => entries.push(entry) })) handlers.set(id, handler)
+    const game = createGameServer({ store, homeProvider: createStarterHomeProvider(), handlers })
     game.server.listen(0, '127.0.0.1')
     await once(game.server, 'listening')
     t.after(() => game.server.listening ? game.stop() : undefined)
@@ -325,6 +328,12 @@ test('new-player naming and deck contents persist through a new server and store
   const c = await client(first.server.address().port)
   c.send(10101, { field_0x80: account.id, field_0x88: account.token }, 4)
   await c.receive(); await c.receive()
+  const beforeCheck = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
+  c.send(16592, { field_0x80: 'بازیکن' })
+  const check = await c.receive()
+  assert.equal(check.id, 20821)
+  assert.deepEqual(decodeMessage(20821, check.payload), { field_0x7c: false, field_0x80: 0, field_0x88: null })
+  assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), beforeCheck)
   const cards = [...account.starter.decks[0]].reverse()
   c.send(13597, { commands: [{ id: 948, fields: { field_0x20: 'بازیکن' } }, { id: 563, fields: { field_0x1c: 3, field_0x20: cards } }] })
   c.send(10108)
@@ -505,6 +514,7 @@ for (const starterHome of [false, true]) {
     const entries = []
     const handlers = createStartupHandlers({ logger: entry => entries.push(entry), traceNetwork: true })
     for (const [id, handler] of createAllianceHandlers()) handlers.set(id, handler)
+    for (const [id, handler] of createNameHandlers({ logger: entry => entries.push(entry) })) handlers.set(id, handler)
     const contentUrls = ['http://127.0.0.1:9338']
     const { game, port, directory } = await setup(t, { handlers, contentUrls, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
     if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
@@ -530,12 +540,15 @@ for (const starterHome of [false, true]) {
     c.socket.write(encodeFrame(10459, 0, send.encrypt(encodeMessage(10459, metadata))))
     c.socket.write(encodeFrame(11485, 0, send.encrypt(Buffer.alloc(0))))
     c.socket.write(encodeFrame(13752, 0, send.encrypt(encodeMessage(13752, { field_0x7c: 1234, field_0x80: 'private-network-address' }))))
-    for (const query of ['no-clan-yet', 'قبیله']) {
-      c.socket.write(encodeFrame(16592, 0, send.encrypt(encodeMessage(16592, { field_0x80: query }))))
-      const search = await c.receive()
-      assert.equal(search.id, 25074)
-      assert.deepEqual(decodeMessage(25074, receive.decrypt(search.payload)), { field_0x80: query, field_0x88: [] })
+    for (const [name, accepted] of [['Player name', true], ['بازیکن', true], ['', false], ['bad\nname', false], ['a'.repeat(201), false]]) {
+      c.socket.write(encodeFrame(16592, 0, send.encrypt(encodeMessage(16592, { field_0x80: name }))))
+      const check = await c.receive()
+      assert.equal(check.id, 20821)
+      assert.deepEqual(decodeMessage(20821, receive.decrypt(check.payload)), { field_0x7c: !accepted, field_0x80: accepted ? 0 : 1, field_0x88: null })
     }
+    const unchanged = await new AccountStore(directory).login(account.field_0x80, account.field_0x90)
+    assert.equal(unchanged.name, 'Player')
+    assert.equal(unchanged.starter.nameSet, false)
     c.socket.write(encodeFrame(14783, 0, send.encrypt(encodeMessage(14783, { field_0x80: 'قبیله', field_0x94: 50 }))))
     const advanced = await c.receive()
     assert.equal(advanced.id, 24184)
@@ -560,7 +573,9 @@ for (const starterHome of [false, true]) {
     }
     assert.equal(game.statistics.logins, 1)
     assert.equal(game.statistics.unsupported, 0)
-    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report', 'server-friends-sent'])
+    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report', ...Array(5).fill('name-check-result'), 'server-friends-sent'])
+    assert.deepEqual(entries.filter(entry => entry.event === 'name-check-result').map(entry => entry.accepted), [true, true, false, false, false])
+    assert(!JSON.stringify(entries).includes('بازیکن'))
     assert(!JSON.stringify(entries).includes('private-event'))
     assert(!JSON.stringify(entries).includes('private-network-address'))
     if (starterHome) {

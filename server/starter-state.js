@@ -5,6 +5,7 @@ const { cards } = require('./data/unlocked-home.json')
 const ownedCards = new Set(cards.map(card => card.id))
 const { packs } = require('./data/resource-packs.json')
 const { isArena1BoostCommand, validateArena1Boost, claimArena1Boost } = require('./arena-boost')
+const { isValidPlayerName } = require('./name-handlers')
 
 function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
@@ -66,7 +67,7 @@ function applyCommands (account, commands, { now = Date.now } = {}) {
       // progression/price rules outside this level-1 starter implementation.
       if (next.starter.nameSet || next.starter.nameChangeCount !== -1) throw new ProtocolError('Name changes after initial naming are not implemented')
       const name = fields.field_0x20
-      if (typeof name !== 'string' || !name.trim() || Buffer.byteLength(name, 'utf8') > 200 || [...name].some(char => char.codePointAt(0) < 32 || char.codePointAt(0) === 127)) throw new ProtocolError('Invalid player name')
+      if (!isValidPlayerName(name)) throw new ProtocolError('Invalid player name')
       next.name = name
       next.starter.nameSet = true
       next.starter.nameChangeCount = 0
