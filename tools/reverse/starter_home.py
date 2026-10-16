@@ -29,7 +29,7 @@ class StarterHome:
         self.data = {}
         self.records = {}
         self.bindings = []
-        self.expected_bindings = 61
+        self.expected_bindings = 62
         self.stream = None
         self.profile_id = None
         table_vtable = vm.alloc(0x70)
@@ -171,7 +171,7 @@ class StarterHome:
             return
         lr = vm.uc.reg_read(UC_ARM64_REG_LR)
         field = {0x34c6c0: 'selectedDeck', 0x71def0: 'nameChangeCount',
-                 0x71e204: 'gems', 0x71e218: 'freeGems'}.get(lr)
+                 0x71e204: 'gems', 0x71e218: 'freeGems', 0x34c8ec: 'homeFlags'}.get(lr)
         extra = {}
         if lr == 0x34c67c:
             field = 'deckCard'
@@ -313,6 +313,12 @@ def make_parts(payload, bindings):
         part = {name: value for name, value in binding.items() if name not in ('offset', 'bytes')}
         if binding['type'] == 'bit':
             part['base'] = payload[offset]
+        if part.get('field') == 'gold':
+            # Bind the whole first resource group, including its count. The
+            # native free pass reward adds resource 5000005 (FreeGold).
+            assert parts[-1]['hex'].endswith('010501')
+            parts[-1]['hex'] = parts[-1]['hex'][:-6]
+            part = {'field': 'resourceBalances', 'type': 'nativeResources'}
         parts.append(part)
         at = offset + binding['bytes']
     if at < len(payload):

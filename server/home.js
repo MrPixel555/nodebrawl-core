@@ -9,6 +9,7 @@ const unlockedHome = require('./data/unlocked-home.json')
 const unlockedProfile = require('./data/unlocked-profile.json')
 const { playerState } = require('./starter-state')
 const { writeArenaBoostState } = require('./arena-boost')
+const { writePassClaim } = require('./season-pass')
 
 // External templates bind fixed-width account IDs explicitly. The starter
 // profile below uses typed bindings generated from the native nested codecs.
@@ -58,14 +59,19 @@ function createPlayerProvider (data, messageId, now = Date.now) {
       else if (part.field === 'deckCard' && part.type === 'vint') writer.vint(state.decks[part.deck][part.slot])
       else if (part.field === 'activeCard' && part.type === 'vint') writer.vint(unlockedHome.cards.find(card => card.id === state.decks[state.selectedDeck][part.slot]).ordinal)
       else if (part.field === 'inventory' && part.type === 'nativeCards') {
-        const active = new Set(state.decks[state.selectedDeck])
-        const inventory = unlockedHome.cards.filter(card => !active.has(card.id))
+        const inventory = state.inventory.map(id => unlockedHome.cards.find(card => card.id === id))
         writer.vint(inventory.length)
         for (const card of inventory) writer.raw(Buffer.from(card.payloadHex, 'hex'))
       }
+      else if (part.field === 'arenaBoostClaim' && part.type === 'nativeArenaBoost' && state.freePassGoldClaimed) writePassClaim(writer, state.arena1Boost)
       else if (['arenaBoostTimers', 'arenaBoostClaim'].includes(part.field) && part.type === 'nativeArenaBoost') writeArenaBoostState(writer, part.field, state.arena1Boost, nowMs)
       else if (part.field === 'nameSet' && part.type === 'bit') writer.byte((part.base & ~part.mask) | (state.nameSet ? part.mask : 0))
-      else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
+      else if (part.field === 'resourceBalances' && part.type === 'nativeResources') {
+        const freeGoldPresent = state.freeGold > 0
+        writer.vint(freeGoldPresent ? 2 : 1).dataReference([5, 1]).vint(state.gold)
+        if (freeGoldPresent) writer.dataReference([5, 5]).vint(state.freeGold)
+      }
+      else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount', 'homeFlags'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
       else throw new Error('Invalid starter Home binding')
     }
     return { payload: writer.toBuffer(), version: data.version }

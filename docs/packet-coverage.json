@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "commands 563/703/805, initial naming 948, gold packs 687 and Arena1 boost branch 595",
+      "runtimeSupport": "commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869",
       "fields": [
         {
           "field": "field_0x88",
@@ -3825,7 +3825,7 @@
       "id": 21217,
       "name": "OwnHomeData",
       "codec": false,
-      "runtimeSupport": "persistent Home with 95 unlocked cards",
+      "runtimeSupport": "persistent Home with 95 unlocked cards, card order and free pass claim",
       "fields": null,
       "nativeEncode": "0x4bce90",
       "nativeDecode": "0x154440",
@@ -6325,7 +6325,8 @@
       "decode": "0x2fbda0",
       "execute": "0x5deac4",
       "fields": null,
-      "unresolvedReason": "control flow/transform mrs at 0x7463b8"
+      "unresolvedReason": "control flow/transform mrs at 0x7463b8",
+      "runtimeSupport": null
     },
     {
       "id": 18,
@@ -6359,7 +6360,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 28,
@@ -6399,7 +6401,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 49,
@@ -6408,7 +6411,8 @@
       "decode": "0x5d82b8",
       "execute": "0x137614",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x193824"
+      "unresolvedReason": "unknown call at 0x193824",
+      "runtimeSupport": null
     },
     {
       "id": 57,
@@ -6436,7 +6440,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 203,
@@ -6476,7 +6481,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 235,
@@ -6485,7 +6491,8 @@
       "decode": "0x44d24c",
       "execute": "0x68c938",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x57bf88"
+      "unresolvedReason": "control flow/transform cbz at 0x57bf88",
+      "runtimeSupport": null
     },
     {
       "id": 252,
@@ -6494,7 +6501,8 @@
       "decode": "0x3ff25c",
       "execute": "0x585728",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x18dda8"
+      "unresolvedReason": "unknown call at 0x18dda8",
+      "runtimeSupport": null
     },
     {
       "id": 254,
@@ -6552,7 +6560,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 255,
@@ -6616,7 +6625,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 261,
@@ -6625,7 +6635,8 @@
       "decode": "0x575fc8",
       "execute": "0x13e304",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x6ddd3c"
+      "unresolvedReason": "unknown call at 0x6ddd3c",
+      "runtimeSupport": null
     },
     {
       "id": 265,
@@ -6677,7 +6688,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 278,
@@ -6686,7 +6698,8 @@
       "decode": "0x33b754",
       "execute": "0x29e27c",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x6a7cf8"
+      "unresolvedReason": "control flow/transform cmp at 0x6a7cf8",
+      "runtimeSupport": null
     },
     {
       "id": 287,
@@ -6726,7 +6739,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 291,
@@ -6760,7 +6774,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 292,
@@ -6806,7 +6821,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 301,
@@ -6815,7 +6831,8 @@
       "decode": "0x2209d4",
       "execute": "0x3dc630",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x5c53f0"
+      "unresolvedReason": "control flow/transform cmp at 0x5c53f0",
+      "runtimeSupport": null
     },
     {
       "id": 312,
@@ -6861,7 +6878,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 314,
@@ -6870,7 +6888,8 @@
       "decode": "0x529f64",
       "execute": "0x2e1414",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x1b548c"
+      "unresolvedReason": "unknown call at 0x1b548c",
+      "runtimeSupport": null
     },
     {
       "id": 320,
@@ -6910,7 +6929,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 322,
@@ -6950,7 +6970,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 327,
@@ -6959,7 +6980,8 @@
       "decode": "0x499374",
       "execute": "0x6b2ed0",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x303d98"
+      "unresolvedReason": "unknown call at 0x303d98",
+      "runtimeSupport": null
     },
     {
       "id": 334,
@@ -6968,7 +6990,8 @@
       "decode": "0x468158",
       "execute": "0x20db10",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x592e04"
+      "unresolvedReason": "control flow/transform cmp at 0x592e04",
+      "runtimeSupport": null
     },
     {
       "id": 345,
@@ -6977,7 +7000,8 @@
       "decode": "0x63e71c",
       "execute": "0x230d04",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x35a394"
+      "unresolvedReason": "unknown call at 0x35a394",
+      "runtimeSupport": null
     },
     {
       "id": 358,
@@ -7017,7 +7041,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 365,
@@ -7026,7 +7051,8 @@
       "decode": "0x228760",
       "execute": "0x11c4b0",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x6d1b18"
+      "unresolvedReason": "control flow/transform cbz at 0x6d1b18",
+      "runtimeSupport": null
     },
     {
       "id": 368,
@@ -7078,7 +7104,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 370,
@@ -7130,7 +7157,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 391,
@@ -7139,7 +7167,8 @@
       "decode": "0x4aea08",
       "execute": "0x2be1d8",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x6fdb2c"
+      "unresolvedReason": "control flow/transform cmp at 0x6fdb2c",
+      "runtimeSupport": null
     },
     {
       "id": 421,
@@ -7185,7 +7214,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 433,
@@ -7194,7 +7224,8 @@
       "decode": "0x6da154",
       "execute": "0x5db6f4",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x53c5d0"
+      "unresolvedReason": "unknown call at 0x53c5d0",
+      "runtimeSupport": null
     },
     {
       "id": 440,
@@ -7203,7 +7234,8 @@
       "decode": "0x22aa30",
       "execute": "0x5e66bc",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x2fe03c"
+      "unresolvedReason": "unknown call at 0x2fe03c",
+      "runtimeSupport": null
     },
     {
       "id": 445,
@@ -7212,7 +7244,8 @@
       "decode": "0x6b5ae4",
       "execute": "0x21d784",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x14ecb0"
+      "unresolvedReason": "unknown call at 0x14ecb0",
+      "runtimeSupport": null
     },
     {
       "id": 450,
@@ -7221,7 +7254,8 @@
       "decode": "0x44dae4",
       "execute": "0x4c0410",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x380bdc"
+      "unresolvedReason": "control flow/transform cbz at 0x380bdc",
+      "runtimeSupport": null
     },
     {
       "id": 454,
@@ -7230,7 +7264,8 @@
       "decode": "0x129a08",
       "execute": "0x4535f4",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x6dc190"
+      "unresolvedReason": "unknown call at 0x6dc190",
+      "runtimeSupport": null
     },
     {
       "id": 469,
@@ -7306,7 +7341,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 477,
@@ -7315,7 +7351,8 @@
       "decode": "0x55e580",
       "execute": "0x6dbf30",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x3f19d8"
+      "unresolvedReason": "unknown call at 0x3f19d8",
+      "runtimeSupport": null
     },
     {
       "id": 479,
@@ -7361,7 +7398,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 490,
@@ -7401,7 +7439,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 503,
@@ -7447,7 +7486,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 521,
@@ -7481,7 +7521,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 523,
@@ -7521,7 +7562,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 527,
@@ -7567,7 +7609,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 532,
@@ -7601,7 +7644,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 541,
@@ -7641,7 +7685,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 547,
@@ -7675,7 +7720,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 556,
@@ -7715,7 +7761,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 560,
@@ -7724,7 +7771,8 @@
       "decode": "0x190a94",
       "execute": "0x2a54a8",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x3d2ebc"
+      "unresolvedReason": "unknown call at 0x3d2ebc",
+      "runtimeSupport": null
     },
     {
       "id": 562,
@@ -7733,7 +7781,8 @@
       "decode": "0x73f594",
       "execute": "0x63d4e4",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x4b83d8"
+      "unresolvedReason": "control flow/transform cbz at 0x4b83d8",
+      "runtimeSupport": null
     },
     {
       "id": 563,
@@ -7786,7 +7835,8 @@
           "type": "optionalLong"
         }
       ],
-      "verification": "tools/reverse/verify_player_commands.py"
+      "verification": "tools/reverse/verify_player_commands.py",
+      "runtimeSupport": "eight owned deck cards; foreign operations unsupported"
     },
     {
       "id": 565,
@@ -7814,7 +7864,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 571,
@@ -7848,7 +7899,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 577,
@@ -7882,7 +7934,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 580,
@@ -7891,7 +7944,8 @@
       "decode": "0x5eb474",
       "execute": "0x32a348",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x496eec"
+      "unresolvedReason": "unknown call at 0x496eec",
+      "runtimeSupport": null
     },
     {
       "id": 581,
@@ -7925,7 +7979,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 589,
@@ -7934,7 +7989,8 @@
       "decode": "0x61e718",
       "execute": "0x3ca728",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x65453c"
+      "unresolvedReason": "unknown call at 0x65453c",
+      "runtimeSupport": null
     },
     {
       "id": 590,
@@ -7962,7 +8018,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 593,
@@ -7971,7 +8028,8 @@
       "decode": "0x3f2204",
       "execute": "0x49fa74",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x23705c"
+      "unresolvedReason": "control flow/transform cbz at 0x23705c",
+      "runtimeSupport": null
     },
     {
       "id": 595,
@@ -8019,7 +8077,8 @@
           "type": "bool"
         }
       ],
-      "verification": "tools/reverse/verify_player_commands.py"
+      "verification": "tools/reverse/verify_player_commands.py",
+      "runtimeSupport": "only Arena1 ChestSpeedUp reference [54,1], false flag"
     },
     {
       "id": 596,
@@ -8053,7 +8112,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 602,
@@ -8099,7 +8159,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 616,
@@ -8108,7 +8169,8 @@
       "decode": "0x692774",
       "execute": "0x220678",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x1df4a4"
+      "unresolvedReason": "unknown call at 0x1df4a4",
+      "runtimeSupport": null
     },
     {
       "id": 622,
@@ -8136,7 +8198,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 623,
@@ -8145,7 +8208,8 @@
       "decode": "0x4c3f24",
       "execute": "0x538b40",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x5dd308"
+      "unresolvedReason": "unknown call at 0x5dd308",
+      "runtimeSupport": null
     },
     {
       "id": 628,
@@ -8179,7 +8243,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 638,
@@ -8213,7 +8278,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 640,
@@ -8222,7 +8288,8 @@
       "decode": "0x1c0188",
       "execute": "0x4c3db8",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x38c25c"
+      "unresolvedReason": "control flow/transform cbz at 0x38c25c",
+      "runtimeSupport": null
     },
     {
       "id": 650,
@@ -8250,7 +8317,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 653,
@@ -8278,7 +8346,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 656,
@@ -8306,7 +8375,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 658,
@@ -8346,7 +8416,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 660,
@@ -8374,7 +8445,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 664,
@@ -8414,7 +8486,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 668,
@@ -8466,7 +8539,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 670,
@@ -8500,7 +8574,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 676,
@@ -8546,7 +8621,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 682,
@@ -8574,7 +8650,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 687,
@@ -8607,7 +8684,8 @@
           "type": "dataReference"
         }
       ],
-      "verification": "tools/reverse/verify_resource_packs.py"
+      "verification": "tools/reverse/verify_resource_packs.py",
+      "runtimeSupport": "three gold resource packs from table 55"
     },
     {
       "id": 691,
@@ -8647,7 +8725,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 693,
@@ -8693,7 +8772,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "manual active-card swap or indexed inventory replacement"
     },
     {
       "id": 696,
@@ -8721,7 +8801,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 703,
@@ -8755,7 +8836,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "select one of five persisted decks"
     },
     {
       "id": 705,
@@ -8783,7 +8865,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 715,
@@ -8823,7 +8906,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 716,
@@ -8832,7 +8916,8 @@
       "decode": "0xf9074",
       "execute": "0x5d63b4",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x4842e4"
+      "unresolvedReason": "control flow/transform cmp at 0x4842e4",
+      "runtimeSupport": null
     },
     {
       "id": 717,
@@ -8866,7 +8951,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 723,
@@ -8906,7 +8992,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 732,
@@ -8915,7 +9002,8 @@
       "decode": "0x3bfa84",
       "execute": "0x6e34f4",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x103344"
+      "unresolvedReason": "unknown call at 0x103344",
+      "runtimeSupport": null
     },
     {
       "id": 738,
@@ -8943,7 +9031,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 742,
@@ -8989,7 +9078,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 744,
@@ -9017,7 +9107,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 751,
@@ -9026,7 +9117,8 @@
       "decode": "0x105fd0",
       "execute": "0x347c54",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x1e03b4"
+      "unresolvedReason": "unknown call at 0x1e03b4",
+      "runtimeSupport": null
     },
     {
       "id": 762,
@@ -9060,7 +9152,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 775,
@@ -9100,7 +9193,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 780,
@@ -9140,7 +9234,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 783,
@@ -9180,7 +9275,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 798,
@@ -9189,7 +9285,8 @@
       "decode": "0x61bb7c",
       "execute": "0x69d39c",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x6494b8"
+      "unresolvedReason": "unknown call at 0x6494b8",
+      "runtimeSupport": null
     },
     {
       "id": 804,
@@ -9223,7 +9320,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 805,
@@ -9251,7 +9349,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "unchanged level-one synchronization only"
     },
     {
       "id": 810,
@@ -9260,7 +9359,8 @@
       "decode": "0x4b2404",
       "execute": "0x1dd900",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x2fe4c0"
+      "unresolvedReason": "control flow/transform cmp at 0x2fe4c0",
+      "runtimeSupport": null
     },
     {
       "id": 819,
@@ -9312,7 +9412,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 820,
@@ -9321,7 +9422,8 @@
       "decode": "0x35e480",
       "execute": "0x4493d8",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x158500"
+      "unresolvedReason": "unknown call at 0x158500",
+      "runtimeSupport": null
     },
     {
       "id": 827,
@@ -9361,7 +9463,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 834,
@@ -9401,7 +9504,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 835,
@@ -9429,7 +9533,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 836,
@@ -9475,7 +9580,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "free tier 0, current pass, non-premium: 500 gold, cap and persistent claim"
     },
     {
       "id": 837,
@@ -9521,7 +9627,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 839,
@@ -9549,7 +9656,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 841,
@@ -9583,7 +9691,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 845,
@@ -9617,7 +9726,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 852,
@@ -9645,7 +9755,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 863,
@@ -9673,7 +9784,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 869,
@@ -9707,7 +9819,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "set one of Home flag bits 1..4"
     },
     {
       "id": 870,
@@ -9735,7 +9848,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 875,
@@ -9769,7 +9883,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 885,
@@ -9778,7 +9893,8 @@
       "decode": "0x5389e8",
       "execute": "0x315544",
       "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x346498"
+      "unresolvedReason": "control flow/transform cbz at 0x346498",
+      "runtimeSupport": null
     },
     {
       "id": 888,
@@ -9824,7 +9940,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 911,
@@ -9833,7 +9950,8 @@
       "decode": "0x4216b8",
       "execute": "0x3601ec",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x170950"
+      "unresolvedReason": "control flow/transform cmp at 0x170950",
+      "runtimeSupport": null
     },
     {
       "id": 912,
@@ -9842,7 +9960,8 @@
       "decode": "0x57bc98",
       "execute": "0x2c5320",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x379e44"
+      "unresolvedReason": "unknown call at 0x379e44",
+      "runtimeSupport": null
     },
     {
       "id": 914,
@@ -9851,7 +9970,8 @@
       "decode": "0x3072fc",
       "execute": "0x3e140c",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x49f6b8"
+      "unresolvedReason": "unknown call at 0x49f6b8",
+      "runtimeSupport": null
     },
     {
       "id": 921,
@@ -9879,7 +9999,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 926,
@@ -9919,7 +10040,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 929,
@@ -9928,7 +10050,8 @@
       "decode": "0x202538",
       "execute": "0x4263d4",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x3bfb38"
+      "unresolvedReason": "unknown call at 0x3bfb38",
+      "runtimeSupport": null
     },
     {
       "id": 947,
@@ -9962,7 +10085,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 948,
@@ -9996,7 +10120,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": "initial free naming only; later renames unsupported"
     },
     {
       "id": 959,
@@ -10005,7 +10130,8 @@
       "decode": "0x23cd38",
       "execute": "0x38875c",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x49cef4"
+      "unresolvedReason": "unknown call at 0x49cef4",
+      "runtimeSupport": null
     },
     {
       "id": 963,
@@ -10014,7 +10140,8 @@
       "decode": "0x5cfbc4",
       "execute": "0x139cf4",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x245fdc"
+      "unresolvedReason": "control flow/transform cmp at 0x245fdc",
+      "runtimeSupport": null
     },
     {
       "id": 965,
@@ -10023,7 +10150,8 @@
       "decode": "0x627050",
       "execute": "0x18c78c",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x225678"
+      "unresolvedReason": "unknown call at 0x225678",
+      "runtimeSupport": null
     },
     {
       "id": 966,
@@ -10057,7 +10185,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 967,
@@ -10085,7 +10214,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 968,
@@ -10113,7 +10243,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 981,
@@ -10122,7 +10253,8 @@
       "decode": "0x6cc070",
       "execute": "0x241b80",
       "fields": null,
-      "unresolvedReason": "control flow/transform cmp at 0x56e910"
+      "unresolvedReason": "control flow/transform cmp at 0x56e910",
+      "runtimeSupport": null
     },
     {
       "id": 987,
@@ -10162,7 +10294,8 @@
           "storage": "value"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     },
     {
       "id": 988,
@@ -10171,7 +10304,8 @@
       "decode": "0x12d4c8",
       "execute": "0x755660",
       "fields": null,
-      "unresolvedReason": "unknown call at 0x658cac"
+      "unresolvedReason": "unknown call at 0x658cac",
+      "runtimeSupport": null
     },
     {
       "id": 990,
@@ -10205,7 +10339,8 @@
           "storage": "address"
         }
       ],
-      "unresolvedReason": null
+      "unresolvedReason": null,
+      "runtimeSupport": null
     }
   ]
 }

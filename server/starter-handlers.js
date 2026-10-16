@@ -3,6 +3,7 @@ const { decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol
 const { ProtocolError } = require('../lib/protocol/stream')
 const { createStarterProfileProvider } = require('./home')
 const { isArena1BoostCommand } = require('./arena-boost')
+const { isFreePassGoldCommand } = require('./season-pass')
 
 function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false }) {
   const profileProvider = createStarterProfileProvider()
@@ -34,7 +35,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // formats alone do not implement their gameplay, prices or preconditions.
     // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
-    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 703, 805, 948].includes(command.id) && !isArena1BoostCommand(command)).map(command => command.id))]
+    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 693, 703, 805, 869, 948].includes(command.id) && !isArena1BoostCommand(command) && !isFreePassGoldCommand(command)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, turnCommandIds: turn.commands.map(command => command.id), extraData: turn.field_0x98 !== null, applied: false })
       // Keep up to eight public selectors for unresolved 595 branches even
@@ -64,10 +65,12 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
         return
       }
       if (mutations.some(command => command.id === 703 || command.id === 563)) logger({ event: 'starter-deck-selected', selectedDeck: session.account.starter.selectedDeck, commands: turn.commands.length })
-      if (mutations.some(command => command.id === 563)) logger({ event: 'starter-deck-updated', selectedDeck: session.account.starter.selectedDeck })
+      if (mutations.some(command => command.id === 563 || command.id === 693)) logger({ event: 'starter-deck-updated', selectedDeck: session.account.starter.selectedDeck })
       if (mutations.some(command => command.id === 948)) logger({ event: 'starter-name-set' })
       if (mutations.some(command => command.id === 687)) logger({ event: 'gold-pack-purchased' })
       if (mutations.some(isArena1BoostCommand)) logger({ event: 'arena-boost-claimed', arena: 'Arena1', seconds: 86400 })
+      if (mutations.some(isFreePassGoldCommand)) logger({ event: 'free-pass-reward-claimed', tier: 0 })
+      if (mutations.some(command => command.id === 869)) logger({ event: 'home-flags-updated' })
     } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
   }]])
 }

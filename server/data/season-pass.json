@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "tier": 0,
+  "gold": 500,
+  "goldLimit": 5000000,
+  "claimedManagerHex": {
+    "withoutArenaBoost": "00000000018096a36100017f0000000100000000027f00",
+    "withArenaBoost": "00000000018096a3610001000000000100000000027f00"
+  }
+}

@@ -82,7 +82,7 @@ class AccountStore {
       const account = (await this.load()).accounts.find(account => account.id[0] === id[0] && account.id[1] === id[1])
       if (!account) return null
       // Profile responses never include credentials or private gem/gold balances.
-      return { id: [...account.id], name: account.name, starter: { ...playerState(account), gold: 0, gems: 0, freeGems: 0 } }
+      return { id: [...account.id], name: account.name, starter: { ...playerState(account), gold: 0, freeGold: 0, gems: 0, freeGems: 0 } }
     })
   }
 

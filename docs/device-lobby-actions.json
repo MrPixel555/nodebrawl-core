@@ -1,0 +1,19 @@
+{
+  "source": "User's pasted server trace and follow-up Training trace against df5b95d",
+  "baselineCommit": "df5b95d",
+  "userConfirmed": {
+    "goldPackPurchaseAndReconnect": true,
+    "purchaseGems": 60,
+    "goldAfterPurchaseAndReconnect": 1100,
+    "manualCardEditsRevertOnReconnect": true
+  },
+  "serverTraceConfirmed": {
+    "nameCheck": [16592, 20821],
+    "finalNameSavedEvent": "starter-name-set",
+    "unsupportedCommands": [762, 836, 869, 693],
+    "freePassSelectors": { "field_0x1c": 0, "field_0x20": false, "field_0x21": false },
+    "unsupportedRequests": [19355, 10453, 17967],
+    "trainingNpc": [18, 7]
+  },
+  "scope": "Evidence for the previous pushed server. The new manual-swap, free pass and Home flag handlers are native/TCP verified; their Android retest is pending. Clan creation, live Training and battle are not established by this report."
+}

@@ -6,6 +6,8 @@ const ownedCards = new Set(cards.map(card => card.id))
 const { packs } = require('./data/resource-packs.json')
 const { isArena1BoostCommand, validateArena1Boost, claimArena1Boost } = require('./arena-boost')
 const { isValidPlayerName } = require('./name-handlers')
+const { inventoryFor, validateInventory, activateDeck, swapCard } = require('./decks')
+const { isFreePassGoldCommand, claimFreePassGold } = require('./season-pass')
 
 function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
@@ -15,6 +17,7 @@ function playerState (account) {
     selectedDeck: state.selectedDeck,
     decks: read('decks', Array.from({ length: 5 }, () => [...starter.deckIds])),
     gold: read('gold', 100),
+    freeGold: read('freeGold', 0),
     gems: read('gems', 100),
     freeGems: read('freeGems', read('gems', 100)),
     // Existing accounts were previously advertised as named. Keep that state
@@ -22,15 +25,21 @@ function playerState (account) {
     nameSet: read('nameSet', true),
     nameChangeCount: read('nameChangeCount', 0),
     arena1Boost: validateArena1Boost(read('arena1Boost', null)),
+    freePassGoldClaimed: read('freePassGoldClaimed', false),
+    homeFlags: read('homeFlags', 0),
   }
   if (!Array.isArray(value.decks) || value.decks.length !== 5) throw new ProtocolError('Invalid starter decks')
   for (const deck of value.decks) validateDeck(deck)
-  for (const key of ['gold', 'gems', 'freeGems']) {
+  value.inventory = read('inventory', inventoryFor(value.decks[value.selectedDeck]))
+  validateInventory(value.inventory, value.decks[value.selectedDeck])
+  for (const key of ['gold', 'freeGold', 'gems', 'freeGems']) {
     if (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > 2147483647) throw new ProtocolError('Invalid starter resources')
   }
   if (value.freeGems > value.gems) throw new ProtocolError('Invalid starter resources')
+  if (typeof value.freePassGoldClaimed !== 'boolean') throw new ProtocolError('Invalid season pass claim state')
+  if (!Number.isInteger(value.homeFlags) || value.homeFlags < 0 || value.homeFlags > 30 || (value.homeFlags & ~30) !== 0) throw new ProtocolError('Invalid Home flags')
   if (typeof value.nameSet !== 'boolean' || !Number.isInteger(value.nameChangeCount) || value.nameChangeCount < -1 || value.nameChangeCount > 2147483646 || (!value.nameSet && value.nameChangeCount !== -1)) throw new ProtocolError('Invalid starter name state')
-  return { ...value, decks: value.decks.map(deck => [...deck]) }
+  return { ...value, decks: value.decks.map(deck => [...deck]), inventory: [...value.inventory] }
 }
 
 function validateDeck (deck) {
@@ -44,14 +53,23 @@ function applyCommands (account, commands, { now = Date.now } = {}) {
     if (id === 703 || id === 563) {
       const deck = fields.field_0x1c
       selectedDeck({ starter: { selectedDeck: deck } })
+      const target = id === 563 ? fields.field_0x20 : next.starter.decks[deck]
       if (id === 563) {
         if (fields.field_0x38 !== null) throw new ProtocolError('Foreign deck changes are not implemented')
         validateDeck(fields.field_0x20)
-        next.starter.decks[deck] = [...fields.field_0x20]
       }
+      activateDeck(next.starter, target)
+      if (id === 563) next.starter.decks[deck] = [...target]
       next.starter.selectedDeck = deck
+    } else if (id === 693) {
+      swapCard(next.starter, fields)
+    } else if (id === 869) {
+      if (!Number.isInteger(fields.field_0x1c) || fields.field_0x1c < 1 || fields.field_0x1c > 4) throw new ProtocolError('Invalid Home flag selector')
+      next.starter.homeFlags |= 1 << fields.field_0x1c
     } else if (isArena1BoostCommand({ id, fields })) {
       claimArena1Boost(next.starter, now)
+    } else if (isFreePassGoldCommand({ id, fields })) {
+      claimFreePassGold(next.starter)
     } else if (id === 687) {
       const reference = fields.field_0x20
       const pack = packs.find(pack => Array.isArray(reference) && reference.length === 2 && pack.reference.every((value, index) => value === reference[index]))

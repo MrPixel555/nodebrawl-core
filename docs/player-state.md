@@ -12,13 +12,14 @@ separate missing features; a successful Home decode does not implement them.
 ## Persistent state and commands
 
 Accounts retain five deck arrays, selected deck, gold, gems, free gems, name-set
-status, name-change count and the one-time Arena1 boost in
+status, name-change count, inventory ordering, Home flags, free pass claim and the one-time Arena1 boost in
 `.local/accounts/accounts.json`. Initial gold and
 gems are 100; seeing those values twice does not establish an account reset.
 Previously Home always encoded 100. It now encodes the persisted balances, with
 independent native fixtures covering 8192 gold, 37 gems and 21 free gems. There
 is now a native-verified gold-pack transaction (command 687) that changes these
-balances. Battle rewards and other shop actions remain open. Invalid stored balances fail validation instead of silently
+balances. The zero-crown free pass reward now grants 500 gold and persists its claim;
+later pass tiers, battle rewards and other shop actions remain open. Invalid stored balances fail validation instead of silently
 falling back to 100. Existing account IDs, tokens, names and server keys survive.
 
 Fresh accounts start with Avatar `+0x14d` (`nameSet`) false and `+0x150`
@@ -42,7 +43,9 @@ card IDs, an inline fixed Long, a packed flag and optional Long. Original execut
 `0x6750b0` checks ownership, duplicates and availability, updates the requested
 deck and selects it. Its native execution also rearranges the active card
 collection. The provider now binds **both** the five deck arrays and the active
-collection's spell ordinals. The handler now accepts eight distinct cards from
+collection's spell ordinals. Manual UI edits use command **693**, now supported separately with persistent
+inventory slot ordering. [Native swap and reward evidence](lobby-actions.md).
+The handler accepts eight distinct cards from
 all 95 unlocked collectible spells and persists the complete validated batch
 atomically. Foreign deck operations and upgrades remain unimplemented.
 Command 703 and unchanged level synchronization 805 still work.
@@ -135,7 +138,7 @@ with isolated temporary accounts and keys.
 | Normal battle, Training, Party | Battle-start state and simulation still missing |
 | Automatic Training Camp onboarding | Requires the missing battle-start and tutorial flow |
 | Emotes | Native Home `+0x640` manager identified; catalogue/asset metadata still missing |
-| Shop, progression, clan creation/membership/chat | Still unimplemented |
+| Remaining shop actions, pass progression, clan creation/membership/chat | Still incomplete; gold packs and free tier-zero pass gold work |
 
 The empty native emote manager sends zero inventory and eight empty selected
 slots. Native `0x197c34` serializes it; `0x472f78 -> 0x562a4c` resolves selected

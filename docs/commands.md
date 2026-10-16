@@ -39,7 +39,7 @@ unnamed; legacy accounts preserve their identity and previously advertised name
 status. Native command **563** now updates deck contents and active card order;
 **948** persists the first name (-1 -> 0 name-change counter) without spending
 resources. Command **687** now buys the three original gold packs and persists
-the gold/gem/free-gem changes atomically. Subsequent paid renames, other purchases
+the gold/gem/free-gem changes atomically. Subsequent paid renames, remaining purchases
 and card upgrades remain unsupported. [Gold-pack evidence](unlocked-cards-and-shop.md).
 [Player state and profile evidence](player-state.md) describes the exact native
 validation/executors and the 12373 -> 22757 Profile route. Complete native Home
@@ -65,8 +65,10 @@ does not implement level progression. The
 why encoding Home level zero caused the next device lobby crash. See
 [the call chain and CSV adapter limits](lobby-crash.md).
 
-Command 595's data-reference/boolean wire layout now passes native round trips,
-but its business behavior is still unresolved and is not applied. Android
+Command 595 supports the native Arena1 boost branch; other branches remain
+unimplemented. Manual card swaps/replacements **693**, zero-crown free pass
+gold **836** and Home flag setter **869** now have original native execution
+evidence and persistent server state; [details](lobby-actions.md). Android
 rendering of the new profile, name-dialog timing and deck interactions remain
 unverified. Battle, Training and Party still require separate implementation.
 
