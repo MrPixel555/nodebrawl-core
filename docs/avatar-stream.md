@@ -41,6 +41,13 @@ bounded `unresolved-command-data` event with 595's public selectors, even with
 network tracing disabled. It never logs the name, command-base account IDs or
 complete payload. The fix does not claim naming is working on the device.
 
+The subsequent device report contained only `turnCommandIds:[595]`, with
+`field_0x28:[54,1]`, selectors `-1/-1` and `field_0x30:false`. Thus that turn
+was not a rejected mixed naming batch. It is the automatic Arena1 chest-speed
+boost branch, now implemented with persistent native Home state; see
+[Arena1 boost](arena-boost.md). Other 595 branches remain unsupported. This
+observation still does not establish that the device sent a name command.
+
 Keep app data, `.local/accounts` and the existing key when updating. Repeat the
 final name confirmation and inspect `starter-name-set`, `starter-turn-rejected`,
 or `unsupported-turn` with `turnCommandIds` and the adjacent selector event.

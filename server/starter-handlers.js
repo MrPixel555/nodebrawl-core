@@ -2,6 +2,7 @@
 const { decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
 const { ProtocolError } = require('../lib/protocol/stream')
 const { createStarterProfileProvider } = require('./home')
+const { isArena1BoostCommand } = require('./arena-boost')
 
 function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false }) {
   const profileProvider = createStarterProfileProvider()
@@ -33,15 +34,12 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // formats alone do not implement their gameplay, prices or preconditions.
     // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
-    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 703, 805, 948].includes(command.id)).map(command => command.id))]
+    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 703, 805, 948].includes(command.id) && !isArena1BoostCommand(command)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, turnCommandIds: turn.commands.map(command => command.id), extraData: turn.field_0x98 !== null, applied: false })
-      // 595's verified reference points to game data, not a player identity.
-      // Retain at most eight such public IDs to identify its unresolved path;
-      // never dump the base command fields or the whole turn payload.
-      // Keep the bounded public selectors for 595 even without TRACE_NETWORK:
-      // otherwise a rejected name turn containing it cannot be diagnosed.
-      const selectors = turn.commands.filter(command => command.id === 595).slice(0, 8).map(command => ({
+      // Keep up to eight public selectors for unresolved 595 branches even
+      // without TRACE_NETWORK. Omit names, base identity fields and payloads.
+      const selectors = turn.commands.filter(command => command.id === 595 && !isArena1BoostCommand(command)).slice(0, 8).map(command => ({
         field_0x1c: command.fields.field_0x1c,
         field_0x20: command.fields.field_0x20,
         field_0x28: command.fields.field_0x28,
@@ -69,6 +67,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       if (mutations.some(command => command.id === 563)) logger({ event: 'starter-deck-updated', selectedDeck: session.account.starter.selectedDeck })
       if (mutations.some(command => command.id === 948)) logger({ event: 'starter-name-set' })
       if (mutations.some(command => command.id === 687)) logger({ event: 'gold-pack-purchased' })
+      if (mutations.some(isArena1BoostCommand)) logger({ event: 'arena-boost-claimed', arena: 'Arena1', seconds: 86400 })
     } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
   }]])
 }

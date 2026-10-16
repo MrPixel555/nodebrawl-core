@@ -3,7 +3,8 @@
 The supplied network-v8 trace reaches Home, and the user confirms content
 downloads complete. The attached server trace still shows unsupported request
 17967 (Training), request 13006, request 11712, and command 595. The 11712 request
-now has a verified empty AvatarStream response; the other listed gameplay paths
+now has a verified empty AvatarStream response. The subsequently observed 595
+Arena1 boost branch is now supported; Training and the other listed battle paths
 remain incomplete. The accompanying
 report names broken Party, battles, emotes, profile and onboarding. These are
 separate missing features; a successful Home decode does not implement them.
@@ -11,7 +12,8 @@ separate missing features; a successful Home decode does not implement them.
 ## Persistent state and commands
 
 Accounts retain five deck arrays, selected deck, gold, gems, free gems, name-set
-status and name-change count in `.local/accounts/accounts.json`. Initial gold and
+status, name-change count and the one-time Arena1 boost in
+`.local/accounts/accounts.json`. Initial gold and
 gems are 100; seeing those values twice does not establish an account reset.
 Previously Home always encoded 100. It now encodes the persisted balances, with
 independent native fixtures covering 8192 gold, 37 gems and 21 free gems. There
@@ -45,18 +47,20 @@ all 95 unlocked collectible spells and persists the complete validated batch
 atomically. Foreign deck operations and upgrades remain unimplemented.
 Command 703 and unchanged level synchronization 805 still work.
 
-Command **595** now has native-verified wire decoding, including its data
-reference and packed boolean. Its business meaning and executor dependencies
-remain unresolved, so it is still rejected atomically as an unsupported action.
-It is not labelled a Party or matchmaking action merely because it was observed
-near a Training attempt. Unknown or unsupported commands and non-null turn extra
+Command **595** has native-verified wire decoding and now supports the observed
+`field_0x28:[54,1], field_0x30:false` branch. It grants the one-time 24-hour
+Arena1 `ChestSpeedUp` boost, with persistent claim and remaining-time fields in
+Home. Fully linked native CSV execution verifies its initial grant and repeat
+rejection; it does not change a name or currency. Other 595 reward branches
+remain unsupported. [Implementation and native evidence](arena-boost.md).
+Unknown or unsupported commands and non-null turn extra
 data leave the whole batch unapplied; no acknowledgement is invented for native
 client prediction. Command checksums and sequence validation remain incomplete.
 `unsupported-turn.commandIds` lists unsupported commands, while the new
 `turnCommandIds` lists **all** commands in that rejected turn. For example,
 `commandIds:[595], turnCommandIds:[948,595]` means initial naming was decoded
 but rejected along with the unsupported command, so it did not persist.
-`unresolved-command-data` reports up to eight of 595's public game-data
+`unresolved-command-data` reports up to eight of unresolved 595 branches' public game-data
 references and selection fields even without TRACE_NETWORK; base fields,
 player names and full payloads stay private. The native Trophy Road UI uses
 595 (`0x524554`), and lobby entry can also enqueue it (`0x59f610`). Neither
@@ -68,7 +72,9 @@ that action. The original final-name callback `0x2b7f38` constructs command
 `0x6037ec`. A [native probe](native-name-submission.json) verifies that path
 with explicit text-widget/client/queue adapters. It does not verify Android
 dialog navigation or prove which commands the supplied device sent. The next
-device run must distinguish a mixed rejected turn from no 948 submission.
+device log had `turnCommandIds:[595]` alone, with the Arena1 boost reference.
+It does not contain a submitted 948, so the mixed-turn hypothesis did not
+explain that observation. Name submission on Android remains unverified.
 
 ## Player Profile route
 
@@ -118,6 +124,7 @@ with isolated temporary accounts and keys.
 | --- | --- |
 | Home and original content downloads | User confirmed on Android, network-v8 |
 | Persistent resources/name/five decks | Implemented and native/TCP verified, including gold-pack transactions |
+| Arena1 24-hour chest-speed boost, command 595 | Native/TCP verified with persisted remaining time and one-time claim; Android verification pending |
 | Initial name state and command 948 | Native/TCP verified; initial Android dialog still missing |
 | Player Profile | User confirmed rendering before the expanded inventory update |
 | Normal battle, Training, Party | Battle-start state and simulation still missing |

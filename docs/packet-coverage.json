@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "commands 563/703/805, initial naming 948 and gold packs 687",
+      "runtimeSupport": "commands 563/703/805, initial naming 948, gold packs 687 and Arena1 boost branch 595",
       "fields": [
         {
           "field": "field_0x88",

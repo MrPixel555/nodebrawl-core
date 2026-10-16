@@ -8,6 +8,7 @@ const starterProfile = require('./data/starter-profile.json')
 const unlockedHome = require('./data/unlocked-home.json')
 const unlockedProfile = require('./data/unlocked-profile.json')
 const { playerState } = require('./starter-state')
+const { writeArenaBoostState } = require('./arena-boost')
 
 // External templates bind fixed-width account IDs explicitly. The starter
 // profile below uses typed bindings generated from the native nested codecs.
@@ -32,21 +33,23 @@ async function loadHomeTemplate (filename) {
   }
 }
 
-function createStarterHomeProvider ({ unlocked = true } = {}) {
-  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217)
+function createStarterHomeProvider ({ unlocked = true, now = Date.now } = {}) {
+  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217, now)
 }
 
 function createStarterProfileProvider ({ unlocked = true } = {}) {
   return createPlayerProvider(unlocked ? unlockedProfile : starterProfile, 22757)
 }
 
-function createPlayerProvider (data, messageId) {
+function createPlayerProvider (data, messageId, now = Date.now) {
+  if (typeof now !== 'function') throw new Error('Invalid Home clock')
   if (data.schema !== 1 || data.librarySha256 !== profile.library_sha256 || data.messageId !== messageId) throw new Error('Starter player data does not match this library')
   const parts = data.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
   return async account => {
     if (!Array.isArray(account.id) || account.id.length !== 2 || typeof account.name !== 'string' || !account.name || Buffer.byteLength(account.name, 'utf8') > 200) throw new ProtocolError('Invalid starter player identity')
     const writer = new Writer()
     const state = playerState(account)
+    const nowMs = state.arena1Boost === null ? null : now()
     for (const part of parts) {
       if (part.buffer) writer.raw(part.buffer)
       else if (part.field === 'accountId' && part.type === 'long') writer.long(account.id)
@@ -60,6 +63,7 @@ function createPlayerProvider (data, messageId) {
         writer.vint(inventory.length)
         for (const card of inventory) writer.raw(Buffer.from(card.payloadHex, 'hex'))
       }
+      else if (['arenaBoostTimers', 'arenaBoostClaim'].includes(part.field) && part.type === 'nativeArenaBoost') writeArenaBoostState(writer, part.field, state.arena1Boost, nowMs)
       else if (part.field === 'nameSet' && part.type === 'bit') writer.byte((part.base & ~part.mask) | (state.nameSet ? part.mask : 0))
       else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
       else throw new Error('Invalid starter Home binding')

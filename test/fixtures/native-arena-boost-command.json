@@ -1,0 +1,22 @@
+{
+  "id": 595,
+  "variant": "observed-arena1-boost",
+  "fields": {
+    "field_0x10": 0,
+    "field_0xc": 0,
+    "field_0x14": [
+      0,
+      0
+    ],
+    "field_0x1c": -1,
+    "field_0x20": -1,
+    "field_0x28": [
+      54,
+      1
+    ],
+    "field_0x30": false
+  },
+  "payloadHex": "9309000000007f7f360100",
+  "nativeDecodeConsumed": 11,
+  "nativeReencodeEqual": true
+}

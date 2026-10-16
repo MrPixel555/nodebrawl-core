@@ -1,7 +1,8 @@
 """Verify branched player command codecs and original initial-name execution.
 
 CSV table lookups and context/UI callbacks are explicit emulation adapters.
-Command 595 is wire-only: its business meaning is still unresolved.
+This probe checks 595's codec only; verify_arena_boost.py verifies its Arena1
+boost execution. Other 595 reward branches remain unimplemented.
 """
 import hashlib
 import json

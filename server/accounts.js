@@ -14,7 +14,12 @@ function sameToken (a, b) {
 }
 
 class AccountStore {
-  constructor (directory) { this.directory = path.resolve(directory) }
+  constructor (directory, { now = Date.now } = {}) {
+    if (typeof now !== 'function') throw new Error('Invalid account store clock')
+    this.directory = path.resolve(directory)
+    this.now = now
+  }
+
   serial (operation) {
     const result = (queues.get(this.directory) || Promise.resolve()).then(operation)
     const settled = result.catch(() => {})
@@ -88,7 +93,7 @@ class AccountStore {
       const index = database.accounts.findIndex(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
       const account = database.accounts[index]
       if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
-      const next = applyCommands(account, commands)
+      const next = applyCommands(account, commands, { now: this.now })
       if (JSON.stringify(next) !== JSON.stringify(account)) {
         database.accounts[index] = next
         await this.save(database)

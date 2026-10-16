@@ -5,7 +5,7 @@ const { Writer } = require('../lib/protocol/stream')
 const { commandCatalog, encodeCommand, decodeCommand, encodeEndClientTurn, decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
 const { encodeMessage, decodeMessage } = require('../lib/protocol/messages')
 
-for (const fixture of [...require('./fixtures/native-commands.json'), ...require('./fixtures/native-player-commands.json'), ...require('./fixtures/native-resource-pack-commands.json')]) {
+for (const fixture of [...require('./fixtures/native-commands.json'), ...require('./fixtures/native-player-commands.json'), ...require('./fixtures/native-resource-pack-commands.json'), require('./fixtures/native-arena-boost-command.json')]) {
   test(`native command ${fixture.id} encode/decode, variant ${fixture.variant}`, () => {
     const command = { id: fixture.id, fields: fixture.fields }
     const payload = Buffer.from(fixture.payloadHex, 'hex')

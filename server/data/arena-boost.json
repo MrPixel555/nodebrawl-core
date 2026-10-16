@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "reference": [
+    54,
+    1
+  ],
+  "seconds": 86400,
+  "ticksPerSecond": 20,
+  "arenaBoostTimers": {
+    "emptyHex": "0000",
+    "parts": [
+      {
+        "hex": "017f7f"
+      },
+      {
+        "field": "claimedAtSeconds",
+        "type": "int"
+      },
+      {
+        "hex": "00000000010300187f"
+      },
+      {
+        "field": "remainingTicks",
+        "type": "int"
+      },
+      {
+        "hex": "00"
+      }
+    ]
+  },
+  "arenaBoostClaim": {
+    "emptyHex": "0000000000",
+    "claimedHex": "00000000018096a36100010000000001007f0000027f00"
+  }
+}

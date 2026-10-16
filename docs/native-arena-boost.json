@@ -1,0 +1,50 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "command": 595,
+  "reference": [
+    54,
+    1
+  ],
+  "arena": "Arena1",
+  "boost": "ChestSpeedUp",
+  "hours": 24,
+  "executor": "0x59b664",
+  "boostCreator": "0x1e9c38",
+  "managerInitializer": "0x621370",
+  "claimCheck": "0x594f28",
+  "lobbyClaimCheck": "0x758354",
+  "results": [
+    {
+      "validation": 0,
+      "execution": 0,
+      "duplicate": 41,
+      "boostType": 3,
+      "seconds": 86400,
+      "ticks": 1728000,
+      "claimedArenaTrophyThreshold": 0,
+      "avatarUnchanged": true
+    },
+    {
+      "validation": 0,
+      "execution": 0,
+      "duplicate": 41,
+      "boostType": 3,
+      "seconds": 86400,
+      "ticks": 1728000,
+      "claimedArenaTrophyThreshold": 0,
+      "avatarUnchanged": true
+    }
+  ],
+  "homeFixtures": 8,
+  "elapsedHours": [
+    0,
+    1,
+    24,
+    25
+  ],
+  "gameCodeAdapters": [
+    "context Home/Avatar/time",
+    "UI refresh and analytics listeners"
+  ],
+  "scope": "Original observed Arena1 branch, full linked CSV, real managers and full native Home roundtrips. Tick advancement is modeled from elapsed wall time. No Android UI, other arena rewards, chests or gameplay verified."
+}

@@ -4,6 +4,7 @@ const { starter } = require('./data/starter-home.json')
 const { cards } = require('./data/unlocked-home.json')
 const ownedCards = new Set(cards.map(card => card.id))
 const { packs } = require('./data/resource-packs.json')
+const { isArena1BoostCommand, validateArena1Boost, claimArena1Boost } = require('./arena-boost')
 
 function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
@@ -19,6 +20,7 @@ function playerState (account) {
     // during migration; newly allocated accounts explicitly start unnamed.
     nameSet: read('nameSet', true),
     nameChangeCount: read('nameChangeCount', 0),
+    arena1Boost: validateArena1Boost(read('arena1Boost', null)),
   }
   if (!Array.isArray(value.decks) || value.decks.length !== 5) throw new ProtocolError('Invalid starter decks')
   for (const deck of value.decks) validateDeck(deck)
@@ -34,7 +36,7 @@ function validateDeck (deck) {
   if (!Array.isArray(deck) || deck.length !== 8 || new Set(deck).size !== 8 || deck.some(id => !ownedCards.has(id))) throw new ProtocolError('Invalid starter deck cards')
 }
 
-function applyCommands (account, commands) {
+function applyCommands (account, commands, { now = Date.now } = {}) {
   const next = { ...account, starter: { ...account.starter, ...playerState(account) } }
   for (const { id, fields } of commands) {
     if (id === 805) continue // Both applied Home level and Avatar level are 1.
@@ -47,6 +49,8 @@ function applyCommands (account, commands) {
         next.starter.decks[deck] = [...fields.field_0x20]
       }
       next.starter.selectedDeck = deck
+    } else if (isArena1BoostCommand({ id, fields })) {
+      claimArena1Boost(next.starter, now)
     } else if (id === 687) {
       const reference = fields.field_0x20
       const pack = packs.find(pack => Array.isArray(reference) && reference.length === 2 && pack.reference.every((value, index) => value === reference[index]))

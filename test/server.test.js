@@ -189,6 +189,86 @@ test('595 diagnostics identify a rejected naming batch without network tracing o
   assert.equal(JSON.stringify(entries).includes('private-name'), false)
 })
 
+test('observed Arena1 boost persists once over TCP and sends the native remaining time and consumed marker after reconnect', { timeout: 5000 }, async t => {
+  const { directory } = await setup(t)
+  const fixtures = require('./fixtures/native-arena-boost-home.json').filter(row => row.accountId[1] === 1)
+  let now = fixtures[0].nowMs
+  const store = new AccountStore(directory, { now: () => now })
+  const entries = []
+  const game = createGameServer({ store, homeProvider: createStarterHomeProvider({ now: () => now }), handlers: createStarterHandlers({ store, logger: entry => entries.push(entry) }) })
+  game.server.listen(0, '127.0.0.1')
+  await once(game.server, 'listening')
+  t.after(() => game.stop())
+  const c = await client(game.server.address().port)
+  c.send(10101, {}, 4)
+  const login = decodeMessage(20758, (await c.receive()).payload)
+  await c.receive()
+  c.send(13597, { commands: [require('./fixtures/native-arena-boost-command.json')] })
+  c.send(10108)
+  assert.equal((await c.receive()).id, 20108)
+  const saved = await store.login(login.field_0x80, login.field_0x90)
+  assert.deepEqual(saved.starter.arena1Boost, fixtures[0].starter.arena1Boost)
+  assert.deepEqual([saved.name, saved.starter.nameSet, saved.starter.gold, saved.starter.gems], ['Player', false, 100, 100])
+  assert.ok(entries.some(entry => entry.event === 'arena-boost-claimed'))
+  assert.ok(!entries.some(entry => entry.event === 'unsupported-turn' || entry.event === 'starter-name-set'))
+  c.socket.destroy()
+  for (const fixture of fixtures) {
+    now = fixture.nowMs
+    const nextStore = new AccountStore(directory, { now: () => now })
+    const nextGame = createGameServer({ store: nextStore, homeProvider: createStarterHomeProvider({ now: () => now }), handlers: createStarterHandlers({ store: nextStore, logger: entry => entries.push(entry) }) })
+    nextGame.server.listen(0, '127.0.0.1')
+    await once(nextGame.server, 'listening')
+    const connection = await client(nextGame.server.address().port)
+    connection.send(10101, { field_0x80: saved.id, field_0x88: saved.token }, 4)
+    assert.equal((await connection.receive()).id, 20758)
+    assert.equal((await connection.receive()).payload.toString('hex'), fixture.payloadHex)
+    const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
+    connection.send(13597, { commands: [require('./fixtures/native-arena-boost-command.json')] })
+    connection.send(10108)
+    assert.equal((await connection.receive()).id, 20108)
+    assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), before)
+    connection.socket.destroy()
+    await nextGame.stop()
+  }
+  assert.equal(entries.filter(entry => entry.event === 'starter-turn-rejected' && entry.reason === 'Arena1 boost already claimed').length, fixtures.length)
+})
+
+test('Arena1 boost is atomic with naming/purchases and cannot be extended by concurrent or expired repeat claims', async t => {
+  const { directory } = await setup(t)
+  let now = 1700000000123
+  const store = new AccountStore(directory, { now: () => now })
+  const second = new AccountStore(directory, { now: () => now })
+  const account = await store.login([0, 0], null)
+  const other = await store.login([0, 0], null)
+  const boost = require('./fixtures/native-arena-boost-command.json')
+  const buy = { id: 687, fields: { field_0x20: [55, 0] } }
+  const name = { id: 948, fields: { field_0x20: 'بازیکن' } }
+  const target = path.join(directory, 'accounts.json')
+  const before = await fs.readFile(target, 'utf8')
+  await assert.rejects(store.applyStarterTurn(account, [name, buy, boost, boost]), /already claimed/)
+  assert.equal(await fs.readFile(target, 'utf8'), before)
+  for (const fields of [undefined, { ...boost.fields, field_0x30: true }, { ...boost.fields, field_0x28: [54, 2] }, { ...boost.fields, field_0x28: [0, 0] }]) {
+    await assert.rejects(store.applyStarterTurn(account, [name, { id: 595, fields }]), /Unsupported starter/)
+    assert.equal(await fs.readFile(target, 'utf8'), before)
+  }
+  const results = await Promise.allSettled([store.applyStarterTurn(account, [name, buy, boost]), second.applyStarterTurn(account, [name, buy, boost])])
+  assert.equal(results.filter(result => result.status === 'fulfilled').length, 1)
+  const saved = await new AccountStore(directory).login(account.id, account.token)
+  assert.deepEqual([saved.name, saved.starter.gold, saved.starter.gems], ['بازیکن', 1100, 40])
+  assert.deepEqual(saved.starter.arena1Boost, { claimedAtMs: now, expiresAtMs: now + 86400000 })
+  assert.deepEqual(await store.login(other.id, other.token), other)
+  const after = await fs.readFile(target, 'utf8')
+  now += 90000000
+  await assert.rejects(second.applyStarterTurn(account, [boost]), /already claimed/)
+  assert.equal(await fs.readFile(target, 'utf8'), after)
+  const database = JSON.parse(after)
+  for (const invalid of [{}, [], { claimedAtMs: -1, expiresAtMs: 86399999 }, { claimedAtMs: 1700000000123, expiresAtMs: 1700086400124 }, { claimedAtMs: NaN, expiresAtMs: null }]) {
+    database.accounts[0].starter.arena1Boost = invalid
+    await fs.writeFile(target, JSON.stringify(database))
+    await assert.rejects(store.login(account.id, account.token), /Invalid Arena1 boost state/)
+  }
+})
+
 test('self AvatarStream roundtrips the native empty response repeatedly without resetting state or exposing another account', { timeout: 5000 }, async t => {
   const { directory } = await setup(t)
   const store = new AccountStore(directory)
@@ -471,6 +551,7 @@ for (const starterHome of [false, true]) {
       assert.deepEqual(receive.decrypt(stream.payload), Buffer.from(require('./fixtures/native-avatar-stream.json').emptyReply.payload, 'hex'))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }, { id: 805 }] }))))
+      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [require('./fixtures/native-arena-boost-command.json'), { id: 948, fields: { field_0x20: 'بازیکن' } }] }))))
     }
     for (let n = 0; n < 2; n++) {
       c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
@@ -482,7 +563,12 @@ for (const starterHome of [false, true]) {
     assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report', 'server-friends-sent'])
     assert(!JSON.stringify(entries).includes('private-event'))
     assert(!JSON.stringify(entries).includes('private-network-address'))
-    if (starterHome) assert.equal((await new AccountStore(directory).login(account.field_0x80, account.field_0x90)).starter.selectedDeck, 4)
+    if (starterHome) {
+      const saved = await new AccountStore(directory).login(account.field_0x80, account.field_0x90)
+      assert.equal(saved.starter.selectedDeck, 4)
+      assert.equal(saved.name, 'بازیکن')
+      assert.equal(saved.starter.arena1Boost.expiresAtMs - saved.starter.arena1Boost.claimedAtMs, 86400000)
+    }
     receive.close(); send.close()
   })
 }

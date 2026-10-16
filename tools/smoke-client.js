@@ -106,7 +106,7 @@ async function handle (frame) {
     Object.assign(player.starter, { selectedDeck: 3, nameSet: true, nameChangeCount: 0, gold: 0, gems: 0, freeGems: 0 })
     player.starter.decks[3].reverse()
     for (const [id, fields] of [
-      [13597, { commands: [{ id: 948, fields: { field_0x20: player.name } }, { id: 563, fields: { field_0x1c: 3, field_0x20: player.starter.decks[3] } }] }],
+      [13597, { commands: [{ id: 595, fields: { field_0x1c: -1, field_0x20: -1, field_0x28: [54, 1], field_0x30: false } }, { id: 948, fields: { field_0x20: player.name } }, { id: 563, fields: { field_0x1c: 3, field_0x20: player.starter.decks[3] } }] }],
       [12373, { field_0x80: player.id }],
     ]) {
       const plain = encodeMessage(id, fields)
@@ -125,7 +125,7 @@ async function handle (frame) {
     assert.equal(payload.length, 0)
     stage = 'done'
     finish()
-    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search, initial naming, deck contents, profile and heartbeat`)
+    console.log(`PASS: ${sharedKey ? 'encrypted' : 'plaintext'} LoginOk, starter Home, startup receipts, empty clan search, Arena1 boost/name/deck batch, profile and heartbeat`)
     if (process.env.EXPECT_CONTENT_URL) console.log('PASS: LoginOk content URL vectors, HTTP fingerprint and original/restored map asset SHA-1')
     console.log('Starter Home display was confirmed on the supplied Android device; this smoke check does not verify battle gameplay.')
   } else {

@@ -29,7 +29,7 @@ class StarterHome:
         self.data = {}
         self.records = {}
         self.bindings = []
-        self.expected_bindings = 59
+        self.expected_bindings = 61
         self.stream = None
         self.profile_id = None
         table_vtable = vm.alloc(0x70)
@@ -114,6 +114,21 @@ class StarterHome:
         self.gold_pending = False
         vm.register_hook(0x1544f4, self.observe_decode_return)
         self.decoded_message = None
+        self.fragments = {}
+        for entry, end, offset, field in [(0x29e1d4, 0x34cfa8, 0x5d0, 'arenaBoostTimers'),
+                                          (0x543f70, 0x34d26c, 0x650, 'arenaBoostClaim')]:
+            vm.register_hook(entry, lambda machine, offset=offset, field=field: self.fragment_start(machine, offset, field))
+            vm.register_hook(end, lambda machine, field=field: self.fragment_end(machine, field))
+
+    def fragment_start(self, vm, offset, field):
+        if self.stream is not None and vm.reg(0) == qword(vm, self.home + offset) and vm.reg(1) == self.stream:
+            self.fragments[field] = read_u32(vm, self.stream + 0x14)
+
+    def fragment_end(self, vm, field):
+        if self.stream is not None and field in self.fragments:
+            start = self.fragments.pop(field)
+            self.bindings.append({'offset': start, 'bytes': read_u32(vm, self.stream + 0x14) - start,
+                                  'field': field, 'type': 'nativeArenaBoost'})
 
     def observe_decode_return(self, vm):
         # Same saved X19 register and offsets used by the device Home callout.

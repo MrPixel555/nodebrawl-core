@@ -52,3 +52,17 @@ test('unlocked Home matches native full messages with disjoint active cards and 
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
   }
 })
+
+test('Arena1 boost Home matches full native messages for fresh/changed players, elapsed time and expiry', async () => {
+  for (const fixture of require('./fixtures/native-arena-boost-home.json')) {
+    const provider = createStarterHomeProvider({ now: () => fixture.nowMs })
+    const result = await provider({ id: fixture.accountId, name: fixture.name, starter: fixture.starter })
+    assert.equal(result.payload.toString('hex'), fixture.payloadHex)
+    assert.equal(result.payload.length, fixture.nativeDecodeConsumed)
+    assert.equal(fixture.nativeReencodeEqual, true)
+  }
+  const fresh = require('./fixtures/native-arena-boost-home.json')[0]
+  const account = { id: fresh.accountId, name: fresh.name, starter: fresh.starter }
+  const rollback = await createStarterHomeProvider({ now: () => fresh.nowMs - 86400000 })(account)
+  assert.equal(rollback.payload.toString('hex'), fresh.payloadHex)
+})
