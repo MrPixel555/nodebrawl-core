@@ -23,7 +23,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 10834 | Message10834 | verified | not implemented |
 | 10916 | Message10916 | unresolved | not implemented |
 | 10947 | Message10947 | unresolved | not implemented |
-| 10953 | TrainingModeNpcRequest | verified | not implemented |
+| 10953 | TrainingModeNpcRequest | verified | ordinary Training with null PvE reference only; PvE challenges unsupported |
 | 10985 | Message10985 | verified | not implemented |
 | 11006 | Message11006 | verified | not implemented |
 | 11212 | Message11212 | verified | not implemented |
@@ -40,16 +40,16 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 12087 | Message12087 | unresolved | not implemented |
 | 12373 | PlayerProfileRequest | verified | persisted starter player profile lookup |
 | 12395 | Message12395 | unresolved | not implemented |
-| 12405 | HomeLogicStopped | verified | not implemented |
+| 12405 | HomeLogicStopped | verified | Home transition receipt/final commands outside an active battle |
 | 12445 | Message12445 | verified | not implemented |
 | 12473 | Message12473 | verified | not implemented |
-| 12526 | Message12526 | verified | not implemented |
+| 12526 | Message12526 | verified | native return-dialog Home route |
 | 12527 | Message12527 | verified | not implemented |
 | 12649 | Message12649 | unresolved | not implemented |
 | 12848 | Message12848 | unresolved | not implemented |
 | 12912 | Message12912 | verified | not implemented |
 | 12951 | Message12951 | verified | not implemented |
-| 13006 | Message13006 | verified | not implemented |
+| 13006 | Message13006 | verified | queued/loading matchmaking cancellation |
 | 13058 | Message13058 | verified | not implemented |
 | 13090 | Message13090 | verified | not implemented |
 | 13172 | Message13172 | verified | not implemented |
@@ -59,7 +59,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 13481 | Message13481 | unresolved | not implemented |
 | 13525 | Message13525 | unresolved | not implemented |
 | 13549 | Message13549 | verified | not implemented |
-| 13597 | EndClientTurn | verified | commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762 |
+| 13597 | EndClientTurn | verified | normal matchmaking 527; commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762 |
 | 13631 | Message13631 | verified | not implemented |
 | 13727 | Message13727 | verified | not implemented |
 | 13732 | Message13732 | verified | not implemented |
@@ -67,7 +67,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 13781 | Message13781 | unresolved | not implemented |
 | 13882 | ChangeAllianceSettings | verified | not implemented |
 | 14054 | Message14054 | verified | not implemented |
-| 14062 | Message14062 | verified | not implemented |
+| 14062 | Message14062 | verified | native battle end Home route |
 | 14124 | Message14124 | unresolved | not implemented |
 | 14164 | Message14164 | unresolved | not implemented |
 | 14173 | Message14173 | unresolved | not implemented |
@@ -81,7 +81,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 15141 | Message15141 | unresolved | not implemented |
 | 15164 | Message15164 | unresolved | not implemented |
 | 15226 | Message15226 | unresolved | not implemented |
-| 15263 | GameModeSnapshotAck | verified | not implemented |
+| 15263 | GameModeSnapshotAck | verified | native snapshot acknowledgement; not proof of Android UI |
 | 15332 | Message15332 | verified | not implemented |
 | 15353 | Message15353 | verified | not implemented |
 | 15415 | Message15415 | unresolved | not implemented |
@@ -89,10 +89,10 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 15441 | Message15441 | verified | not implemented |
 | 15725 | Message15725 | unresolved | not implemented |
 | 15821 | Message15821 | unresolved | not implemented |
-| 15965 | Message15965 | verified | not implemented |
+| 15965 | Message15965 | verified | battle Home route, authoritative forfeit and results |
 | 16001 | Message16001 | verified | not implemented |
 | 16045 | Message16045 | verified | not implemented |
-| 16194 | ClientCommandRequest | verified | not implemented |
+| 16194 | ClientCommandRequest | verified | owned native battle inputs and checksum reports |
 | 16220 | Message16220 | verified | not implemented |
 | 16292 | Message16292 | verified | not implemented |
 | 16401 | Message16401 | verified | not implemented |
@@ -112,7 +112,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 17628 | Message17628 | verified | not implemented |
 | 17656 | Message17656 | unresolved | not implemented |
 | 17688 | Message17688 | verified | not implemented |
-| 17967 | TrainingNpcRequest | verified | not implemented |
+| 17967 | TrainingNpcRequest | verified | source Training NPC world and bot |
 | 18077 | Message18077 | verified | not implemented |
 | 18100 | Message18100 | verified | not implemented |
 | 18102 | Message18102 | verified | not implemented |
@@ -122,7 +122,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 18385 | Message18385 | unresolved | not implemented |
 | 18443 | Message18443 | unresolved | not implemented |
 | 18495 | Message18495 | verified | not implemented |
-| 18533 | Message18533 | verified | not implemented |
+| 18533 | Message18533 | verified | native return-dialog Home route |
 | 18685 | Message18685 | verified | not implemented |
 | 18720 | Message18720 | unresolved | not implemented |
 | 18900 | Message18900 | unresolved | not implemented |
@@ -247,7 +247,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 26774 | Message26774 | verified | not implemented |
 | 26783 | Message26783 | verified | not implemented |
 | 26831 | Message26831 | unresolved | not implemented |
-| 26980 | CommandBatch | verified | not implemented |
+| 26980 | CommandBatch | verified | native sector tick/checksum and command broadcast |
 | 27029 | Message27029 | verified | not implemented |
 | 27050 | Message27050 | verified | not implemented |
 | 27072 | Message27072 | verified | not implemented |
@@ -275,7 +275,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 28854 | Message28854 | unresolved | not implemented |
 | 28887 | Message28887 | verified | not implemented |
 | 28921 | Message28921 | unresolved | not implemented |
-| 28991 | DeferredGameModeSnapshot | unresolved | not implemented |
+| 28991 | DeferredGameModeSnapshot | verified native engine | native online world snapshot and reconnect state |
 | 29188 | Message29188 | unresolved | not implemented |
 | 29461 | Message29461 | verified | not implemented |
 | 29531 | Message29531 | verified | not implemented |
@@ -291,11 +291,11 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 
 | Command | Native executor | Wire codec | Runtime support |
 | --- | --- | --- | --- |
-| 2 | 0x5deac4 | unresolved | not implemented |
-| 18 | 0x6340d4 | verified | not implemented |
-| 28 | 0x2ab0b0 | verified | not implemented |
-| 49 | 0x137614 | unresolved | not implemented |
-| 57 | 0x140720 | verified | not implemented |
+| 2 | 0x5deac4 | verified subset | native spell validation/execution; owned deck, elixir, legal placement, bounded tick window, duplicate protection |
+| 18 | 0x6340d4 | verified | native battle command executor; only valid in its native mode |
+| 28 | 0x2ab0b0 | verified | native battle command executor; only valid in its native mode |
+| 49 | 0x137614 | verified | native battle command executor; only valid in its native mode |
+| 57 | 0x140720 | verified | native battle command executor; only valid in its native mode |
 | 203 | 0x3fbc58 | verified | not implemented |
 | 235 | 0x68c938 | verified subset | not implemented |
 | 252 | 0x585728 | unresolved | not implemented |
@@ -333,7 +333,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 503 | 0x6bb594 | verified | not implemented |
 | 521 | 0x1ade8c | verified | not implemented |
 | 523 | 0x4c125c | verified | not implemented |
-| 527 | 0x370930 | verified | not implemented |
+| 527 | 0x370930 | verified | normal matchmaking, native 1v1/2v2, optional labelled bots; event branches unsupported |
 | 532 | 0x204678 | verified | not implemented |
 | 541 | 0x637c64 | verified | not implemented |
 | 547 | 0x6bc17c | verified | not implemented |

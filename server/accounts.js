@@ -4,6 +4,7 @@ const path = require('node:path')
 const { randomBytes, timingSafeEqual } = require('node:crypto')
 const { ProtocolError } = require('../lib/protocol/stream')
 const { playerState, applyCommands } = require('./starter-state')
+const { applyBattleResult, validateBattleHistory } = require('./battle/results')
 
 const queues = new Map()
 
@@ -37,6 +38,7 @@ class AccountStore {
         if (!account || !Array.isArray(account.id) || account.id.length !== 2 || account.id[0] !== 0 || !Number.isInteger(account.id[1]) || account.id[1] < 1 || account.id[1] >= data.nextId || ids.has(account.id[1]) || typeof account.token !== 'string' || !/^[0-9a-f]{40}$/.test(account.token) || typeof account.name !== 'string' || typeof account.createdAt !== 'string' || !Number.isFinite(Date.parse(account.createdAt))) throw new Error('Invalid account database')
         ids.add(account.id[1])
         playerState(account)
+        validateBattleHistory(account.battleHistory)
       }
       return data
     } catch (error) {
@@ -98,6 +100,18 @@ class AccountStore {
         database.accounts[index] = next
         await this.save(database)
       }
+      return next
+    })
+  }
+
+  recordBattle (identity, result) {
+    return this.serial(async () => {
+      const database = await this.load()
+      const index = database.accounts.findIndex(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
+      const account = database.accounts[index]
+      if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+      const next = applyBattleResult(account, result, this.now())
+      if (next !== account) { database.accounts[index] = next; await this.save(database) }
       return next
     })
   }

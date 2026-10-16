@@ -6,14 +6,18 @@
   "scripts": {
     "start": "node index.js",
     "test": "node --test test/*.test.js",
-    "lint": "eslint index.js lib/protocol/*.js server/*.js test/*.test.js tools/*.js tools/frida/*.js",
+    "lint": "eslint index.js lib/protocol/*.js server/*.js server/battle/*.js test/*.test.js tools/*.js tools/frida/*.js",
+    "battle:verify": "node tools/verify-battle.js",
     "packets": "node tools/packets.js"
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "keywords": [],
   "author": "tailsjs",
   "license": "ISC",
   "dependencies": {
+    "@alexaltea/unicorn-js": "2.1.4",
     "fs": "^0.0.1-security",
     "net": "^1.0.2"
   },

@@ -643,7 +643,7 @@
       "id": 10953,
       "name": "TrainingModeNpcRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "ordinary Training with null PvE reference only; PvE challenges unsupported",
       "fields": [
         {
           "field": "field_0x80",
@@ -981,7 +981,7 @@
       "id": 12405,
       "name": "HomeLogicStopped",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "Home transition receipt/final commands outside an active battle",
       "fields": [
         {
           "field": "field_0x88",
@@ -1076,7 +1076,7 @@
       "id": 12526,
       "name": "Message12526",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native return-dialog Home route",
       "fields": [],
       "nativeEncode": "0x7431b0",
       "nativeDecode": "0x3ca568",
@@ -1189,7 +1189,7 @@
       "id": 13006,
       "name": "Message13006",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "queued/loading matchmaking cancellation",
       "fields": [],
       "nativeEncode": "0x415534",
       "nativeDecode": "0x423b40",
@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762",
+      "runtimeSupport": "normal matchmaking 527; commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762",
       "fields": [
         {
           "field": "field_0x88",
@@ -1598,7 +1598,7 @@
       "id": 14062,
       "name": "Message14062",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native battle end Home route",
       "fields": [],
       "nativeEncode": "0x425398",
       "nativeDecode": "0x6ab084",
@@ -1929,7 +1929,7 @@
       "id": 15263,
       "name": "GameModeSnapshotAck",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native snapshot acknowledgement; not proof of Android UI",
       "fields": [],
       "nativeEncode": "0x5eaf68",
       "nativeDecode": "0x372674",
@@ -2068,7 +2068,7 @@
       "id": 15965,
       "name": "Message15965",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "battle Home route, authoritative forfeit and results",
       "fields": [],
       "nativeEncode": "0x14c8b0",
       "nativeDecode": "0x42324c",
@@ -2116,7 +2116,7 @@
       "id": 16194,
       "name": "ClientCommandRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "owned native battle inputs and checksum reports",
       "fields": [
         {
           "field": "field_0x88",
@@ -2541,7 +2541,7 @@
       "id": 17967,
       "name": "TrainingNpcRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "source Training NPC world and bot",
       "fields": [
         {
           "field": "field_0x80",
@@ -2769,7 +2769,7 @@
       "id": 18533,
       "name": "Message18533",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native return-dialog Home route",
       "fields": [],
       "nativeEncode": "0x66baec",
       "nativeDecode": "0x34a3cc",
@@ -5500,7 +5500,7 @@
       "id": 26980,
       "name": "CommandBatch",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native sector tick/checksum and command broadcast",
       "fields": [
         {
           "field": "field_0x80",
@@ -6056,7 +6056,7 @@
       "id": 28991,
       "name": "DeferredGameModeSnapshot",
       "codec": false,
-      "runtimeSupport": null,
+      "runtimeSupport": "native online world snapshot and reconnect state",
       "fields": null,
       "nativeEncode": "0xfb52c",
       "nativeDecode": "0x200810",
@@ -6070,7 +6070,8 @@
           "version": 0
         }
       ],
-      "envelopeSupport": "verified raw/zlib envelope; inner GameMode snapshot unresolved; no runtime battle handler"
+      "envelopeSupport": "verified raw/zlib envelope and original native GameMode initialization/full-state codecs in Node/WASM",
+      "nativeEngineCodec": true
     },
     {
       "id": 29188,
@@ -6359,9 +6360,54 @@
       "encode": "0x74639c",
       "decode": "0x2fbda0",
       "execute": "0x5deac4",
-      "fields": null,
-      "unresolvedReason": "control flow/transform mrs at 0x7463b8",
-      "runtimeSupport": null
+      "fields": [
+        {
+          "field": "field_0x10",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "type": "vlong"
+        },
+        {
+          "field": "field_0x1c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x20",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x24",
+          "type": "gameDataId"
+        },
+        {
+          "field": "field_0x30",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x34",
+          "type": "bool"
+        },
+        {
+          "field": "field_0x38",
+          "type": "battleCard"
+        },
+        {
+          "field": "field_0x28",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x2c",
+          "type": "vint"
+        }
+      ],
+      "codecScope": "Original spell command, including optional native card descriptor",
+      "runtimeSupport": "native spell validation/execution; owned deck, elixir, legal placement, bounded tick window, duplicate protection"
     },
     {
       "id": 18,
@@ -6396,7 +6442,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": null
+      "runtimeSupport": "native battle command executor; only valid in its native mode"
     },
     {
       "id": 28,
@@ -6437,7 +6483,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": null
+      "runtimeSupport": "native battle command executor; only valid in its native mode"
     },
     {
       "id": 49,
@@ -6445,9 +6491,25 @@
       "encode": "0x193804",
       "decode": "0x5d82b8",
       "execute": "0x137614",
-      "fields": null,
-      "unresolvedReason": "unknown call at 0x193824",
-      "runtimeSupport": null
+      "fields": [
+        {
+          "field": "field_0x1c",
+          "type": "gameDataId"
+        },
+        {
+          "field": "field_0x10",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "type": "vlong"
+        }
+      ],
+      "runtimeSupport": "native battle command executor; only valid in its native mode"
     },
     {
       "id": 57,
@@ -6476,7 +6538,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": null
+      "runtimeSupport": "native battle command executor; only valid in its native mode"
     },
     {
       "id": 203,
@@ -7678,7 +7740,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": null
+      "runtimeSupport": "normal matchmaking, native 1v1/2v2, optional labelled bots; event branches unsupported"
     },
     {
       "id": 532,

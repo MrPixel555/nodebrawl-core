@@ -15,7 +15,7 @@ for (const fixture of fixtures) {
     assert.equal(fixture.nativeDeferredSnapshotMatched, true)
     assert.equal(fixture.nativeVirtualDecodeConsumed, 0)
     assert.equal(fixture.syntheticSnapshot, true)
-    assert.throws(() => schemaFor(28991), /unresolved GameMode snapshot/)
+    assert.throws(() => schemaFor(28991), /native GameMode snapshot/)
   })
 }
 
@@ -48,6 +48,7 @@ test('packet coverage distinguishes a compression envelope from a GameMode codec
   const message = report.messages.find(message => message.id === 28991)
   assert.equal(message.codec, false)
   assert.equal(message.fields, null)
-  assert.equal(message.runtimeSupport, null)
-  assert.match(message.envelopeSupport, /inner GameMode snapshot unresolved/)
+  assert.match(message.runtimeSupport, /native online world/)
+  assert.equal(message.nativeEngineCodec, true)
+  assert.match(message.envelopeSupport, /original native GameMode/)
 })

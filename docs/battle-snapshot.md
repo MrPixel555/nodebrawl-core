@@ -1,4 +1,10 @@
-# Deferred GameMode snapshot and battle investigation
+# Deferred GameMode snapshot: investigation history
+
+The live implementation now supersedes the incomplete stages recorded below.
+See [native battles](native-battles.md) and its [verification report](native-battle-runtime.json):
+the Node runtime constructs online worlds, sends original snapshots, executes
+combat and records results. Android battle UI remains unverified. Statements
+below about pending simulation/handlers describe the earlier probes.
 
 Message **28991** loads a GameMode snapshot through a deferred consumer. Its
 virtual encode (`0xfb52c`) and decode (`0x200810`) return without touching the

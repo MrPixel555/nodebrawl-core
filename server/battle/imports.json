@@ -1,0 +1,1857 @@
+[
+  {
+    "address": 915120,
+    "slot": 11005648,
+    "name": "_ZN4FMOD6System5closeEv"
+  },
+  {
+    "address": 915136,
+    "slot": 11005656,
+    "name": "closedir"
+  },
+  {
+    "address": 915152,
+    "slot": 11005664,
+    "name": "strtod"
+  },
+  {
+    "address": 915168,
+    "slot": 11005672,
+    "name": "glGetProgramInfoLog"
+  },
+  {
+    "address": 915184,
+    "slot": 11005680,
+    "name": "pthread_mutexattr_destroy"
+  },
+  {
+    "address": 915200,
+    "slot": 11005688,
+    "name": "strlen"
+  },
+  {
+    "address": 915216,
+    "slot": 11005696,
+    "name": "strcoll"
+  },
+  {
+    "address": 915232,
+    "slot": 11005704,
+    "name": "madvise"
+  },
+  {
+    "address": 915248,
+    "slot": 11005712,
+    "name": "strftime"
+  },
+  {
+    "address": 915264,
+    "slot": 11005720,
+    "name": "strtoull"
+  },
+  {
+    "address": 915280,
+    "slot": 11005728,
+    "name": "strtoull_l"
+  },
+  {
+    "address": 915296,
+    "slot": 11005736,
+    "name": "pthread_cond_timedwait"
+  },
+  {
+    "address": 915312,
+    "slot": 11005744,
+    "name": "isxdigit"
+  },
+  {
+    "address": 915328,
+    "slot": 11005752,
+    "name": "iswblank"
+  },
+  {
+    "address": 915344,
+    "slot": 11005760,
+    "name": "getcwd"
+  },
+  {
+    "address": 915360,
+    "slot": 11005768,
+    "name": "glCompileShader"
+  },
+  {
+    "address": 915376,
+    "slot": 11005776,
+    "name": "acosf"
+  },
+  {
+    "address": 915392,
+    "slot": 11005784,
+    "name": "calloc"
+  },
+  {
+    "address": 915408,
+    "slot": 11005792,
+    "name": "dlclose"
+  },
+  {
+    "address": 915424,
+    "slot": 11005800,
+    "name": "fopen"
+  },
+  {
+    "address": 915440,
+    "slot": 11005808,
+    "name": "glUniform1fv"
+  },
+  {
+    "address": 915456,
+    "slot": 11005816,
+    "name": "glUniform2fv"
+  },
+  {
+    "address": 915472,
+    "slot": 11005824,
+    "name": "_ZN4FMOD6System4initEijPv"
+  },
+  {
+    "address": 915488,
+    "slot": 11005832,
+    "name": "glGenerateMipmap"
+  },
+  {
+    "address": 915504,
+    "slot": 11005840,
+    "name": "dlsym"
+  },
+  {
+    "address": 915520,
+    "slot": 11005848,
+    "name": "glHint"
+  },
+  {
+    "address": 915536,
+    "slot": 11005856,
+    "name": "glEnableVertexAttribArray"
+  },
+  {
+    "address": 915552,
+    "slot": 11005864,
+    "name": "tanf"
+  },
+  {
+    "address": 915568,
+    "slot": 11005872,
+    "name": "fseek"
+  },
+  {
+    "address": 915584,
+    "slot": 11005880,
+    "name": "syslog"
+  },
+  {
+    "address": 915600,
+    "slot": 11005888,
+    "name": "getsockname"
+  },
+  {
+    "address": 915616,
+    "slot": 11005896,
+    "name": "glClearColor"
+  },
+  {
+    "address": 915632,
+    "slot": 11005904,
+    "name": "mbsrtowcs"
+  },
+  {
+    "address": 915648,
+    "slot": 11005912,
+    "name": "clock_gettime"
+  },
+  {
+    "address": 915664,
+    "slot": 11005920,
+    "name": "_ZN4FMOD14ChannelControl9setPausedEb"
+  },
+  {
+    "address": 915680,
+    "slot": 11005928,
+    "name": "gai_strerror"
+  },
+  {
+    "address": 915696,
+    "slot": 11005936,
+    "name": "localeconv"
+  },
+  {
+    "address": 915712,
+    "slot": 11005944,
+    "name": "vsnprintf"
+  },
+  {
+    "address": 915728,
+    "slot": 11005952,
+    "name": "glGenBuffers"
+  },
+  {
+    "address": 915744,
+    "slot": 11005960,
+    "name": "opendir"
+  },
+  {
+    "address": 915760,
+    "slot": 11005968,
+    "name": "asinf"
+  },
+  {
+    "address": 915776,
+    "slot": 11005976,
+    "name": "pthread_cond_wait"
+  },
+  {
+    "address": 915792,
+    "slot": 11005984,
+    "name": "connect"
+  },
+  {
+    "address": 915808,
+    "slot": 11005992,
+    "name": "glUniform1f"
+  },
+  {
+    "address": 915824,
+    "slot": 11006000,
+    "name": "glBufferData"
+  },
+  {
+    "address": 915840,
+    "slot": 11006008,
+    "name": "localtime_r"
+  },
+  {
+    "address": 915856,
+    "slot": 11006016,
+    "name": "iswalpha"
+  },
+  {
+    "address": 915872,
+    "slot": 11006024,
+    "name": "pthread_cond_destroy"
+  },
+  {
+    "address": 915888,
+    "slot": 11006032,
+    "name": "wcstoul"
+  },
+  {
+    "address": 915904,
+    "slot": 11006040,
+    "name": "sysconf"
+  },
+  {
+    "address": 915920,
+    "slot": 11006048,
+    "name": "eglGetProcAddress"
+  },
+  {
+    "address": 915936,
+    "slot": 11006056,
+    "name": "toupper"
+  },
+  {
+    "address": 915952,
+    "slot": 11006064,
+    "name": "_ZN4FMOD14ChannelControl4stopEv"
+  },
+  {
+    "address": 915968,
+    "slot": 11006072,
+    "name": "strcmp"
+  },
+  {
+    "address": 915984,
+    "slot": 11006080,
+    "name": "glGetShaderiv"
+  },
+  {
+    "address": 916000,
+    "slot": 11006088,
+    "name": "fflush"
+  },
+  {
+    "address": 916016,
+    "slot": 11006096,
+    "name": "dirfd"
+  },
+  {
+    "address": 916032,
+    "slot": 11006104,
+    "name": "popen"
+  },
+  {
+    "address": 916048,
+    "slot": 11006112,
+    "name": "__FD_SET_chk"
+  },
+  {
+    "address": 916064,
+    "slot": 11006120,
+    "name": "glUniform3f"
+  },
+  {
+    "address": 916080,
+    "slot": 11006128,
+    "name": "memcmp"
+  },
+  {
+    "address": 916096,
+    "slot": 11006136,
+    "name": "recv"
+  },
+  {
+    "address": 916112,
+    "slot": 11006144,
+    "name": "glCreateShader"
+  },
+  {
+    "address": 916128,
+    "slot": 11006152,
+    "name": "AAssetManager_openDir"
+  },
+  {
+    "address": 916144,
+    "slot": 11006160,
+    "name": "atof"
+  },
+  {
+    "address": 916160,
+    "slot": 11006168,
+    "name": "_ZN4FMOD6System12mixerSuspendEv"
+  },
+  {
+    "address": 916176,
+    "slot": 11006176,
+    "name": "glUseProgram"
+  },
+  {
+    "address": 916192,
+    "slot": 11006184,
+    "name": "glGetShaderInfoLog"
+  },
+  {
+    "address": 916208,
+    "slot": 11006192,
+    "name": "glDrawElements"
+  },
+  {
+    "address": 916224,
+    "slot": 11006200,
+    "name": "pthread_exit"
+  },
+  {
+    "address": 916240,
+    "slot": 11006208,
+    "name": "_ZN4FMOD6System6updateEv"
+  },
+  {
+    "address": 916256,
+    "slot": 11006216,
+    "name": "pthread_self"
+  },
+  {
+    "address": 916272,
+    "slot": 11006224,
+    "name": "glColorMask"
+  },
+  {
+    "address": 916288,
+    "slot": 11006232,
+    "name": "glDeleteFramebuffers"
+  },
+  {
+    "address": 916304,
+    "slot": 11006240,
+    "name": "dlopen"
+  },
+  {
+    "address": 916320,
+    "slot": 11006248,
+    "name": "_ZN4FMOD14ChannelControl9setVolumeEf"
+  },
+  {
+    "address": 916336,
+    "slot": 11006256,
+    "name": "__stack_chk_fail"
+  },
+  {
+    "address": 916352,
+    "slot": 11006264,
+    "name": "fclose"
+  },
+  {
+    "address": 916368,
+    "slot": 11006272,
+    "name": "wcsnrtombs"
+  },
+  {
+    "address": 916384,
+    "slot": 11006280,
+    "name": "wcsxfrm"
+  },
+  {
+    "address": 916400,
+    "slot": 11006288,
+    "name": "_ZN4FMOD6System11mixerResumeEv"
+  },
+  {
+    "address": 916416,
+    "slot": 11006296,
+    "name": "strtof"
+  },
+  {
+    "address": 916432,
+    "slot": 11006304,
+    "name": "powf"
+  },
+  {
+    "address": 916448,
+    "slot": 11006312,
+    "name": "ferror"
+  },
+  {
+    "address": 916464,
+    "slot": 11006320,
+    "name": "sigemptyset"
+  },
+  {
+    "address": 916480,
+    "slot": 11006328,
+    "name": "strxfrm"
+  },
+  {
+    "address": 916496,
+    "slot": 11006336,
+    "name": "glIsEnabled"
+  },
+  {
+    "address": 916512,
+    "slot": 11006344,
+    "name": "_ZN4FMOD6System18createChannelGroupEPKcPPNS_12ChannelGroupE"
+  },
+  {
+    "address": 916528,
+    "slot": 11006352,
+    "name": "_ZN4FMOD7Channel8getIndexEPi"
+  },
+  {
+    "address": 916544,
+    "slot": 11006360,
+    "name": "glBindFramebuffer"
+  },
+  {
+    "address": 916560,
+    "slot": 11006368,
+    "name": "glGetUniformLocation"
+  },
+  {
+    "address": 916576,
+    "slot": 11006376,
+    "name": "stat"
+  },
+  {
+    "address": 916592,
+    "slot": 11006384,
+    "name": "fgets"
+  },
+  {
+    "address": 916608,
+    "slot": 11006392,
+    "name": "realloc"
+  },
+  {
+    "address": 916624,
+    "slot": 11006400,
+    "name": "_ZN4FMOD7Channel15setChannelGroupEPNS_12ChannelGroupE"
+  },
+  {
+    "address": 916640,
+    "slot": 11006408,
+    "name": "atoll"
+  },
+  {
+    "address": 916656,
+    "slot": 11006416,
+    "name": "iswpunct"
+  },
+  {
+    "address": 916672,
+    "slot": 11006424,
+    "name": "_ZN4FMOD7Channel11setPositionEjj"
+  },
+  {
+    "address": 916688,
+    "slot": 11006432,
+    "name": "glGenTextures"
+  },
+  {
+    "address": 916704,
+    "slot": 11006440,
+    "name": "unlink"
+  },
+  {
+    "address": 916720,
+    "slot": 11006448,
+    "name": "FMOD_Debug_Initialize"
+  },
+  {
+    "address": 916736,
+    "slot": 11006456,
+    "name": "atoi"
+  },
+  {
+    "address": 916752,
+    "slot": 11006464,
+    "name": "pthread_key_create"
+  },
+  {
+    "address": 916768,
+    "slot": 11006472,
+    "name": "rename"
+  },
+  {
+    "address": 916784,
+    "slot": 11006480,
+    "name": "snprintf"
+  },
+  {
+    "address": 916800,
+    "slot": 11006488,
+    "name": "_ZN4FMOD6System11createSoundEPKcjP22FMOD_CREATESOUNDEXINFOPPNS_5SoundE"
+  },
+  {
+    "address": 916816,
+    "slot": 11006496,
+    "name": "mbsnrtowcs"
+  },
+  {
+    "address": 916832,
+    "slot": 11006504,
+    "name": "glViewport"
+  },
+  {
+    "address": 916848,
+    "slot": 11006512,
+    "name": "glCompressedTexImage2D"
+  },
+  {
+    "address": 916864,
+    "slot": 11006520,
+    "name": "wcscoll"
+  },
+  {
+    "address": 916880,
+    "slot": 11006528,
+    "name": "_ZN4FMOD14ChannelControl9isPlayingEPb"
+  },
+  {
+    "address": 916896,
+    "slot": 11006536,
+    "name": "uselocale"
+  },
+  {
+    "address": 916912,
+    "slot": 11006544,
+    "name": "glGetString"
+  },
+  {
+    "address": 916928,
+    "slot": 11006552,
+    "name": "pthread_mutexattr_init"
+  },
+  {
+    "address": 916944,
+    "slot": 11006560,
+    "name": "nanosleep"
+  },
+  {
+    "address": 916960,
+    "slot": 11006568,
+    "name": "mprotect"
+  },
+  {
+    "address": 916976,
+    "slot": 11006576,
+    "name": "wcrtomb"
+  },
+  {
+    "address": 916992,
+    "slot": 11006584,
+    "name": "__android_log_print"
+  },
+  {
+    "address": 917008,
+    "slot": 11006592,
+    "name": "free"
+  },
+  {
+    "address": 917024,
+    "slot": 11006600,
+    "name": "AAsset_close"
+  },
+  {
+    "address": 917040,
+    "slot": 11006608,
+    "name": "pthread_create"
+  },
+  {
+    "address": 917056,
+    "slot": 11006616,
+    "name": "frexp"
+  },
+  {
+    "address": 917072,
+    "slot": 11006624,
+    "name": "memset"
+  },
+  {
+    "address": 917088,
+    "slot": 11006632,
+    "name": "glDepthMask"
+  },
+  {
+    "address": 917104,
+    "slot": 11006640,
+    "name": "android_set_abort_message"
+  },
+  {
+    "address": 917120,
+    "slot": 11006648,
+    "name": "__FD_ISSET_chk"
+  },
+  {
+    "address": 917136,
+    "slot": 11006656,
+    "name": "printf"
+  },
+  {
+    "address": 917152,
+    "slot": 11006664,
+    "name": "pthread_once"
+  },
+  {
+    "address": 917168,
+    "slot": 11006672,
+    "name": "strerror_r"
+  },
+  {
+    "address": 917184,
+    "slot": 11006680,
+    "name": "_ZN4FMOD6System13getNumDriversEPi"
+  },
+  {
+    "address": 917200,
+    "slot": 11006688,
+    "name": "wmemmove"
+  },
+  {
+    "address": 917216,
+    "slot": 11006696,
+    "name": "pthread_getschedparam"
+  },
+  {
+    "address": 917232,
+    "slot": 11006704,
+    "name": "fseeko"
+  },
+  {
+    "address": 917248,
+    "slot": 11006712,
+    "name": "setlocale"
+  },
+  {
+    "address": 917264,
+    "slot": 11006720,
+    "name": "clock"
+  },
+  {
+    "address": 917280,
+    "slot": 11006728,
+    "name": "memchr"
+  },
+  {
+    "address": 917296,
+    "slot": 11006736,
+    "name": "getc"
+  },
+  {
+    "address": 917312,
+    "slot": 11006744,
+    "name": "wcstoll"
+  },
+  {
+    "address": 917328,
+    "slot": 11006752,
+    "name": "malloc"
+  },
+  {
+    "address": 917344,
+    "slot": 11006760,
+    "name": "__system_property_get"
+  },
+  {
+    "address": 917360,
+    "slot": 11006768,
+    "name": "dladdr"
+  },
+  {
+    "address": 917376,
+    "slot": 11006776,
+    "name": "mbrlen"
+  },
+  {
+    "address": 917392,
+    "slot": 11006784,
+    "name": "_ZN4FMOD14ChannelControl11setUserDataEPv"
+  },
+  {
+    "address": 917408,
+    "slot": 11006792,
+    "name": "iswcntrl"
+  },
+  {
+    "address": 917424,
+    "slot": 11006800,
+    "name": "glCheckFramebufferStatus"
+  },
+  {
+    "address": 917440,
+    "slot": 11006808,
+    "name": "munmap"
+  },
+  {
+    "address": 917456,
+    "slot": 11006816,
+    "name": "swprintf"
+  },
+  {
+    "address": 917472,
+    "slot": 11006824,
+    "name": "glTexParameterf"
+  },
+  {
+    "address": 917488,
+    "slot": 11006832,
+    "name": "__cxa_finalize"
+  },
+  {
+    "address": 917504,
+    "slot": 11006840,
+    "name": "glEnable"
+  },
+  {
+    "address": 917520,
+    "slot": 11006848,
+    "name": "glClear"
+  },
+  {
+    "address": 917536,
+    "slot": 11006856,
+    "name": "pthread_mutex_lock"
+  },
+  {
+    "address": 917552,
+    "slot": 11006864,
+    "name": "AAsset_getRemainingLength64"
+  },
+  {
+    "address": 917568,
+    "slot": 11006872,
+    "name": "islower"
+  },
+  {
+    "address": 917584,
+    "slot": 11006880,
+    "name": "strdup"
+  },
+  {
+    "address": 917600,
+    "slot": 11006888,
+    "name": "tzset"
+  },
+  {
+    "address": 917616,
+    "slot": 11006896,
+    "name": "time"
+  },
+  {
+    "address": 917632,
+    "slot": 11006904,
+    "name": "iswlower"
+  },
+  {
+    "address": 917648,
+    "slot": 11006912,
+    "name": "glScissor"
+  },
+  {
+    "address": 917664,
+    "slot": 11006920,
+    "name": "wmemcpy"
+  },
+  {
+    "address": 917680,
+    "slot": 11006928,
+    "name": "select"
+  },
+  {
+    "address": 917696,
+    "slot": 11006936,
+    "name": "_ZN4FMOD6System7releaseEv"
+  },
+  {
+    "address": 917712,
+    "slot": 11006944,
+    "name": "_ZN4FMOD6System17setSoftwareFormatEi16FMOD_SPEAKERMODEi"
+  },
+  {
+    "address": 917728,
+    "slot": 11006952,
+    "name": "_ZN4FMOD14ChannelControl11getUserDataEPPv"
+  },
+  {
+    "address": 917744,
+    "slot": 11006960,
+    "name": "tolower"
+  },
+  {
+    "address": 917760,
+    "slot": 11006968,
+    "name": "if_indextoname"
+  },
+  {
+    "address": 917776,
+    "slot": 11006976,
+    "name": "setsockopt"
+  },
+  {
+    "address": 917792,
+    "slot": 11006984,
+    "name": "gmtime"
+  },
+  {
+    "address": 917808,
+    "slot": 11006992,
+    "name": "_ZN4FMOD6System9playSoundEPNS_5SoundEPNS_12ChannelGroupEbPPNS_7ChannelE"
+  },
+  {
+    "address": 917824,
+    "slot": 11007000,
+    "name": "vasprintf"
+  },
+  {
+    "address": 917840,
+    "slot": 11007008,
+    "name": "glReadPixels"
+  },
+  {
+    "address": 917856,
+    "slot": 11007016,
+    "name": "socket"
+  },
+  {
+    "address": 917872,
+    "slot": 11007024,
+    "name": "glGetBooleanv"
+  },
+  {
+    "address": 917888,
+    "slot": 11007032,
+    "name": "__cxa_atexit"
+  },
+  {
+    "address": 917904,
+    "slot": 11007040,
+    "name": "srand"
+  },
+  {
+    "address": 917920,
+    "slot": 11007048,
+    "name": "strtoll_l"
+  },
+  {
+    "address": 917936,
+    "slot": 11007056,
+    "name": "getpeername"
+  },
+  {
+    "address": 917952,
+    "slot": 11007064,
+    "name": "glGenFramebuffers"
+  },
+  {
+    "address": 917968,
+    "slot": 11007072,
+    "name": "difftime"
+  },
+  {
+    "address": 917984,
+    "slot": 11007080,
+    "name": "isspace"
+  },
+  {
+    "address": 918000,
+    "slot": 11007088,
+    "name": "fstat"
+  },
+  {
+    "address": 918016,
+    "slot": 11007096,
+    "name": "ungetc"
+  },
+  {
+    "address": 918032,
+    "slot": 11007104,
+    "name": "mbrtowc"
+  },
+  {
+    "address": 918048,
+    "slot": 11007112,
+    "name": "strtold"
+  },
+  {
+    "address": 918064,
+    "slot": 11007120,
+    "name": "wcslen"
+  },
+  {
+    "address": 918080,
+    "slot": 11007128,
+    "name": "pthread_detach"
+  },
+  {
+    "address": 918096,
+    "slot": 11007136,
+    "name": "glBindRenderbuffer"
+  },
+  {
+    "address": 918112,
+    "slot": 11007144,
+    "name": "wcstoull"
+  },
+  {
+    "address": 918128,
+    "slot": 11007152,
+    "name": "strncmp"
+  },
+  {
+    "address": 918144,
+    "slot": 11007160,
+    "name": "glBlendEquation"
+  },
+  {
+    "address": 918160,
+    "slot": 11007168,
+    "name": "pthread_mutex_destroy"
+  },
+  {
+    "address": 918176,
+    "slot": 11007176,
+    "name": "btowc"
+  },
+  {
+    "address": 918192,
+    "slot": 11007184,
+    "name": "glActiveTexture"
+  },
+  {
+    "address": 918208,
+    "slot": 11007192,
+    "name": "glStencilMask"
+  },
+  {
+    "address": 918224,
+    "slot": 11007200,
+    "name": "AAsset_seek64"
+  },
+  {
+    "address": 918240,
+    "slot": 11007208,
+    "name": "sinf"
+  },
+  {
+    "address": 918256,
+    "slot": 11007216,
+    "name": "fileno"
+  },
+  {
+    "address": 918272,
+    "slot": 11007224,
+    "name": "_ZN4FMOD5Sound7releaseEv"
+  },
+  {
+    "address": 918288,
+    "slot": 11007232,
+    "name": "sched_yield"
+  },
+  {
+    "address": 918304,
+    "slot": 11007240,
+    "name": "glFramebufferTexture2D"
+  },
+  {
+    "address": 918320,
+    "slot": 11007248,
+    "name": "_ZN4FMOD7Channel12setFrequencyEf"
+  },
+  {
+    "address": 918336,
+    "slot": 11007256,
+    "name": "freeaddrinfo"
+  },
+  {
+    "address": 918352,
+    "slot": 11007264,
+    "name": "fread"
+  },
+  {
+    "address": 918368,
+    "slot": 11007272,
+    "name": "putchar"
+  },
+  {
+    "address": 918384,
+    "slot": 11007280,
+    "name": "iswprint"
+  },
+  {
+    "address": 918400,
+    "slot": 11007288,
+    "name": "_ZN4FMOD6System17getSoftwareFormatEPiP16FMOD_SPEAKERMODES1_"
+  },
+  {
+    "address": 918416,
+    "slot": 11007296,
+    "name": "glStencilFunc"
+  },
+  {
+    "address": 918432,
+    "slot": 11007304,
+    "name": "iswxdigit"
+  },
+  {
+    "address": 918448,
+    "slot": 11007312,
+    "name": "glAttachShader"
+  },
+  {
+    "address": 918464,
+    "slot": 11007320,
+    "name": "AAssetDir_getNextFileName"
+  },
+  {
+    "address": 918480,
+    "slot": 11007328,
+    "name": "wmemchr"
+  },
+  {
+    "address": 918496,
+    "slot": 11007336,
+    "name": "strnlen"
+  },
+  {
+    "address": 918512,
+    "slot": 11007344,
+    "name": "iswspace"
+  },
+  {
+    "address": 918528,
+    "slot": 11007352,
+    "name": "glFramebufferRenderbuffer"
+  },
+  {
+    "address": 918544,
+    "slot": 11007360,
+    "name": "getpid"
+  },
+  {
+    "address": 918560,
+    "slot": 11007368,
+    "name": "pthread_mutexattr_settype"
+  },
+  {
+    "address": 918576,
+    "slot": 11007376,
+    "name": "_ZN4FMOD6System12createStreamEPKcjP22FMOD_CREATESOUNDEXINFOPPNS_5SoundE"
+  },
+  {
+    "address": 918592,
+    "slot": 11007384,
+    "name": "sigaction"
+  },
+  {
+    "address": 918608,
+    "slot": 11007392,
+    "name": "readdir"
+  },
+  {
+    "address": 918624,
+    "slot": 11007400,
+    "name": "glTexSubImage2D"
+  },
+  {
+    "address": 918640,
+    "slot": 11007408,
+    "name": "glTexParameteri"
+  },
+  {
+    "address": 918656,
+    "slot": 11007416,
+    "name": "sincosf"
+  },
+  {
+    "address": 918672,
+    "slot": 11007424,
+    "name": "rand"
+  },
+  {
+    "address": 918688,
+    "slot": 11007432,
+    "name": "socketpair"
+  },
+  {
+    "address": 918704,
+    "slot": 11007440,
+    "name": "glBindBuffer"
+  },
+  {
+    "address": 918720,
+    "slot": 11007448,
+    "name": "recvfrom"
+  },
+  {
+    "address": 918736,
+    "slot": 11007456,
+    "name": "strtoul"
+  },
+  {
+    "address": 918752,
+    "slot": 11007464,
+    "name": "dl_iterate_phdr"
+  },
+  {
+    "address": 918768,
+    "slot": 11007472,
+    "name": "wcstol"
+  },
+  {
+    "address": 918784,
+    "slot": 11007480,
+    "name": "glStencilOp"
+  },
+  {
+    "address": 918800,
+    "slot": 11007488,
+    "name": "bind"
+  },
+  {
+    "address": 918816,
+    "slot": 11007496,
+    "name": "strtoll"
+  },
+  {
+    "address": 918832,
+    "slot": 11007504,
+    "name": "strncpy"
+  },
+  {
+    "address": 918848,
+    "slot": 11007512,
+    "name": "glBufferSubData"
+  },
+  {
+    "address": 918864,
+    "slot": 11007520,
+    "name": "glDisableVertexAttribArray"
+  },
+  {
+    "address": 918880,
+    "slot": 11007528,
+    "name": "fwrite"
+  },
+  {
+    "address": 918896,
+    "slot": 11007536,
+    "name": "strcpy"
+  },
+  {
+    "address": 918912,
+    "slot": 11007544,
+    "name": "posix_memalign"
+  },
+  {
+    "address": 918928,
+    "slot": 11007552,
+    "name": "getenv"
+  },
+  {
+    "address": 918944,
+    "slot": 11007560,
+    "name": "glClearStencil"
+  },
+  {
+    "address": 918960,
+    "slot": 11007568,
+    "name": "openat"
+  },
+  {
+    "address": 918976,
+    "slot": 11007576,
+    "name": "glUniform3fv"
+  },
+  {
+    "address": 918992,
+    "slot": 11007584,
+    "name": "ftello"
+  },
+  {
+    "address": 919008,
+    "slot": 11007592,
+    "name": "__errno"
+  },
+  {
+    "address": 919024,
+    "slot": 11007600,
+    "name": "getsockopt"
+  },
+  {
+    "address": 919040,
+    "slot": 11007608,
+    "name": "glUniform4fv"
+  },
+  {
+    "address": 919056,
+    "slot": 11007616,
+    "name": "wcstold"
+  },
+  {
+    "address": 919072,
+    "slot": 11007624,
+    "name": "memmove"
+  },
+  {
+    "address": 919088,
+    "slot": 11007632,
+    "name": "strerror"
+  },
+  {
+    "address": 919104,
+    "slot": 11007640,
+    "name": "glGenRenderbuffers"
+  },
+  {
+    "address": 919120,
+    "slot": 11007648,
+    "name": "pthread_mutex_trylock"
+  },
+  {
+    "address": 919136,
+    "slot": 11007656,
+    "name": "glDeleteProgram"
+  },
+  {
+    "address": 919152,
+    "slot": 11007664,
+    "name": "strtol"
+  },
+  {
+    "address": 919168,
+    "slot": 11007672,
+    "name": "_ZN4FMOD7Channel12setLoopCountEi"
+  },
+  {
+    "address": 919184,
+    "slot": 11007680,
+    "name": "_ZN4FMOD12ChannelGroup7releaseEv"
+  },
+  {
+    "address": 919200,
+    "slot": 11007688,
+    "name": "fcntl"
+  },
+  {
+    "address": 919216,
+    "slot": 11007696,
+    "name": "pthread_setname_np"
+  },
+  {
+    "address": 919232,
+    "slot": 11007704,
+    "name": "fmod"
+  },
+  {
+    "address": 919248,
+    "slot": 11007712,
+    "name": "sleep"
+  },
+  {
+    "address": 919264,
+    "slot": 11007720,
+    "name": "puts"
+  },
+  {
+    "address": 919280,
+    "slot": 11007728,
+    "name": "glGetIntegerv"
+  },
+  {
+    "address": 919296,
+    "slot": 11007736,
+    "name": "pow"
+  },
+  {
+    "address": 919312,
+    "slot": 11007744,
+    "name": "wcstod"
+  },
+  {
+    "address": 919328,
+    "slot": 11007752,
+    "name": "glShaderSource"
+  },
+  {
+    "address": 919344,
+    "slot": 11007760,
+    "name": "glUniform1i"
+  },
+  {
+    "address": 919360,
+    "slot": 11007768,
+    "name": "ioctl"
+  },
+  {
+    "address": 919376,
+    "slot": 11007776,
+    "name": "glGetProgramiv"
+  },
+  {
+    "address": 919392,
+    "slot": 11007784,
+    "name": "setjmp"
+  },
+  {
+    "address": 919408,
+    "slot": 11007792,
+    "name": "_ZN4FMOD6System13getDriverInfoEiPciP9FMOD_GUIDPiP16FMOD_SPEAKERMODES4_"
+  },
+  {
+    "address": 919424,
+    "slot": 11007800,
+    "name": "pthread_equal"
+  },
+  {
+    "address": 919440,
+    "slot": 11007808,
+    "name": "ldexpf"
+  },
+  {
+    "address": 919456,
+    "slot": 11007816,
+    "name": "exit"
+  },
+  {
+    "address": 919472,
+    "slot": 11007824,
+    "name": "glDeleteRenderbuffers"
+  },
+  {
+    "address": 919488,
+    "slot": 11007832,
+    "name": "pthread_getspecific"
+  },
+  {
+    "address": 919504,
+    "slot": 11007840,
+    "name": "iswupper"
+  },
+  {
+    "address": 919520,
+    "slot": 11007848,
+    "name": "strcasecmp"
+  },
+  {
+    "address": 919536,
+    "slot": 11007856,
+    "name": "atanf"
+  },
+  {
+    "address": 919552,
+    "slot": 11007864,
+    "name": "FMOD_System_Create"
+  },
+  {
+    "address": 919568,
+    "slot": 11007872,
+    "name": "mmap"
+  },
+  {
+    "address": 919584,
+    "slot": 11007880,
+    "name": "glDisable"
+  },
+  {
+    "address": 919600,
+    "slot": 11007888,
+    "name": "strtold_l"
+  },
+  {
+    "address": 919616,
+    "slot": 11007896,
+    "name": "pthread_join"
+  },
+  {
+    "address": 919632,
+    "slot": 11007904,
+    "name": "fputs"
+  },
+  {
+    "address": 919648,
+    "slot": 11007912,
+    "name": "openlog"
+  },
+  {
+    "address": 919664,
+    "slot": 11007920,
+    "name": "pthread_cond_broadcast"
+  },
+  {
+    "address": 919680,
+    "slot": 11007928,
+    "name": "longjmp"
+  },
+  {
+    "address": 919696,
+    "slot": 11007936,
+    "name": "send"
+  },
+  {
+    "address": 919712,
+    "slot": 11007944,
+    "name": "sprintf"
+  },
+  {
+    "address": 919728,
+    "slot": 11007952,
+    "name": "abort"
+  },
+  {
+    "address": 919744,
+    "slot": 11007960,
+    "name": "glGetAttribLocation"
+  },
+  {
+    "address": 919760,
+    "slot": 11007968,
+    "name": "iswdigit"
+  },
+  {
+    "address": 919776,
+    "slot": 11007976,
+    "name": "close"
+  },
+  {
+    "address": 919792,
+    "slot": 11007984,
+    "name": "write"
+  },
+  {
+    "address": 919808,
+    "slot": 11007992,
+    "name": "pthread_setschedparam"
+  },
+  {
+    "address": 919824,
+    "slot": 11008000,
+    "name": "strcat"
+  },
+  {
+    "address": 919840,
+    "slot": 11008008,
+    "name": "atan2f"
+  },
+  {
+    "address": 919856,
+    "slot": 11008016,
+    "name": "glRenderbufferStorage"
+  },
+  {
+    "address": 919872,
+    "slot": 11008024,
+    "name": "glPixelStorei"
+  },
+  {
+    "address": 919888,
+    "slot": 11008032,
+    "name": "glUniform2f"
+  },
+  {
+    "address": 919904,
+    "slot": 11008040,
+    "name": "mkdir"
+  },
+  {
+    "address": 919920,
+    "slot": 11008048,
+    "name": "memcpy"
+  },
+  {
+    "address": 919936,
+    "slot": 11008056,
+    "name": "glVertexAttribPointer"
+  },
+  {
+    "address": 919952,
+    "slot": 11008064,
+    "name": "dlerror"
+  },
+  {
+    "address": 919968,
+    "slot": 11008072,
+    "name": "AAsset_openFileDescriptor64"
+  },
+  {
+    "address": 919984,
+    "slot": 11008080,
+    "name": "pthread_cond_signal"
+  },
+  {
+    "address": 920000,
+    "slot": 11008088,
+    "name": "fputc"
+  },
+  {
+    "address": 920016,
+    "slot": 11008096,
+    "name": "glShaderBinary"
+  },
+  {
+    "address": 920032,
+    "slot": 11008104,
+    "name": "glBindAttribLocation"
+  },
+  {
+    "address": 920048,
+    "slot": 11008112,
+    "name": "glCreateProgram"
+  },
+  {
+    "address": 920064,
+    "slot": 11008120,
+    "name": "glDeleteTextures"
+  },
+  {
+    "address": 920080,
+    "slot": 11008128,
+    "name": "sendto"
+  },
+  {
+    "address": 920096,
+    "slot": 11008136,
+    "name": "mbtowc"
+  },
+  {
+    "address": 920112,
+    "slot": 11008144,
+    "name": "sscanf"
+  },
+  {
+    "address": 920128,
+    "slot": 11008152,
+    "name": "open"
+  },
+  {
+    "address": 920144,
+    "slot": 11008160,
+    "name": "vsscanf"
+  },
+  {
+    "address": 920160,
+    "slot": 11008168,
+    "name": "read"
+  },
+  {
+    "address": 920176,
+    "slot": 11008176,
+    "name": "glGetError"
+  },
+  {
+    "address": 920192,
+    "slot": 11008184,
+    "name": "_ZN4FMOD7Channel11setPriorityEi"
+  },
+  {
+    "address": 920208,
+    "slot": 11008192,
+    "name": "remove"
+  },
+  {
+    "address": 920224,
+    "slot": 11008200,
+    "name": "freelocale"
+  },
+  {
+    "address": 920240,
+    "slot": 11008208,
+    "name": "_ZN4FMOD6System10getChannelEiPPNS_7ChannelE"
+  },
+  {
+    "address": 920256,
+    "slot": 11008216,
+    "name": "glTexImage2D"
+  },
+  {
+    "address": 920272,
+    "slot": 11008224,
+    "name": "wmemset"
+  },
+  {
+    "address": 920288,
+    "slot": 11008232,
+    "name": "glLinkProgram"
+  },
+  {
+    "address": 920304,
+    "slot": 11008240,
+    "name": "newlocale"
+  },
+  {
+    "address": 920320,
+    "slot": 11008248,
+    "name": "bsearch"
+  },
+  {
+    "address": 920336,
+    "slot": 11008256,
+    "name": "rewind"
+  },
+  {
+    "address": 920352,
+    "slot": 11008264,
+    "name": "pthread_setspecific"
+  },
+  {
+    "address": 920368,
+    "slot": 11008272,
+    "name": "wcstof"
+  },
+  {
+    "address": 920384,
+    "slot": 11008280,
+    "name": "AAssetManager_open"
+  },
+  {
+    "address": 920400,
+    "slot": 11008288,
+    "name": "strchr"
+  },
+  {
+    "address": 920416,
+    "slot": 11008296,
+    "name": "_ZN4FMOD6System9setOutputE15FMOD_OUTPUTTYPE"
+  },
+  {
+    "address": 920432,
+    "slot": 11008304,
+    "name": "strstr"
+  },
+  {
+    "address": 920448,
+    "slot": 11008312,
+    "name": "__ctype_get_mb_cur_max"
+  },
+  {
+    "address": 920464,
+    "slot": 11008320,
+    "name": "fprintf"
+  },
+  {
+    "address": 920480,
+    "slot": 11008328,
+    "name": "glDeleteShader"
+  },
+  {
+    "address": 920496,
+    "slot": 11008336,
+    "name": "AAsset_read"
+  },
+  {
+    "address": 920512,
+    "slot": 11008344,
+    "name": "glDeleteBuffers"
+  },
+  {
+    "address": 920528,
+    "slot": 11008352,
+    "name": "AAssetDir_close"
+  },
+  {
+    "address": 920544,
+    "slot": 11008360,
+    "name": "pthread_mutex_unlock"
+  },
+  {
+    "address": 920560,
+    "slot": 11008368,
+    "name": "ftell"
+  },
+  {
+    "address": 920576,
+    "slot": 11008376,
+    "name": "pclose"
+  },
+  {
+    "address": 920592,
+    "slot": 11008384,
+    "name": "modf"
+  },
+  {
+    "address": 920608,
+    "slot": 11008392,
+    "name": "_ZN4FMOD7Channel12getFrequencyEPf"
+  },
+  {
+    "address": 920624,
+    "slot": 11008400,
+    "name": "glBlendFunc"
+  },
+  {
+    "address": 920640,
+    "slot": 11008408,
+    "name": "glUniformMatrix4fv"
+  },
+  {
+    "address": 920656,
+    "slot": 11008416,
+    "name": "getaddrinfo"
+  },
+  {
+    "address": 920672,
+    "slot": 11008424,
+    "name": "glDrawArrays"
+  },
+  {
+    "address": 920688,
+    "slot": 11008432,
+    "name": "_ZN4FMOD6System19setStreamBufferSizeEjj"
+  },
+  {
+    "address": 920704,
+    "slot": 11008440,
+    "name": "gettimeofday"
+  },
+  {
+    "address": 920720,
+    "slot": 11008448,
+    "name": "strncat"
+  },
+  {
+    "address": 920736,
+    "slot": 11008456,
+    "name": "isupper"
+  },
+  {
+    "address": 920752,
+    "slot": 11008464,
+    "name": "glBindTexture"
+  },
+  {
+    "address": 920768,
+    "slot": 11008472,
+    "name": "glUniform4f"
+  },
+  {
+    "address": 920784,
+    "slot": 11008480,
+    "name": "wmemcmp"
+  },
+  {
+    "address": 920800,
+    "slot": 11008488,
+    "name": "shutdown"
+  },
+  {
+    "address": 920816,
+    "slot": 11008496,
+    "name": "vfprintf"
+  },
+  {
+    "address": 920832,
+    "slot": 11008504,
+    "name": "wctob"
+  },
+  {
+    "address": 920848,
+    "slot": 11008512,
+    "name": "pthread_mutex_init"
+  },
+  {
+    "address": 920864,
+    "slot": 11008520,
+    "name": "strrchr"
+  },
+  {
+    "address": 920880,
+    "slot": 11008528,
+    "name": "cosf"
+  },
+  {
+    "address": 920896,
+    "slot": 11008536,
+    "name": "towupper"
+  },
+  {
+    "address": 920912,
+    "slot": 11008544,
+    "name": "closelog"
+  },
+  {
+    "address": 920928,
+    "slot": 11008552,
+    "name": "_ZN4FMOD6System13setFileSystemEPF11FMOD_RESULTPKcPjPPvS5_EPFS1_S5_S5_EPFS1_S5_S5_jS4_S5_EPFS1_S5_jS5_EPFS1_P18FMOD_ASYNCREADINFOS5_ESI_i"
+  },
+  {
+    "address": 920944,
+    "slot": 11008560,
+    "name": "AAsset_getLength64"
+  },
+  {
+    "address": 920960,
+    "slot": 11008568,
+    "name": "AAssetManager_fromJava"
+  },
+  {
+    "address": 920976,
+    "slot": 11008576,
+    "name": "qsort"
+  },
+  {
+    "address": 920992,
+    "slot": 11008584,
+    "name": "log"
+  },
+  {
+    "address": 921008,
+    "slot": 11008592,
+    "name": "towlower"
+  },
+  {
+    "address": 921024,
+    "slot": 11008600,
+    "name": "_ZN4FMOD5Sound9getLengthEPjj"
+  },
+  {
+    "address": 921040,
+    "slot": 11008608,
+    "name": "fmodf"
+  }
+]

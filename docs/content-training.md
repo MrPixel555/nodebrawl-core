@@ -1,5 +1,10 @@
 # Content delivery and Training protocol evidence
 
+Current runtime: `17967` and the ordinary, null-PvE branch of `10953` now start
+Training using the original engine in Node. Source NPC decks/levels and all
+53 level geometries are included. See [native battles](native-battles.md).
+The remaining sections retain the content-download and earlier codec evidence.
+
 The user confirmed that network-v6 displays Home on the supplied Android device.
 The latest network-v8 run also confirms content downloads complete; its server
 trace includes a Training NPC request 17967 and unresolved command 595. See

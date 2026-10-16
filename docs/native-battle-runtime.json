@@ -1,0 +1,88 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "runtime": "Node.js + Unicorn WebAssembly; no Python or child process",
+  "androidUIVerified": false,
+  "nativeClient": {
+    "ticks": 400,
+    "announcedCommands": 2,
+    "sectorChecksumsMatched": true,
+    "desyncCallbacks": 0
+  },
+  "locations": {
+    "loaded": 53,
+    "nativeWorldSnapshotsDecoded": 53,
+    "scope": "Geometry and snapshot codecs; four-player probe for team maps, including the unused 3v3 geometry. Not Android mode/UI validation."
+  },
+  "fullMatch": {
+    "tick": 2890,
+    "ended": true,
+    "winner": 0,
+    "crowns": [
+      3,
+      1
+    ],
+    "elixir": [
+      3,
+      3
+    ],
+    "checksum": -1896200604,
+    "elapsedMs": 103729,
+    "scope": "Original native combat, bot commands, towers, damage, match end and checksum. Android battle UI remains unverified."
+  },
+  "trainers": {
+    "constructed": 46,
+    "scope": "All source NPC rows with TrainingMatchAllowed; original decks, levels, location, towers and snapshot encoder. Does not assert Android UI or identical official-server AI policy."
+  },
+  "cards": {
+    "acceptedByOriginalExecutor": 95,
+    "syntheticInputs": {
+      "tick": 160,
+      "elixir": 10,
+      "handSlot": 0
+    },
+    "scope": "Isolated cast validation/execution for all unlocked cards, not full combat coverage for every interaction."
+  },
+  "node18": {
+    "version": "18.20.8",
+    "checks": [
+      "VM startup",
+      "Training worker snapshot",
+      "ten simulation ticks",
+      "forfeit and worker close"
+    ]
+  },
+  "automated": {
+    "nodeTests": 698,
+    "failures": 0,
+    "tcp": [
+      "Training",
+      "queue cancellation",
+      "two-human matchmaking",
+      "reconnect",
+      "forfeit",
+      "persistent winner gold"
+    ],
+    "cli": [
+      "starter/nacl17",
+      "disabled/nacl17",
+      "starter/plaintext",
+      "HTTP asset hashes"
+    ]
+  },
+  "node24": {
+    "version": "24.19.0",
+    "cleanNpmCi": true
+  },
+  "fourPlayerViews": {
+    "nativeClients": 4,
+    "ticks": 20,
+    "sectorChecksumsMatched": true
+  },
+  "imageRebuild": {
+    "sourceCatalogueIdentical": true,
+    "importsIdentical": true,
+    "heapIdentical": true,
+    "nativeMemoryBlocksIdentical": 3,
+    "tool": "tools/reverse/build_battle_image.py"
+  }
+}

@@ -1,13 +1,13 @@
 'use strict'
-const { decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
+const { decodeEndClientTurn, encodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
 const { ProtocolError } = require('../lib/protocol/stream')
 const { createStarterProfileProvider } = require('./home')
 const { isArena1BoostCommand } = require('./arena-boost')
 const { isFreePassGoldCommand } = require('./season-pass')
 
-function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false }) {
+function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false, battles = null }) {
   const profileProvider = createStarterProfileProvider()
-  return new Map([[11712, async (session, fields) => {
+  const handlers = new Map([[11712, async (session, fields) => {
     // AvatarStream is private to the authenticated player. Its native consumer
     // requires an allocated empty vector (00), and dereferences a null one (7f).
     if (!fields.field_0x80.every((part, index) => part === session.account.id[index])) throw new ProtocolError('Avatar stream identity does not match session')
@@ -35,7 +35,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // formats alone do not implement their gameplay, prices or preconditions.
     // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
-    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 693, 703, 762, 805, 869, 948].includes(command.id) && !isArena1BoostCommand(command) && !isFreePassGoldCommand(command)).map(command => command.id))]
+    const unsupported = [...new Set(turn.commands.filter(command => !(battles && command.id === 527) && ![563, 687, 693, 703, 762, 805, 869, 948].includes(command.id) && !isArena1BoostCommand(command) && !isFreePassGoldCommand(command)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, turnCommandIds: turn.commands.map(command => command.id), extraData: turn.field_0x98 !== null, applied: false })
       // Keep up to eight public selectors for unresolved 595 branches even
@@ -57,9 +57,17 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       }
       return
     }
-    const mutations = turn.commands.filter(command => command.id !== 805)
+    const requests = turn.commands.filter(command => command.id === 527)
+    if (requests.length > 1) throw new ProtocolError('Multiple matchmaking requests in one turn')
+    if (requests.some(command => command.fields.field_0x20 !== 0 || command.fields.field_0x24 !== -1)) {
+      logger({ event: 'matchmaking-request-rejected', reason: 'Event matchmaking requires a configured catalogue', applied: false })
+      return
+    }
+    if (battles?.active(session) && turn.commands.length) { logger({ event: 'home-turn-during-battle', applied: false }); return }
+    const homeCommands = turn.commands.filter(command => command.id !== 527)
+    const mutations = homeCommands.filter(command => command.id !== 805)
     if (mutations.length) {
-      try { session.account = await store.applyStarterTurn(session.account, turn.commands) } catch (error) {
+      try { session.account = await store.applyStarterTurn(session.account, homeCommands) } catch (error) {
         if (!(error instanceof ProtocolError)) throw error
         logger({ event: 'starter-turn-rejected', commandIds: mutations.map(command => command.id), reason: error.message, applied: false })
         return
@@ -73,7 +81,15 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       if (mutations.some(command => command.id === 869)) logger({ event: 'home-flags-updated' })
       if (traceNetwork && mutations.some(command => command.id === 762)) logger({ event: 'season-pass-seen', crowns: session.account.starter.passSeenCrowns })
     } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
+    if (requests.length) await battles.request(session, requests[0].fields)
   }]])
+  if (battles) { handlers.set(12405, async (session, fields) => {
+    // HomeLogicStopped carries final Home commands, with the same command
+    // format as EndClientTurn and no trailing byte-array field.
+    if (fields.commands.length && !battles.active(session)) await handlers.get(13597)(session, null, { payload: encodeEndClientTurn({ ...fields, field_0x98: null }) })
+    if (traceNetwork) logger({ event: 'home-logic-stopped', commands: fields.commands.length })
+  }) }
+  return handlers
 }
 
 module.exports = { createStarterHandlers }

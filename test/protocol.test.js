@@ -13,8 +13,8 @@ for (const fixture of fixtures) {
     test(`empty native virtual methods do not establish a 28991 codec, variant ${fixture.variant}`, () => {
       assert.equal(fixture.payload, '')
       assert.equal(fixture.native_decode_consumed, 0)
-      assert.throws(() => encodeMessage(28991, {}), /unresolved GameMode snapshot/)
-      assert.throws(() => decodeMessage(28991, Buffer.alloc(0)), /unresolved GameMode snapshot/)
+      assert.throws(() => encodeMessage(28991, {}), /native GameMode snapshot/)
+      assert.throws(() => decodeMessage(28991, Buffer.alloc(0)), /native GameMode snapshot/)
     })
     continue
   }
