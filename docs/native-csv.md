@@ -69,6 +69,45 @@ checks exercise direct, GOT and PLT-suffix paths. Optional CPU register capture
 includes flags and the full SIMD bank for bounded, single-thread CSV parser
 continuation with matching memory; it is not a standalone process snapshot.
 
+The separate [base text-table report](native-texts.json) verifies all **88,858
+cells** (22 columns, 4,039 physical rows and 4,038 named records). One row has an
+empty first cell and continues the preceding record; it is not a lost record.
+Every native record name/physical offset and native getter samples also match.
+This check uses a retained completed parser checkpoint, validates the source
+against the APK hash and does not establish patch overlays or text rendering:
+
+```bash
+GAME_ANALYSIS_DIR=/workspace/game-analysis \
+  /workspace/game-analysis/venv/bin/python tools/reverse/verify_native_texts.py \
+  --checkpoint /workspace/game-analysis/native-csv-text-raw-state
+```
+
+The libc boundary now models the C/POSIX locale required by C++ parsing,
+including opaque locale handles, `localeconv`, C-locale `mbtowc`, `errno` and
+signed/unsigned 64-bit integer conversion. Other locales remain explicitly
+unsupported. Tests execute the original lazy locale initializer and numeric
+facet, and check overflow, end pointers, errno and invalid handles. Locale
+bookkeeping resides in VM memory and survives matching memory continuations.
+
+`native_strings.initialize_data_globals` executes another **38 original static
+constructors** before GameData linking, preserving all 72 registered tables
+and the loaded text dictionary. These construct containers, regexes, constants,
+RNG and C++ support objects. Four application/loader/worker initializers remain
+excluded with explicit reasons in [the report](native-data-initializers.json);
+this is not a complete Android process initialization.
+
+Zero-filled BSS was insufficient for the reward selector's `std::map` at
+`0xd69950`. The original insert helper faults at `0x823b5c` without constructor
+`0xf1c8c`. The regression probe reproduces that fault with a synthetic map node,
+then verifies successful insertion after the actual constructor. No map/game
+lookup callback or failing instruction is replaced.
+
+```bash
+GAME_ANALYSIS_DIR=/workspace/game-analysis \
+  /workspace/game-analysis/venv/bin/python tools/reverse/verify_native_data_initializers.py \
+  --checkpoint /workspace/game-analysis/native-csv-text-state
+```
+
 Raw DataTable construction is only an initial step. Cross-table field linking,
 map/tower creation, players, GameMode snapshots and battle simulation require
 further verification. These parser checks do not establish playable Training,

@@ -1,0 +1,39 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "path": "csv_client/texts.csv",
+  "decodedSourceSha256": "4663f16b211f29ee437e505b0ba453443c7a51803c33bf49cbe742d0f8dddecf",
+  "nativeParser": "0x4a461c",
+  "columns": [
+    "e",
+    "EN",
+    "FR",
+    "DE",
+    "ES",
+    "IT",
+    "NL",
+    "NO",
+    "TR",
+    "JP",
+    "KR",
+    "RU",
+    "AR",
+    "PT",
+    "CN",
+    "CNT",
+    "FA",
+    "ID",
+    "MS",
+    "TH",
+    "FI",
+    "VI"
+  ],
+  "physicalRows": 4039,
+  "namedRows": 4038,
+  "continuationRows": [
+    1693
+  ],
+  "cellsMatched": 88858,
+  "allNativeNamesAndPhysicalOffsetsMatched": true,
+  "gameCodeAdapters": [],
+  "scope": "Original base text CSV only; source strings and native getter behavior. Does not verify patch overlays, fonts/rendering, cross-table linking or gameplay."
+}

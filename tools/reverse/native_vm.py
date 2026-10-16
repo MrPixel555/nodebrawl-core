@@ -7,6 +7,7 @@ from unicorn import Uc, UC_ARCH_ARM64, UC_MODE_ARM, UC_HOOK_CODE, UC_HOOK_INTR
 from unicorn.arm64_const import *
 from elftools.elf.elffile import ELFFile
 from native_printf import vsnprintf
+from native_locale import IMPORTS as LOCALE_IMPORTS, call as locale_call
 
 ROOT=Path(os.environ['GAME_ANALYSIS_DIR'])
 class NativeVM:
@@ -117,6 +118,7 @@ class NativeVM:
         name=self.imports.get(address)
         if not name:return
         a,b,c=self.reg(0),self.reg(1),self.reg(2)
+        if name in LOCALE_IMPORTS:return locale_call(self,name)
         if name=='open':
             path=self.string(a)
             if path not in [b'/dev/urandom',b'/dev/random']:raise RuntimeError(f'Unsupported file access: {path!r}')

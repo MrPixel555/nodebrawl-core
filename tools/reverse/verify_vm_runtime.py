@@ -42,6 +42,70 @@ def main():
     assert vm.call(imports['time'], timestamp) == 1
     assert struct.unpack('<q', vm.uc.mem_read(timestamp, 8))[0] == 1
     assert vm.call(imports['time'], 0) == 1
+    # Execute the library's actual lazy C-locale initializer and exercise the
+    # opaque locale API used by its C++ standard library.
+    classic = vm.call(0x83ed60)
+    assert classic and vm.call(0x83ed60) == classic
+    global_locale = 0xffffffffffffffff
+    assert vm.call(imports['uselocale'], 0) == global_locale
+    assert vm.call(imports['uselocale'], classic) == global_locale
+    assert vm.call(imports['uselocale'], 0) == classic
+    assert vm.call(imports['__ctype_get_mb_cur_max']) == 1
+    locale_data = vm.call(imports['localeconv'])
+    decimal = struct.unpack('<Q', vm.uc.mem_read(locale_data, 8))[0]
+    thousands = struct.unpack('<Q', vm.uc.mem_read(locale_data + 8, 8))[0]
+    assert vm.string(decimal) == b'.' and vm.string(thousands) == b''
+    assert bytes(vm.uc.mem_read(locale_data + 80, 14)) == bytes([127]) * 14
+    assert vm.string(vm.call(imports['setlocale'], 0, 0)) == b'C'
+    duplicate = vm.call(imports['newlocale'], 0x1fbf, text(b'POSIX'), 0)
+    assert duplicate != classic
+    vm.call(imports['freelocale'], duplicate)
+    for locale in (duplicate, 17):
+        try:
+            vm.call(imports['uselocale'], locale)
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError('Invalid locale handle accepted')
+    try:
+        vm.call(imports['newlocale'], 0x1fbf, text(b'C.UTF-8'), 0)
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError('Unsupported locale silently replaced')
+    assert vm.call(imports['uselocale'], global_locale) == classic
+    errno = vm.call(imports['__errno'])
+    end_pointer = vm.alloc(8)
+    for name, value, base, expected, consumed, error in [
+        ('strtoll_l', b' \t-37rest', 10, -37, 5, 0),
+        ('strtoull_l', b'0x7f_rest', 0, 127, 4, 0),
+        ('strtoull_l', b'077x', 0, 63, 3, 0),
+        ('strtoull_l', b'-1', 10, (1 << 64) - 1, 2, 0),
+        ('strtoll_l', b'-9223372036854775808', 10, -(1 << 63), 20, 0),
+        ('strtoll_l', b'9223372036854775808x', 10, (1 << 63) - 1, 19, 34),
+        ('strtoull_l', b'18446744073709551616x', 10, (1 << 64) - 1, 20, 34),
+        ('strtoll_l', b' +no number', 10, 0, 0, 0),
+        ('strtoll_l', b'0xZ', 16, 0, 1, 0)
+    ]:
+        source = text(value)
+        vm.uc.mem_write(errno, bytes(4))
+        assert vm.call(imports[name], source, end_pointer, base, classic) == expected & 0xffffffffffffffff
+        assert struct.unpack('<Q', vm.uc.mem_read(end_pointer, 8))[0] == source + consumed
+        assert struct.unpack('<i', vm.uc.mem_read(errno, 4))[0] == error
+    # The actual C++ numeric facet uses newlocale/errno/strtoull_l together.
+    source, state_error = text(b'12345'), vm.alloc(4)
+    vm.uc.mem_write(errno, struct.pack('<i', 17))
+    assert vm.call(0x86ab7c, source, source + 5, state_error, 10) == 12345
+    assert bytes(vm.uc.mem_read(state_error, 4)) == bytes(4)
+    assert struct.unpack('<i', vm.uc.mem_read(errno, 4))[0] == 17
+    wide_character = vm.alloc(4)
+    assert vm.call(imports['mbtowc'], wide_character, text(b'A'), 1) == 1
+    assert struct.unpack('<I', vm.uc.mem_read(wide_character, 4))[0] == 65
+    assert vm.call(imports['mbtowc'], wide_character, text(b''), 1) == 0
+    assert struct.unpack('<I', vm.uc.mem_read(wide_character, 4))[0] == 0
+    assert vm.call(imports['mbtowc'], 0, 0, 0) == 0
+    assert vm.call(imports['mbtowc'], wide_character, text(b'\xc3'), 1) == 0xffffffffffffffff
+    assert struct.unpack('<i', vm.uc.mem_read(errno, 4))[0] == 84
     # Both direct and indirect/GOT calls must reach the same libc adapter,
     # including an existing PLT suffix reached after its ADRP instruction.
     malloc_slot = next(slot for slot, entry in vm.import_slots.items() if entry == imports['malloc'])

@@ -1,0 +1,94 @@
+[
+  {
+    "fields": {
+      "revision": -1,
+      "events": []
+    },
+    "payloadHex": "7f00",
+    "nativeDecodeConsumed": 2,
+    "nativeReencodeEqual": true
+  },
+  {
+    "fields": {
+      "revision": 1,
+      "events": [
+        {
+          "id": 1001,
+          "versionId": 1,
+          "variantId": 0,
+          "category": 20,
+          "startTime": 1600000000,
+          "endTime": 2000000000,
+          "visibleTime": 1599990000,
+          "visibleEndTime": 2000000000,
+          "targetingId": 0,
+          "schedulingType": 0,
+          "eventGroupId": 0,
+          "eventTopGroupId": 0,
+          "impressionId": 0,
+          "name": "DoubleElixir",
+          "startNotificationTid": "",
+          "endNotificationTid": "",
+          "eventName": "DoubleElixir",
+          "personallyTargeted": false,
+          "json": "{\"GameMode\": \"DoubleElixir\"}"
+        },
+        {
+          "id": 1002,
+          "versionId": 8192,
+          "variantId": -37,
+          "category": 20,
+          "startTime": 1600000000,
+          "endTime": 2000000000,
+          "visibleTime": 1599990000,
+          "visibleEndTime": 2000000000,
+          "targetingId": 37,
+          "schedulingType": 2,
+          "eventGroupId": 3,
+          "eventTopGroupId": 4,
+          "impressionId": 8192,
+          "name": "نبرد",
+          "startNotificationTid": "",
+          "endNotificationTid": "",
+          "eventName": "TeamVsTeamLadder",
+          "personallyTargeted": true,
+          "json": "{\"GameMode\": \"TeamVsTeamLadder\"}"
+        }
+      ]
+    },
+    "payloadHex": "0102a90f01000000000c446f75626c65456c697869721480c0f0f50b80d0acf30eb0a3eff50b80d0acf30e00000000000000000000000c446f75626c65456c69786972010000001c7b2247616d654d6f6465223a2022446f75626c65456c69786972227d000000000000aa0f8080015b00000008d986d8a8d8b1d8af1480c0f0f50b80d0acf30eb0a3eff50b80d0acf30e0000000000000000000000105465616d56735465616d4c616464657201000000207b2247616d654d6f6465223a20225465616d56735465616d4c6164646572227d2501020304808001",
+    "nativeDecodeConsumed": 218,
+    "nativeReencodeEqual": true
+  },
+  {
+    "fields": {
+      "revision": 8192,
+      "events": [
+        {
+          "id": 8192,
+          "versionId": 8192,
+          "variantId": -37,
+          "category": 20,
+          "startTime": 1600000000,
+          "endTime": 2000000000,
+          "visibleTime": 1599990000,
+          "visibleEndTime": 2000000000,
+          "targetingId": 37,
+          "schedulingType": 2,
+          "eventGroupId": 3,
+          "eventTopGroupId": 4,
+          "impressionId": 8192,
+          "name": "نبرد",
+          "startNotificationTid": "",
+          "endNotificationTid": "",
+          "eventName": "",
+          "personallyTargeted": true,
+          "json": null
+        }
+      ]
+    },
+    "payloadHex": "808001018080018080015b00000008d986d8a8d8b1d8af1480c0f0f50b80d0acf30eb0a3eff50b80d0acf30e000000000000000000000000002501020304808001",
+    "nativeDecodeConsumed": 65,
+    "nativeReencodeEqual": true
+  }
+]

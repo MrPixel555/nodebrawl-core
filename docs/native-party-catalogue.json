@@ -1,0 +1,33 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "category": 20,
+  "nativeCategoryName": "CASUAL",
+  "categoryNameFunction": "0x23a400",
+  "eventConstructor": "0x15ad14",
+  "eventJsonDecoder": "0x3ed574",
+  "eventEncoder": "0x412a70",
+  "eventDecoder": "0x35c298",
+  "catalogueEncoder": "0x524ba0",
+  "catalogueDecoder": "0x23da1c",
+  "handlerFactory": "0x71d0c8",
+  "handlerVtable": "0xa53cb0",
+  "modeKey": "GameMode",
+  "modeSourceSha256": "75a3f7c7b5a7f2c5dcdf4f8a37ebcab48ff1b3a696188a95fc7ff9a7146da148",
+  "modes": [
+    {
+      "name": "DoubleElixir",
+      "globalId": 72000001
+    },
+    {
+      "name": "TeamVsTeamLadder",
+      "globalId": 72000023
+    }
+  ],
+  "fixtures": 3,
+  "selectedStringInitializers": 183,
+  "gameCodeAdapters": [],
+  "explicitFieldBindings": [
+    "Wire-only null-JSON fixture clears event+0x88 after JSON decoding"
+  ],
+  "scope": "Original event/catalogue codecs and CASUAL JSON mode-name resolution using raw native CSV records. Does not verify targeting/time filters, Home UI, event availability, matchmaking or battles; no event is advertised by this tool."
+}
