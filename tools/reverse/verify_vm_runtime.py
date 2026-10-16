@@ -2,7 +2,7 @@
 import struct
 
 from native_vm import NativeVM
-from unicorn.arm64_const import UC_ARM64_REG_X16
+from unicorn.arm64_const import UC_ARM64_REG_X8, UC_ARM64_REG_X16
 
 
 def main():
@@ -42,6 +42,43 @@ def main():
     assert vm.call(imports['time'], timestamp) == 1
     assert struct.unpack('<q', vm.uc.mem_read(timestamp, 8))[0] == 1
     assert vm.call(imports['time'], 0) == 1
+    # Original C++ variadic String formatter constructs its own AArch64
+    # va_list. This checks the ABI boundary, not just a Python format helper.
+    formatted = vm.alloc(24)
+    vm.uc.reg_write(UC_ARM64_REG_X8, formatted)
+    vm.call(0x229c74, text(b'Combined Table %d'), 49)
+    size = struct.unpack('<I', vm.uc.mem_read(formatted + 4, 4))[0]
+    data = struct.unpack('<Q', vm.uc.mem_read(formatted + 8, 8))[0]
+    assert size == 17 and bytes(vm.uc.mem_read(data, size)) == b'Combined Table 49'
+
+    def printf(fmt, values, capacity=256):
+        # Two register-save slots, then stack arguments exercise both paths.
+        registers = vm.alloc(16)
+        stack = vm.alloc(max(16, 8 * len(values)))
+        for index, value in enumerate(values):
+            location = registers + index * 8 if index < 2 else stack + (index - 2) * 8
+            vm.uc.mem_write(location, struct.pack('<Q', value & 0xffffffffffffffff))
+        arguments = vm.alloc(32)
+        vm.uc.mem_write(arguments, struct.pack('<QQQii', stack, registers + 16, 0, -16, 0))
+        destination = vm.alloc(max(capacity, 16))
+        vm.uc.mem_write(destination, b'!' * max(capacity, 16))
+        result = vm.call(imports['vsnprintf'], destination if capacity else 0, capacity, text(fmt), arguments)
+        return result, bytes(vm.uc.mem_read(destination, max(capacity, 16)))
+
+    result, data = printf(b'%s:%+05d:%#llx:%hhu:%%', [text(b'key'), -7, 0x123456789, 257])
+    assert result == len(b'key:-0007:0x123456789:1:%')
+    assert data.startswith(b'key:-0007:0x123456789:1:%\0')
+    assert printf(b'%*.*s', [-6, 3, text(b'abcdef')])[1].startswith(b'abc   \0')
+    assert printf(b'%.0u/%#.0o', [0, 0])[1].startswith(b'/0\0')
+    assert printf(b'123456', [], capacity=4) == (6, b'123\0' + b'!' * 12)
+    assert printf(b'123456', [], capacity=0) == (6, b'!' * 16)
+    for unsupported in (b'%n', b'%f', b'%1048577d'):
+        try:
+            printf(unsupported, [0])
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError('Unsupported/bounded format accepted')
     # mov w0,0; add w0,w0,1; cmp w0,100; b.lt add; ret.
     code = 0x20005000
     vm.uc.mem_write(code, struct.pack('<5I', 0x52800000, 0x11000400, 0x7101901f, 0x54ffffcb, 0xd65f03c0))

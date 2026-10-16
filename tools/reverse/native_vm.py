@@ -6,6 +6,7 @@ from collections import deque
 from unicorn import Uc, UC_ARCH_ARM64, UC_MODE_ARM, UC_HOOK_CODE, UC_HOOK_INTR
 from unicorn.arm64_const import *
 from elftools.elf.elffile import ELFFile
+from native_printf import vsnprintf
 
 ROOT=Path(os.environ['GAME_ANALYSIS_DIR'])
 class NativeVM:
@@ -134,7 +135,7 @@ class NativeVM:
         if name=='time':
             if a:self.uc.mem_write(a,struct.pack('<q',1))
             return self.ret(1) # Same deterministic VM clock as gettimeofday.
-        if name=='vsnprintf':raise RuntimeError(f'Native formatted diagnostic: {self.string(c)!r}')
+        if name=='vsnprintf':return self.ret(vsnprintf(self,a,b,c,self.reg(3)))
         raise RuntimeError(f'Unsupported import {name} at {address:x}')
     def on_intr(self,uc,intno,_):
         if self.reg(8)==169: # gettimeofday in Arxan opaque predicates

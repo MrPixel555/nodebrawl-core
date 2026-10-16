@@ -35,14 +35,19 @@ def main():
         source = ROOT / 'game-data-verified' / path
         digest = hashlib.sha256(source.read_bytes()).hexdigest()
         assert digest == expected[path]['decodedSha256'], path
-        rows = [row for row in list(csv.DictReader(source.open(encoding='utf-8-sig', newline='')))[1:] if row['Name']]
+        with source.open(encoding='utf-8-sig', newline='') as handle:
+            reader = csv.DictReader(handle)
+            # The native parser uses the first column as the record name.
+            # season_default.csv calls that column "tr", rather than "Name".
+            name_column = reader.fieldnames[0]
+            rows = [row for row in list(reader)[1:] if row[name_column]]
         table = model.load(path, kind)
         vm = model.vm
         assert model.integer(table + 0x14) == len(rows), path
         for index, row in enumerate(rows):
             pointer = vm.call(0x2b53d4, table, index)
             assert model.integer(pointer + 0x20) == kind * 1000000 + index
-            assert model.read_string(vm.call(0x3c0638, pointer)) == row['Name'], (path, index)
+            assert model.read_string(vm.call(0x3c0638, pointer)) == row[name_column], (path, index)
         record = {'kind': kind, 'path': path, 'decodedSha256': digest,
                   'nativeRecords': len(rows), 'nativeNamesAndGlobalIdsMatched': True}
         if kind == 15:

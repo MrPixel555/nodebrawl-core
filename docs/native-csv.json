@@ -378,6 +378,48 @@
   "dataTableLoader": "0x41c214",
   "verifiedTables": [
     {
+      "kind": 3,
+      "path": "csv_logic/globals.csv",
+      "decodedSha256": "90f17820593f04d7fa9b7520100879b66cec80ce9d85d2d9fa5b42f4f1b589cf",
+      "nativeRecords": 384,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 5,
+      "path": "csv_logic/resources.csv",
+      "decodedSha256": "5401ca59a7a8ad1614c91f98cce2f21922b2cc8b485e01e6e93d31ef7fa83c95",
+      "nativeRecords": 52,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 9,
+      "path": "csv_logic/character_buffs.csv",
+      "decodedSha256": "df0af915a0eb0e5da4b40f75e0c33c8bb4212cfc052dd0fea41ad4b8ac55d85b",
+      "nativeRecords": 33,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 10,
+      "path": "csv_logic/projectiles.csv",
+      "decodedSha256": "614d74d078481abb6dbb1651b4685901b13361fca108bb722c12e1cb28200870",
+      "nativeRecords": 71,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 12,
+      "path": "csv_logic/predefined_decks.csv",
+      "decodedSha256": "a4eeaa8327263a8182676a7fd580da11bac2267e74f8664c82a6ef9145826454",
+      "nativeRecords": 156,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 14,
+      "path": "csv_logic/rarities.csv",
+      "decodedSha256": "57986ec3868685c02b0f98142939abc301def82c90e887b91a1caae412b6a819",
+      "nativeRecords": 5,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
       "kind": 15,
       "path": "csv_logic/locations.csv",
       "decodedSha256": "aa1817d9741957f73b787f7f0d69f22cf1e806b8edae355f523124cac93bb434",
@@ -393,10 +435,451 @@
       "nativeNamesAndGlobalIdsMatched": true
     },
     {
+      "kind": 19,
+      "path": "csv_logic/treasure_chests.csv",
+      "decodedSha256": "2290b02afa49f13adb1e4b8ea8c29037a6a6ef95eab0b9c13bd410d79f3b0f1f",
+      "nativeRecords": 414,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 22,
+      "path": "csv_logic/area_effect_objects.csv",
+      "decodedSha256": "2d7d4901073b345eac8a1a706dad55a7b4d57c1a23231d5361a24509ba51cbce",
+      "nativeRecords": 31,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 26,
+      "path": "csv_logic/spells_characters.csv",
+      "decodedSha256": "c84aac2de8cefed5ae7e60e22e74658d753a3c624d8d7aa5e37ca735b438c824",
+      "nativeRecords": 72,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 27,
+      "path": "csv_logic/spells_buildings.csv",
+      "decodedSha256": "7839ed563ec27a26024538f1348fc3d56389c93f1f8de0caf14aeef6a2aa3582",
+      "nativeRecords": 17,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 28,
+      "path": "csv_logic/spells_other.csv",
+      "decodedSha256": "5623e02739184643002d46620575efc473224864881fc1a539a6b5068ada1210",
+      "nativeRecords": 20,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 71,
+      "path": "csv_logic/spells_heroes.csv",
+      "decodedSha256": "cadf594afaab31b4fc07d5975c0d9f4e7a67f80b9c9eb0ffabec2f3f7147f102",
+      "nativeRecords": 6,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 70,
+      "path": "csv_logic/spells_hero_abilities.csv",
+      "decodedSha256": "e4258f8bf61d2659ddd81f77dcd6af8d3c0f8a764e52d56829cfc01d9566cd14",
+      "nativeRecords": 9,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 34,
+      "path": "csv_logic/characters.csv",
+      "decodedSha256": "bc35aa5bb1077dbd86f1b7e49cdbfad6504cbe765e42d249f815cdc795e4fa43",
+      "nativeRecords": 79,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 35,
+      "path": "csv_logic/buildings.csv",
+      "decodedSha256": "038be6324e4a6bf1eb3cfe64f0f871750017dbbd999b9d1ec3ed0adfe829f574",
+      "nativeRecords": 50,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 69,
+      "path": "csv_logic/heroes.csv",
+      "decodedSha256": "639cc6949e9f925541461ad4343b5dd64809e8c17f011fb208ec2668a2836cc5",
+      "nativeRecords": 6,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 42,
+      "path": "csv_logic/decos.csv",
+      "decodedSha256": "ebda0a9819e67ed9097753c943ae41b92ae92ea86ba492d6dbdae1378f7e977d",
+      "nativeRecords": 598,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 98,
+      "path": "csv_logic/decos_season.csv",
+      "decodedSha256": "701f4f940e6129f95a22aae7425bc0b4db123582d39ebe2f146d4660732342e7",
+      "nativeRecords": 0,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 45,
+      "path": "csv_logic/tutorials_home.csv",
+      "decodedSha256": "bf32758c654ac1b4798491cbeedd2353d8baea541f3d9199edcd13f5412735ca",
+      "nativeRecords": 16,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 46,
+      "path": "csv_logic/exp_levels.csv",
+      "decodedSha256": "71a1327f2857e188a1845639e9f0d59c78b3053b33c0fdf163626ab66bf19f74",
+      "nativeRecords": 13,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 48,
+      "path": "csv_logic/tutorials_npc.csv",
+      "decodedSha256": "7a34f5665114442dda9c6f5a3023e5c05717e6acffdf2e74e18957a803ab9ee5",
+      "nativeRecords": 52,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 51,
+      "path": "csv_logic/spell_sets.csv",
+      "decodedSha256": "5ca9efdb2153842c6c7eea53b9b59f2cfb598be82390cfcf1d2dede746828e35",
+      "nativeRecords": 194,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 52,
+      "path": "csv_logic/chest_order.csv",
+      "decodedSha256": "7d6bc103e71d42aaf4afdbd0d18f1e5b1c9eb5ae2fb07c9e48bd037f6edcc8f5",
+      "nativeRecords": 14,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 53,
+      "path": "csv_logic/taunts.csv",
+      "decodedSha256": "c757f24de82becc9bf4607eb37c47d587b8b228a52ada4e74184b6b2d8b60f37",
+      "nativeRecords": 21,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 54,
+      "path": "csv_logic/arenas.csv",
+      "decodedSha256": "4ee7d8cefec96ecbcb5a08cfaa8694197bf68bdcc669c5ff578f5fc76874eab1",
+      "nativeRecords": 38,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 55,
+      "path": "csv_logic/resource_packs.csv",
+      "decodedSha256": "17444e924dfb778e4cf429039605ffc4bd2820f4226800a2aa019ba3b7590404",
+      "nativeRecords": 3,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 57,
+      "path": "csv_logic/regions.csv",
+      "decodedSha256": "3a39bc3d61d791419e8a20d6702f314253a65fa1bb5fae52a07f20c5bd79464c",
+      "nativeRecords": 261,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 59,
+      "path": "csv_logic/alliance_roles.csv",
+      "decodedSha256": "882d12e20f41ff40fc153d5ebb81ab93dc457c1366ea5da391b9a8232e64aaca",
+      "nativeRecords": 5,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 16,
+      "path": "csv_logic/alliance_badges.csv",
+      "decodedSha256": "9246f245b5424703735c492ffc79fe3a460fb4dd473055d120645baac36bf15b",
+      "nativeRecords": 180,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 60,
+      "path": "csv_logic/achievements.csv",
+      "decodedSha256": "2924b6be577a135980e76f6b8e35d31e414bfde6746c88c9a1fb2a7056c881e9",
+      "nativeRecords": 30,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 63,
+      "path": "csv_logic/tournament_tiers.csv",
+      "decodedSha256": "b85b0e6540e93eec557094d47c40bc982e1811f7f64e00567233695c6c37d0a3",
+      "nativeRecords": 20,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 65,
+      "path": "csv_logic/survival_modes.csv",
+      "decodedSha256": "c36be4000070d7e0b65e83ab458c55150a98f32c394048c2a875ecdb2ba11b47",
+      "nativeRecords": 16,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 66,
+      "path": "csv_logic/shop.csv",
+      "decodedSha256": "93aaa39c0af08bb5c332eec5a4ff4aacfb6bfa3ac1b80dc99776ad75889b3467",
+      "nativeRecords": 56,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 68,
+      "path": "csv_logic/draft_deck.csv",
+      "decodedSha256": "67da397363300d0b57beb0aba7760dd00cba399346b33bb6ac098b9ae7c003de",
+      "nativeRecords": 15,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 72,
+      "path": "csv_logic/game_modes.csv",
+      "decodedSha256": "75a3f7c7b5a7f2c5dcdf4f8a37ebcab48ff1b3a696188a95fc7ff9a7146da148",
+      "nativeRecords": 203,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
       "kind": 79,
       "path": "csv_logic/pve_gamemodes.csv",
       "decodedSha256": "d81fa73af3927c57a0c738435f7b5461a5b1ceb76a61eaf7fca7ce64f84f57fc",
       "nativeRecords": 18,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 81,
+      "path": "csv_logic/tve_gamemodes.csv",
+      "decodedSha256": "eef05aab023120abf0453145f1eda1da70c1d310f66d3adb5252b8c2d0249a0c",
+      "nativeRecords": 3,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 82,
+      "path": "csv_logic/tutorial_chest_order.csv",
+      "decodedSha256": "c5f15f38826d4359bf2661da342ce61f71f84ea41e22feb6973145ab592feb35",
+      "nativeRecords": 3,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 83,
+      "path": "csv_logic/skins.csv",
+      "decodedSha256": "03fc5c6819bb005b5e574e92d639c948e898e6b2a1fe6545c31a4b8b0060f4ef",
+      "nativeRecords": 16,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 84,
+      "path": "csv_logic/quest_order.csv",
+      "decodedSha256": "03b185d61ace59cae7ba64aed31c6661efba41807cfc590811b5022838af94d2",
+      "nativeRecords": 14,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 86,
+      "path": "csv_logic/shop_cycle.csv",
+      "decodedSha256": "a2e3448aa0042432f63985e6dcdcdca279b522da97d5584d958a42185a05ea29",
+      "nativeRecords": 24,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 87,
+      "path": "csv_logic/skin_sets.csv",
+      "decodedSha256": "336362bb9c039e451a4f8e7d4a5fe1082298967df86d266faaca749d9861fb2e",
+      "nativeRecords": 8,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 88,
+      "path": "csv_logic/shop_chests.csv",
+      "decodedSha256": "e863105dc9d11207eb3fe750a76772bfa5b133def5da3eeceab72c32d13834ea",
+      "nativeRecords": 10,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 90,
+      "path": "csv_logic/fortune.csv",
+      "decodedSha256": "834e247e93eb1248a909bdcc2567b627080c804e9ee50b788c3b82daf903f8fa",
+      "nativeRecords": 6,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 91,
+      "path": "csv_logic/quest_main_rewards.csv",
+      "decodedSha256": "76413dd363c537f2fdc1d287224e38a0a1037f4c20fb03405dba68d235afa14a",
+      "nativeRecords": 28,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 92,
+      "path": "csv_logic/clan_war_globals.csv",
+      "decodedSha256": "4cddc110224aa6b8454b8d134a7f2a95880ba91225e3828b0ba9d58de4dff037",
+      "nativeRecords": 43,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 93,
+      "path": "csv_logic/clan_leagues.csv",
+      "decodedSha256": "bb671278ff4450988c69d3dee51a5f48dc863c6fb61e8b0228f34bfaec04f4a4",
+      "nativeRecords": 10,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 95,
+      "path": "csv_logic/achievement_badges.csv",
+      "decodedSha256": "dd5c681cfd7c65b87b1be58bbb89f40ca843e2da12cd74b1808f71052bfdf253",
+      "nativeRecords": 16,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 96,
+      "path": "csv_logic/tribes.csv",
+      "decodedSha256": "004a5a71f62217aa46d3f8d966e8d6387a5f313932371c3bd5207115d51f06ed",
+      "nativeRecords": 8,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 99,
+      "path": "csv_logic/trophy_road.csv",
+      "decodedSha256": "3e99c57eece50a842cfff05c80a5de9caf17607c2f27d1f17845e72a2e8b030d",
+      "nativeRecords": 1,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 100,
+      "path": "csv_logic/trophy_road_season.csv",
+      "decodedSha256": "64c036a9657aaffa1a9326df3ed420329e88eb54210fd3be390f204dd09f9414",
+      "nativeRecords": 3,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 102,
+      "path": "csv_logic/season_default.csv",
+      "decodedSha256": "a261093164299137d4f4d8e92cdfe896546211460004ea33c7972fab130e1893",
+      "nativeRecords": 1,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 106,
+      "path": "csv_logic/season_pass_rookie.csv",
+      "decodedSha256": "294cf6593e31062f430ed805aae0147ebc400c9eb0bda0d4372a92a420d9d832",
+      "nativeRecords": 1,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 103,
+      "path": "csv_logic/season_pass_pro.csv",
+      "decodedSha256": "7be27f2a14439c09b18a5eec39a21fd3d5daa98647e99e830e59b967e6e01ae1",
+      "nativeRecords": 4,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 67,
+      "path": "csv_logic/event_categories.csv",
+      "decodedSha256": "55ecdfcaeff05934e0e3dee3acb5185c4450f1a46f445e56099d8b889390f47f",
+      "nativeRecords": 5,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 64,
+      "path": "csv_logic/content_tests.csv",
+      "decodedSha256": "8cf7458b93a3a89bda4f1f0174b151186ea563d8b1dc889a380a80c43e04bf0f",
+      "nativeRecords": 21,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 1,
+      "path": "csv_client/locales.csv",
+      "decodedSha256": "23e2eb33dfb4eab959b1c2e462c3780f7e077b11ec12622e2b6bc1931c16fd58",
+      "nativeRecords": 25,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 41,
+      "path": "csv_client/music.csv",
+      "decodedSha256": "d07ab062539cbe7cacdc12ba2465b4af88c79a86e6705bf60c2a746de226deae",
+      "nativeRecords": 12,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 50,
+      "path": "csv_client/background_decos.csv",
+      "decodedSha256": "a12f24288c6b8d871fda9d4f670b0b915e84015d7862cbf5a56fefd4c5ac85de",
+      "nativeRecords": 0,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 2,
+      "path": "csv_client/billing_packages.csv",
+      "decodedSha256": "0694061a31d4fc86b474d6bda621a9f10961b1b8ec11b35292167f5b50dc09d1",
+      "nativeRecords": 47,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 4,
+      "path": "csv_client/sounds.csv",
+      "decodedSha256": "21f49dd983558c466800cefaf4b43e46fba3b7cb9c88c03a34c6ea9236dd6c45",
+      "nativeRecords": 741,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 11,
+      "path": "csv_client/effects.csv",
+      "decodedSha256": "7658e36f3c0c94ac13e351d1533b909dcb8d76c32a3778826c3c3d81bd7c53d9",
+      "nativeRecords": 978,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 21,
+      "path": "csv_client/particle_emitters.csv",
+      "decodedSha256": "0dca2d342d804db1484f83291e9a52f90a70bb8b8893daca402c8c19102d5f90",
+      "nativeRecords": 798,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 40,
+      "path": "csv_client/health_bars.csv",
+      "decodedSha256": "16a8cbfa0f76ed66162be51e84af777c32fec0ca8926f1a4cf0d40816608d009",
+      "nativeRecords": 10,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 20,
+      "path": "csv_client/client_globals.csv",
+      "decodedSha256": "4c81f6bc957be0fafc540481f7e0e0539af996df46e043c531bd8ec13ea9c828",
+      "nativeRecords": 305,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 56,
+      "path": "csv_client/credits.csv",
+      "decodedSha256": "8039640a5078f7b067ccd9ba251dfbc5e132ffef2a3c640123777b9feb878647",
+      "nativeRecords": 64,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 58,
+      "path": "csv_client/news.csv",
+      "decodedSha256": "c7ed6361540d47ab30c5cabc2aa7192a425246498470e419200789af4d4b4b56",
+      "nativeRecords": 1,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 61,
+      "path": "csv_client/hints.csv",
+      "decodedSha256": "160ef0623106efacc095a3e4761c14e51353f3e8834eff8dfee40191f9d4e98a",
+      "nativeRecords": 185,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 62,
+      "path": "csv_client/helpshift.csv",
+      "decodedSha256": "f9ec8844edb077b996e680129ec1211d0a32210b4fd949b155212cd3b5b2afb1",
+      "nativeRecords": 5,
+      "nativeNamesAndGlobalIdsMatched": true
+    },
+    {
+      "kind": 89,
+      "path": "csv_client/animations.csv",
+      "decodedSha256": "243f4c574a9a0c0f62bcb4fa8e8b7857fca4980b707b0ef67a92546dce033f22",
+      "nativeRecords": 60,
       "nativeNamesAndGlobalIdsMatched": true
     }
   ],

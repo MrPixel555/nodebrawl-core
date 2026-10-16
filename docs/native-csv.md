@@ -30,7 +30,10 @@ APK. It checks native record names and global IDs against every named CSV row
 in the selected tables. The default checks locations (53), NPCs (59) and PvE
 modes (18); the original getter also returns
 `locations/training_arena.csv` for TrainingCamp. [The report](native-csv.json)
-lists the exact tables verified, source hashes and native manifest.
+lists the exact tables verified, source hashes and native manifest. The full
+mode-0 run passed for **all 72 tables and 6,726 record identities**. The first
+column supplies record names, including `season_default.csv`, whose first
+column is called `tr` rather than `Name`.
 
 ```bash
 GAME_ANALYSIS_DIR=/workspace/game-analysis \
@@ -51,6 +54,13 @@ bounded execution slices. Ordinary VM calls retain their single-slice budget.
 The runtime verifier executes a native loop across slice boundaries and tests
 heap exhaustion and libc ABI behavior. It does not replace failed instructions
 or change CSV values to pass checks.
+
+The VM also supports bounded integer/string `vsnprintf` at the libc boundary,
+using the Android AArch64 register-save/stack `va_list` layout. Tests execute
+the original C++ variadic String formatter and check truncation, stack spill,
+width, precision and unsupported conversion rejection. Formatting a normal
+name such as `Combined Table 49` no longer gets mistaken for a fatal game
+diagnostic. Native assertions still run and are not suppressed.
 
 Raw DataTable construction is only an initial step. Cross-table field linking,
 map/tower creation, players, GameMode snapshots and battle simulation require
