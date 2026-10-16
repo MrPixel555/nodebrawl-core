@@ -4,11 +4,11 @@ from pathlib import Path
 import struct
 import subprocess
 
-from starter_home import StarterHome
+from unlocked_home import UnlockedHome
 from verify_transport import MessagingHarness, qword, word
 from native_vm import ROOT
 
-data = StarterHome()
+data = UnlockedHome()
 model = MessagingHarness(vm=data.vm)
 vector = json.loads(subprocess.check_output(['node', str(Path(__file__).resolve().parents[1] / 'export-starter-transport.js')]))
 model.state(3)

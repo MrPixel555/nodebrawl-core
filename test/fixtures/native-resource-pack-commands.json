@@ -1,0 +1,59 @@
+[
+  {
+    "id": 687,
+    "variant": 0,
+    "fields": {
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        0
+      ],
+      "field_0x20": [
+        55,
+        0
+      ]
+    },
+    "payloadHex": "af0a000000003700",
+    "nativeDecodeConsumed": 8,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 687,
+    "variant": 1,
+    "fields": {
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        0
+      ],
+      "field_0x20": [
+        55,
+        1
+      ]
+    },
+    "payloadHex": "af0a000000003701",
+    "nativeDecodeConsumed": 8,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 687,
+    "variant": 2,
+    "fields": {
+      "field_0x10": 0,
+      "field_0xc": 0,
+      "field_0x14": [
+        0,
+        0
+      ],
+      "field_0x20": [
+        55,
+        2
+      ]
+    },
+    "payloadHex": "af0a000000003702",
+    "nativeDecodeConsumed": 8,
+    "nativeReencodeEqual": true
+  }
+]

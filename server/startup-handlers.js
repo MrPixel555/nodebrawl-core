@@ -26,6 +26,12 @@ function contentEvent (name, data) {
 
 function createStartupHandlers ({ logger = () => {}, traceNetwork = false } = {}) {
   return new Map([
+    [16442, async (session) => {
+      // The Party popup also requests server friends. No friend relations
+      // exist yet. Type zero + allocated empty list uses two fixed int32s.
+      session.sendRaw(21047, Buffer.alloc(8))
+      if (traceNetwork) logger({ event: 'server-friends-sent', count: 0 })
+    }],
     [10459, async (session, fields, frame) => {
       const data = fields || decodeMessage(10459, frame.payload)
       if (typeof data.field_0x80_0x8 !== 'string' || typeof data.field_0x80_0x20_json !== 'string') throw new ProtocolError('Invalid client metadata')

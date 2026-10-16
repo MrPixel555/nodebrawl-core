@@ -36,3 +36,20 @@ test('authenticated clan search returns an initialized empty list for the curren
   assert.deepEqual(sent, [{ id: 25074, fields: { field_0x80: 'قبیله', field_0x88: [] } }])
   for (const value of [null, 'a'.repeat(1025)]) await assert.rejects(handler(session, { field_0x80: value }), /search query/)
 })
+
+test('advanced clan search uses the native list-only response and rejects malformed/truncated filters', async () => {
+  const sent = []
+  await createAllianceHandlers().get(14783)({ send: (id, fields) => sent.push({ id, fields }) })
+  assert.deepEqual(sent, [{ id: 24184, fields: { field_0x80: [] } }])
+  for (const fixture of require('./fixtures/native-alliances.json').filter(f => [14783, 24184].includes(f.id))) {
+    const payload = Buffer.from(fixture.payload, 'hex')
+    for (let n = 0; n < payload.length; n++) assert.throws(() => decodeMessage(fixture.id, payload.subarray(0, n)))
+    assert.throws(() => decodeMessage(fixture.id, Buffer.concat([payload, Buffer.from([0])])), /trailing/)
+  }
+  assert.throws(() => encodeMessage(14783, { field_0x80: 'a'.repeat(1025) }), /string limit/)
+  assert.throws(() => encodeMessage(14783, { field_0xc8: ['a'.repeat(1025)] }), /string limit/)
+  assert.throws(() => encodeMessage(14783, { field_0xb8: null }), /non-null/)
+  assert.throws(() => encodeMessage(14783, { field_0xb8: [[0]] }), /high, low/)
+  assert.throws(() => encodeMessage(14783, { field_0x88: [16, 0] }), /reference type/)
+  for (const count of [-2, 10001]) assert.throws(() => decodeMessage(24184, new Writer().vint(count).toBuffer()), /collection count/)
+})

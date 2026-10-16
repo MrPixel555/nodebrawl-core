@@ -1,6 +1,9 @@
 'use strict'
 const { ProtocolError } = require('../lib/protocol/stream')
 const { starter } = require('./data/starter-home.json')
+const { cards } = require('./data/unlocked-home.json')
+const ownedCards = new Set(cards.map(card => card.id))
+const { packs } = require('./data/resource-packs.json')
 
 function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
@@ -28,7 +31,7 @@ function playerState (account) {
 }
 
 function validateDeck (deck) {
-  if (!Array.isArray(deck) || deck.length !== 8 || new Set(deck).size !== 8 || deck.some(id => !starter.deckIds.includes(id))) throw new ProtocolError('Invalid starter deck cards')
+  if (!Array.isArray(deck) || deck.length !== 8 || new Set(deck).size !== 8 || deck.some(id => !ownedCards.has(id))) throw new ProtocolError('Invalid starter deck cards')
 }
 
 function applyCommands (account, commands) {
@@ -44,6 +47,15 @@ function applyCommands (account, commands) {
         next.starter.decks[deck] = [...fields.field_0x20]
       }
       next.starter.selectedDeck = deck
+    } else if (id === 687) {
+      const reference = fields.field_0x20
+      const pack = packs.find(pack => Array.isArray(reference) && reference.length === 2 && pack.reference.every((value, index) => value === reference[index]))
+      if (!pack) throw new ProtocolError('Invalid gold pack')
+      if (next.starter.gems < pack.gems) throw new ProtocolError('Insufficient gems')
+      if (next.starter.gold + pack.gold > pack.goldLimit) throw new ProtocolError('Gold limit exceeded')
+      next.starter.gems -= pack.gems
+      next.starter.freeGems = Math.min(next.starter.freeGems, next.starter.gems)
+      next.starter.gold += pack.gold
     } else if (id === 948) {
       // Native 0x2160d4/0x67956c permit the initial -1 -> 0 name change
       // without a level, gem or cooldown requirement. Later renames need

@@ -188,5 +188,179 @@
     "payload": "ffffffff7f",
     "native_decode_consumed": 5,
     "native_reencode_equal": true
+  },
+  {
+    "id": 24184,
+    "variant": 0,
+    "fields": {
+      "field_0x80": []
+    },
+    "payload": "00",
+    "native_decode_consumed": 1,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 24184,
+    "variant": 1,
+    "fields": {
+      "field_0x80": [
+        {
+          "field_0x0": [
+            0,
+            37
+          ],
+          "field_0x8": "Clan",
+          "field_0x10": [
+            16,
+            0
+          ],
+          "field_0x18": 12345,
+          "field_0x1c": 12345,
+          "field_0x20": 12345,
+          "field_0x24": 12345,
+          "field_0x28": 12345,
+          "field_0x2c": 12345,
+          "field_0x30": 12345,
+          "field_0x40": 12345,
+          "field_0x44": 12345,
+          "field_0x48": 12345,
+          "field_0x58": [
+            0,
+            0
+          ],
+          "field_0x50": [
+            57,
+            0
+          ],
+          "field_0x60": true,
+          "field_0x34": 12345,
+          "field_0x38": 12345,
+          "field_0x3c": 12345,
+          "field_0x61": true,
+          "field_0x62": false,
+          "field_0x63": true,
+          "field_0x64": false
+        },
+        {
+          "field_0x0": [
+            7,
+            8192
+          ],
+          "field_0x8": "\u0642\u0628\u06cc\u0644\u0647",
+          "field_0x10": [
+            16,
+            1
+          ],
+          "field_0x18": -8192,
+          "field_0x1c": -8192,
+          "field_0x20": -8192,
+          "field_0x24": -8192,
+          "field_0x28": -8192,
+          "field_0x2c": -8192,
+          "field_0x30": -8192,
+          "field_0x40": -8192,
+          "field_0x44": -8192,
+          "field_0x48": -8192,
+          "field_0x58": [
+            0,
+            0
+          ],
+          "field_0x50": [
+            57,
+            1
+          ],
+          "field_0x60": false,
+          "field_0x34": -8192,
+          "field_0x38": -8192,
+          "field_0x3c": -8192,
+          "field_0x61": false,
+          "field_0x62": true,
+          "field_0x63": false,
+          "field_0x64": true
+        }
+      ]
+    },
+    "payload": "02000000000000002500000004436c616e1000b9c001b9c001b9c001b9c001b9c001b9c001b9c001b9c001b9c001b9c00100390001b9c001b9c001b9c0010500000007000020000000000ad982d8a8db8cd984d9871001c0807fc0807fc0807fc0807fc0807fc0807fc0807fc0807fc0807fc0807f00390100c0807fc0807fc0807f0a",
+    "native_decode_consumed": 131,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 24184,
+    "variant": 2,
+    "fields": {
+      "field_0x80": null
+    },
+    "payload": "7f",
+    "native_decode_consumed": 1,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 14783,
+    "variant": 0,
+    "fields": {
+      "field_0x80": "example",
+      "field_0x88": [
+        0,
+        0
+      ],
+      "field_0x90": 0,
+      "field_0x94": 50,
+      "field_0x98": 0,
+      "field_0xa0": 0,
+      "field_0xa4": false,
+      "field_0xa8": 0,
+      "field_0x9c": 0,
+      "field_0xa5": false,
+      "field_0xb0": null,
+      "field_0xb8": [],
+      "field_0xc8": [],
+      "field_0xd0": [],
+      "field_0xd8": []
+    },
+    "payload": "000000076578616d706c65000000000000000032000000000000000000000000000000000000ffffffff00000000",
+    "native_decode_consumed": 46,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 14783,
+    "variant": 1,
+    "fields": {
+      "field_0x80": "\u0642\u0628\u06cc\u0644\u0647",
+      "field_0x88": [
+        57,
+        1
+      ],
+      "field_0x90": -8192,
+      "field_0x94": 50,
+      "field_0x98": 1000,
+      "field_0xa0": 0,
+      "field_0xa4": true,
+      "field_0xa8": 0,
+      "field_0x9c": 0,
+      "field_0xa5": true,
+      "field_0xb0": "filter",
+      "field_0xb8": [
+        [
+          7,
+          8192
+        ],
+        [
+          0,
+          37
+        ]
+      ],
+      "field_0xc8": [
+        "test"
+      ],
+      "field_0xd0": [
+        "\u0628\u0627\u0632\u06cc\u06a9\u0646"
+      ],
+      "field_0xd8": [
+        "other"
+      ]
+    },
+    "payload": "0000000ad982d8a8db8cd984d9873901ffffe00000000032000003e800000000010000000000000000010000000666696c74657202078080010025010000000474657374010000000cd8a8d8a7d8b2db8cdaa9d98601000000056f74686572",
+    "native_decode_consumed": 95,
+    "native_reencode_equal": true
   }
 ]

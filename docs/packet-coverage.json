@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "starter commands 563/703/805 and initial naming 948",
+      "runtimeSupport": "commands 563/703/805, initial naming 948 and gold packs 687",
       "fields": [
         {
           "field": "field_0x88",
@@ -1713,10 +1713,81 @@
     },
     {
       "id": 14783,
-      "name": "Message14783",
-      "codec": false,
-      "runtimeSupport": null,
-      "fields": null,
+      "name": "AdvancedAllianceSearch",
+      "codec": true,
+      "runtimeSupport": "empty advanced clan search",
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "string",
+          "maxBytes": 1024
+        },
+        {
+          "field": "field_0x88",
+          "type": "dataReference",
+          "referenceType": 57
+        },
+        {
+          "field": "field_0x90",
+          "type": "int"
+        },
+        {
+          "field": "field_0x94",
+          "type": "int"
+        },
+        {
+          "field": "field_0x98",
+          "type": "int"
+        },
+        {
+          "field": "field_0xa0",
+          "type": "int"
+        },
+        {
+          "field": "field_0xa4",
+          "type": "bool"
+        },
+        {
+          "field": "field_0xa8",
+          "type": "int"
+        },
+        {
+          "field": "field_0x9c",
+          "type": "int"
+        },
+        {
+          "field": "field_0xa5",
+          "type": "bool"
+        },
+        {
+          "field": "field_0xb0",
+          "type": "string",
+          "maxBytes": 1024
+        },
+        {
+          "field": "field_0xb8",
+          "type": "vlongs",
+          "nullable": false
+        },
+        {
+          "field": "field_0xc8",
+          "type": "strings",
+          "nullable": false,
+          "maxBytes": 1024
+        },
+        {
+          "field": "field_0xd0",
+          "type": "strings",
+          "nullable": false,
+          "maxBytes": 1024
+        },
+        {
+          "field": "field_0xd8",
+          "type": "strings",
+          "nullable": false,
+          "maxBytes": 1024
+        }
+      ],
       "nativeEncode": "0x3ed2f4",
       "nativeDecode": "0x24b2dc",
       "factoryObservations": [
@@ -2145,9 +2216,9 @@
     },
     {
       "id": 16442,
-      "name": "Message16442",
+      "name": "ServerFriendsRequest",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "empty server-friend list prefetch",
       "fields": [],
       "nativeEncode": "0x240230",
       "nativeDecode": "0x1e0b50",
@@ -3714,9 +3785,9 @@
     },
     {
       "id": 21047,
-      "name": "Message21047",
+      "name": "ServerFriends",
       "codec": false,
-      "runtimeSupport": null,
+      "runtimeSupport": "only type-zero empty list supported; general friend codec unresolved",
       "fields": null,
       "nativeEncode": "0x5e5f88",
       "nativeDecode": "0x204f78",
@@ -3754,7 +3825,7 @@
       "id": 21217,
       "name": "OwnHomeData",
       "codec": false,
-      "runtimeSupport": "persistent starter Home provider",
+      "runtimeSupport": "persistent Home with 95 unlocked cards",
       "fields": null,
       "nativeEncode": "0x4bce90",
       "nativeDecode": "0x154440",
@@ -4469,10 +4540,15 @@
     },
     {
       "id": 24184,
-      "name": "Message24184",
-      "codec": false,
-      "runtimeSupport": null,
-      "fields": null,
+      "name": "AdvancedAllianceSearchResult",
+      "codec": true,
+      "runtimeSupport": "advanced clan search result",
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "allianceHeaders"
+        }
+      ],
       "nativeEncode": "0x6c5be4",
       "nativeDecode": "0x69e244",
       "factoryObservations": [
@@ -8506,8 +8582,32 @@
       "encode": "0x11a520",
       "decode": "0x3750a4",
       "execute": "0x1be468",
-      "fields": null,
-      "unresolvedReason": "unknown call at 0x11a548"
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "dataReference"
+        }
+      ],
+      "verification": "tools/reverse/verify_resource_packs.py"
     },
     {
       "id": 691,

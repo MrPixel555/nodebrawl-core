@@ -246,6 +246,64 @@ test('new-player naming and deck contents persist through a new server and store
   next.socket.destroy()
 })
 
+test('gold pack and newly unlocked deck cards survive a TCP reconnect and store restart', async t => {
+  const handlers = new Map()
+  const entries = []
+  const { game, port, directory } = await setup(t, { handlers, homeProvider: createStarterHomeProvider(), traceNetwork: true, logger: entry => entries.push(entry) })
+  const store = new AccountStore(directory)
+  for (const [id, handler] of createStarterHandlers({ store })) handlers.set(id, handler)
+  const c = await client(port)
+  c.send(10101, { field_0x80: [0, 0] }, 4)
+  const ok = decodeMessage(20758, (await c.receive()).payload)
+  await c.receive()
+  const cards = [26000004, 26000015, 26000023, 26000026, 27000000, 27000012, 28000010, 28000011]
+  c.send(13597, {
+    commands: [
+      { id: 687, fields: { field_0x20: [55, 0] } },
+      { id: 563, fields: { field_0x1c: 2, field_0x20: cards } },
+    ],
+  })
+  c.send(10108)
+  assert.equal((await c.receive()).id, 20108)
+  c.socket.destroy()
+  const saved = await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90)
+  assert.deepEqual([saved.starter.gold, saved.starter.gems, saved.starter.freeGems], [1100, 40, 40])
+  assert.deepEqual(saved.starter.decks[2], cards)
+  const next = await client(port)
+  next.send(10101, { field_0x80: ok.field_0x80, field_0x88: ok.field_0x90 }, 4)
+  assert.deepEqual(decodeMessage(20758, (await next.receive()).payload).field_0x80, saved.id)
+  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider()(saved)).payload)
+  assert.deepEqual(entries.filter(entry => entry.event === 'account-login').map(entry => entry.kind), ['created', 'resumed'])
+  assert.ok(!JSON.stringify(entries).includes(saved.token))
+  const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
+  for (const reference of [[55, 0], [55, 3], [26, 0], [0, 0]]) {
+    await assert.rejects(store.applyStarterTurn(saved, [{ id: 703, fields: { field_0x1c: 4 } }, { id: 687, fields: { field_0x20: reference } }]), /gems|pack/)
+  }
+  assert.equal(await fs.readFile(path.join(directory, 'accounts.json'), 'utf8'), before)
+  next.socket.destroy()
+  assert.equal(game.statistics.logins, 2)
+})
+
+test('gold pack cap and concurrent spending reject a whole batch without losing resources', async t => {
+  const { directory } = await setup(t)
+  const store = new AccountStore(directory)
+  const account = await store.login([0, 0], null)
+  const buy = [{ id: 687, fields: { field_0x20: [55, 0] } }]
+  const purchases = await Promise.allSettled([store.applyStarterTurn(account, buy), new AccountStore(directory).applyStarterTurn(account, buy)])
+  assert.equal(purchases.filter(result => result.status === 'fulfilled').length, 1)
+  assert.equal(purchases.filter(result => result.status === 'rejected').length, 1)
+  const database = await store.load()
+  Object.assign(database.accounts[0].starter, { gold: 4999001, gems: 100, freeGems: 21 })
+  await store.save(database)
+  await assert.rejects(store.applyStarterTurn(account, buy), /Gold limit/)
+  const saved = await store.login(account.id, account.token)
+  assert.deepEqual([saved.starter.gold, saved.starter.gems, saved.starter.freeGems], [4999001, 100, 21])
+  database.accounts[0].starter.gold = 4999000
+  await store.save(database)
+  const atLimit = await store.applyStarterTurn(account, buy)
+  assert.deepEqual([atLimit.starter.gold, atLimit.starter.gems, atLimit.starter.freeGems], [5000000, 40, 21])
+})
+
 test('legacy accounts retain identity and name status while invalid stored player state is rejected', async t => {
   const { directory } = await setup(t)
   const store = new AccountStore(directory)
@@ -342,7 +400,7 @@ for (const starterHome of [false, true]) {
     const send = new SessionCipher(opened.sessionKey, clientNonce)
     const home = await c.receive()
     assert.equal(home.id, 21217)
-    const expected = starterHome ? Buffer.from(require('./fixtures/native-starter-home.json').find(f => f.starter?.nameSet === false).payloadHex, 'hex') : Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY')
+    const expected = starterHome ? Buffer.from(require('./fixtures/native-unlocked-home.json').find(f => f.starter?.nameSet === false).payloadHex, 'hex') : Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY')
     assert.deepEqual(receive.decrypt(home.payload), expected)
     const metadata = { field_0x80_0x8: 'private-event-name', field_0x80_0x20_json: '{"details":"private-event-value"}' }
     c.socket.write(encodeFrame(10459, 0, send.encrypt(encodeMessage(10459, metadata))))
@@ -354,6 +412,14 @@ for (const starterHome of [false, true]) {
       assert.equal(search.id, 25074)
       assert.deepEqual(decodeMessage(25074, receive.decrypt(search.payload)), { field_0x80: query, field_0x88: [] })
     }
+    c.socket.write(encodeFrame(14783, 0, send.encrypt(encodeMessage(14783, { field_0x80: 'قبیله', field_0x94: 50 }))))
+    const advanced = await c.receive()
+    assert.equal(advanced.id, 24184)
+    assert.deepEqual(decodeMessage(24184, receive.decrypt(advanced.payload)), { field_0x80: [] })
+    c.socket.write(encodeFrame(16442, 0, send.encrypt(encodeMessage(16442))))
+    const friends = await c.receive()
+    assert.equal(friends.id, 21047)
+    assert.deepEqual(receive.decrypt(friends.payload), Buffer.from(require('./fixtures/native-empty-friends.json')[0].payload, 'hex'))
     if (starterHome) {
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }, { id: 805 }] }))))
@@ -365,7 +431,7 @@ for (const starterHome of [false, true]) {
     }
     assert.equal(game.statistics.logins, 1)
     assert.equal(game.statistics.unsupported, 0)
-    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report'])
+    assert.deepEqual(entries.map(entry => entry.event), ['client-metadata-accepted', 'client-ui-startup-notice', 'client-network-report', 'server-friends-sent'])
     assert(!JSON.stringify(entries).includes('private-event'))
     assert(!JSON.stringify(entries).includes('private-network-address'))
     if (starterHome) assert.equal((await new AccountStore(directory).login(account.field_0x80, account.field_0x90)).starter.selectedDeck, 4)

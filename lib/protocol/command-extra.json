@@ -102,6 +102,39 @@
         }
       ],
       "verification": "tools/reverse/verify_player_commands.py"
+    },
+    {
+      "id": 687,
+      "vtable": "0xa5c818",
+      "encode": "0x11a520",
+      "decode": "0x3750a4",
+      "execute": "0x1be468",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint",
+          "storage": "value"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong",
+          "storage": "address"
+        },
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "dataReference"
+        }
+      ],
+      "verification": "tools/reverse/verify_resource_packs.py"
     }
   ]
 }

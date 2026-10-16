@@ -42,7 +42,7 @@ async function main () {
   if (process.env.TRACE_NETWORK === '1') console.log('Network metadata tracing enabled; payloads, credentials and keys are omitted.')
   if (secret) console.log(`Development server public key: ${publicKey(secret).toString('hex')}; client must use this peer key`)
   if (!homeProvider) console.log('Home data missing: login will return a clear LoginFailed response, rather than an invalid Home packet.')
-  if (process.env.HOME_MODE === 'starter') console.log('Starter Home enabled: 8 cards, 5 decks, Arena1, level 1. Home displayed on the supplied Android device; battle gameplay remains unverified.')
+  if (process.env.HOME_MODE === 'starter') console.log('Starter Home enabled: 95 unlocked cards, 8 active cards, 5 decks, Arena1, level 1. Expanded inventory native codec verified; Android inventory and battle gameplay remain unverified.')
   console.log(`Content server listening on ${process.env.CONTENT_HOST || process.env.HOST || '127.0.0.1'}:${assets.address().port}; advertised URL: ${contentUrls[0]}`)
   if (new URL(contentUrls[0]).protocol === 'http:') console.log('The supplied APK targets Android SDK 28 without a cleartext HTTP opt-in. Use a trusted HTTPS CONTENT_URL for device downloads; HTTP is available for local checks or behind your HTTPS proxy.')
   console.log(`Content fingerprint ${content.manifest.sha}: ${content.entries.size - content.missing.length}/${content.entries.size} files verified; ${content.missing.length} missing, fetched with SHA-1 verification when requested if an upstream is configured.`)

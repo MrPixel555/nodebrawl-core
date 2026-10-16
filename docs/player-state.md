@@ -13,8 +13,8 @@ status and name-change count in `.local/accounts/accounts.json`. Initial gold an
 gems are 100; seeing those values twice does not establish an account reset.
 Previously Home always encoded 100. It now encodes the persisted balances, with
 independent native fixtures covering 8192 gold, 37 gems and 21 free gems. There
-are no implemented shop purchases or battle rewards yet to change these balances
-through gameplay. Invalid stored balances fail validation instead of silently
+is now a native-verified gold-pack transaction (command 687) that changes these
+balances. Battle rewards and other shop actions remain open. Invalid stored balances fail validation instead of silently
 falling back to 100. Existing account IDs, tokens, names and server keys survive.
 
 Fresh accounts start with Avatar `+0x14d` (`nameSet`) false and `+0x150`
@@ -25,8 +25,9 @@ sets the name, nameSet and count -1 -> 0, leaving gems unchanged. The server
 implements that initial naming operation. Later paid renames, cooldown and
 progression remain unimplemented. Legacy accounts keep their previously
 advertised named state; they are not deleted or forced through onboarding.
-Whether this corrected flag produces the intended name dialog at the desired
-point in the Android tutorial is still unverified.
+The user subsequently confirmed that the initial-name dialog never appears;
+the flag alone is insufficient. The original lobby also checks tutorial
+BattleInfo type 102. [Current naming diagnosis](unlocked-cards-and-shop.md).
 The starter Avatar still advertises seven NPC wins (`+0x144`, JSON `npcWins`),
 which intentionally bypassed Training during lobby bring-up. Changing that to
 zero without implementing the tutorial battle would strand new players before
@@ -37,9 +38,9 @@ card IDs, an inline fixed Long, a packed flag and optional Long. Original execut
 `0x6750b0` checks ownership, duplicates and availability, updates the requested
 deck and selects it. Its native execution also rearranges the active card
 collection. The provider now binds **both** the five deck arrays and the active
-collection's spell ordinals. The handler accepts permutations of the eight owned
-cards and persists the complete validated batch atomically. Foreign deck
-operations, purchases, upgrades and additional card ownership are not implemented.
+collection's spell ordinals. The handler now accepts eight distinct cards from
+all 95 unlocked collectible spells and persists the complete validated batch
+atomically. Foreign deck operations and upgrades remain unimplemented.
 Command 703 and unchanged level synchronization 805 still work.
 
 Command **595** now has native-verified wire decoding, including its data
@@ -82,7 +83,10 @@ initial-name and deck-content executors with explicit CSV/context/observer
 adapters. [The execution report](native-player-state.json) records those limits.
 No Android UI or full game-data initialization is emulated by these adapters.
 The [network-v8 device observation](device-network-v8.json) predates these new
-features and must not be used as proof that their Android UI works.
+features and must not be used as proof that their Android UI works. The newer
+[device report](device-feature-report.json) separately confirms Player Profile
+rendering on the prior push. Expanded inventory and its updated card-count
+statistic still need device validation.
 
 TCP tests allocate an account, set its name, reorder a deck, request its profile,
 stop the server, start a different server/store, then verify saved name, deck,
@@ -93,9 +97,9 @@ with isolated temporary accounts and keys.
 | Requested feature | Current status |
 | --- | --- |
 | Home and original content downloads | User confirmed on Android, network-v8 |
-| Persistent resources/name/five decks | Implemented and native/TCP verified; resource transactions still missing |
-| Initial name state and command 948 | Native/TCP verified; Android dialog timing unverified |
-| Player Profile | Native provider and handler implemented; Android rendering unverified |
+| Persistent resources/name/five decks | Implemented and native/TCP verified, including gold-pack transactions |
+| Initial name state and command 948 | Native/TCP verified; initial Android dialog still missing |
+| Player Profile | User confirmed rendering before the expanded inventory update |
 | Normal battle, Training, Party | Battle-start state and simulation still missing |
 | Automatic Training Camp onboarding | Requires the missing battle-start and tutorial flow |
 | Emotes | Native Home `+0x640` manager identified; catalogue/asset metadata still missing |

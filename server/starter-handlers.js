@@ -27,7 +27,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // formats alone do not implement their gameplay, prices or preconditions.
     // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
-    const unsupported = [...new Set(turn.commands.filter(command => ![563, 703, 805, 948].includes(command.id)).map(command => command.id))]
+    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 703, 805, 948].includes(command.id)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, extraData: turn.field_0x98 !== null, applied: false })
       // 595's verified reference points to game data, not a player identity.
@@ -36,6 +36,12 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       if (traceNetwork) {
         const references = turn.commands.filter(command => command.id === 595).slice(0, 8).map(command => command.fields.field_0x28)
         if (references.length) logger({ event: 'unresolved-command-data', id: 595, gameDataReferences: references, applied: false })
+        for (const command of turn.commands.filter(command => [527, 836].includes(command.id)).slice(0, 8)) {
+          // Only these already-recovered public mode/reward selector fields;
+          // omit base fields, account references and the complete turn bytes.
+          const names = command.id === 527 ? ['field_0x1c', 'field_0x20', 'field_0x24'] : ['field_0x1c', 'field_0x20', 'field_0x21']
+          logger({ event: 'unresolved-command-data', id: command.id, fields: Object.fromEntries(names.map(name => [name, command.fields[name]])), applied: false })
+        }
       }
       return
     }
@@ -49,6 +55,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       if (mutations.some(command => command.id === 703 || command.id === 563)) logger({ event: 'starter-deck-selected', selectedDeck: session.account.starter.selectedDeck, commands: turn.commands.length })
       if (mutations.some(command => command.id === 563)) logger({ event: 'starter-deck-updated', selectedDeck: session.account.starter.selectedDeck })
       if (mutations.some(command => command.id === 948)) logger({ event: 'starter-name-set' })
+      if (mutations.some(command => command.id === 687)) logger({ event: 'gold-pack-purchased' })
     } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
   }]])
 }

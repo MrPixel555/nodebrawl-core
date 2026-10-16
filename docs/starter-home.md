@@ -1,5 +1,13 @@
 # Starter Home for the supplied 3.1.0 library
 
+The runtime default is now `server/data/unlocked-home.json`: a native-backed
+95-card collection, with eight active cards and 87 inventory cards. It adds an
+inventory binding to the 59 baseline bindings described below, rebuilds that
+inventory after a deck change, and binds persisted gold-pack purchases. The
+baseline eight-card template remains available to verification tools. Public
+profiles now use `unlocked-profile.json`, whose owned-card statistic also says
+95. [Expanded inventory, purchases and device-test scope](unlocked-cards-and-shop.md).
+
 `HOME_MODE=starter` enables an initial player state for Android lobby testing.
 The device decoded Home and resolved its cards/arena. A missing event catalogue
 was corrected and confirmed present on the next device run, which then exposed

@@ -65,7 +65,50 @@ their HP, ownership, targeting, collision, players or a valid battle snapshot.
 The raw loader reads an optional initialization section through `0x6123b8`, then
 the full state through `0x431508`. Its world branch calls `0x546890` and depends
 on game-data tables, players, decks, towers, commands and simulation state.
-No verified initial NPC/PvP world has been built yet. The server does not send
-28991 with empty or synthetic data. Training, normal matchmaking, Party, battle
+The new probe below constructs a replay world; a verified live NPC/PvP world
+is still pending. The server does not send 28991 with empty or synthetic data.
+Training, normal matchmaking, Party, battle
 simulation and rewards remain unimplemented. Transport/envelope support must
 not be counted as a complete battle codec or gameplay handler.
+
+## Native replay-world construction and full-state round trips
+
+After completing all original game-data field linking (`0x2b5570`, flag
+`0xd6c128 = 1`), the original full level loader `0x49b630` creates the Training
+map. High-level initializer `0x2211f0` creates a two-avatar replay world with the
+source Training mode, Npc8 and BasicDeck8. Calling the lower-level JSON world
+loader from an idle GameMode instead triggers `logic changes not allowed`;
+the high-level initializer establishes its required replay state.
+
+Both players also need appearance objects: `hbd: [{"em":{}},{"em":{}}]`.
+An omitted appearance array makes initialization serialization dereference an
+absent entry; omitting the `em` object makes the emote JSON reader dereference
+null. Native constructors and JSON parsing create these objects in the probe.
+
+`verify_training_world.py` now executes initialization encoder/decoder
+`0x15a920`/`0x6123b8` and full-state codecs `0x121748`/`0x431508` without game-data
+lookup adapters. Both variants consume and reproduce every byte:
+
+| Force world type 4 | Initialization bytes | Combined bytes | Decoded world type |
+| --- | ---: | ---: | ---: |
+| false | 213 | 827 | 3 |
+| true | 213 | 738 | 4 |
+
+The world codec writes a boolean **and then a world-type VInt**, including when
+forcing type 4. These bytes are the inner initialization/full-state sections,
+not a complete 28991 payload. The optional-initialization flag and outer
+envelope are separate. [Native report](native-training-world.json).
+
+```bash
+GAME_ANALYSIS_DIR=/workspace/game-analysis \
+  /workspace/game-analysis/venv/bin/python tools/reverse/verify_training_world.py \
+  --checkpoint /workspace/game-analysis/native-csv-linked-state
+```
+
+The checkpoint must have been produced locally by the pinned NativeCsv VM with
+all original game-data linking complete. Raw table/identity checkpoints are
+insufficient. Probe account IDs, names, seed/time and `gmt`/`plt` values are
+explicit synthetic inputs. NPC card levels use source CSV minus one. These
+round trips do not verify tower HP, simulation steps, AI, live client ownership,
+input processing, results/rewards or Android battle UI. The replay world is not
+sent as a live Training match.

@@ -10,8 +10,9 @@ command cannot be skipped while reliably locating the following command.
 factory `0x41a1dc` over IDs 1 through 1000. Of these, 89 straight-line codecs
 have two complete native encode/decode/reencode observations. Two branched
 codecs (563/595) are now overlaid from `command-extra.json`, with independent
-native fixtures. The merged catalogue has 91 verified codecs and 44 unresolved
-types. This is codec coverage, not 91 implemented gameplay actions. Nothing is inferred from the sample server's
+native fixtures. A third overlay adds resource-pack command 687, verified with
+fully linked native data. The merged catalogue has 92 verified codecs and 43
+unresolved types. This is codec coverage, not 92 implemented gameplay actions. Nothing is inferred from the sample server's
 usual IDs.
 
 The shared command encoder `0x25079c` writes fields +0x10 and +0xc as VInts and
@@ -37,7 +38,9 @@ state under the existing serialized atomic account store. Fresh accounts are
 unnamed; legacy accounts preserve their identity and previously advertised name
 status. Native command **563** now updates deck contents and active card order;
 **948** persists the first name (-1 -> 0 name-change counter) without spending
-resources. Subsequent paid renames, purchases and card upgrades remain unsupported.
+resources. Command **687** now buys the three original gold packs and persists
+the gold/gem/free-gem changes atomically. Subsequent paid renames, other purchases
+and card upgrades remain unsupported. [Gold-pack evidence](unlocked-cards-and-shop.md).
 [Player state and profile evidence](player-state.md) describes the exact native
 validation/executors and the 12373 -> 22757 Profile route. Complete native Home
 fixtures include a fresh unnamed account and non-default resources/reordered

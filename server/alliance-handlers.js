@@ -2,7 +2,10 @@
 const { ProtocolError } = require('../lib/protocol/stream')
 
 function createAllianceHandlers () {
-  return new Map([[16592, async (session, fields) => {
+  return new Map([[14783, async (session) => {
+    // Advanced search uses its own result and popup consumer, not 25074.
+    session.send(24184, { field_0x80: [] })
+  }], [16592, async (session, fields) => {
     const query = fields.field_0x80
     if (typeof query !== 'string' || Buffer.byteLength(query, 'utf8') > 1024) throw new ProtocolError('Invalid alliance search query')
     // No clans can be created by this server yet. The genuine search response

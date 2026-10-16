@@ -41,3 +41,20 @@ The default Home still advertises an empty event catalogue. Targeting/time
 filters, the Android Party UI, event availability, matchmaking and battle
 snapshots remain unverified. The new nested codec does not increase the count
 of fully supported message IDs or establish playable Party battles.
+
+## Server-friend prefetch when opening Party
+
+The user observed **16442** while opening the Party menu. Its constructor
+`0x31618c` is called by `0x33c938`; that request asks for server friends. The
+corresponding list message **21047** encodes a fixed int32 type and fixed int32
+count, then nested friend entries. Type zero selects dispatcher `0x720b48`,
+which moves the list into controller `0xd54310` through `0x6e4584` and refreshes
+listeners through `0x1d5274`. Other types select external social providers.
+
+The server has no friend relations and now replies with **type zero, count
+zero**, eight bytes. `verify_empty_friends.py` executes the original codecs
+(`0x5e5f88`/`0x204f78`), empty-list consumer and listener refresh. The complete
+nonempty friend codec remains unresolved in the registry; this supported empty
+case is not counted as a full new codec. Encrypted TCP tests compare the actual
+response to the native fixture. This completes the prefetch exchange; the Home
+event catalogue is still empty and Party battles are still unimplemented.

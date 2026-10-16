@@ -84,6 +84,7 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         const login = decodeMessage(frame.id, frame.payload)
         if (!homeProvider) { fail('Home data for this libg.so is not configured. A compatible player-state Home provider is required.'); return }
         const account = await store.login(login.field_0x80, login.field_0x88)
+        trace({ event: 'account-login', kind: login.field_0x80.every(part => part === 0) ? 'created' : 'resumed' })
         if (socket.destroyed) return
         const home = await homeProvider(account, login)
         if (socket.destroyed) return
@@ -112,6 +113,7 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         else {
           statistics.unsupported++
           logger({ event: 'unsupported-message', connectionId, id: frame.id, length: frame.payload.length, codecAvailable })
+          if (traceNetwork && [10953, 17967].includes(frame.id)) logger({ event: 'training-request-data', npc: frame.id === 17967 ? fields.field_0x80 : fields.field_0x88, mode: frame.id === 10953 ? fields.field_0x80 : null })
           events.emit('unsupported', { id: frame.id, version: frame.version, length: frame.payload.length, fields })
         }
       }

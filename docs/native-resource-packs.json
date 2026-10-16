@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "command": 687,
+  "executor": "0x1be468",
+  "packs": [
+    {
+      "reference": [
+        55,
+        0
+      ],
+      "name": "Gold1",
+      "gold": 1000,
+      "gems": 60,
+      "nativeExecutor": 0,
+      "insufficientGemsRejected": 5,
+      "goldLimit": 5000000,
+      "goldLimitRejected": 6,
+      "goldCreditListenerArguments": [
+        4,
+        5000001,
+        1000,
+        60
+      ]
+    },
+    {
+      "reference": [
+        55,
+        1
+      ],
+      "name": "Gold2",
+      "gold": 10000,
+      "gems": 500,
+      "nativeExecutor": 0,
+      "insufficientGemsRejected": 5,
+      "goldLimit": 5000000,
+      "goldLimitRejected": 6,
+      "goldCreditListenerArguments": [
+        4,
+        5000001,
+        10000,
+        500
+      ]
+    },
+    {
+      "reference": [
+        55,
+        2
+      ],
+      "name": "Gold3",
+      "gold": 100000,
+      "gems": 4500,
+      "nativeExecutor": 0,
+      "insufficientGemsRejected": 5,
+      "goldLimit": 5000000,
+      "goldLimitRejected": 6,
+      "goldCreditListenerArguments": [
+        4,
+        5000001,
+        100000,
+        4500
+      ]
+    }
+  ],
+  "scope": "Native codec and executor with fully linked original CSV data; context observers/analytics adapted, Android shop unverified."
+}

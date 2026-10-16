@@ -330,8 +330,12 @@ for (const eventsPresent of [false, true]) {
     }
     home.add(0x134).writeByteArray(Buffer.from([8, 0, 0, 0]))
     home.add(0x15c).writeByteArray(Buffer.from([5, 0, 0, 0]))
+    home.add(0x144).writeByteArray(Buffer.from([87, 0, 0, 0]))
     home.add(0x3c8).writeByteArray(Buffer.from([eventsPresent ? 1 : 0, 0, 0, 0]))
     avatar.add(0xd8).writeByteArray(Buffer.from([1, 0, 0, 0]))
+    avatar.add(0x144).writeByteArray(Buffer.from([7, 0, 0, 0]))
+    avatar.add(0x14d).writeByteArray(Buffer.from([eventsPresent ? 1 : 0]))
+    avatar.add(0x150).writeByteArray(Buffer.from(eventsPresent ? [0, 0, 0, 0] : [255, 255, 255, 255]))
     const ids = require('../server/data/starter-home.json').starter.deckIds
     for (let n = 0; n < 8; n++) {
       const card = c.memory.alloc(0x40)
@@ -360,6 +364,10 @@ for (const eventsPresent of [false, true]) {
     assert.equal(observed.decks, 5)
     assert.equal(observed.level, 1)
     assert.equal(observed.homeLevel, eventsPresent ? 1 : 0)
+    assert.equal(observed.inventoryCards, 87)
+    assert.equal(observed.nameSet, eventsPresent)
+    assert.equal(observed.nameChangeCount, eventsPresent ? 0 : -1)
+    assert.equal(observed.npcWins, 7)
     assert(c.logs.some(log => log.event === 'development-peer-tracing-stopped' && log.reason === 'home-decoded'))
     assert(!JSON.stringify(c.logs).includes(login.clientSecret))
   })

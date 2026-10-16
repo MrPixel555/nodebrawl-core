@@ -34,7 +34,17 @@ def wire_fields(schema, fields):
             bits = (bits + 1) % 8
             continue
         bits = 0
-        if typ == 'vint':
+        if typ == 'int':
+            output += struct.pack('>i', value)
+        elif typ == 'vlongs':
+            output += vint(len(value))
+            for high, low in value:
+                output += vint(high) + vint(low)
+        elif typ == 'strings':
+            output += vint(len(value))
+            for item in value:
+                output += struct.pack('>i', len(item.encode())) + item.encode()
+        elif typ == 'vint':
             output += vint(value)
         elif typ == 'long':
             output += struct.pack('>ii', *value)
@@ -113,8 +123,26 @@ def main():
         if entries:
             payload += b''.join(wire_fields(HEADER, entry) for entry in entries)
         fixtures.append(roundtrip(vm, 25074, 0x5c51b0, 0x2c6bb0, fields, payload, variant))
+    for variant, entries in enumerate([[], headers, None]):
+        wire = vint(-1 if entries is None else len(entries))
+        wire += b''.join(wire_fields(HEADER, entry) for entry in entries or [])
+        fixtures.append(roundtrip(vm, 24184, 0x6c5be4, 0x69e244, {'field_0x80': entries}, wire, variant))
+    schema = [('field_0x80', 'string'), ('field_0x88', 'ref')]
+    schema += [('field_' + off, 'int') for off in ('0x90', '0x94', '0x98', '0xa0')]
+    schema += [('field_0xa4', 'bool'), ('field_0xa8', 'int'), ('field_0x9c', 'int'), ('field_0xa5', 'bool'),
+               ('field_0xb0', 'string'), ('field_0xb8', 'vlongs')]
+    schema += [('field_' + off, 'strings') for off in ('0xc8', '0xd0', '0xd8')]
+    for variant in range(2):
+        fields = {name: {'string': None, 'ref': [0, 0], 'int': 0, 'bool': False, 'vlongs': [], 'strings': []}[typ] for name, typ in schema}
+        fields['field_0x80'] = 'قبیله' if variant else 'example'
+        fields['field_0x94'] = 50
+        if variant:
+            fields.update(field_0x88=[57, 1], field_0x90=-8192, field_0x98=1000, field_0xa4=True,
+                          field_0xa5=True, field_0xb0='filter', field_0xb8=[[7, 8192], [0, 37]],
+                          field_0xc8=['test'], field_0xd0=['بازیکن'], field_0xd8=['other'])
+        fixtures.append(roundtrip(vm, 14783, 0x3ed2f4, 0x24b2dc, fields, wire_fields(schema, fields), variant))
     (ROOT / 'native-alliances.json').write_text(json.dumps(fixtures, indent=2) + '\n')
-    print('Native clan create/edit wire formats and search headers: 7 fixtures PASS')
+    print(f'Native clan create/edit, simple/advanced search and headers: {len(fixtures)} fixtures PASS')
 
 
 if __name__ == '__main__':

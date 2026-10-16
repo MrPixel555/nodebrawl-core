@@ -1,0 +1,12 @@
+{
+  "source": "User's latest report against pushed d18e735, plus follow-up that initial naming has never appeared",
+  "baselineCommit": "d18e735",
+  "userConfirmed": {
+    "playerProfileDisplayed": true,
+    "initialNameDialogDisplayed": false
+  },
+  "reportedUnsupportedMessages": [17967, 16442, 13006, 10453, 14783],
+  "reportedUnsupportedCommands": [527, 687, 836],
+  "reconnectReport": "Player looks reset and gold/gems stay at 100. Name was never chosen; no changed name or identity was demonstrated. Gold purchases were not applied by the baseline server.",
+  "scope": "Device evidence for the previous push. Does not validate the new 95-card inventory, gold-pack implementation, advanced clan search, empty friends response or battle research."
+}

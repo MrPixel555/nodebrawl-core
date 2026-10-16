@@ -1,0 +1,46 @@
+[
+  {
+    "id": 21047,
+    "variant": 0,
+    "fields": {
+      "kind": 0,
+      "count": 0
+    },
+    "payload": "0000000000000000",
+    "native_decode_consumed": 8,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 21047,
+    "variant": 1,
+    "fields": {
+      "kind": 1,
+      "count": 0
+    },
+    "payload": "0000000100000000",
+    "native_decode_consumed": 8,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 21047,
+    "variant": 2,
+    "fields": {
+      "kind": 2,
+      "count": 0
+    },
+    "payload": "0000000200000000",
+    "native_decode_consumed": 8,
+    "native_reencode_equal": true
+  },
+  {
+    "id": 21047,
+    "variant": 3,
+    "fields": {
+      "kind": 3,
+      "count": 0
+    },
+    "payload": "0000000300000000",
+    "native_decode_consumed": 8,
+    "native_reencode_equal": true
+  }
+]

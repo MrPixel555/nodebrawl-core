@@ -36,6 +36,26 @@ location references, two headers with signed VInt boundaries/packed booleans,
 and empty/null lists. CSV tables 16/57 are explicit lookup adapters. This proves
 the wire formats, not synthetic scores/IDs as gameplay or full Android UI.
 
+## Advanced search (14783 -> 24184)
+
+The user's newer device trace sends **14783**. Its full codec includes a query,
+table-57 region, six fixed int32 filters, two booleans, another string, a vector
+of VInt Long IDs and three string vectors. Native encoders/decoders are
+`0x3ed2f4`/`0x24b2dc`. Server strings are limited to 1,024 UTF-8 bytes; vectors
+use the normal 10,000-entry bound. Native wire limits can be larger.
+
+This search requires **24184**, containing only a nullable header vector.
+It does not use the query-bearing 25074 response. UI submit `0x714e0c` builds
+14783 through `0x747884`. Dispatcher branch `0x720d7c` consumes 24184 via
+`0x46fec8`, which forwards the list to that search popup's `0x1166f4` consumer.
+The live handler sends an allocated empty list for the still-empty clan store.
+
+The probe now verifies **12 fixtures**, including both search responses with
+nonempty/empty/null header lists and advanced request filters with Persian text,
+negative/fixed-width integers, non-null region, ID vectors and string vectors.
+Encrypted TCP tests exercise the advanced exchange and a subsequent heartbeat.
+Clan creation, membership and chat remain unimplemented.
+
 Encrypted TCP tests send startup receipts, English/Persian searches, turns and
 heartbeat on one session. Actual CLI smoke also exercises startup receipts and
 empty search before heartbeat, in plaintext and nacl17 modes. Core decoding now

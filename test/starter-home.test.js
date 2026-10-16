@@ -5,7 +5,7 @@ const { createStarterHomeProvider, createStarterProfileProvider, loadHomeProvide
 const fixtures = require('./fixtures/native-starter-home.json')
 
 test('starter player identity bindings match full native Home outputs, including VInt boundaries and UTF-8', async () => {
-  const provider = createStarterHomeProvider()
+  const provider = createStarterHomeProvider({ unlocked: false })
   for (const fixture of fixtures) {
     const home = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: fixture.selectedDeck ?? 0, ...fixture.starter } })
     assert.equal(home.version, 0)
@@ -33,9 +33,22 @@ test('Home mode selection preserves the disabled default and rejects conflicting
 })
 
 test('profile card collection and Avatar match native outputs for UTF-8 names, large IDs and reordered decks', async () => {
-  const provider = createStarterProfileProvider()
-  for (const fixture of require('./fixtures/native-starter-profile.json')) {
-    const result = await provider({ id: fixture.accountId, name: fixture.name, starter: fixture.starter })
+  for (const group of [
+    { unlocked: false, fixtures: require('./fixtures/native-starter-profile.json') },
+    { unlocked: true, fixtures: [require('./fixtures/native-unlocked-profile.json')] },
+  ]) {
+    const provider = createStarterProfileProvider(group)
+    for (const fixture of group.fixtures) {
+      const result = await provider({ id: fixture.accountId, name: fixture.name, starter: fixture.starter })
+      assert.equal(result.payload.toString('hex'), fixture.payloadHex)
+    }
+  }
+})
+
+test('unlocked Home matches native full messages with disjoint active cards and inventory after deck edits', async () => {
+  const provider = createStarterHomeProvider()
+  for (const fixture of require('./fixtures/native-unlocked-home.json')) {
+    const result = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: 0, ...fixture.starter } })
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
   }
 })

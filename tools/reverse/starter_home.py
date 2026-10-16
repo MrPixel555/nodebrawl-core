@@ -29,6 +29,7 @@ class StarterHome:
         self.data = {}
         self.records = {}
         self.bindings = []
+        self.expected_bindings = 59
         self.stream = None
         self.profile_id = None
         table_vtable = vm.alloc(0x70)
@@ -220,7 +221,7 @@ class StarterHome:
         self.stream = self.object + 0x10
         payload = encode(vm, self.object, self.buffer)
         self.stream = None
-        assert len(self.bindings) == 59, self.bindings
+        assert len(self.bindings) == self.expected_bindings, self.bindings
         # The complete native decoder must resolve all cards/resources/arena and
         # reproduce the full message, not merely accept its length prefix.
         second, buffer, consumed, reads = decode(vm, payload)

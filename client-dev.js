@@ -371,7 +371,7 @@ function installDevelopmentPeer (module) {
         const arena = avatar.add(0x158).readPointer()
         const manager = home.add(0x4f8).readPointer()
         const events = manager.isNull() ? manager : manager.add(0x10).readPointer()
-        record('native-home-decode-complete', { consumedBytes: message.add(0x24).readU32(), slots, cards, decks: home.add(0x15c).readU32(), level: avatar.add(0xd8).readU32(), homeLevel: home.add(0x3c8).readU32(), arena: arena.isNull() ? null : arena.add(0x20).readU32(), eventsPresent: !events.isNull(), eventCount: events.isNull() ? null : events.add(0x14).readU32() })
+        record('native-home-decode-complete', { consumedBytes: message.add(0x24).readU32(), slots, cards, inventoryCards: home.add(0x144).readU32(), decks: home.add(0x15c).readU32(), level: avatar.add(0xd8).readU32(), homeLevel: home.add(0x3c8).readU32(), nameSet: (avatar.add(0x14d).readU32() & 255) !== 0, nameChangeCount: avatar.add(0x150).readU32() | 0, npcWins: avatar.add(0x144).readU32(), arena: arena.isNull() ? null : arena.add(0x20).readU32(), eventsPresent: !events.isNull(), eventCount: events.isNull() ? null : events.add(0x14).readU32() })
         stopPeerTracing('home-decoded')
       })],
     )

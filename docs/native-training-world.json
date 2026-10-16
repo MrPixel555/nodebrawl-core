@@ -1,0 +1,49 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "fullyLinkedGameData": true,
+  "levelLoader": "0x49b630",
+  "map": [
+    36,
+    64
+  ],
+  "replayInitializer": "0x2211f0",
+  "gameModeState": 4,
+  "sourceWorldType": 3,
+  "npc": 18000007,
+  "npcDeck": "BasicDeck8",
+  "mode": 72000008,
+  "appearanceJson": [
+    {
+      "em": {}
+    },
+    {
+      "em": {}
+    }
+  ],
+  "roundtrips": [
+    {
+      "forceWorldType4": false,
+      "initializationBytes": 213,
+      "totalBytes": 827,
+      "worldType": 3,
+      "players": 2,
+      "payloadSha256": "12e47aa4b215db0de4a443398245a7b8d94a925e86942d476cfe573a722a6197",
+      "nativeReencodeEqual": true
+    },
+    {
+      "forceWorldType4": true,
+      "initializationBytes": 213,
+      "totalBytes": 738,
+      "worldType": 4,
+      "players": 2,
+      "payloadSha256": "c3abc651e829fed225d1fcbd055112472cefb9f33fe41cb3b67007be119800d6",
+      "nativeReencodeEqual": true
+    }
+  ],
+  "gameDataLookupAdapters": [],
+  "adaptedBoundary": [
+    "fatal diagnostic capture",
+    "libc/POSIX VM imports"
+  ],
+  "scope": "Original replay initializer, two avatars, full map, initialization/full-state codecs. Synthetic probe account identities, names, seed/time and zero gmt/plt; NPC levels converted from CSV minus one. Not a verified live Training snapshot, stepped battle, input protocol, tower HP, AI or Android gameplay."
+}

@@ -5,7 +5,7 @@ const { Writer } = require('../lib/protocol/stream')
 const { commandCatalog, encodeCommand, decodeCommand, encodeEndClientTurn, decodeEndClientTurn, UnverifiedCommandError } = require('../lib/protocol/commands')
 const { encodeMessage, decodeMessage } = require('../lib/protocol/messages')
 
-for (const fixture of [...require('./fixtures/native-commands.json'), ...require('./fixtures/native-player-commands.json')]) {
+for (const fixture of [...require('./fixtures/native-commands.json'), ...require('./fixtures/native-player-commands.json'), ...require('./fixtures/native-resource-pack-commands.json')]) {
   test(`native command ${fixture.id} encode/decode, variant ${fixture.variant}`, () => {
     const command = { id: fixture.id, fields: fixture.fields }
     const payload = Buffer.from(fixture.payloadHex, 'hex')
@@ -30,7 +30,7 @@ for (const fixture of require('./fixtures/native-turns.json')) {
 
 test('command catalog retains unresolved native types and refuses to guess their sizes', () => {
   assert.equal(commandCatalog.size, 135)
-  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 91)
+  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 92)
   for (const id of [1001, -1]) {
     assert.throws(() => encodeCommand({ id }), UnverifiedCommandError)
     assert.throws(() => decodeCommand(new Writer().vint(id).toBuffer()), error => error instanceof UnverifiedCommandError && error.id === id)
