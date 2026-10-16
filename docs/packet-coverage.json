@@ -1384,7 +1384,7 @@
       "id": 13597,
       "name": "EndClientTurn",
       "codec": true,
-      "runtimeSupport": "commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869",
+      "runtimeSupport": "commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762",
       "fields": [
         {
           "field": "field_0x88",
@@ -2114,10 +2114,23 @@
     },
     {
       "id": 16194,
-      "name": "Message16194",
-      "codec": false,
+      "name": "ClientCommandRequest",
+      "codec": true,
       "runtimeSupport": null,
-      "fields": null,
+      "fields": [
+        {
+          "field": "field_0x88",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x8c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x80",
+          "type": "optionalClientCommand"
+        }
+      ],
       "nativeEncode": "0x4b1fb4",
       "nativeDecode": "0x47f938",
       "factoryObservations": [
@@ -4057,10 +4070,15 @@
     },
     {
       "id": 22192,
-      "name": "Message22192",
-      "codec": false,
+      "name": "ServerCommand",
+      "codec": true,
       "runtimeSupport": null,
-      "fields": null,
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "serverCommand"
+        }
+      ],
       "nativeEncode": "0x167b88",
       "nativeDecode": "0x6129d8",
       "factoryObservations": [
@@ -5480,10 +5498,27 @@
     },
     {
       "id": 26980,
-      "name": "Message26980",
-      "codec": false,
+      "name": "CommandBatch",
+      "codec": true,
       "runtimeSupport": null,
-      "fields": null,
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x7c",
+          "type": "vint"
+        },
+        {
+          "field": "commands",
+          "type": "commands"
+        },
+        {
+          "field": "field_0x98",
+          "type": "optionalBytes"
+        }
+      ],
       "nativeEncode": "0x24f744",
       "nativeDecode": "0x217b98",
       "factoryObservations": [
@@ -6490,8 +6525,41 @@
       "encode": "0x57bf68",
       "decode": "0x44d24c",
       "execute": "0x68c938",
-      "fields": null,
-      "unresolvedReason": "control flow/transform cbz at 0x57bf88",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "lootResult"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong"
+        }
+      ],
+      "unresolvedReason": null,
+      "verification": "tools/reverse/verify_loot_result.py",
+      "codecScope": "Optional ordinary loot result (type 0) only; draft result type 2 unresolved; no runtime chest handler",
       "runtimeSupport": null
     },
     {
@@ -9153,7 +9221,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": null
+      "runtimeSupport": "persist seen crowns monotonically up to server-stored earned crowns; never grants crowns or rewards"
     },
     {
       "id": 775,
@@ -9581,7 +9649,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": "free tier 0, current pass, non-premium: 500 gold, cap and persistent claim"
+      "runtimeSupport": "free tier zero (crown selectors 0..9), current pass, non-premium: 500 gold, cap and persistent claim"
     },
     {
       "id": 837,

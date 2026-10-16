@@ -11,8 +11,10 @@ factory `0x41a1dc` over IDs 1 through 1000. Of these, 89 straight-line codecs
 have two complete native encode/decode/reencode observations. Two branched
 codecs (563/595) are now overlaid from `command-extra.json`, with independent
 native fixtures. A third overlay adds resource-pack command 687, verified with
-fully linked native data. The merged catalogue has 92 verified codecs and 43
-unresolved types. This is codec coverage, not 92 implemented gameplay actions. Nothing is inferred from the sample server's
+fully linked native data. A fourth overlay adds ordinary loot-result command 235
+(type 0; draft type 2 remains unresolved). The merged catalogue has 93 codecs,
+including that bounded branch, and 42 unresolved types. This is wire coverage,
+not 93 implemented gameplay actions. Nothing is inferred from the sample server's
 usual IDs.
 
 The shared command encoder `0x25079c` writes fields +0x10 and +0xc as VInts and
@@ -67,10 +69,15 @@ why encoding Home level zero caused the next device lobby crash. See
 
 Command 595 supports the native Arena1 boost branch; other branches remain
 unimplemented. Manual card swaps/replacements **693**, zero-crown free pass
-gold **836** and Home flag setter **869** now have original native execution
+gold **836**, pass seen progress **762** and Home flag setter **869** now have original native execution
 evidence and persistent server state; [details](lobby-actions.md). Android
 rendering of the new profile, name-dialog timing and deck interactions remain
 unverified. Battle, Training and Party still require separate implementation.
+
+The entire original pass catalogue, persisted seen/crown fields and the three
+nested command message codecs are documented in [season rewards](season-rewards.md).
+Only 762 and the existing tier-zero free gold are runtime pass actions; the
+ordinary loot-result codec does not itself implement chest generation/redemption.
 
 ## Reproduction
 

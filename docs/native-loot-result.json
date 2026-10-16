@@ -1,0 +1,19 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "command": 235,
+  "serverMessage": 22192,
+  "resultFactory": "0x4d7594",
+  "resultType": 0,
+  "resultEncode": "0x3f0ad0",
+  "resultDecode": "0x5417bc",
+  "cardEncode": "0x5c40d8",
+  "cardDecode": "0x45886c",
+  "spellMetadata": {
+    "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+    "table": 7,
+    "count": 124,
+    "extendedFieldIndexes": []
+  },
+  "fixtures": 6,
+  "scope": "Original ordinary loot-result wire codec, null/empty/nonempty card vectors, conditional spell fields, resource integers and tokens. Synthetic payload values. Draft result type 2, loot-generation probabilities and actual rewards are not implemented by these fixtures."
+}

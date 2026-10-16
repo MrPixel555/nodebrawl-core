@@ -63,7 +63,7 @@ function createPlayerProvider (data, messageId, now = Date.now) {
         writer.vint(inventory.length)
         for (const card of inventory) writer.raw(Buffer.from(card.payloadHex, 'hex'))
       }
-      else if (part.field === 'arenaBoostClaim' && part.type === 'nativeArenaBoost' && state.freePassGoldClaimed) writePassClaim(writer, state.arena1Boost)
+      else if (part.field === 'arenaBoostClaim' && part.type === 'nativeArenaBoost' && (state.passInitialized || state.freePassGoldClaimed || state.passCrowns !== 0 || state.passSeenCrowns !== -1)) writePassClaim(writer, state.arena1Boost, state)
       else if (['arenaBoostTimers', 'arenaBoostClaim'].includes(part.field) && part.type === 'nativeArenaBoost') writeArenaBoostState(writer, part.field, state.arena1Boost, nowMs)
       else if (part.field === 'nameSet' && part.type === 'bit') writer.byte((part.base & ~part.mask) | (state.nameSet ? part.mask : 0))
       else if (part.field === 'resourceBalances' && part.type === 'nativeResources') {

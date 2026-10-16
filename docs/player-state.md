@@ -12,7 +12,8 @@ separate missing features; a successful Home decode does not implement them.
 ## Persistent state and commands
 
 Accounts retain five deck arrays, selected deck, gold, gems, free gems, name-set
-status, name-change count, inventory ordering, Home flags, free pass claim and the one-time Arena1 boost in
+status, name-change count, inventory ordering, Home flags, free pass claim,
+pass crown/seen progress and the one-time Arena1 boost in
 `.local/accounts/accounts.json`. Initial gold and
 gems are 100; seeing those values twice does not establish an account reset.
 Previously Home always encoded 100. It now encodes the persisted balances, with

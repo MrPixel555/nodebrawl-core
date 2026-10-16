@@ -80,9 +80,11 @@ leaves the account file unchanged. Encrypted TCP and actual CLI smoke also cover
 the new commands. `starter-deck-updated`, `free-pass-reward-claimed` and
 `home-flags-updated` record outcomes without names or credentials.
 
-After pulling, restart the server and use the existing Frida script and key.
-Swap two active cards, replace one from the collection, claim the first free
-pass reward and reconnect. Do not clear app data or `.local`.
+The user's subsequent report against 810cb4a confirms receiving the 500-gold
+reward and manual card changes surviving an app restart. The
+[device evidence](device-lobby-actions.json) retains both the earlier failing
+trace and that confirmation. Keep the existing app data, Frida script/key and
+`.local` state when updating; an already claimed reward is not claimable again.
 
 ## Remaining runtime work
 

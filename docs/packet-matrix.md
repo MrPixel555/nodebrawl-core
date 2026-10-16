@@ -59,7 +59,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 13481 | Message13481 | unresolved | not implemented |
 | 13525 | Message13525 | unresolved | not implemented |
 | 13549 | Message13549 | verified | not implemented |
-| 13597 | EndClientTurn | verified | commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869 |
+| 13597 | EndClientTurn | verified | commands 563/693/703/805, initial naming 948, gold packs 687, Arena1 boost branch 595 and free tier-zero pass gold 836 and Home flags 869, pass seen progress 762 |
 | 13631 | Message13631 | verified | not implemented |
 | 13727 | Message13727 | verified | not implemented |
 | 13732 | Message13732 | verified | not implemented |
@@ -92,7 +92,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 15965 | Message15965 | verified | not implemented |
 | 16001 | Message16001 | verified | not implemented |
 | 16045 | Message16045 | verified | not implemented |
-| 16194 | Message16194 | unresolved | not implemented |
+| 16194 | ClientCommandRequest | verified | not implemented |
 | 16220 | Message16220 | verified | not implemented |
 | 16292 | Message16292 | verified | not implemented |
 | 16401 | Message16401 | verified | not implemented |
@@ -178,7 +178,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 22064 | Message22064 | verified | not implemented |
 | 22091 | Message22091 | verified | not implemented |
 | 22177 | Message22177 | unresolved | not implemented |
-| 22192 | Message22192 | unresolved | not implemented |
+| 22192 | ServerCommand | verified | not implemented |
 | 22344 | Message22344 | unresolved | not implemented |
 | 22493 | Message22493 | verified | not implemented |
 | 22556 | Message22556 | unresolved | not implemented |
@@ -247,7 +247,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 26774 | Message26774 | verified | not implemented |
 | 26783 | Message26783 | verified | not implemented |
 | 26831 | Message26831 | unresolved | not implemented |
-| 26980 | Message26980 | unresolved | not implemented |
+| 26980 | CommandBatch | verified | not implemented |
 | 27029 | Message27029 | verified | not implemented |
 | 27050 | Message27050 | verified | not implemented |
 | 27072 | Message27072 | verified | not implemented |
@@ -297,7 +297,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 49 | 0x137614 | unresolved | not implemented |
 | 57 | 0x140720 | verified | not implemented |
 | 203 | 0x3fbc58 | verified | not implemented |
-| 235 | 0x68c938 | unresolved | not implemented |
+| 235 | 0x68c938 | verified subset | not implemented |
 | 252 | 0x585728 | unresolved | not implemented |
 | 254 | 0x2c2d68 | verified | not implemented |
 | 255 | 0x2e1d94 | verified | not implemented |
@@ -383,7 +383,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 742 | 0x32f090 | verified | not implemented |
 | 744 | 0x60520c | verified | not implemented |
 | 751 | 0x347c54 | unresolved | not implemented |
-| 762 | 0x460fac | verified | not implemented |
+| 762 | 0x460fac | verified | persist seen crowns monotonically up to server-stored earned crowns; never grants crowns or rewards |
 | 775 | 0x4296d0 | verified | not implemented |
 | 780 | 0x63798c | verified | not implemented |
 | 783 | 0x545570 | verified | not implemented |
@@ -396,7 +396,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 827 | 0x6655a8 | verified | not implemented |
 | 834 | 0x578044 | verified | not implemented |
 | 835 | 0x6e3694 | verified | not implemented |
-| 836 | 0x1d14cc | verified | free tier 0, current pass, non-premium: 500 gold, cap and persistent claim |
+| 836 | 0x1d14cc | verified | free tier zero (crown selectors 0..9), current pass, non-premium: 500 gold, cap and persistent claim |
 | 837 | 0x4414e8 | verified | not implemented |
 | 839 | 0x644904 | verified | not implemented |
 | 841 | 0x59b170 | verified | not implemented |

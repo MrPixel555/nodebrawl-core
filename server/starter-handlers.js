@@ -35,7 +35,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     // formats alone do not implement their gameplay, prices or preconditions.
     // Native 805 synchronizes Home's applied level with Avatar. Both are fixed
     // at 1 in this starter profile, so its native executor returns 0 unchanged.
-    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 693, 703, 805, 869, 948].includes(command.id) && !isArena1BoostCommand(command) && !isFreePassGoldCommand(command)).map(command => command.id))]
+    const unsupported = [...new Set(turn.commands.filter(command => ![563, 687, 693, 703, 762, 805, 869, 948].includes(command.id) && !isArena1BoostCommand(command) && !isFreePassGoldCommand(command)).map(command => command.id))]
     if (unsupported.length || turn.field_0x98 !== null) {
       logger({ event: 'unsupported-turn', commandIds: unsupported, turnCommandIds: turn.commands.map(command => command.id), extraData: turn.field_0x98 !== null, applied: false })
       // Keep up to eight public selectors for unresolved 595 branches even
@@ -71,6 +71,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
       if (mutations.some(isArena1BoostCommand)) logger({ event: 'arena-boost-claimed', arena: 'Arena1', seconds: 86400 })
       if (mutations.some(isFreePassGoldCommand)) logger({ event: 'free-pass-reward-claimed', tier: 0 })
       if (mutations.some(command => command.id === 869)) logger({ event: 'home-flags-updated' })
+      if (traceNetwork && mutations.some(command => command.id === 762)) logger({ event: 'season-pass-seen', crowns: session.account.starter.passSeenCrowns })
     } else if (traceNetwork) logger({ event: 'client-turn', commands: turn.commands.length })
   }]])
 }

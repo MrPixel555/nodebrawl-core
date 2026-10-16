@@ -8,12 +8,37 @@
     "manualCardEditsRevertOnReconnect": true
   },
   "serverTraceConfirmed": {
-    "nameCheck": [16592, 20821],
+    "nameCheck": [
+      16592,
+      20821
+    ],
     "finalNameSavedEvent": "starter-name-set",
-    "unsupportedCommands": [762, 836, 869, 693],
-    "freePassSelectors": { "field_0x1c": 0, "field_0x20": false, "field_0x21": false },
-    "unsupportedRequests": [19355, 10453, 17967],
-    "trainingNpc": [18, 7]
+    "unsupportedCommands": [
+      762,
+      836,
+      869,
+      693
+    ],
+    "freePassSelectors": {
+      "field_0x1c": 0,
+      "field_0x20": false,
+      "field_0x21": false
+    },
+    "unsupportedRequests": [
+      19355,
+      10453,
+      17967
+    ],
+    "trainingNpc": [
+      18,
+      7
+    ]
   },
-  "scope": "Evidence for the previous pushed server. The new manual-swap, free pass and Home flag handlers are native/TCP verified; their Android retest is pending. Clan creation, live Training and battle are not established by this report."
+  "scope": "Earlier trace records df5b95d failures; latest user confirmation establishes the 810cb4a free gold claim and manual card persistence on Android. New 762 persistence and chest codecs remain native/Node verified only. Clan creation, live Training and battle are not established.",
+  "latestUserConfirmation": {
+    "baselineCommit": "810cb4a",
+    "freePassGoldReceived": 500,
+    "manualCardEditsPersistOnReconnect": true,
+    "source": "User confirmed receiving 500 gold and card changes surviving app restart"
+  }
 }

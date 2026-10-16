@@ -135,6 +135,48 @@
         }
       ],
       "verification": "tools/reverse/verify_resource_packs.py"
+    },
+    {
+      "id": 235,
+      "vtable": "0xa5c770",
+      "encode": "0x57bf68",
+      "decode": "0x44d24c",
+      "execute": "0x68c938",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "offset": 32,
+          "type": "lootResult"
+        },
+        {
+          "field": "field_0x28",
+          "offset": 40,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x1c",
+          "offset": 28,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x10",
+          "offset": 16,
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "offset": 12,
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "offset": 20,
+          "type": "vlong"
+        }
+      ],
+      "unresolvedReason": null,
+      "verification": "tools/reverse/verify_loot_result.py",
+      "codecScope": "Optional ordinary loot result (type 0) only; draft result type 2 unresolved; no runtime chest handler"
     }
   ]
 }

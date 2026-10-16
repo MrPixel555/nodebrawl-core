@@ -41,7 +41,7 @@ test('free pass tier-zero credit, cap and duplicate rejection match native execu
     assert.throws(() => applyCommands(original, [command, command]), /already claimed/)
     assert.equal(original.starter.gold, gold)
   }
-  for (const patch of [{ field_0x1c: 1 }, { field_0x20: true }, { field_0x21: true }]) {
+  for (const patch of [{ field_0x1c: 10 }, { field_0x1c: -1 }, { field_0x20: true }, { field_0x21: true }]) {
     assert.throws(() => applyCommands({ name: 'Player' }, [{ id: 836, fields: { ...command.fields, ...patch } }]), /Unsupported/)
   }
 })

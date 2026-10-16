@@ -1,0 +1,1257 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "command": 762,
+  "executor": "0x460fac",
+  "managerEncoder": "0x543f70",
+  "slotEncoder": "0x181040",
+  "progressEncoder": "0x19a968",
+  "passRows": 5,
+  "rewardRows": 180,
+  "tracks": 360,
+  "observations": [
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 0
+        },
+        "payloadHex": "ba0b0000000000",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": 0,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 0
+        },
+        "payloadHex": "ba0b0000000000",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": 0,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 0
+        },
+        "payloadHex": "ba0b0000000000",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": 0,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 1
+        },
+        "payloadHex": "ba0b0000000001",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 7,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 1
+        },
+        "payloadHex": "ba0b0000000001",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 7,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 1
+        },
+        "payloadHex": "ba0b0000000001",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 0,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 7,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": 9,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": 9,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": 9,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 8
+        },
+        "payloadHex": "ba0b0000000008",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 8,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 8
+        },
+        "payloadHex": "ba0b0000000008",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 8,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 8
+        },
+        "payloadHex": "ba0b0000000008",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 8,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9
+        },
+        "payloadHex": "ba0b0000000009",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 9,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 10
+        },
+        "payloadHex": "ba0b000000000a",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 10,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 10
+        },
+        "payloadHex": "ba0b000000000a",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 10,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 10
+        },
+        "payloadHex": "ba0b000000000a",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": 9,
+      "seen": 10,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 350
+        },
+        "payloadHex": "ba0b000000009e05",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 350,
+      "initialSeen": -1,
+      "seen": 350,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 350
+        },
+        "payloadHex": "ba0b000000009e05",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 350,
+      "initialSeen": -1,
+      "seen": 350,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 350
+        },
+        "payloadHex": "ba0b000000009e05",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 350,
+      "initialSeen": -1,
+      "seen": 350,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 510
+        },
+        "payloadHex": "ba0b00000000be07",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 511,
+      "initialSeen": -1,
+      "seen": 510,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 510
+        },
+        "payloadHex": "ba0b00000000be07",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 511,
+      "initialSeen": -1,
+      "seen": 510,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 510
+        },
+        "payloadHex": "ba0b00000000be07",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 511,
+      "initialSeen": -1,
+      "seen": 510,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 2147483647
+        },
+        "payloadHex": "ba0b00000000bfffffff0f",
+        "nativeDecodeConsumed": 11,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 2147483647,
+      "initialSeen": -1,
+      "seen": 2147483647,
+      "result": 0,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 2147483647
+        },
+        "payloadHex": "ba0b00000000bfffffff0f",
+        "nativeDecodeConsumed": 11,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 2147483647,
+      "initialSeen": -1,
+      "seen": 2147483647,
+      "result": 0,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 2147483647
+        },
+        "payloadHex": "ba0b00000000bfffffff0f",
+        "nativeDecodeConsumed": 11,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 2147483647,
+      "initialSeen": -1,
+      "seen": 2147483647,
+      "result": 0,
+      "claimed": true,
+      "boosted": true
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": -1
+        },
+        "payloadHex": "ba0b000000007f",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 1,
+      "claimed": false,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": -1
+        },
+        "payloadHex": "ba0b000000007f",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 1,
+      "claimed": true,
+      "boosted": false
+    },
+    {
+      "command": {
+        "id": 762,
+        "variant": "pass-seen",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": -1
+        },
+        "payloadHex": "ba0b000000007f",
+        "nativeDecodeConsumed": 7,
+        "nativeReencodeEqual": true
+      },
+      "crowns": 10,
+      "initialSeen": -1,
+      "seen": -1,
+      "result": 1,
+      "claimed": true,
+      "boosted": true
+    }
+  ],
+  "selections": [
+    {
+      "passId": 106000000,
+      "selector": -1,
+      "crowns": null
+    },
+    {
+      "passId": 106000000,
+      "selector": 0,
+      "crowns": 0
+    },
+    {
+      "passId": 106000000,
+      "selector": 1,
+      "crowns": 0
+    },
+    {
+      "passId": 106000000,
+      "selector": 9,
+      "crowns": 0
+    },
+    {
+      "passId": 106000000,
+      "selector": 10,
+      "crowns": 10
+    },
+    {
+      "passId": 106000000,
+      "selector": 19,
+      "crowns": 10
+    },
+    {
+      "passId": 106000000,
+      "selector": 349,
+      "crowns": 340
+    },
+    {
+      "passId": 106000000,
+      "selector": 350,
+      "crowns": 350
+    },
+    {
+      "passId": 106000000,
+      "selector": 351,
+      "crowns": 350
+    },
+    {
+      "passId": 106000000,
+      "selector": 2147483647,
+      "crowns": 350
+    },
+    {
+      "passId": 103000000,
+      "selector": -1,
+      "crowns": null
+    },
+    {
+      "passId": 103000000,
+      "selector": 0,
+      "crowns": 0
+    },
+    {
+      "passId": 103000000,
+      "selector": 1,
+      "crowns": 0
+    },
+    {
+      "passId": 103000000,
+      "selector": 9,
+      "crowns": 0
+    },
+    {
+      "passId": 103000000,
+      "selector": 10,
+      "crowns": 10
+    },
+    {
+      "passId": 103000000,
+      "selector": 19,
+      "crowns": 10
+    },
+    {
+      "passId": 103000000,
+      "selector": 349,
+      "crowns": 340
+    },
+    {
+      "passId": 103000000,
+      "selector": 350,
+      "crowns": 350
+    },
+    {
+      "passId": 103000000,
+      "selector": 351,
+      "crowns": 350
+    },
+    {
+      "passId": 103000000,
+      "selector": 2147483647,
+      "crowns": 350
+    },
+    {
+      "passId": 103000001,
+      "selector": -1,
+      "crowns": null
+    },
+    {
+      "passId": 103000001,
+      "selector": 0,
+      "crowns": 0
+    },
+    {
+      "passId": 103000001,
+      "selector": 1,
+      "crowns": 0
+    },
+    {
+      "passId": 103000001,
+      "selector": 9,
+      "crowns": 0
+    },
+    {
+      "passId": 103000001,
+      "selector": 10,
+      "crowns": 10
+    },
+    {
+      "passId": 103000001,
+      "selector": 19,
+      "crowns": 10
+    },
+    {
+      "passId": 103000001,
+      "selector": 349,
+      "crowns": 340
+    },
+    {
+      "passId": 103000001,
+      "selector": 350,
+      "crowns": 350
+    },
+    {
+      "passId": 103000001,
+      "selector": 351,
+      "crowns": 350
+    },
+    {
+      "passId": 103000001,
+      "selector": 2147483647,
+      "crowns": 350
+    },
+    {
+      "passId": 103000002,
+      "selector": -1,
+      "crowns": null
+    },
+    {
+      "passId": 103000002,
+      "selector": 0,
+      "crowns": 0
+    },
+    {
+      "passId": 103000002,
+      "selector": 1,
+      "crowns": 0
+    },
+    {
+      "passId": 103000002,
+      "selector": 9,
+      "crowns": 0
+    },
+    {
+      "passId": 103000002,
+      "selector": 10,
+      "crowns": 10
+    },
+    {
+      "passId": 103000002,
+      "selector": 19,
+      "crowns": 10
+    },
+    {
+      "passId": 103000002,
+      "selector": 349,
+      "crowns": 340
+    },
+    {
+      "passId": 103000002,
+      "selector": 350,
+      "crowns": 350
+    },
+    {
+      "passId": 103000002,
+      "selector": 351,
+      "crowns": 350
+    },
+    {
+      "passId": 103000002,
+      "selector": 2147483647,
+      "crowns": 350
+    },
+    {
+      "passId": 103000003,
+      "selector": -1,
+      "crowns": null
+    },
+    {
+      "passId": 103000003,
+      "selector": 0,
+      "crowns": 0
+    },
+    {
+      "passId": 103000003,
+      "selector": 1,
+      "crowns": 0
+    },
+    {
+      "passId": 103000003,
+      "selector": 9,
+      "crowns": 0
+    },
+    {
+      "passId": 103000003,
+      "selector": 10,
+      "crowns": 10
+    },
+    {
+      "passId": 103000003,
+      "selector": 19,
+      "crowns": 10
+    },
+    {
+      "passId": 103000003,
+      "selector": 349,
+      "crowns": 340
+    },
+    {
+      "passId": 103000003,
+      "selector": 350,
+      "crowns": 350
+    },
+    {
+      "passId": 103000003,
+      "selector": 351,
+      "crowns": 350
+    },
+    {
+      "passId": 103000003,
+      "selector": 2147483647,
+      "crowns": 350
+    }
+  ],
+  "managerShapes": [
+    {
+      "hex": "077b808001c0807f018096a3610000",
+      "fields": {
+        "field_0x20": 7,
+        "field_0x28": -5,
+        "field_0x24": 8192,
+        "field_0x2c": -8192,
+        "slots": [
+          {
+            "seasonId": 102000000,
+            "index": 0,
+            "arena": null,
+            "pass": null
+          }
+        ]
+      }
+    },
+    {
+      "hex": "077b808001c0807f018096a361000180022579c0807f00",
+      "fields": {
+        "field_0x20": 7,
+        "field_0x28": -5,
+        "field_0x24": 8192,
+        "field_0x2c": -8192,
+        "slots": [
+          {
+            "seasonId": 102000000,
+            "index": 0,
+            "arena": {
+              "threshold": 128,
+              "field_0xc": 37,
+              "field_0x8": -7,
+              "field_0x14": -8192
+            },
+            "pass": null
+          }
+        ]
+      }
+    },
+    {
+      "hex": "077b808001c0807f018096a36100029e0594058a0501029d0502000000077fffffffffffffff00000025",
+      "fields": {
+        "field_0x20": 7,
+        "field_0x28": -5,
+        "field_0x24": 8192,
+        "field_0x2c": -8192,
+        "slots": [
+          {
+            "seasonId": 102000000,
+            "index": 0,
+            "arena": null,
+            "pass": {
+              "crowns": 350,
+              "freeClaimedCrowns": 340,
+              "premiumClaimedCrowns": 330,
+              "flag": true,
+              "arenaIndex": 2,
+              "seenCrowns": 349,
+              "identities": [
+                [
+                  7,
+                  2147483647
+                ],
+                [
+                  -1,
+                  37
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "hex": "077b808001c0807f018096a361000180022579c0807f019e0594058a0501029d0502000000077fffffffffffffff00000025",
+      "fields": {
+        "field_0x20": 7,
+        "field_0x28": -5,
+        "field_0x24": 8192,
+        "field_0x2c": -8192,
+        "slots": [
+          {
+            "seasonId": 102000000,
+            "index": 0,
+            "arena": {
+              "threshold": 128,
+              "field_0xc": 37,
+              "field_0x8": -7,
+              "field_0x14": -8192
+            },
+            "pass": {
+              "crowns": 350,
+              "freeClaimedCrowns": 340,
+              "premiumClaimedCrowns": 330,
+              "flag": true,
+              "arenaIndex": 2,
+              "seenCrowns": 349,
+              "identities": [
+                [
+                  7,
+                  2147483647
+                ],
+                [
+                  -1,
+                  37
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "claimSelectors": [
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": -1,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000007f00",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 101,
+      "duplicate": null
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 0,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000000000",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 0,
+      "duplicate": 44
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 1,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000000100",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 0,
+      "duplicate": 44
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 9,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000000900",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 0,
+      "duplicate": 44
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 10,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000000a00",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 4,
+      "duplicate": null
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 19,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000001300",
+        "nativeDecodeConsumed": 8,
+        "nativeReencodeEqual": true
+      },
+      "result": 4,
+      "duplicate": null
+    },
+    {
+      "command": {
+        "id": 836,
+        "variant": "crown-selector",
+        "fields": {
+          "field_0x10": 0,
+          "field_0xc": 0,
+          "field_0x14": [
+            0,
+            0
+          ],
+          "field_0x1c": 350,
+          "field_0x20": false,
+          "field_0x21": false
+        },
+        "payloadHex": "840d000000009e0500",
+        "nativeDecodeConsumed": 9,
+        "nativeReencodeEqual": true
+      },
+      "result": 4,
+      "duplicate": null
+    }
+  ],
+  "catalogueSha256": "3d5bdf1cd0696c55d8df926a99d8ab3c365147037f3460e7fe424e7795aaaebf",
+  "scope": "Original CSV values and descriptor enum/amount checks for every pass track. Native 762 execution and 30 full Home roundtrips. ManagerShapes use synthetic distinct auxiliary values for native encoder order/null-flag verification only. Positive crowns are test inputs; earning crowns, later chest redemption, premium entitlement and season rollover are not implemented."
+}

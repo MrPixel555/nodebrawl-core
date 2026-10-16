@@ -7,7 +7,7 @@ const { packs } = require('./data/resource-packs.json')
 const { isArena1BoostCommand, validateArena1Boost, claimArena1Boost } = require('./arena-boost')
 const { isValidPlayerName } = require('./name-handlers')
 const { inventoryFor, validateInventory, activateDeck, swapCard } = require('./decks')
-const { isFreePassGoldCommand, claimFreePassGold } = require('./season-pass')
+const { isFreePassGoldCommand, claimFreePassGold, markPassSeen } = require('./season-pass')
 
 function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
@@ -26,6 +26,9 @@ function playerState (account) {
     nameChangeCount: read('nameChangeCount', 0),
     arena1Boost: validateArena1Boost(read('arena1Boost', null)),
     freePassGoldClaimed: read('freePassGoldClaimed', false),
+    passCrowns: read('passCrowns', 0),
+    passSeenCrowns: read('passSeenCrowns', -1),
+    passInitialized: read('passInitialized', state.freePassGoldClaimed === true || state.passCrowns > 0 || state.passSeenCrowns >= 0),
     homeFlags: read('homeFlags', 0),
   }
   if (!Array.isArray(value.decks) || value.decks.length !== 5) throw new ProtocolError('Invalid starter decks')
@@ -37,6 +40,8 @@ function playerState (account) {
   }
   if (value.freeGems > value.gems) throw new ProtocolError('Invalid starter resources')
   if (typeof value.freePassGoldClaimed !== 'boolean') throw new ProtocolError('Invalid season pass claim state')
+  if (!Number.isInteger(value.passCrowns) || value.passCrowns < 0 || value.passCrowns > 2147483647 || !Number.isInteger(value.passSeenCrowns) || value.passSeenCrowns < -1 || value.passSeenCrowns > value.passCrowns) throw new ProtocolError('Invalid season pass progress')
+  if (typeof value.passInitialized !== 'boolean') throw new ProtocolError('Invalid season pass initialization state')
   if (!Number.isInteger(value.homeFlags) || value.homeFlags < 0 || value.homeFlags > 30 || (value.homeFlags & ~30) !== 0) throw new ProtocolError('Invalid Home flags')
   if (typeof value.nameSet !== 'boolean' || !Number.isInteger(value.nameChangeCount) || value.nameChangeCount < -1 || value.nameChangeCount > 2147483646 || (!value.nameSet && value.nameChangeCount !== -1)) throw new ProtocolError('Invalid starter name state')
   return { ...value, decks: value.decks.map(deck => [...deck]), inventory: [...value.inventory] }
@@ -70,6 +75,8 @@ function applyCommands (account, commands, { now = Date.now } = {}) {
       claimArena1Boost(next.starter, now)
     } else if (isFreePassGoldCommand({ id, fields })) {
       claimFreePassGold(next.starter)
+    } else if (id === 762) {
+      markPassSeen(next.starter, fields.field_0x1c)
     } else if (id === 687) {
       const reference = fields.field_0x20
       const pack = packs.find(pack => Array.isArray(reference) && reference.length === 2 && pack.reference.every((value, index) => value === reference[index]))

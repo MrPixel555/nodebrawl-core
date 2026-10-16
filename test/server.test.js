@@ -429,7 +429,7 @@ test('manual card swaps and free pass gold survive reconnect and store restart w
   await c.receive()
   const account = await store.login(login.field_0x80, login.field_0x90)
   const replaced = account.starter.inventory[0]
-  c.send(13597, { commands: [{ id: 693, fields: { field_0x1c: 0, field_0x20: 2, field_0x24: -1 } }, { id: 693, fields: { field_0x1c: -1, field_0x20: 0, field_0x24: 7 } }, { id: 869, fields: { field_0x1c: 3 } }, require('../docs/native-lobby-actions.json').reward] })
+  c.send(13597, { commands: [{ id: 693, fields: { field_0x1c: 0, field_0x20: 2, field_0x24: -1 } }, { id: 693, fields: { field_0x1c: -1, field_0x20: 0, field_0x24: 7 } }, { id: 869, fields: { field_0x1c: 3 } }, { id: 762, fields: { field_0x1c: 0 } }, require('../docs/native-lobby-actions.json').reward] })
   c.send(10108)
   assert.equal((await c.receive()).id, 20108)
   const saved = await store.login(login.field_0x80, login.field_0x90)
@@ -438,6 +438,8 @@ test('manual card swaps and free pass gold survive reconnect and store restart w
   assert.equal(saved.starter.inventory[0], account.starter.decks[0][2])
   assert.deepEqual([saved.starter.gold, saved.starter.freeGold, saved.starter.gems], [600, 500, 100])
   assert.equal(saved.starter.homeFlags, 8)
+  assert.equal(saved.starter.passSeenCrowns, 0)
+  assert.equal(saved.starter.passCrowns, 0)
   c.socket.destroy()
   await game.stop()
   const restartedStore = new AccountStore(directory)
@@ -607,7 +609,7 @@ for (const starterHome of [false, true]) {
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 703, fields: { field_0x1c: 4 } }, { id: 805 }] }))))
       c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [require('./fixtures/native-arena-boost-command.json'), { id: 948, fields: { field_0x20: 'بازیکن' } }] }))))
-      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 693, fields: { field_0x1c: 0, field_0x20: 1, field_0x24: -1 } }, require('../docs/native-lobby-actions.json').reward] }))))
+      c.socket.write(encodeFrame(13597, 0, send.encrypt(encodeMessage(13597, { commands: [{ id: 693, fields: { field_0x1c: 0, field_0x20: 1, field_0x24: -1 } }, { id: 762, fields: { field_0x1c: 0 } }, require('../docs/native-lobby-actions.json').reward] }))))
     }
     for (let n = 0; n < 2; n++) {
       c.socket.write(encodeFrame(10108, 0, send.encrypt(Buffer.alloc(0))))
@@ -628,6 +630,7 @@ for (const starterHome of [false, true]) {
       assert.equal(saved.starter.gold, 600)
       assert.equal(saved.starter.freeGold, 500)
       assert.equal(saved.starter.freePassGoldClaimed, true)
+      assert.equal(saved.starter.passSeenCrowns, 0)
       assert.equal(saved.starter.decks[4][1], 26000002)
       assert.equal(saved.starter.arena1Boost.expiresAtMs - saved.starter.arena1Boost.claimedAtMs, 86400000)
     }

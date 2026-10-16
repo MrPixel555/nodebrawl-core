@@ -1,0 +1,3752 @@
+{
+  "schema": 1,
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "sources": [
+    {
+      "path": "csv_logic/season_pass_rookie.csv",
+      "decodedSha256": "294cf6593e31062f430ed805aae0147ebc400c9eb0bda0d4372a92a420d9d832"
+    },
+    {
+      "path": "csv_logic/season_pass_pro.csv",
+      "decodedSha256": "7be27f2a14439c09b18a5eec39a21fd3d5daa98647e99e830e59b967e6e01ae1"
+    }
+  ],
+  "kinds": {
+    "0": "empty",
+    "3": "resource",
+    "4": "chest",
+    "5": "token",
+    "6": "emote",
+    "7": "skin",
+    "9": "strike"
+  },
+  "passes": [
+    {
+      "id": 106000000,
+      "name": "Rookie_Basic",
+      "rewards": [
+        {
+          "crowns": 0,
+          "free": {
+            "kind": 3,
+            "amount": 500,
+            "data": {
+              "Amount": "500",
+              "Resource": "Gold",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 0,
+            "amount": 0,
+            "data": {
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 10,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 20,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "1",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 30,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "2",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 40,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "3",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 50,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "4",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 60,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 70,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 80,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T3",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 90,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 100,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 7,
+            "amount": 0,
+            "data": {
+              "SkinSet": "2",
+              "UnlockedOnDay": "7",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 110,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "8",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 120,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "9",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 130,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "10",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 140,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "11",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 150,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 160,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 170,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 180,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 190,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "14",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 200,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 6,
+            "amount": 0,
+            "data": {
+              "EmoteIDHigh": "10",
+              "EmoteIDLow": "0",
+              "UnlockedOnDay": "15",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 210,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "16",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 220,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T3",
+              "UnlockedOnDay": "17",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 230,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "18",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 240,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 250,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 260,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 270,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 280,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "21",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 290,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "22",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 300,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T2",
+              "UnlockedOnDay": "23",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 310,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "24",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 320,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "25",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 330,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2500,
+            "data": {
+              "Amount": "2500",
+              "Resource": "Gold",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 340,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T1",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 350,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T3",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Rookie_T4",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 103000000,
+      "name": "Pro_Basic",
+      "rewards": [
+        {
+          "crowns": 0,
+          "free": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 0,
+            "amount": 0,
+            "data": {
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 10,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 6,
+            "amount": 0,
+            "data": {
+              "EmoteIDHigh": "10",
+              "EmoteIDLow": "0",
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 20,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2000,
+            "data": {
+              "Amount": "2000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "1",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 30,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "2",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 40,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "3",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 50,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "4",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 60,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 2000,
+            "data": {
+              "Amount": "2000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 70,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 80,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 90,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Common",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 100,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "7",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 110,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "8",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 120,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "9",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 130,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "10",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 140,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Rare",
+              "UnlockedOnDay": "11",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 150,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 160,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 170,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 180,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 190,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "14",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 200,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "15",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 210,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Epic",
+              "UnlockedOnDay": "16",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 220,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "17",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 230,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "18",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 240,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 250,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 260,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 270,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 280,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "21",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 290,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "22",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 300,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 7,
+            "amount": 0,
+            "data": {
+              "SkinSet": "2",
+              "UnlockedOnDay": "23",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 310,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "24",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 320,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "25",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 330,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Legendary",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 340,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 10000,
+            "data": {
+              "Amount": "10000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 350,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 103000001,
+      "name": "Pro_Rares",
+      "rewards": [
+        {
+          "crowns": 0,
+          "free": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 0,
+            "amount": 0,
+            "data": {
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 10,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 20,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "1",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 30,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "2",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 40,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "3",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 50,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 6,
+            "amount": 0,
+            "data": {
+              "EmoteIDHigh": "10",
+              "EmoteIDLow": "0",
+              "UnlockedOnDay": "4",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 60,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 70,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 80,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 90,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Rare",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 100,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "7",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 110,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "8",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 120,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "9",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 130,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "10",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 140,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Common",
+              "UnlockedOnDay": "11",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 150,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 160,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 170,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Legendary",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 180,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 190,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "14",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 200,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "15",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 210,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "16",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 220,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "17",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 230,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "18",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 240,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 250,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 20000,
+            "data": {
+              "Amount": "20000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 260,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 270,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 280,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "21",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 290,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "22",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 300,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 7,
+            "amount": 0,
+            "data": {
+              "SkinSet": "1",
+              "UnlockedOnDay": "23",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 310,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "24",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 320,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 5000,
+            "data": {
+              "Amount": "5000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "25",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 330,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 340,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Epic",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 350,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 103000002,
+      "name": "Pro_EarlyStrikes",
+      "rewards": [
+        {
+          "crowns": 0,
+          "free": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 0,
+            "amount": 0,
+            "data": {
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 10,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 10000,
+            "data": {
+              "Amount": "10000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 20,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "1",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 30,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "2",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 40,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Epic",
+              "UnlockedOnDay": "3",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 50,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "4",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 60,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 70,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 80,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 90,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Rare",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 100,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 7,
+            "amount": 0,
+            "data": {
+              "SkinSet": "3",
+              "UnlockedOnDay": "7",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 110,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "8",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 120,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "9",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 130,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "10",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 140,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "11",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 150,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 160,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 170,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 180,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 190,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "14",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 200,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 6,
+            "amount": 0,
+            "data": {
+              "EmoteIDHigh": "10",
+              "EmoteIDLow": "0",
+              "UnlockedOnDay": "15",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 210,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "16",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 220,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "17",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 230,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "18",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 240,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 250,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 260,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 270,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 280,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "21",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 290,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Common",
+              "UnlockedOnDay": "22",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 300,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "23",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 310,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "24",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 320,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "25",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 330,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 340,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Legendary",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 350,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 103000003,
+      "name": "Pro_EarlyTowers",
+      "rewards": [
+        {
+          "crowns": 0,
+          "free": {
+            "kind": 3,
+            "amount": 1000,
+            "data": {
+              "Amount": "1000",
+              "Resource": "Gold",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 0,
+            "amount": 0,
+            "data": {
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 10,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 10000,
+            "data": {
+              "Amount": "10000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "0",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 20,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "1",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 30,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "2",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 40,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Epic",
+              "UnlockedOnDay": "3",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 50,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "4",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 60,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 70,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "5",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 80,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 90,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "0"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Rare",
+              "UnlockedOnDay": "6",
+              "Tier": "0"
+            }
+          }
+        },
+        {
+          "crowns": 100,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 7,
+            "amount": 0,
+            "data": {
+              "SkinSet": "3",
+              "UnlockedOnDay": "7",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 110,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "8",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 120,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "9",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 130,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "10",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 140,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 3000,
+            "data": {
+              "Amount": "3000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "11",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 150,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 160,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "12",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 170,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 180,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "13",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 190,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "1"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "14",
+              "Tier": "1"
+            }
+          }
+        },
+        {
+          "crowns": 200,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 6,
+            "amount": 0,
+            "data": {
+              "EmoteIDHigh": "10",
+              "EmoteIDLow": "0",
+              "UnlockedOnDay": "15",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 210,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "16",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 220,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "17",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 230,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "18",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 240,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 250,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "19",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 260,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 9,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Strike": "TRUE",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 270,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T2",
+              "UnlockedOnDay": "20",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 280,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "21",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 290,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "2"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Common",
+              "UnlockedOnDay": "22",
+              "Tier": "2"
+            }
+          }
+        },
+        {
+          "crowns": 300,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T3",
+              "UnlockedOnDay": "23",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 310,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "24",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 320,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T1",
+              "UnlockedOnDay": "25",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 330,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 3,
+            "amount": 4000,
+            "data": {
+              "Amount": "4000",
+              "Resource": "Gold",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 340,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "Star_<current_arena>",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 5,
+            "amount": 1,
+            "data": {
+              "Amount": "1",
+              "Token": "Legendary",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        },
+        {
+          "crowns": 350,
+          "free": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "Tier": "3"
+            }
+          },
+          "premium": {
+            "kind": 4,
+            "amount": 0,
+            "data": {
+              "Chest": "SeasonPass_Pro_T4",
+              "UnlockedOnDay": "26",
+              "Tier": "3"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+[
+  {
+    "id": 235,
+    "variant": 0,
+    "fields": {
+      "field_0x20": null,
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab03000511257900808001",
+    "nativeDecodeConsumed": 11,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 235,
+    "variant": 1,
+    "fields": {
+      "field_0x20": {
+        "type": 0,
+        "field_0x8": null,
+        "field_0x10": null,
+        "field_0x18": 123,
+        "field_0x1c": -7,
+        "field_0x20": 8192,
+        "field_0x24": 37,
+        "field_0x28": null
+      },
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab0301007f7fbb0179808001257f0511257900808001",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 235,
+    "variant": 2,
+    "fields": {
+      "field_0x20": {
+        "type": 0,
+        "field_0x8": [],
+        "field_0x10": [],
+        "field_0x18": 123,
+        "field_0x1c": -7,
+        "field_0x20": 8192,
+        "field_0x24": 37,
+        "field_0x28": null
+      },
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab0301000000bb0179808001257f0511257900808001",
+    "nativeDecodeConsumed": 22,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 235,
+    "variant": 3,
+    "fields": {
+      "field_0x20": {
+        "type": 0,
+        "field_0x8": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": true
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": false
+          }
+        ],
+        "field_0x10": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": true
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": false
+          }
+        ],
+        "field_0x18": 123,
+        "field_0x1c": -7,
+        "field_0x20": 8192,
+        "field_0x24": 37,
+        "field_0x28": null
+      },
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab03010002010180800179258002c0807f03bc010180800179258002c0807f0002010180800179258002c0807f03bc010180800179258002c0807f00bb0179808001257f0511257900808001",
+    "nativeDecodeConsumed": 76,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 235,
+    "variant": 4,
+    "fields": {
+      "field_0x20": {
+        "type": 0,
+        "field_0x8": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": false
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": true
+          }
+        ],
+        "field_0x10": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": false
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": true
+          }
+        ],
+        "field_0x18": 123,
+        "field_0x1c": -7,
+        "field_0x20": 8192,
+        "field_0x24": 37,
+        "field_0x28": [
+          {
+            "reference": [
+              70,
+              0
+            ],
+            "amount": 5
+          },
+          {
+            "reference": [
+              70,
+              3
+            ],
+            "amount": 7
+          }
+        ]
+      },
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab03010002010180800179258002c0807f00bc010180800179258002c0807f0302010180800179258002c0807f00bc010180800179258002c0807f03bb0179808001250286010005860103070511257900808001",
+    "nativeDecodeConsumed": 84,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 235,
+    "variant": 5,
+    "fields": {
+      "field_0x20": {
+        "type": 0,
+        "field_0x8": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": false
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": true
+          }
+        ],
+        "field_0x10": [
+          {
+            "spellIndex": 1,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": true,
+            "field_0x29": false
+          },
+          {
+            "spellIndex": 124,
+            "field_0x10": 1,
+            "field_0x14": 8192,
+            "field_0x18": -7,
+            "field_0x1c": 37,
+            "field_0x2c": 128,
+            "field_0x30": -8192,
+            "field_0x28": false,
+            "field_0x29": true
+          }
+        ],
+        "field_0x18": 123,
+        "field_0x1c": -7,
+        "field_0x20": 8192,
+        "field_0x24": 37,
+        "field_0x28": [
+          {
+            "reference": [
+              70,
+              0
+            ],
+            "amount": 5
+          },
+          {
+            "reference": [
+              70,
+              3
+            ],
+            "amount": 7
+          }
+        ]
+      },
+      "field_0x28": 5,
+      "field_0x1c": 17,
+      "field_0x10": 37,
+      "field_0xc": -7,
+      "field_0x14": [
+        0,
+        8192
+      ]
+    },
+    "payloadHex": "ab03010002010180800179258002c0807f01bc010180800179258002c0807f0202010180800179258002c0807f01bc010180800179258002c0807f02bb0179808001250286010005860103070511257900808001",
+    "nativeDecodeConsumed": 84,
+    "nativeReencodeEqual": true
+  }
+]
