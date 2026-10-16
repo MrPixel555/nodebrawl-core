@@ -11,6 +11,13 @@ from native_printf import vsnprintf
 ROOT=Path(os.environ['GAME_ANALYSIS_DIR'])
 class NativeVM:
     READ_TYPES={0x13de78:'vint',0x2bf360:'int',0x2da5c8:'int',0x314530:'string',0x37e628:'string-object',0x1cba10:'long',0x3ff2c4:'bytes'}
+    CPU_REGISTERS={**{f'x{i}':(UC_ARM64_REG_X0+i,64) for i in range(29)},
+                   'fp':(UC_ARM64_REG_FP,64),'lr':(UC_ARM64_REG_LR,64),
+                   'sp':(UC_ARM64_REG_SP,64),'pc':(UC_ARM64_REG_PC,64),
+                   'tls':(UC_ARM64_REG_TPIDR_EL0,64),'pstate':(UC_ARM64_REG_PSTATE,64),
+                   'nzcv':(UC_ARM64_REG_NZCV,64),'fpcr':(UC_ARM64_REG_FPCR,64),
+                   'fpsr':(UC_ARM64_REG_FPSR,64),
+                   **{f'q{i}':(UC_ARM64_REG_Q0+i,128) for i in range(32)}}
 
     def __init__(self, trace_instructions=True, heap_size=0x1000000):
         if not isinstance(heap_size,int) or heap_size<0x1000 or heap_size>0x10000000 or heap_size%0x1000:
@@ -30,10 +37,14 @@ class NativeVM:
         self.reads=[]
         self.input_stream=None
         self.imports={}
+        self.import_slots={}
         elf=ELFFile(open(ROOT/'libg.so','rb'))
         rel=elf.get_section_by_name('.rela.plt');sym=elf.get_section(rel['sh_link'])
         for n,r in enumerate(rel.iter_relocations()):
-            self.imports[0xdf690+32+n*16]=sym.get_symbol(r['r_info_sym']).name
+            address=0xdf690+32+n*16
+            self.imports[address]=sym.get_symbol(r['r_info_sym']).name
+            self.import_slots[r['r_offset']]=address
+        self.resolve_imports()
         self.hooks={}
         self.mutexes=set()
         self.entropy=os.urandom
@@ -47,6 +58,28 @@ class NativeVM:
             for address in sorted(set(self.imports) | set(self.READ_TYPES)):
                 self.point_hooks.append(self.uc.hook_add(UC_HOOK_CODE,self.on_code,begin=address,end=address))
         self.uc.hook_add(UC_HOOK_INTR,self.on_intr)
+    def resolve_imports(self):
+        # Model ELF relocation, including indirect calls through the GOT. The
+        # unloaded image's lazy slots point at PLT0, whose Android dynamic
+        # loader is absent here. Bind them to our existing libc entry hooks.
+        for slot,address in self.import_slots.items():
+            self.uc.mem_write(slot,struct.pack('<Q',address))
+    def cpu_state(self):
+        """Register state at a suspended call, alongside matching VM memory.
+
+        This is not a standalone VM snapshot. Use only locally generated state;
+        the single-thread CSV workflow has no outstanding exclusive accesses.
+        """
+        return {name:self.uc.reg_read(reg) for name,(reg,_) in self.CPU_REGISTERS.items()}
+    def restore_cpu(self,state):
+        if not isinstance(state,dict) or set(state)!=set(self.CPU_REGISTERS):
+            raise ValueError('Incomplete VM CPU register state')
+        for name,(_,bits) in self.CPU_REGISTERS.items():
+            value=state[name]
+            if type(value) is not int or not 0<=value<(1<<bits):
+                raise ValueError('Invalid VM CPU register value')
+        for name,(reg,_) in self.CPU_REGISTERS.items():
+            self.uc.reg_write(reg,state[name])
     def register_hook(self,address,callback):
         self.hooks[address]=callback
         if not self.trace_instructions and address not in self.imports and address not in self.READ_TYPES:

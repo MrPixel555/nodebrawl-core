@@ -2,7 +2,7 @@
 import struct
 
 from native_vm import NativeVM
-from unicorn.arm64_const import UC_ARM64_REG_X8, UC_ARM64_REG_X16
+from unicorn.arm64_const import UC_ARM64_REG_X0, UC_ARM64_REG_X8, UC_ARM64_REG_X16, UC_ARM64_REG_Q8, UC_ARM64_REG_NZCV
 
 
 def main():
@@ -42,6 +42,15 @@ def main():
     assert vm.call(imports['time'], timestamp) == 1
     assert struct.unpack('<q', vm.uc.mem_read(timestamp, 8))[0] == 1
     assert vm.call(imports['time'], 0) == 1
+    # Both direct and indirect/GOT calls must reach the same libc adapter,
+    # including an existing PLT suffix reached after its ADRP instruction.
+    malloc_slot = next(slot for slot, entry in vm.import_slots.items() if entry == imports['malloc'])
+    entry = struct.unpack('<Q', vm.uc.mem_read(malloc_slot, 8))[0]
+    before = vm.heap
+    assert vm.call(entry, 26) == before
+    before = vm.heap
+    vm.uc.reg_write(UC_ARM64_REG_X16, malloc_slot & ~4095)
+    assert vm.call(entry + 4, 26) == before
     # String reads cross page boundaries and stop at NUL before the next,
     # unmapped page; chunking must retain the original bound and semantics.
     vm.uc.mem_map(0x30000000, 8192)
@@ -104,6 +113,32 @@ def main():
     else:
         raise AssertionError('Single-slice instruction budget ignored')
     assert vm.call(code, count=64, max_slices=5) == 100
+    # Save at a conditional branch: resumption needs PC, flags and live integer
+    # registers. Preserve the SIMD bank as well, rather than guessing its values.
+    marker = 0x112233445566778899aabbccddeeff00
+    vm.uc.reg_write(UC_ARM64_REG_Q8, marker)
+    try:
+        vm.call(code, count=3)
+    except RuntimeError as error:
+        assert 'budget exhausted' in str(error)
+    else:
+        raise AssertionError('Expected a suspended native loop')
+    state = vm.cpu_state()
+    vm.uc.reg_write(UC_ARM64_REG_X0, 999)
+    vm.uc.reg_write(UC_ARM64_REG_Q8, 0)
+    vm.uc.reg_write(UC_ARM64_REG_X8, 0)
+    vm.uc.reg_write(UC_ARM64_REG_NZCV, 0)
+    vm.restore_cpu(state)
+    assert vm.cpu_state() == state and vm.uc.reg_read(UC_ARM64_REG_Q8) == marker
+    vm.uc.emu_start(state['pc'], vm.stop, count=10000, timeout=60000000)
+    assert vm.reg(0) == 100
+    for invalid in ({}, {**state, 'q8': 1 << 128}, {**state, 'pc': -1}):
+        try:
+            vm.restore_cpu(invalid)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('Invalid CPU snapshot accepted')
     # Continuation also preserves an imported libc call and its native frame.
     vm.uc.mem_write(code, struct.pack('<5I', 0xa9bf7bfd, 0x910003fd, 0xd63f0200, 0xa8c17bfd, 0xd65f03c0))
     vm.uc.ctl_remove_cache(code, code + 20)
@@ -111,7 +146,7 @@ def main():
     for budget in range(1, 10):
         vm.uc.reg_write(UC_ARM64_REG_X16, imports['atoi'])
         assert vm.call(code, number, count=budget, max_slices=10) == 37
-    print('VM libc adapters, heap bounds and exact-state execution continuation PASS')
+    print('VM libc/GOT adapters, heap bounds and CPU/SIMD continuation PASS')
 
 
 if __name__ == '__main__':

@@ -62,6 +62,13 @@ width, precision and unsupported conversion rejection. Formatting a normal
 name such as `Combined Table 49` no longer gets mistaken for a fatal game
 diagnostic. Native assertions still run and are not suppressed.
 
+ELF GOT import slots are bound to the same libc adapter entries as direct PLT
+calls; this also covers indirect calls without invoking an absent Android
+dynamic loader. Restoring a memory checkpoint rebinds those slots. The runtime
+checks exercise direct, GOT and PLT-suffix paths. Optional CPU register capture
+includes flags and the full SIMD bank for bounded, single-thread CSV parser
+continuation with matching memory; it is not a standalone process snapshot.
+
 Raw DataTable construction is only an initial step. Cross-table field linking,
 map/tower creation, players, GameMode snapshots and battle simulation require
 further verification. These parser checks do not establish playable Training,

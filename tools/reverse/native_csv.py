@@ -122,5 +122,6 @@ class NativeCsv:
             assert hashlib.sha256(data).hexdigest() == block['sha256']
             vm.uc.mem_write(address, data)
         vm.heap = heap
+        vm.resolve_imports()
         self.tables = {int(kind): pointer for kind, pointer in report['tables'].items()}
         self.nodes = report['nodes']
