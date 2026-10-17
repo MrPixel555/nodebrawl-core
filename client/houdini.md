@@ -22,8 +22,12 @@ Previously the patch moved `e_phoff` from 64 to `0xd80000`, expanded the PHDR
 count from 8 to 9 and put the new table in the appended RX segment. Android's
 ARM64 loader accepts that arrangement, but the user reports that Houdini
 rejects the patched library. The log does not expose Houdini's internal
-rejection reason, so the relocated table is a compatibility hypothesis,
-not a confirmed diagnosis.
+rejection reason, so the relocated table was a compatibility hypothesis,
+not a confirmed diagnosis. The user subsequently reported that the
+canonical-header revision still fails. The uploaded report matches its exact
+published APK/library hashes and confirms e_phoff=64/e_phnum=8. That layout
+change alone did not resolve the problem on this MuMu device; the cause remains
+unresolved.
 
 The new layout keeps the table at **64**, keeps its **8 descriptors**, and
 places the complete table within the first original PT_LOAD. The optional
@@ -47,23 +51,37 @@ the signing identity is unchanged. Do not clear app data. Open it directly,
 confirm it gets past native-library loading and reaches Home, then try a
 Training battle. Keep `assets/configs.so` and the server key as configured.
 
-If loading still fails, run this immediately after the failed launch:
+For the next failing run, use live capture from the repository root:
 
 ```bat
 set ADB=tools\ADB\adb.exe
-node tools/client/diagnose.js 127.0.0.1:7555
+node tools/client/diagnose.js 127.0.0.1:7555 --launch
 ```
 
 Use the actual adb executable path/device serial on your machine; `ADB`
-can be omitted if adb is on PATH. This read-only collector requires no
-Frida. It records ABI/bridge properties, relevant log lines, and the
+can be omitted if adb is on PATH. No Frida is required. The explicit `--launch`
+option stops only this game's running process and starts GameApp; it never
+clears application data. Live logcat is drained before/during that launch and
+saved before any getprop/dumpsys/pull calls. It records ABI/bridge properties,
+relevant log lines, and the
 **installed** APK/library hashes and program-header location. It writes a
-local JSON file under `.local/client-diagnostics/`, prints its path, and
-does not install, launch, stop, reset or upload anything. Review that file
-before sharing it. The APK ZIP reader was checked against the built APK;
+local JSON file and full `.raw.log` under `.local/client-diagnostics/`, and
+prints their paths. It does not install, reset or upload anything. Without
+`--launch` it takes a read-only snapshot before metadata requests and never
+starts or stops the game. Review the files before sharing them. The APK ZIP
+reader was checked against the built APK;
 no Android/ADB device is attached to the build environment.
 
-Houdini/native-bridge loading and actual gameplay remain unverified for
-this revision until that device test is returned. This ARM64 APK cannot
+The previous collector captured logs after metadata requests and kept only
+2000 broad linker/package lines. In the supplied report, ADB linker chatter
+and NewFileUpdater messages occupied every retained line, excluding the game
+load/failure. The collector now preserves target-process details without that
+tail cutoff, includes a complete raw capture, and indicates whether a game
+load/failure was seen. Eight regression tests cover capture order, noisy
+logs, metadata errors and actual child-process stream collection; Android/ADB
+execution is still not available in the build environment.
+
+Successful Houdini/native-bridge loading and actual gameplay remain unverified;
+the reported MuMu test of the canonical-header revision failed. This ARM64 APK cannot
 support a bridge that only translates ARM32 or an emulator without working
 ARM64 translation; no ARMv7 or x86 game library was supplied.

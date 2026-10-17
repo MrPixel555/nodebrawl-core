@@ -17,5 +17,14 @@
   "sevenCallSitesUnchanged": true,
   "integrityConstantsUnchanged": true,
   "apkStructureTestsPassed": 9,
-  "nativeStartupAndBothHandshakesPassed": true
+  "nativeStartupAndBothHandshakesPassed": true,
+  "canonicalPhdrRevisionStillFailsOnUserEmulator": true,
+  "latestInstalledApkHashMatchesPublished": true,
+  "latestInstalledLibraryHashMatchesPublished": true,
+  "latestReportProgramHeaderOffset": 64,
+  "latestReportProgramHeaderCount": 8,
+  "latestUploadedReportSha256": "40a23f3764ea0d589c35bbf69252284183582400e22f9c87f12f1b84b2229063",
+  "latestReportContainsGameLoadOrFailure": false,
+  "diagnosticIssue": "Old collector captured after metadata commands, then kept only final 2000 broad linker/package lines; sample contains 1811 linker lines and 189 NewFileUpdater lines, no libg load or failure",
+  "hypothesisStatus": "Canonical PHDR layout alone was insufficient on the reported MuMu device; root cause remains unresolved"
 }
