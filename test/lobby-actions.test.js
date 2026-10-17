@@ -48,7 +48,7 @@ test('free pass tier-zero credit, cap and duplicate rejection match native execu
 
 test('free pass claim Home matches complete native codecs with and without Arena1 boost and capped balances', async () => {
   for (const fixture of require('./fixtures/native-season-pass-home.json')) {
-    const provider = createStarterHomeProvider({ now: () => fixture.nowMs })
+    const provider = createStarterHomeProvider({ emotes: false, now: () => fixture.nowMs })
     const result = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: 0, ...fixture.starter } })
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
     assert.equal(result.payload.length, fixture.nativeDecodeConsumed)

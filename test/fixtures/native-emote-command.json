@@ -1,0 +1,33 @@
+{
+  "id": 912,
+  "fields": {
+    "field_0x10": 0,
+    "field_0xc": 0,
+    "field_0x14": [
+      0,
+      0
+    ],
+    "field_0x20": {
+      "id": [
+        10001,
+        0
+      ],
+      "file": "ui.sc",
+      "checksum": "8328251af75aa0ccc1fc8d855b485cee",
+      "available": true,
+      "defaultOwned": true,
+      "sfx": {},
+      "sc": {
+        "file": "ui.sc",
+        "path": "/8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc/sc/ui.sc",
+        "checksum": "8328251af75aa0ccc1fc8d855b485cee"
+      },
+      "availableForOffer": false,
+      "exclusive": false
+    },
+    "field_0x28": 3
+  },
+  "payloadHex": "900e000000000000271100000000030000000000000000000000000000000575692e7363000000322f386633613033353062623163383766313637366463343537316664356138346366366166653564632f73632f75692e73630000002038333238323531616637356161306363633166633864383535623438356365650003",
+  "nativeDecodeConsumed": 128,
+  "nativeReencodeEqual": true
+}

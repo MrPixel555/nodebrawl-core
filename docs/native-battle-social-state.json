@@ -1,0 +1,57 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "profileGetters": {
+    "score": 137,
+    "best": 199,
+    "battles": 13,
+    "wins": 7,
+    "losses": 4
+  },
+  "partyAvailableAtInitialHomeClock": [
+    true,
+    true
+  ],
+  "oldEventStartExcluded": true,
+  "emoteDefinitions": [
+    {
+      "id": [
+        10001,
+        0
+      ],
+      "file": "ui.sc",
+      "checksum": "8328251af75aa0ccc1fc8d855b485cee",
+      "available": true,
+      "defaultOwned": true,
+      "sfx": {},
+      "sc": {
+        "file": "ui.sc",
+        "path": "/8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc/sc/ui.sc",
+        "checksum": "8328251af75aa0ccc1fc8d855b485cee"
+      },
+      "availableForOffer": false,
+      "exclusive": false
+    },
+    {
+      "id": [
+        10002,
+        0
+      ],
+      "file": "season_3_legendary_dl.sc",
+      "checksum": "dec76341b23995eeb4797d0618cb9e94",
+      "available": true,
+      "defaultOwned": true,
+      "sfx": {},
+      "sc": {
+        "file": "season_3_legendary_dl.sc",
+        "path": "/8f3a0350bb1c87f1676dc4571fd5a84cf6afe5dc/sc/season_3_legendary_dl.sc",
+        "checksum": "dec76341b23995eeb4797d0618cb9e94"
+      },
+      "availableForOffer": false,
+      "exclusive": false
+    }
+  ],
+  "emoteDefinitionsOwnedAndSelected": true,
+  "emoteExportsVerified": true,
+  "emoteSelectionCommandNativeRoundTrip": true,
+  "androidUiVerified": false
+}

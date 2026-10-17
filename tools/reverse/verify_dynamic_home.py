@@ -19,7 +19,7 @@ const {createStarterHomeProvider,createStarterProfileProvider}=require('./server
  const account={id:[0,37],name:'بازیکن'};
  if(clan)account.alliance={id:[0,37],name:'قبیله',badge:[16,0],role:2,level:0};
  for(const id of [21217,22757]){
- const result=await(id===21217?createStarterHomeProvider({unlocked,party:true}):createStarterProfileProvider({unlocked}))(account);
+ const result=await(id===21217?createStarterHomeProvider({unlocked,party:true,emotes:false}):createStarterProfileProvider({unlocked}))(account);
  out.push({id,unlocked,account,payloadHex:result.payload.toString('hex')});
  }}process.stdout.write(JSON.stringify(out));})().catch(e=>{console.error(e);process.exitCode=1});
 """

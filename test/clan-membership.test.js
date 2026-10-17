@@ -32,7 +32,7 @@ for (const fixture of require('./fixtures/native-full-clan.json')) {
 }
 for (const [index, fixture] of require('./fixtures/native-dynamic-home.json').entries()) {
   test(`current Party/clan Home/Profile native round trip ${index}`, async () => {
-    const provider = fixture.id === 21217 ? createStarterHomeProvider({ unlocked: fixture.unlocked, party: true }) : createStarterProfileProvider({ unlocked: fixture.unlocked })
+    const provider = fixture.id === 21217 ? createStarterHomeProvider({ emotes: false, unlocked: fixture.unlocked, party: true }) : createStarterProfileProvider({ unlocked: fixture.unlocked })
     const result = await provider(fixture.account)
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
     assert.equal(result.payload.length, fixture.nativeDecodeConsumed)
@@ -68,7 +68,7 @@ test('clan creation charges once atomically, persists membership and sends the n
   const rich = await store.applyStarterTurn(second, [{ id: 687, fields: { field_0x20: [55, 0] } }])
   const sent = [], session = { account: rich, send: (id, fields) => sent.push({ id, payload: encodeMessage(id, fields) }) }
   await createAllianceHandlers({ store }).get(10453)(session, settings)
-  assert.deepEqual(sent.map(packet => packet.id), [22192, 28165])
+  assert.deepEqual(sent.map(packet => packet.id), [22192, 28165, 21822])
   assert.equal(decodeMessage(22192, sent[0].payload).field_0x80.fields.field_0x38, true)
   assert.equal(decodeMessage(28165, sent[1].payload).field_0x80.members[0].field_0x10[1], second.id[1])
   assert.equal(session.account.starter.gold, 100)

@@ -3,6 +3,8 @@ const { ProtocolError } = require('../lib/protocol/stream')
 const { starter } = require('./data/starter-home.json')
 const { cards } = require('./data/unlocked-home.json')
 const ownedCards = new Set(cards.map(card => card.id))
+const { defaultDeck, validateEmoteDeck, definitions } = require('./emotes')
+const { historicalStatistics } = require('./battle/progression')
 const { packs } = require('./data/resource-packs.json')
 const { isArena1BoostCommand, validateArena1Boost, claimArena1Boost } = require('./arena-boost')
 const { isValidPlayerName } = require('./name-handlers')
@@ -13,6 +15,7 @@ function playerState (account) {
   const state = account.starter === undefined ? { selectedDeck: 0 } : account.starter
   selectedDeck(account)
   const read = (key, fallback) => Object.hasOwn(state, key) ? state[key] : fallback
+  const history = historicalStatistics(account.battleHistory)
   const value = {
     selectedDeck: state.selectedDeck,
     decks: read('decks', Array.from({ length: 5 }, () => [...starter.deckIds])),
@@ -30,7 +33,15 @@ function playerState (account) {
     passSeenCrowns: read('passSeenCrowns', -1),
     passInitialized: read('passInitialized', state.freePassGoldClaimed === true || state.passCrowns > 0 || state.passSeenCrowns >= 0),
     homeFlags: read('homeFlags', 0),
+    emoteDeck: read('emoteDeck', defaultDeck),
+    trophies: read('trophies', history.trophies),
+    bestTrophies: read('bestTrophies', Math.max(history.bestTrophies, read('trophies', 0))),
+    battles: read('battles', history.battles),
+    wins: read('wins', history.wins),
+    losses: read('losses', history.losses),
+    threeCrownWins: read('threeCrownWins', history.threeCrownWins),
   }
+  validateEmoteDeck(value.emoteDeck)
   if (!Array.isArray(value.decks) || value.decks.length !== 5) throw new ProtocolError('Invalid starter decks')
   for (const deck of value.decks) validateDeck(deck)
   value.inventory = read('inventory', inventoryFor(value.decks[value.selectedDeck]))
@@ -38,13 +49,17 @@ function playerState (account) {
   for (const key of ['gold', 'freeGold', 'gems', 'freeGems']) {
     if (!Number.isInteger(value[key]) || value[key] < 0 || value[key] > 2147483647) throw new ProtocolError('Invalid starter resources')
   }
+  for (const field of ['trophies', 'bestTrophies', 'battles', 'wins', 'losses', 'threeCrownWins']) {
+    if (!Number.isInteger(value[field]) || value[field] < 0 || value[field] > 2147483647) throw new ProtocolError('Invalid player battle statistics')
+  }
+  if (value.bestTrophies < value.trophies || value.wins + value.losses > value.battles || value.threeCrownWins > value.wins) throw new ProtocolError('Invalid player battle statistics')
   if (value.freeGems > value.gems) throw new ProtocolError('Invalid starter resources')
   if (typeof value.freePassGoldClaimed !== 'boolean') throw new ProtocolError('Invalid season pass claim state')
   if (!Number.isInteger(value.passCrowns) || value.passCrowns < 0 || value.passCrowns > 2147483647 || !Number.isInteger(value.passSeenCrowns) || value.passSeenCrowns < -1 || value.passSeenCrowns > value.passCrowns) throw new ProtocolError('Invalid season pass progress')
   if (typeof value.passInitialized !== 'boolean') throw new ProtocolError('Invalid season pass initialization state')
   if (!Number.isInteger(value.homeFlags) || value.homeFlags < 0 || value.homeFlags > 30 || (value.homeFlags & ~30) !== 0) throw new ProtocolError('Invalid Home flags')
   if (typeof value.nameSet !== 'boolean' || !Number.isInteger(value.nameChangeCount) || value.nameChangeCount < -1 || value.nameChangeCount > 2147483646 || (!value.nameSet && value.nameChangeCount !== -1)) throw new ProtocolError('Invalid starter name state')
-  return { ...value, decks: value.decks.map(deck => [...deck]), inventory: [...value.inventory] }
+  return { ...value, emoteDeck: value.emoteDeck.map(id => [...id]), decks: value.decks.map(deck => [...deck]), inventory: [...value.inventory] }
 }
 
 function validateDeck (deck) {
@@ -54,6 +69,7 @@ function validateDeck (deck) {
 function applyCommands (account, commands, { now = Date.now } = {}) {
   const next = { ...account, starter: { ...account.starter, ...playerState(account) } }
   for (const { id, fields } of commands) {
+    if (id === 565) continue // Marks the emote collection seen; no currency or ownership changes.
     if (id === 805) continue // Both applied Home level and Avatar level are 1.
     if (id === 703 || id === 563) {
       const deck = fields.field_0x1c
@@ -66,6 +82,10 @@ function applyCommands (account, commands, { now = Date.now } = {}) {
       activateDeck(next.starter, target)
       if (id === 563) next.starter.decks[deck] = [...target]
       next.starter.selectedDeck = deck
+    } else if (id === 912) {
+      const reference = fields.field_0x20?.id, slot = fields.field_0x28
+      if (!Number.isInteger(slot) || slot < 0 || slot > 7 || !Array.isArray(reference) || !definitions.some(entry => entry.id.every((n, i) => n === reference[i]))) throw new ProtocolError('Invalid emote selection')
+      next.starter.emoteDeck[slot] = [...reference]
     } else if (id === 693) {
       swapCard(next.starter, fields)
     } else if (id === 869) {

@@ -17,12 +17,21 @@ function validateAlliances (database) {
   const ids = new Set()
   for (const clan of database.alliances) {
     if (!equalId(clan.id, [0, clan.id?.[1]]) || !Number.isInteger(clan.id[1]) || clan.id[1] < 1 || clan.id[1] >= database.nextAllianceId || ids.has(clan.id[1]) || !text(clan.name, 60) || !text(clan.description, 560, true) || !reference(clan.badge, 16, catalogue.alliance_badges) || !reference(clan.region, 57, catalogue.regions, true) || ![1, 2, 3].includes(clan.type) || !Number.isInteger(clan.requiredScore) || clan.requiredScore < 0 || clan.requiredScore > 100000) throw Error('Invalid clan database')
+    if (clan.chat !== undefined && (!Array.isArray(clan.chat) || clan.chat.length > 100 || clan.chat.some(entry => !validEntry(entry) || !text(entry.text, 512)))) throw Error('Invalid clan chat history')
+    if (clan.nextChatId !== undefined && (!Number.isInteger(clan.nextChatId) || clan.nextChatId < 1 || clan.nextChatId > 2147483647)) throw Error('Invalid clan chat sequence')
     ids.add(clan.id[1])
   }
-  for (const account of database.accounts) { if (account.alliance) {
-    const clan = database.alliances.find(clan => equalId(clan.id, account.alliance.id))
-    if (!clan || account.alliance.name !== clan.name || !equalId(account.alliance.badge, clan.badge) || ![1, 2, 3, 4].includes(account.alliance.role) || account.alliance.level !== 0) throw Error('Invalid clan membership')
-  } }
+  for (const account of database.accounts) {
+    if (account.mail !== undefined && (!Array.isArray(account.mail) || account.mail.length > 50 || account.mail.some(entry => !validEntry(entry) || !text(entry.subject, 256) || !text(entry.text, 256) || !reference(entry.badge, 16, catalogue.alliance_badges)))) throw Error('Invalid clan mailbox')
+    if (account.clanMailAvailableAt !== undefined && (!Number.isSafeInteger(account.clanMailAvailableAt) || account.clanMailAvailableAt < 0)) throw Error('Invalid clan mail cooldown')
+    if (account.alliance) {
+      const clan = database.alliances.find(clan => equalId(clan.id, account.alliance.id))
+      if (!clan || account.alliance.name !== clan.name || !equalId(account.alliance.badge, clan.badge) || ![1, 2, 3, 4].includes(account.alliance.role) || account.alliance.level !== 0) throw Error('Invalid clan membership')
+    } }
+}
+function validEntry (entry) {
+  const identity = id => Array.isArray(id) && id.length === 2 && id.every(Number.isInteger) && id[0] === 0 && id[1] > 0 && id[1] < 2147483647
+  return entry && identity(entry.id) && identity(entry.sender) && text(entry.name, 200) && [1, 2, 3, 4].includes(entry.role) && Number.isSafeInteger(entry.at) && entry.at >= 0
 }
 function createAlliance (database, account, fields) {
   if (account.alliance) throw new ProtocolError('Player already belongs to a clan')
@@ -38,13 +47,47 @@ function createAlliance (database, account, fields) {
   database.alliances.push(clan)
   return clan
 }
+function editAlliance (database, account, fields) {
+  const clan = database.alliances.find(clan => equalId(clan.id, account.alliance?.id))
+  if (!clan || ![2, 4].includes(account.alliance.role)) throw new ProtocolError('Clan settings require leader or co-leader')
+  if (!text(fields.field_0x80, 560, true) || !reference(fields.field_0x88, 16, catalogue.alliance_badges) || !reference(fields.field_0x90, 57, catalogue.regions, true) || ![1, 2, 3].includes(fields.field_0x98) || !Number.isInteger(fields.field_0x9c) || fields.field_0x9c < 0 || fields.field_0x9c > 100000) throw new ProtocolError('Invalid clan settings')
+  Object.assign(clan, { description: fields.field_0x80, badge: [...fields.field_0x88], region: [...fields.field_0x90], type: fields.field_0x98, requiredScore: fields.field_0x9c })
+  for (const member of database.accounts.filter(member => equalId(member.alliance?.id, clan.id))) member.alliance.badge = [...clan.badge]
+  return clan
+}
+function postChat (database, account, value, now) {
+  const clan = database.alliances.find(clan => equalId(clan.id, account.alliance?.id))
+  if (!clan) throw new ProtocolError('Clan membership required')
+  if (!text(value, 512)) throw new ProtocolError('Invalid clan chat text')
+  clan.chat ??= []
+  if (clan.chat.length && clan.chat[clan.chat.length - 1].sender.every((n, i) => n === account.id[i]) && now - clan.chat[clan.chat.length - 1].at < 500) throw new ProtocolError('Clan chat rate limit')
+  clan.nextChatId ??= 1
+  if (clan.nextChatId >= 2147483647) throw new ProtocolError('Clan chat sequence exhausted')
+  const entry = { id: [0, clan.nextChatId++], sender: [...account.id], name: account.name, role: account.alliance.role, level: 1, text: value, at: now }
+  clan.chat = [...clan.chat.slice(-99), entry]
+  return { clan, entry }
+}
+function postMail (database, account, fields, now) {
+  const clan = database.alliances.find(clan => equalId(clan.id, account.alliance?.id))
+  if (!clan || ![2, 4].includes(account.alliance.role)) throw new ProtocolError('Clan mail requires leader or co-leader')
+  if (!text(fields.field_0x20, 256) || !text(fields.field_0x28, 256)) throw new ProtocolError('Invalid clan mail')
+  if ((account.clanMailAvailableAt || 0) > now) throw new ProtocolError('Clan mail cooldown active')
+  database.nextMailId ??= 1
+  if (!Number.isInteger(database.nextMailId) || database.nextMailId < 1 || database.nextMailId >= 2147483647) throw new ProtocolError('Clan mailbox sequence exhausted')
+  const entry = { id: [0, database.nextMailId++], sender: [...account.id], name: account.name, role: account.alliance.role, clanId: [...clan.id], badge: [...clan.badge], subject: fields.field_0x20, text: fields.field_0x28, at: now }
+  const recipients = database.accounts.filter(member => equalId(member.alliance?.id, clan.id))
+  for (const member of recipients) member.mail = [...(member.mail || []).slice(-49), entry]
+  account.clanMailAvailableAt = now + 43200000
+  return entry
+}
+function agedEntries (entries = [], now = Date.now()) { return entries.map(entry => ({ ...entry, age: Math.max(0, Math.floor((now - entry.at) / 1000)) })) }
 function clanData (database, clan) {
   const members = database.accounts.filter(account => equalId(account.alliance?.id, clan.id))
   return {
-    header: { field_0x0: clan.id, field_0x8: clan.name, field_0x10: clan.badge, field_0x18: clan.type, field_0x1c: members.length, field_0x24: clan.requiredScore, field_0x50: clan.region },
+    header: { field_0x0: clan.id, field_0x8: clan.name, field_0x10: clan.badge, field_0x18: clan.type, field_0x1c: members.length, field_0x20: members.reduce((sum, account) => sum + playerState(account).trophies, 0), field_0x24: clan.requiredScore, field_0x50: clan.region },
     description: clan.description,
-    members: members.map((account, index) => ({ field_0x10: account.id, field_0x8: account.id, field_0x20: account.name, field_0x48: [54, 1], field_0x28: account.alliance.role, field_0x2c: 1, field_0x30: 0, field_0x3c: index + 1, field_0x40: index + 1 })),
+    members: members.map((account, index) => ({ field_0x10: account.id, field_0x8: account.id, field_0x20: account.name, field_0x48: [54, 1], field_0x28: account.alliance.role, field_0x2c: 1, field_0x30: playerState(account).trophies, field_0x3c: index + 1, field_0x40: index + 1 })),
   }
 }
 
-module.exports = { equalId, validateAlliances, createAlliance, clanData }
+module.exports = { equalId, validateAlliances, createAlliance, editAlliance, postChat, postMail, agedEntries, clanData }

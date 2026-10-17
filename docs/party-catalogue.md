@@ -61,3 +61,8 @@ case is not counted as a full new codec. Encrypted TCP tests compare the actual
 response to the native fixture. This completes the prefetch exchange; the separate Home catalogue now
 advertises the two supported CASUAL events. General friend relations remain
 unimplemented.
+
+The previous Unix start time was rejected by the zero initial Home simulation
+clock. The current catalogue starts at zero; original availability/selection
+functions now execute successfully. See [the current fixes](battle-social-fixes.md)
+and [native evidence](native-battle-social-state.json). Android rendering remains unverified.

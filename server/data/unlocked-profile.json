@@ -102,14 +102,25 @@
       "type": "vint"
     },
     {
-      "hex": "00000000000000000002000000000009"
+      "field": "trophies",
+      "type": "vint"
+    },
+    {
+      "hex": "000000000000000002000000000009"
     },
     {
       "field": "resourceBalances",
       "type": "nativeResources"
     },
     {
-      "hex": "00000003050600051b0105089f0100000000"
+      "hex": "000000"
+    },
+    {
+      "field": "profileStatistics",
+      "type": "nativeStatistics"
+    },
+    {
+      "hex": "00000000"
     },
     {
       "field": "gems",
@@ -129,7 +140,22 @@
       "base": 1
     },
     {
-      "hex": "0000000000000700000000000000000000000000000000"
+      "field": "battles",
+      "type": "vint"
+    },
+    {
+      "hex": "0000"
+    },
+    {
+      "field": "wins",
+      "type": "vint"
+    },
+    {
+      "field": "losses",
+      "type": "vint"
+    },
+    {
+      "hex": "000700000000000000000000000000000000"
     }
   ],
   "scope": "Native profile codec with 95 owned-card statistic and eight active cards; changed inventory/profile Android UI unverified."

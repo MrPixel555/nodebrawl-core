@@ -1,0 +1,77 @@
+[
+  {
+    "id": 21749,
+    "entry": {
+      "id": [
+        0,
+        7
+      ],
+      "sender": [
+        0,
+        37
+      ],
+      "name": "بازیکن",
+      "role": 2,
+      "level": 1,
+      "text": "سلام clan",
+      "age": 0
+    },
+    "payloadHex": "020007002500250000000cd8a8d8a7d8b2db8cdaa9d98602010000000000000000000000000000000dd8b3d984d8a7d98520636c616e",
+    "nativeDecodeConsumed": 54,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 21822,
+    "entries": [
+      {
+        "id": [
+          0,
+          7
+        ],
+        "sender": [
+          0,
+          37
+        ],
+        "name": "بازیکن",
+        "role": 2,
+        "level": 1,
+        "text": "سلام clan",
+        "age": 0
+      }
+    ],
+    "payloadHex": "01020007002500250000000cd8a8d8a7d8b2db8cdaa9d98602010000000000000000000000000000000dd8b3d984d8a7d98520636c616e00",
+    "nativeDecodeConsumed": 56,
+    "nativeReencodeEqual": true
+  },
+  {
+    "id": 28299,
+    "entries": [
+      {
+        "id": [
+          0,
+          8
+        ],
+        "sender": [
+          0,
+          37
+        ],
+        "name": "Leader",
+        "role": 2,
+        "clanId": [
+          0,
+          3
+        ],
+        "badge": [
+          16,
+          0
+        ],
+        "subject": "News",
+        "text": "Welcome to clan",
+        "age": 0
+      }
+    ],
+    "payloadHex": "01030000000000000008010000000000000025000000064c656164657200000000000000000000030000000f57656c636f6d6520746f20636c616e100002000000044e65777300",
+    "nativeDecodeConsumed": 71,
+    "nativeReencodeEqual": true
+  }
+]

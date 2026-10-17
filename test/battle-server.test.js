@@ -29,6 +29,7 @@ async function connect (port) {
   socket.on('close', () => { for (const waiter of pending.splice(0)) { clearTimeout(waiter.timer); waiter.reject(Error('Connection closed')) } })
   const client = {
     socket,
+    frames,
     send: (id, fields = {}) => socket.write(encodeFrame(id, 0, encodeMessage(id, fields))),
     receive: id => {
       const index = frames.findIndex(frame => frame.id === id)
@@ -39,10 +40,10 @@ async function connect (port) {
       })
     },
   }
-  client.login = async (id = [0, 0], token = null) => {
+  client.login = async (id = [0, 0], token = null, inBattle = false) => {
     client.send(10101, { field_0x80: id, field_0x88: token, field_0x90: 3, field_0x98: 1945 })
     const ok = decodeMessage(20758, (await client.receive(20758)).payload)
-    await client.receive(21217)
+    await client.receive(inBattle ? 28991 : 21217)
     return { id: ok.field_0x80, token: ok.field_0x90 }
   }
   return client
@@ -54,8 +55,8 @@ async function setup (t, options = {}) {
   const battles = new BattleCoordinator({ store, homeProvider, logger, fallbackMs: 0, ...options })
   const handlers = createStarterHandlers({ store, battles, logger })
   for (const [id, handler] of battles.handlers()) handlers.set(id, handler)
-  const game = createGameServer({ store, homeProvider, handlers, logger, traceNetwork: true })
-  game.events.on('login', session => battles.login(session).catch(error => battles.logError(error)))
+  const game = createGameServer({ store, homeProvider, handlers, logger, traceNetwork: true, loginResponseProvider: options.initialLogin ? session => battles.initialResponse(session) : null })
+  if (!options.initialLogin) game.events.on('login', session => battles.login(session).catch(error => battles.logError(error)))
   game.events.on('disconnect', session => { if (session.account) battles.disconnect(session) })
   game.server.listen(0, '127.0.0.1'); await once(game.server, 'listening')
   t.after(async () => { await battles.stop(); await game.stop(); await fs.rm(directory, { recursive: true, force: true }) })
@@ -118,4 +119,38 @@ test('real TCP normal queue cancellation, two-human matchmaking, forfeit and per
   assert.ok(logs.some(row => row.event === 'matchmaking-cancelled'))
   assert.equal(logs.some(row => row.event === 'session-error'), false)
   first.socket.destroy(); second.socket.destroy()
+})
+
+test('TCP login routes directly to the unfinished online match; offline completion persists both accounts and 18100 returns current Home', { timeout: 60000 }, async t => {
+  const { game, battles, store, port } = await setup(t, { initialLogin: true })
+  const first = await connect(port), second = await connect(port)
+  const identities = [await first.login(), await second.login()]
+  requestBattle(first); requestBattle(second)
+  await Promise.all([first.receive(28991), second.receive(28991)])
+  first.send(15263); second.send(15263)
+  await Promise.all([first.receive(26980), second.receive(26980)])
+  const match = [...battles.matches.values()][0]
+  let disconnected = once(game.events, 'disconnect')
+  first.socket.destroy(); await disconnected
+  const resumed = await connect(port)
+  await resumed.login(identities[0].id, identities[0].token, true)
+  resumed.send(15263); resumed.send(10108); await resumed.receive(20108)
+  assert.equal(resumed.frames.some(frame => frame.id === 21217), false)
+  assert.equal(battles.active(match.players[0].session), match)
+  for (const client of [resumed, second]) {
+    disconnected = once(game.events, 'disconnect'); client.socket.destroy(); await disconnected
+  }
+  assert.equal(match.phase, 'running'); assert.equal(match.awayTimer, undefined)
+  const result = await match.process.call('forfeit', { slot: 0 })
+  await battles.finish(match, result)
+  const [loser, winner] = await Promise.all(identities.map(id => store.login(id.id, id.token)))
+  assert.equal(loser.battleHistory.length, 1); assert.equal(winner.battleHistory.length, 1)
+  assert.equal(loser.starter.trophies, 0)
+  assert.ok(winner.starter.trophies >= 36 && winner.starter.trophies <= 42)
+  const returned = await connect(port)
+  await returned.login(identities[1].id, identities[1].token)
+  returned.send(18100, { field_0x7c: true, field_0x80: 0 }); await returned.receive(21217)
+  assert.equal(returned.frames.some(frame => frame.id === 28991), false)
+  assert.equal((await store.login(identities[1].id, identities[1].token)).battleHistory.length, 1)
+  returned.socket.destroy()
 })

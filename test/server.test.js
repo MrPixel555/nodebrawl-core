@@ -135,12 +135,12 @@ test('deck selection persists without changing credentials or another account', 
 })
 
 test('TCP starter turns preserve deck selection across login and reject unsupported batches atomically', { timeout: 5000 }, async t => {
-  const { game, port, directory } = await setup(t, { homeProvider: createStarterHomeProvider() })
+  const { game, port, directory } = await setup(t, { homeProvider: createStarterHomeProvider({ emotes: false }) })
   const entries = []
   const handlers = createStarterHandlers({ store: new AccountStore(directory), logger: entry => entries.push(entry), traceNetwork: true })
   // Both servers use the same account directory; reconnect through the other
   // instance to prove it reloads persistent state rather than a session cache.
-  const active = createGameServer({ store: new AccountStore(directory), homeProvider: createStarterHomeProvider(), handlers })
+  const active = createGameServer({ store: new AccountStore(directory), homeProvider: createStarterHomeProvider({ emotes: false }), handlers })
   active.server.listen(0, '127.0.0.1')
   await once(active.server, 'listening')
   t.after(() => active.stop())
@@ -174,7 +174,7 @@ test('TCP starter turns preserve deck selection across login and reject unsuppor
   next.send(10101, { field_0x80: ok.field_0x80, field_0x88: ok.field_0x90 }, 4)
   assert.equal((await next.receive()).id, 20758)
   const home = await next.receive()
-  const expected = await createStarterHomeProvider()(await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90))
+  const expected = await createStarterHomeProvider({ emotes: false })(await new AccountStore(directory).login(ok.field_0x80, ok.field_0x90))
   assert.deepEqual(home.payload, expected.payload)
   assert.equal(game.statistics.logins, 1)
   next.socket.destroy()
@@ -196,7 +196,7 @@ test('observed Arena1 boost persists once over TCP and sends the native remainin
   let now = fixtures[0].nowMs
   const store = new AccountStore(directory, { now: () => now })
   const entries = []
-  const game = createGameServer({ store, homeProvider: createStarterHomeProvider({ now: () => now }), handlers: createStarterHandlers({ store, logger: entry => entries.push(entry) }) })
+  const game = createGameServer({ store, homeProvider: createStarterHomeProvider({ emotes: false, now: () => now }), handlers: createStarterHandlers({ store, logger: entry => entries.push(entry) }) })
   game.server.listen(0, '127.0.0.1')
   await once(game.server, 'listening')
   t.after(() => game.stop())
@@ -216,7 +216,7 @@ test('observed Arena1 boost persists once over TCP and sends the native remainin
   for (const fixture of fixtures) {
     now = fixture.nowMs
     const nextStore = new AccountStore(directory, { now: () => now })
-    const nextGame = createGameServer({ store: nextStore, homeProvider: createStarterHomeProvider({ now: () => now }), handlers: createStarterHandlers({ store: nextStore, logger: entry => entries.push(entry) }) })
+    const nextGame = createGameServer({ store: nextStore, homeProvider: createStarterHomeProvider({ emotes: false, now: () => now }), handlers: createStarterHandlers({ store: nextStore, logger: entry => entries.push(entry) }) })
     nextGame.server.listen(0, '127.0.0.1')
     await once(nextGame.server, 'listening')
     const connection = await client(nextGame.server.address().port)
@@ -276,7 +276,7 @@ test('self AvatarStream roundtrips the native empty response repeatedly without 
   const account = await store.login([0, 0], null)
   const other = await store.login([0, 0], null)
   const entries = []
-  const game = createGameServer({ store, homeProvider: createStarterHomeProvider(), handlers: createStarterHandlers({ store, traceNetwork: true, logger: entry => entries.push(entry) }) })
+  const game = createGameServer({ store, homeProvider: createStarterHomeProvider({ emotes: false }), handlers: createStarterHandlers({ store, traceNetwork: true, logger: entry => entries.push(entry) }) })
   game.server.listen(0, '127.0.0.1')
   await once(game.server, 'listening')
   t.after(() => game.stop())
@@ -318,7 +318,7 @@ test('new-player naming and deck contents persist through a new server and store
     const store = new AccountStore(directory)
     const handlers = createStarterHandlers({ store, logger: entry => entries.push(entry) })
     for (const [id, handler] of createNameHandlers({ logger: entry => entries.push(entry) })) handlers.set(id, handler)
-    const game = createGameServer({ store, homeProvider: createStarterHomeProvider(), handlers })
+    const game = createGameServer({ store, homeProvider: createStarterHomeProvider({ emotes: false }), handlers })
     game.server.listen(0, '127.0.0.1')
     await once(game.server, 'listening')
     t.after(() => game.server.listening ? game.stop() : undefined)
@@ -366,7 +366,7 @@ test('new-player naming and deck contents persist through a new server and store
   next.send(10101, { field_0x80: account.id, field_0x88: account.token }, 4)
   const ok = decodeMessage(20758, (await next.receive()).payload)
   assert.deepEqual(ok.field_0x80, account.id)
-  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider()(saved)).payload)
+  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider({ emotes: false })(saved)).payload)
   const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
   const badDeck = [...cards]; badDeck[1] = badDeck[0]
   next.send(13597, { commands: [{ id: 703, fields: { field_0x1c: 1 } }, { id: 563, fields: { field_0x1c: 2, field_0x20: badDeck } }] })
@@ -382,7 +382,7 @@ test('new-player naming and deck contents persist through a new server and store
 test('gold pack and newly unlocked deck cards survive a TCP reconnect and store restart', async t => {
   const handlers = new Map()
   const entries = []
-  const { game, port, directory } = await setup(t, { handlers, homeProvider: createStarterHomeProvider(), traceNetwork: true, logger: entry => entries.push(entry) })
+  const { game, port, directory } = await setup(t, { handlers, homeProvider: createStarterHomeProvider({ emotes: false }), traceNetwork: true, logger: entry => entries.push(entry) })
   const store = new AccountStore(directory)
   for (const [id, handler] of createStarterHandlers({ store })) handlers.set(id, handler)
   const c = await client(port)
@@ -405,7 +405,7 @@ test('gold pack and newly unlocked deck cards survive a TCP reconnect and store 
   const next = await client(port)
   next.send(10101, { field_0x80: ok.field_0x80, field_0x88: ok.field_0x90 }, 4)
   assert.deepEqual(decodeMessage(20758, (await next.receive()).payload).field_0x80, saved.id)
-  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider()(saved)).payload)
+  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider({ emotes: false })(saved)).payload)
   assert.deepEqual(entries.filter(entry => entry.event === 'account-login').map(entry => entry.kind), ['created', 'resumed'])
   assert.ok(!JSON.stringify(entries).includes(saved.token))
   const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
@@ -420,7 +420,7 @@ test('gold pack and newly unlocked deck cards survive a TCP reconnect and store 
 test('manual card swaps and free pass gold survive reconnect and store restart without repeat rewards', { timeout: 5000 }, async t => {
   const handlers = new Map()
   const entries = []
-  const { game, port, directory } = await setup(t, { handlers, homeProvider: createStarterHomeProvider() })
+  const { game, port, directory } = await setup(t, { handlers, homeProvider: createStarterHomeProvider({ emotes: false }) })
   const store = new AccountStore(directory)
   for (const [id, handler] of createStarterHandlers({ store, logger: entry => entries.push(entry) })) handlers.set(id, handler)
   const c = await client(port)
@@ -443,14 +443,14 @@ test('manual card swaps and free pass gold survive reconnect and store restart w
   c.socket.destroy()
   await game.stop()
   const restartedStore = new AccountStore(directory)
-  const restarted = createGameServer({ store: restartedStore, homeProvider: createStarterHomeProvider(), handlers: createStarterHandlers({ store: restartedStore, logger: entry => entries.push(entry) }) })
+  const restarted = createGameServer({ store: restartedStore, homeProvider: createStarterHomeProvider({ emotes: false }), handlers: createStarterHandlers({ store: restartedStore, logger: entry => entries.push(entry) }) })
   restarted.server.listen(0, '127.0.0.1')
   await once(restarted.server, 'listening')
   t.after(() => restarted.stop())
   const next = await client(restarted.server.address().port)
   next.send(10101, { field_0x80: saved.id, field_0x88: saved.token }, 4)
   await next.receive()
-  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider()(saved)).payload)
+  assert.deepEqual((await next.receive()).payload, (await createStarterHomeProvider({ emotes: false })(saved)).payload)
   const before = await fs.readFile(path.join(directory, 'accounts.json'), 'utf8')
   next.send(13597, { commands: [require('../docs/native-lobby-actions.json').reward] })
   next.send(10108)
@@ -560,7 +560,7 @@ for (const starterHome of [false, true]) {
     for (const [id, handler] of createAllianceHandlers()) handlers.set(id, handler)
     for (const [id, handler] of createNameHandlers({ logger: entry => entries.push(entry) })) handlers.set(id, handler)
     const contentUrls = ['http://127.0.0.1:9338']
-    const { game, port, directory } = await setup(t, { handlers, contentUrls, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider() : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
+    const { game, port, directory } = await setup(t, { handlers, contentUrls, transportFactory: () => new NativeTransport(secret), homeProvider: starterHome ? createStarterHomeProvider({ emotes: false }) : async () => ({ payload: Buffer.from('SYNTHETIC HOME FOR TCP TEST ONLY') }) })
     if (starterHome) for (const [id, handler] of createStarterHandlers({ store: new AccountStore(directory) })) handlers.set(id, handler)
     const c = await client(port)
     c.send(10100)

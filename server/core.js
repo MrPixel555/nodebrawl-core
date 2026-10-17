@@ -7,11 +7,12 @@ const { encodeMessage, decodeMessage, schemaFor, loginOk, loginFailed } = requir
 const { ProtocolError } = require('../lib/protocol/stream')
 const { contentUrl } = require('./content')
 
-function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false, contentUrls = [] } = {}) {
+function createGameServer ({ store, homeProvider = null, handlers = new Map(), transportFactory = null, idleTimeout = 30000, maxConnections = 128, maxPayload = 1048576, logger = () => {}, traceNetwork = false, contentUrls = [], loginResponseProvider = null } = {}) {
   if (!Array.isArray(contentUrls) || contentUrls.length > 8) throw new TypeError('Invalid content URLs')
   contentUrls = contentUrls.map(contentUrl)
   if (!store || typeof store.login !== 'function') throw new TypeError('Account store required')
   if (transportFactory !== null && typeof transportFactory !== 'function') throw new TypeError('Invalid transport factory')
+  if (loginResponseProvider !== null && typeof loginResponseProvider !== 'function') throw new TypeError('Invalid login response provider')
   if (homeProvider !== null && typeof homeProvider !== 'function') throw new TypeError('Invalid Home provider')
   if (!(handlers instanceof Map) || [...handlers.values()].some(handler => typeof handler !== 'function')) throw new TypeError('Invalid message handlers')
   if (!Number.isInteger(idleTimeout) || idleTimeout < 1 || idleTimeout > 2147483647) throw new TypeError('Invalid idle timeout')
@@ -86,14 +87,15 @@ function createGameServer ({ store, homeProvider = null, handlers = new Map(), t
         const account = await store.login(login.field_0x80, login.field_0x88)
         trace({ event: 'account-login', kind: login.field_0x80.every(part => part === 0) ? 'created' : 'resumed' })
         if (socket.destroyed) return
-        const home = await homeProvider(account, login)
+        session.account = account
+        const resumed = loginResponseProvider ? await loginResponseProvider(session) : null
+        const home = resumed || await homeProvider(session.account, login)
         if (socket.destroyed) return
         if (!home || !Buffer.isBuffer(home.payload)) throw new Error('Home provider did not supply a payload')
         sendBatch([
-          { id: 20758, payload: encodeMessage(20758, loginOk(account, login, new Date(), contentUrls)), version: 1 },
-          { id: 21217, payload: home.payload, version: home.version ?? 0 },
+          { id: 20758, payload: encodeMessage(20758, loginOk(session.account, login, new Date(), contentUrls)), version: 1 },
+          { id: home.id ?? 21217, payload: home.payload, version: home.version ?? 0 },
         ])
-        session.account = account
         session.state = 'authenticated'
         statistics.logins++
         trace({ event: 'login-accepted', state: session.state, homeBytes: home.payload.length })

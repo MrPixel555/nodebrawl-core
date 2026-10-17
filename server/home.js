@@ -11,6 +11,7 @@ const { playerState } = require('./starter-state')
 const { writeArenaBoostState } = require('./arena-boost')
 const { writePassClaim } = require('./season-pass')
 const { encodeEventCatalogue } = require('../lib/protocol/event-catalogue')
+const { writeEmotes } = require('./emotes')
 const { partyCatalogue } = require('./party')
 
 // External templates bind fixed-width account IDs explicitly. The starter
@@ -36,15 +37,15 @@ async function loadHomeTemplate (filename) {
   }
 }
 
-function createStarterHomeProvider ({ unlocked = true, now = Date.now, party = false } = {}) {
-  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217, now, party)
+function createStarterHomeProvider ({ unlocked = true, now = Date.now, party = false, emotes = true } = {}) {
+  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217, now, party, emotes)
 }
 
 function createStarterProfileProvider ({ unlocked = true } = {}) {
   return createPlayerProvider(unlocked ? unlockedProfile : starterProfile, 22757)
 }
 
-function createPlayerProvider (data, messageId, now = Date.now, party = false) {
+function createPlayerProvider (data, messageId, now = Date.now, party = false, emotes = true) {
   if (typeof now !== 'function') throw new Error('Invalid Home clock')
   if (data.schema !== 1 || data.librarySha256 !== profile.library_sha256 || data.messageId !== messageId) throw new Error('Starter player data does not match this library')
   const parts = data.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
@@ -52,7 +53,7 @@ function createPlayerProvider (data, messageId, now = Date.now, party = false) {
     if (!Array.isArray(account.id) || account.id.length !== 2 || typeof account.name !== 'string' || !account.name || Buffer.byteLength(account.name, 'utf8') > 200) throw new ProtocolError('Invalid starter player identity')
     const writer = new Writer()
     const state = playerState(account)
-    const nowMs = state.arena1Boost === null ? null : now()
+    const nowMs = now()
     for (const part of parts) {
       if (part.buffer) writer.raw(part.buffer)
       else if (part.field === 'eventCatalogue' && part.type === 'nativeEvents') writer.raw(encodeEventCatalogue(partyCatalogue(party)))
@@ -79,12 +80,18 @@ function createPlayerProvider (data, messageId, now = Date.now, party = false) {
             .vint(clan.badge[1] + 1).vint(clan.role).vint(clan.level).bool(false).bool(false)
         }
       }
+      else if (part.field === 'emotes' && part.type === 'nativeEmotes') { if (emotes) writeEmotes(writer, state.emoteDeck); else writer.raw(Buffer.alloc(72)) }
+      else if (part.field === 'profileStatistics' && part.type === 'nativeStatistics') {
+        writer.vint(state.threeCrownWins ? 4 : 3).dataReference([5, 6]).vint(state.bestTrophies)
+          .dataReference([5, 27]).vint(1).dataReference([5, 8]).vint(data === unlockedHome || data === unlockedProfile ? unlockedHome.cards.length : 8)
+        if (state.threeCrownWins) writer.dataReference([5, 7]).vint(state.threeCrownWins)
+      }
       else if (part.field === 'resourceBalances' && part.type === 'nativeResources') {
         const freeGoldPresent = state.freeGold > 0
         writer.vint(freeGoldPresent ? 2 : 1).dataReference([5, 1]).vint(state.gold)
         if (freeGoldPresent) writer.dataReference([5, 5]).vint(state.freeGold)
       }
-      else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount', 'homeFlags'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
+      else if (['selectedDeck', 'gold', 'gems', 'freeGems', 'nameChangeCount', 'homeFlags', 'trophies', 'battles', 'wins', 'losses'].includes(part.field) && part.type === 'vint') writer.vint(state[part.field])
       else throw new Error('Invalid starter Home binding')
     }
     return { payload: writer.toBuffer(), version: data.version }

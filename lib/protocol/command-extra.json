@@ -220,6 +220,35 @@
       ],
       "unresolvedReason": null,
       "verification": "tools/reverse/verify_clan_membership.py"
+    },
+    {
+      "id": 912,
+      "vtable": "0xa59bb0",
+      "encode": "0x379e24",
+      "decode": "0x57bc98",
+      "execute": "0x2c5320",
+      "fields": [
+        {
+          "field": "field_0x10",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "type": "vlong"
+        },
+        {
+          "field": "field_0x20",
+          "type": "emote"
+        },
+        {
+          "field": "field_0x28",
+          "type": "vint"
+        }
+      ]
     }
   ]
 }

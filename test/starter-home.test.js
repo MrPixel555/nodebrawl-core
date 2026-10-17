@@ -5,7 +5,7 @@ const { createStarterHomeProvider, createStarterProfileProvider, loadHomeProvide
 const fixtures = require('./fixtures/native-starter-home.json')
 
 test('starter player identity bindings match full native Home outputs, including VInt boundaries and UTF-8', async () => {
-  const provider = createStarterHomeProvider({ unlocked: false })
+  const provider = createStarterHomeProvider({ emotes: false, unlocked: false })
   for (const fixture of fixtures) {
     const home = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: fixture.selectedDeck ?? 0, ...fixture.starter } })
     assert.equal(home.version, 0)
@@ -17,7 +17,7 @@ test('starter player identity bindings match full native Home outputs, including
 })
 
 test('starter Home rejects identities exceeding the native limits', async () => {
-  const provider = createStarterHomeProvider()
+  const provider = createStarterHomeProvider({ emotes: false })
   for (const id of [[], [0], [0, 1.5], [0, 2147483648]]) await assert.rejects(provider({ id, name: 'Player' }))
   for (const name of ['', null, 'ا'.repeat(101)]) await assert.rejects(provider({ id: [0, 1], name }), /identity/)
   for (const starter of [null, [], {}, { selectedDeck: -1 }, { selectedDeck: 5 }, { selectedDeck: 1.5 }]) await assert.rejects(provider({ id: [0, 1], name: 'Player', starter }), /deck selection/)
@@ -46,7 +46,7 @@ test('profile card collection and Avatar match native outputs for UTF-8 names, l
 })
 
 test('unlocked Home matches native full messages with disjoint active cards and inventory after deck edits', async () => {
-  const provider = createStarterHomeProvider()
+  const provider = createStarterHomeProvider({ emotes: false })
   for (const fixture of require('./fixtures/native-unlocked-home.json')) {
     const result = await provider({ id: fixture.accountId, name: fixture.name, starter: { selectedDeck: 0, ...fixture.starter } })
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
@@ -55,7 +55,7 @@ test('unlocked Home matches native full messages with disjoint active cards and 
 
 test('Arena1 boost Home matches full native messages for fresh/changed players, elapsed time and expiry', async () => {
   for (const fixture of require('./fixtures/native-arena-boost-home.json')) {
-    const provider = createStarterHomeProvider({ now: () => fixture.nowMs })
+    const provider = createStarterHomeProvider({ emotes: false, now: () => fixture.nowMs })
     const result = await provider({ id: fixture.accountId, name: fixture.name, starter: fixture.starter })
     assert.equal(result.payload.toString('hex'), fixture.payloadHex)
     assert.equal(result.payload.length, fixture.nativeDecodeConsumed)
@@ -63,6 +63,6 @@ test('Arena1 boost Home matches full native messages for fresh/changed players, 
   }
   const fresh = require('./fixtures/native-arena-boost-home.json')[0]
   const account = { id: fresh.accountId, name: fresh.name, starter: fresh.starter }
-  const rollback = await createStarterHomeProvider({ now: () => fresh.nowMs - 86400000 })(account)
+  const rollback = await createStarterHomeProvider({ emotes: false, now: () => fresh.nowMs - 86400000 })(account)
   assert.equal(rollback.payload.toString('hex'), fresh.payloadHex)
 })

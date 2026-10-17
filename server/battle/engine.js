@@ -2,6 +2,7 @@
 const { NativeVM } = require('./vm')
 const catalogue = require('./catalogue.json')
 const { Reader, ProtocolError } = require('../../lib/protocol/stream')
+const { battleEmotes } = require('../emotes')
 const { encodeCommand } = require('../../lib/protocol/commands')
 
 const BATTLE_COMMANDS = new Set([2, 18, 28, 49, 57])
@@ -35,7 +36,7 @@ function battleDefinition ({ players, training = false, npcId = 18000007, arenaI
   const location = catalogue.locations.find(row => locationId === null ? row.name === locationName : row.id === locationId)
   if (!location) throw new ProtocolError('Battle location is unavailable')
   if (!Number.isInteger(seed) || seed < 1 || seed > 2147483647 || !Number.isInteger(time) || time < 1 || time > 2147483647) throw new ProtocolError('Invalid battle clock or seed')
-  const battle = { gmt: training ? 3 : 1, plt: roster.length === 4 ? 2 : 1, gamemode: mode.id, location: location.id, arena: actualArena.id, hbd: roster.map(() => ({ em: {} })) }
+  const battle = { gmt: training ? 3 : 1, plt: roster.length === 4 ? 2 : 1, gamemode: mode.id, location: location.id, arena: actualArena.id, hbd: roster.map(player => ({ em: battleEmotes(player.emoteDeck) })) }
   if (training) battle.NPC = npc.id
   roster.forEach((player, index) => {
     battle['avatar' + index] = { 'accountID.hi': player.id[0], 'accountID.lo': player.id[1], name: player.name, expLevel: player.level ?? 1, expPoints: 0, arena: actualArena.id }

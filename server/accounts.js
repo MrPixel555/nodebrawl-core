@@ -5,7 +5,7 @@ const { randomBytes, timingSafeEqual } = require('node:crypto')
 const { ProtocolError } = require('../lib/protocol/stream')
 const { playerState, applyCommands } = require('./starter-state')
 const { applyBattleResult, validateBattleHistory } = require('./battle/results')
-const { equalId, validateAlliances, createAlliance, clanData } = require('./alliances')
+const { equalId, validateAlliances, createAlliance, editAlliance, postChat, postMail, agedEntries, clanData } = require('./alliances')
 
 const queues = new Map()
 
@@ -97,12 +97,31 @@ class AccountStore {
       const index = database.accounts.findIndex(account => account.id[0] === identity?.id?.[0] && account.id[1] === identity?.id?.[1])
       const account = database.accounts[index]
       if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
-      const next = applyCommands(account, commands, { now: this.now })
+      const next = applyCommands(account, commands.filter(command => command.id !== 715), { now: this.now })
+      database.accounts[index] = next
+      for (const command of commands.filter(command => command.id === 715)) postMail(database, next, command.fields, this.now())
       if (JSON.stringify(next) !== JSON.stringify(account)) {
         database.accounts[index] = next
         await this.save(database)
       }
       return next
+    })
+  }
+
+  recordBattles (entries) {
+    if (!Array.isArray(entries) || entries.length < 1 || entries.length > 4 || new Set(entries.map(entry => entry.identity?.id?.join(':'))).size !== entries.length) return Promise.reject(new ProtocolError('Invalid battle result roster'))
+    return this.serial(async () => {
+      const database = await this.load()
+      const updated = entries.map(({ identity, result }) => {
+        const index = database.accounts.findIndex(account => equalId(account.id, identity?.id))
+        const account = database.accounts[index]
+        if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+        const next = applyBattleResult(account, result, this.now())
+        database.accounts[index] = next
+        return next
+      })
+      await this.save(database)
+      return updated
     })
   }
 
@@ -126,6 +145,27 @@ class AccountStore {
       const clan = createAlliance(database, account, fields)
       await this.save(database)
       return { account, data: clanData(database, clan) }
+    })
+  }
+
+  socialAction (identity, action, fields) {
+    return this.serial(async () => {
+      const database = await this.load()
+      const account = database.accounts.find(account => equalId(account.id, identity?.id))
+      if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+      const result = action === 'chat' ? postChat(database, account, fields.field_0x80, this.now()) : { clan: editAlliance(database, account, fields) }
+      await this.save(database)
+      return { account, entry: result.entry, data: clanData(database, result.clan) }
+    })
+  }
+
+  clanChat (identity) {
+    return this.serial(async () => {
+      const database = await this.load()
+      const account = database.accounts.find(account => equalId(account.id, identity?.id))
+      if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+      const clan = database.alliances.find(clan => equalId(clan.id, account.alliance?.id))
+      return agedEntries(clan?.chat, this.now())
     })
   }
 
