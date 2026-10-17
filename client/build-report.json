@@ -1,6 +1,6 @@
 {
   "originalLibrarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
-  "patchedLibrarySha256": "629273c4b7a042d3ce0d41e50504a5abc3827d139830271a59cc4f0f9077dc3f",
+  "patchedLibrarySha256": "34dec25e84a886835d43e9219511ef2e97ee634952fb55082f617ebbc772ef37",
   "serverPublicKey": "8ddd4aa88e325e6cf7393740d2b9a9a952934477a44818bc0605d3b730cc5831",
   "fridaRequired": false,
   "instrumentationFrameworkBundled": false,
@@ -9,7 +9,11 @@
     "address": 14155776,
     "size": 18200,
     "flags": "RX",
-    "programHeadersRelocated": true
+    "programHeadersRelocated": false,
+    "programHeaderSlot": 4,
+    "replacedDescriptor": "PT_NOTE Android NDK ident",
+    "originalProgramHeaderOffset": 64,
+    "originalProgramHeaderCount": 8
   },
   "calls": [
     {
@@ -397,8 +401,8 @@
   },
   "originalBundledLibrarySha256": "6020d2fb42fa13c81ac755cbec31621b3b104ebfdbfb65ae4b1a4356b7b0a46a",
   "originalApkSha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
-  "apkSha256": "f3385d317b9e15e72310ec00b08256888b79f84da260cde0246eea3571e9ea3a",
-  "apkBytes": 104730904,
+  "apkSha256": "b8e35fb2b9e584caaf17e129e618c6ac963696b4d8e22a0f465ba01affaa5c77",
+  "apkBytes": 104730905,
   "launcherActivity": "com.supercell.clashroyale.GameApp",
   "configurationAsset": "assets/configs.so",
   "settingsUi": false,

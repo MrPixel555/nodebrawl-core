@@ -75,8 +75,12 @@ endpoint validation and DNS adapter fixtures also passed.
 
 Native code is position independent and has no dynamic relocations, mutable
 globals or extra shared-library dependencies. An appended 64 KiB-aligned RX
-PT_LOAD also contains the expanded ELF program header table. The original
-segments, notes, RELRO and unwind header remain intact. The integrity updater
+PT_LOAD contains the adapter. The ELF program header table stays at its
+original offset (64 bytes), with its original count (8). Only the optional
+Android NDK-ident PT_NOTE descriptor is reused for the extra load segment;
+the note bytes/section remain in the file. GNU build-id, original load/dynamic
+descriptors, stack policy, RELRO and unwind header remain intact. This avoids
+the previous late-PHDR-table layout when using native-bridge loaders. The integrity updater
 checks the original checksum baseline, updates affected stored constants
 through their string XOR encoding, reaches a fixed point and then rechecks
 all 13 identified tables against the final ELF. It never disables a checksum

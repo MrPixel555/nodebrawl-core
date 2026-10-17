@@ -1,0 +1,21 @@
+{
+  "uploadedLogArchiveSha256": "e789ff168667bacf6f310d16eb4fb26f0c95c428d4b8a54546bf1c37a60774b1",
+  "reportedEnvironment": "MuMu Android 12 x86_64, Houdini 12.0.0_z.38816.m",
+  "userReportedOriginalRunsOnSameEmulator": true,
+  "userReportedPreviousPatchedRunsOnPhysicalArm64": true,
+  "observedPatchedFmodLoadSucceeded": true,
+  "observedPatchedGLoadSucceeded": false,
+  "nativeBridgeError": "dlopen failed",
+  "nativeCrashLocationKnown": false,
+  "hypothesis": "Relocated ELF program-header table incompatible with native-bridge loader",
+  "change": "Keep e_phoff=64 and e_phnum=8; reuse optional Android NDK-ident PT_NOTE descriptor for appended RX PT_LOAD",
+  "houdiniExecutionVerified": false,
+  "universalCompatibilityGuaranteed": false,
+  "previousLibrarySha256": "629273c4b7a042d3ce0d41e50504a5abc3827d139830271a59cc4f0f9077dc3f",
+  "revisedLibrarySha256": "34dec25e84a886835d43e9219511ef2e97ee634952fb55082f617ebbc772ef37",
+  "nativeAdapterCodeByteIdenticalToPreviousRevision": true,
+  "sevenCallSitesUnchanged": true,
+  "integrityConstantsUnchanged": true,
+  "apkStructureTestsPassed": 9,
+  "nativeStartupAndBothHandshakesPassed": true
+}

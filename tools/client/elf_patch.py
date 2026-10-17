@@ -219,20 +219,30 @@ def patch_library(original, work, clang, linker, public_key=PUBLIC_KEY):
                 for n in range(4):
                     output[at + n] ^= baseline[address + n] ^ memory[address + n]
         metadata.append({'table': hex(table['address']), 'ranges': len(table['entries']), 'originalKeys': table['originalKeys'], 'updatedKeys': values, 'locations': table['locations']})
-    phdrs = original[elf['e_phoff']:elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize']]
+    # Keep the PHDR table at its original low file offset. Some native-bridge
+    # loaders may reject a table relocated into a late PT_LOAD even though
+    # Android's ARM64 linker accepts it. Reuse the optional Android NDK-ident note
+    # descriptor; its bytes/section remain intact. Preserve GNU build-id, stack,
+    # RELRO, unwind and all original load/dynamic descriptors.
+    note_slots = [n for n, segment in enumerate(elf.iter_segments())
+                  if segment['p_type'] == 'PT_NOTE'
+                  and all(note['n_name'] == 'Android' for note in segment.iter_notes())]
+    if len(note_slots) != 1:
+        raise ValueError('Expected one optional Android NDK note descriptor')
+    slot = note_slots[0]
     total = 0x1000 + len(code)
     output.extend(bytes(appended + total - len(output)))
-    phdrs += struct.pack('<IIQQQQQQ', 1, 5, appended, appended, appended, total, total, 0x10000)
-    output[appended:appended + len(phdrs)] = phdrs
+    descriptor = elf['e_phoff'] + slot * elf['e_phentsize']
+    output[descriptor:descriptor + elf['e_phentsize']] = struct.pack('<IIQQQQQQ', 1, 5, appended, appended, appended, total, total, 0x10000)
     output[code_start:code_start + len(code)] = code
-    struct.pack_into('<Q', output, 32, appended)
-    struct.pack_into('<H', output, 56, elf['e_phnum'] + 1)
     patched = ELFFile(io.BytesIO(output))
     check_memory, _ = runtime_image(patched)
     for table in tables:
         assert checksum.calculate(check_memory, table['entries']) == [struct.unpack_from('<I', check_memory, group[0])[0] for group in table['locations']]
     report = {'originalLibrarySha256': LIBRARY_SHA, 'patchedLibrarySha256': hashlib.sha256(output).hexdigest(), 'serverPublicKey': public_key,
               'fridaRequired': False, 'instrumentationFrameworkBundled': False, 'integrityChecksDisabled': False,
-              'appendedSegment': {'address': appended, 'size': total, 'flags': 'RX', 'programHeadersRelocated': True},
+              'appendedSegment': {'address': appended, 'size': total, 'flags': 'RX', 'programHeadersRelocated': False,
+                                  'programHeaderSlot': slot, 'replacedDescriptor': 'PT_NOTE Android NDK ident',
+                                  'originalProgramHeaderOffset': elf['e_phoff'], 'originalProgramHeaderCount': elf['e_phnum']},
               'calls': changed, 'integrity': metadata, 'nativeSymbols': {name: names[name] for name in ['peer_connect', 'peer_shared', 'peer_seal', 'peer_open']}}
     return bytes(output), report

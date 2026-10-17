@@ -87,13 +87,26 @@ class ApkTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(library).hexdigest(), self.report['patchedLibrarySha256'])
         self.assertEqual(self.report['serverPublicKey'], PUBLIC_KEY)
         self.assertIn(bytes.fromhex(PUBLIC_KEY), library)
-        self.assertEqual(elf.num_segments(), original.num_segments() + 1)
+        self.assertEqual(elf.num_segments(), original.num_segments())
+        self.assertEqual(elf['e_phoff'], original['e_phoff'])
+        slot = self.report['appendedSegment']['programHeaderSlot']
         for n, old in enumerate(original.iter_segments()):
-            self.assertEqual(dict(old.header), dict(elf.get_segment(n).header))
-        added = elf.get_segment(elf.num_segments() - 1)
+            if n != slot:
+                self.assertEqual(dict(old.header), dict(elf.get_segment(n).header))
+            else:
+                self.assertEqual(old['p_type'], 'PT_NOTE')
+                self.assertEqual([note['n_name'] for note in old.iter_notes()], ['Android'])
+        added = elf.get_segment(slot)
+        self.assertEqual(added['p_type'], 'PT_LOAD')
         self.assertEqual(added['p_flags'], 5)
-        self.assertGreaterEqual(elf['e_phoff'], added['p_offset'])
-        self.assertLess(elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize'], added['p_offset'] + added['p_filesz'])
+        first_load = next(s for s in elf.iter_segments() if s['p_type'] == 'PT_LOAD')
+        self.assertLessEqual(elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize'], first_load['p_filesz'])
+        self.assertFalse(self.report['appendedSegment']['programHeadersRelocated'])
+        loads = [s for s in elf.iter_segments() if s['p_type'] == 'PT_LOAD']
+        self.assertEqual([s['p_vaddr'] for s in loads], sorted(s['p_vaddr'] for s in loads))
+        original_ids = [note['n_desc'] for s in original.iter_segments() if s['p_type'] == 'PT_NOTE' for note in s.iter_notes() if note['n_type'] == 'NT_GNU_BUILD_ID']
+        patched_ids = [note['n_desc'] for s in elf.iter_segments() if s['p_type'] == 'PT_NOTE' for note in s.iter_notes() if note['n_type'] == 'NT_GNU_BUILD_ID']
+        self.assertEqual(original_ids, patched_ids)
         self.assertEqual(added['p_offset'] % added['p_align'], added['p_vaddr'] % added['p_align'])
         memory, _ = runtime_image(elf)
         before, _ = runtime_image(original)
@@ -107,7 +120,8 @@ class ApkTests(unittest.TestCase):
             if segment['p_type'] == 'PT_LOAD' and segment['p_flags'] & 1:
                 start, size = segment['p_vaddr'], segment['p_filesz']
                 differing = {n for n in range(start, start + size) if before[n] != memory[n]}
-                self.assertTrue(differing.issubset(permitted | set(range(32, 40)) | {56, 57}))
+                header_slot = set(range(elf['e_phoff'] + slot * elf['e_phentsize'], elf['e_phoff'] + (slot + 1) * elf['e_phentsize']))
+                self.assertTrue(differing.issubset(permitted | header_slot))
         self.assertEqual(len(self.report['calls']), 7)
 
     def test_all_integrity_tables_and_tamper_detection(self):
