@@ -1,0 +1,5 @@
+# Optional native/APK verification only.
+pyelftools==0.32
+unicorn==2.1.4
+capstone==5.0.7
+androguard==4.1.4

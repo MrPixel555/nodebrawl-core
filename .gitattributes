@@ -1,2 +1,3 @@
 content/assets/** -text -diff
 content/fingerprint.json -text
+client/*.apk -text -diff

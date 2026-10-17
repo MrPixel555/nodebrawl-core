@@ -1,0 +1,63 @@
+{
+  "serverPublicKey": "8ddd4aa88e325e6cf7393740d2b9a9a952934477a44818bc0605d3b730cc5831",
+  "startup": {
+    "originalStringDecryptorExecuted": true,
+    "stringRangesMatched": 21757
+  },
+  "handshakes": [
+    {
+      "inlineLogin": false,
+      "outgoingLoginAcceptedByNode": true,
+      "nativeReplyHomeKeepAliveAccepted": true,
+      "state": 5,
+      "cryptoArgumentOverrides": 0
+    },
+    {
+      "inlineLogin": true,
+      "outgoingLoginAcceptedByNode": true,
+      "nativeReplyHomeKeepAliveAccepted": true,
+      "state": 5,
+      "cryptoArgumentOverrides": 0
+    }
+  ],
+  "connections": [
+    {
+      "config": null,
+      "accepted": true
+    },
+    {
+      "config": "192.0.2.20:1234\n",
+      "accepted": true
+    },
+    {
+      "config": "127.0.0.1:65535",
+      "accepted": true
+    },
+    {
+      "config": "",
+      "accepted": false
+    },
+    {
+      "config": "256.2.3.4:9339",
+      "accepted": false
+    },
+    {
+      "config": "1.2.3.4:0",
+      "accepted": false
+    },
+    {
+      "config": "1.2.3.4:65536",
+      "accepted": false
+    },
+    {
+      "config": "1.2.3.4:9339\ntrailing",
+      "accepted": false
+    },
+    {
+      "config": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "accepted": false
+    }
+  ],
+  "patchedLibrarySha256": "df42b5e2479c6c7abd1cb9e9ca4725659af6582c87c96fa9815e58db4b30ca1f",
+  "androidLoaderAndUiVerified": false
+}

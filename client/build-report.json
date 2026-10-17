@@ -1,0 +1,426 @@
+{
+  "originalLibrarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "patchedLibrarySha256": "df42b5e2479c6c7abd1cb9e9ca4725659af6582c87c96fa9815e58db4b30ca1f",
+  "serverPublicKey": "8ddd4aa88e325e6cf7393740d2b9a9a952934477a44818bc0605d3b730cc5831",
+  "fridaRequired": false,
+  "instrumentationFrameworkBundled": false,
+  "integrityChecksDisabled": false,
+  "appendedSegment": {
+    "address": 14155776,
+    "size": 17744,
+    "flags": "RX",
+    "programHeadersRelocated": true
+  },
+  "calls": [
+    {
+      "address": 3918952,
+      "target": 14159872,
+      "symbol": "peer_shared_deferred",
+      "oldHex": "2c79fe97",
+      "newHex": "e6102794"
+    },
+    {
+      "address": 2507236,
+      "target": 14159880,
+      "symbol": "peer_shared_inline",
+      "oldHex": "cddb0394",
+      "newHex": "89732c94"
+    },
+    {
+      "address": 2615988,
+      "target": 14159888,
+      "symbol": "peer_shared_reply",
+      "oldHex": "99710394",
+      "newHex": "57092c94"
+    },
+    {
+      "address": 3918980,
+      "target": 14159896,
+      "symbol": "peer_seal_deferred",
+      "oldHex": "febbfe97",
+      "newHex": "e5102794"
+    },
+    {
+      "address": 2507264,
+      "target": 14159904,
+      "symbol": "peer_seal_inline",
+      "oldHex": "9f1e0494",
+      "newHex": "88732c94"
+    },
+    {
+      "address": 2616020,
+      "target": 14159912,
+      "symbol": "peer_open_reply",
+      "oldHex": "0de9fd97",
+      "newHex": "55092c94"
+    },
+    {
+      "address": 2306488,
+      "target": 14160304,
+      "symbol": "peer_connect",
+      "oldHex": "e6b1fa97",
+      "newHex": "fe372d94"
+    }
+  ],
+  "integrity": [
+    {
+      "table": "0xaa4f08",
+      "ranges": 49,
+      "originalKeys": [
+        1489779865,
+        4114407064,
+        85574952
+      ],
+      "updatedKeys": [
+        1489779865,
+        4114407064,
+        85574952
+      ],
+      "locations": [
+        [
+          12448088
+        ],
+        [
+          11747032
+        ],
+        [
+          11322312
+        ]
+      ]
+    },
+    {
+      "table": "0xabf0b0",
+      "ranges": 98,
+      "originalKeys": [
+        2564654236,
+        568779343,
+        3324582558
+      ],
+      "updatedKeys": [
+        2564654236,
+        568779343,
+        3324582558
+      ],
+      "locations": [
+        [
+          11651208
+        ],
+        [
+          11341388
+        ],
+        [
+          11676236
+        ]
+      ]
+    },
+    {
+      "table": "0xabf5c4",
+      "ranges": 15,
+      "originalKeys": [
+        1941914748,
+        2908078275,
+        2132011675
+      ],
+      "updatedKeys": [
+        1941914748,
+        2908078275,
+        2132011675
+      ],
+      "locations": [
+        [
+          11764648
+        ],
+        [
+          11421828
+        ],
+        [
+          11753952
+        ]
+      ]
+    },
+    {
+      "table": "0xac0308",
+      "ranges": 15,
+      "originalKeys": [
+        3377081724,
+        178442445,
+        1315874695
+      ],
+      "updatedKeys": [
+        3377081724,
+        178442445,
+        1315874695
+      ],
+      "locations": [
+        [
+          13930372
+        ],
+        [
+          11537784
+        ],
+        [
+          11318040
+        ]
+      ]
+    },
+    {
+      "table": "0xac22a4",
+      "ranges": 424,
+      "originalKeys": [
+        2535317207,
+        2847511362,
+        261984241
+      ],
+      "updatedKeys": [
+        2535317207,
+        2847511362,
+        261984241
+      ],
+      "locations": [
+        [
+          11122396
+        ],
+        [
+          11757420
+        ],
+        [
+          12496060
+        ]
+      ]
+    },
+    {
+      "table": "0xad05a4",
+      "ranges": 3,
+      "originalKeys": [
+        605925228,
+        750103681,
+        825183967
+      ],
+      "updatedKeys": [
+        605925228,
+        750103681,
+        825183967
+      ],
+      "locations": [
+        [
+          11769288
+        ],
+        [
+          11152344
+        ],
+        [
+          12505336
+        ]
+      ]
+    },
+    {
+      "table": "0xad9620",
+      "ranges": 462,
+      "originalKeys": [
+        985176403,
+        590712863,
+        3260813369
+      ],
+      "updatedKeys": [
+        2915220621,
+        2955635941,
+        3260813369
+      ],
+      "locations": [
+        [
+          11273252
+        ],
+        [
+          11681028
+        ],
+        [
+          11610752
+        ]
+      ]
+    },
+    {
+      "table": "0xae4d7c",
+      "ranges": 5,
+      "originalKeys": [
+        792008573,
+        1902271737,
+        525359805
+      ],
+      "updatedKeys": [
+        792008573,
+        1902271737,
+        525359805
+      ],
+      "locations": [
+        [
+          11272476
+        ],
+        [
+          11521084
+        ],
+        [
+          11327836
+        ]
+      ]
+    },
+    {
+      "table": "0xae621c",
+      "ranges": 2797,
+      "originalKeys": [
+        3838754507,
+        2624251683,
+        1630236734
+      ],
+      "updatedKeys": [
+        3838754507,
+        2624251683,
+        1630236734
+      ],
+      "locations": [
+        [
+          11534352
+        ],
+        [
+          12503460
+        ],
+        [
+          11535068
+        ]
+      ]
+    },
+    {
+      "table": "0xaf30b4",
+      "ranges": 1129,
+      "originalKeys": [
+        2583730965,
+        3298968030,
+        1756549578
+      ],
+      "updatedKeys": [
+        1691293668,
+        3484004762,
+        99027161
+      ],
+      "locations": [
+        [
+          11051992
+        ],
+        [
+          11541112
+        ],
+        [
+          11276444
+        ]
+      ]
+    },
+    {
+      "table": "0xb1cde4",
+      "ranges": 4,
+      "originalKeys": [
+        3846141404,
+        200937384,
+        3317983432
+      ],
+      "updatedKeys": [
+        3846141404,
+        200937384,
+        3317983432
+      ],
+      "locations": [
+        [
+          11098744
+        ],
+        [
+          11125152
+        ],
+        [
+          12452732
+        ]
+      ]
+    },
+    {
+      "table": "0xb38a3c",
+      "ranges": 184,
+      "originalKeys": [
+        3466531384,
+        1716108819,
+        3616203881
+      ],
+      "updatedKeys": [
+        3466531384,
+        1716108819,
+        3616203881
+      ],
+      "locations": [
+        [
+          11364524
+        ],
+        [
+          13916816
+        ],
+        [
+          11628604
+        ]
+      ]
+    },
+    {
+      "table": "0xbeefd4",
+      "ranges": 83788,
+      "originalKeys": [
+        1722091763,
+        3540470421,
+        1420105696
+      ],
+      "updatedKeys": [
+        4265628304,
+        3789304889,
+        3712240510
+      ],
+      "locations": [
+        [
+          11670772
+        ],
+        [
+          11314484
+        ],
+        [
+          11059656
+        ]
+      ]
+    }
+  ],
+  "nativeSymbols": {
+    "peer_connect": 14160304,
+    "peer_shared": 14159920,
+    "peer_seal": 14160024,
+    "peer_open": 14160148
+  },
+  "originalBundledLibrarySha256": "6020d2fb42fa13c81ac755cbec31621b3b104ebfdbfb65ae4b1a4356b7b0a46a",
+  "originalApkSha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
+  "apkSha256": "bf8a4328b7dd4898860c73115be26d77ad80d897b27bd6001ed525a72033e6c9",
+  "apkBytes": 104734939,
+  "launcherActivity": "org.nodebrawl.client.ServerActivity",
+  "originalGameDexUnchanged": true,
+  "originalAssetsUnchanged": true,
+  "storedEntriesAligned": true,
+  "androidRuntimeVerified": false,
+  "signingVerification": [
+    "Verifies",
+    "Verified using v1 scheme (JAR signing): true",
+    "Verified using v2 scheme (APK Signature Scheme v2): true",
+    "Verified using v3 scheme (APK Signature Scheme v3): true",
+    "Verified using v3.1 scheme (APK Signature Scheme v3.1): false",
+    "Verified using v4 scheme (APK Signature Scheme v4): false",
+    "Verified for SourceStamp: false",
+    "Number of signers: 1",
+    "Signer #1 certificate DN: CN=Nodebrawl Private Client",
+    "Signer #1 certificate SHA-256 digest: 313f5133153360af5450005ad4bb8b66a4d89a3ceb4eb6b10d395e1eed1dd301",
+    "Signer #1 certificate SHA-1 digest: 2b7540c394aa1e5a5bf58cbf939b035018353e0a",
+    "Signer #1 certificate MD5 digest: 2c718628d7e6983d4cd10f3c8e06676c",
+    "Signer #1 key algorithm: RSA",
+    "Signer #1 key size (bits): 3072",
+    "Signer #1 public key SHA-256 digest: 12fcc70ddcaf8617576cee3a21c8c2fb62fc6a7ae6d15c2a2834b311d70e9159",
+    "Signer #1 public key SHA-1 digest: 826688b15c4ee1e65d6e92675d3d9de5a01c6e89",
+    "Signer #1 public key MD5 digest: 937340af8caec21e83241a441b751a72"
+  ]
+}
