@@ -40,6 +40,22 @@ function zipEntry (apk, wanted) {
 
 function sha (value) { return createHash('sha256').update(value).digest('hex') }
 
+function elfLayout (library) {
+  if (library.length < 64 || library.subarray(0, 6).toString('hex') !== '7f454c460201') throw new Error('Expected ELF64 little-endian library')
+  const programHeaderOffset = Number(library.readBigUInt64LE(32))
+  const stride = library.readUInt16LE(54)
+  const programHeaderCount = library.readUInt16LE(56)
+  if (!Number.isSafeInteger(programHeaderOffset) || stride < 56 || programHeaderCount > 128 || programHeaderOffset + stride * programHeaderCount > library.length) throw new Error('Invalid ELF program-header table')
+  const loadSegments = []
+  for (let n = 0; n < programHeaderCount; n++) {
+    const at = programHeaderOffset + n * stride
+    if (library.readUInt32LE(at) === 1) {
+      loadSegments.push({ flags: library.readUInt32LE(at + 4), fileOffset: Number(library.readBigUInt64LE(at + 8)), virtualAddress: Number(library.readBigUInt64LE(at + 16)), fileBytes: Number(library.readBigUInt64LE(at + 32)), memoryBytes: Number(library.readBigUInt64LE(at + 40)) })
+    }
+  }
+  return { programHeaderOffset, programHeaderCount, loadSegmentCount: loadSegments.length, loadSegments }
+}
+
 function selectLogs (text) {
   const lines = text.split(/\r?\n/).filter(Boolean)
   const pids = new Set()
@@ -129,8 +145,7 @@ async function collect (run, live, launch) {
     report.apkSha256 = sha(apk)
     const library = zipEntry(apk, 'lib/arm64-v8a/libg.so')
     report.librarySha256 = sha(library)
-    report.programHeaderOffset = Number(library.readBigUInt64LE(32))
-    report.programHeaderCount = library.readUInt16LE(56)
+    Object.assign(report, elfLayout(library))
     report.configuration = zipEntry(apk, 'assets/configs.so').toString('utf8').trim()
     report.matchesPublishedLibrary = report.librarySha256 === expected.patchedLibrarySha256
   } catch (error) { report.errors.push(error.message) } finally { fs.rmSync(temporary, { recursive: true, force: true }) }
@@ -163,4 +178,4 @@ async function main () {
 if (require.main === module) {
   main().catch(error => { console.error(error.message); process.exitCode = 1 })
 }
-module.exports = { zipEntry, selectLogs, collect, captureLive }
+module.exports = { zipEntry, elfLayout, selectLogs, collect, captureLive }

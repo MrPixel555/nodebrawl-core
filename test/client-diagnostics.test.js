@@ -4,11 +4,43 @@ const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
-const { selectLogs, collect, captureLive } = require('../tools/client/diagnose')
+const { selectLogs, collect, captureLive, elfLayout } = require('../tools/client/diagnose')
 
 const started = '10-17 20:00:00.000 1298 1298 I ActivityManager: Start proc 1234:com.supercell.clashroyale/u0a58 for activity'
 const load = '10-17 20:00:00.100 1234 1234 D linker: loading /data/app/com.supercell.clashroyale-ab/lib/arm64/libg.so'
 const failure = '10-17 20:00:00.200 1234 1234 E AndroidRuntime: java.lang.UnsatisfiedLinkError: dlopen failed'
+
+test('diagnostic distinguishes two-load RX/RW layout from added RX mappings', () => {
+  const library = Buffer.alloc(64 + 3 * 56)
+  Buffer.from('7f454c460201', 'hex').copy(library)
+  library.writeBigUInt64LE(64n, 32)
+  library.writeUInt16LE(56, 54)
+  library.writeUInt16LE(3, 56)
+  for (let n = 0; n < 3; n++) {
+    const at = 64 + n * 56
+    library.writeUInt32LE(1, at)
+    library.writeUInt32LE(n === 1 ? 6 : 5, at + 4)
+    library.writeBigUInt64LE(BigInt(n * 65536), at + 8)
+    library.writeBigUInt64LE(BigInt(n * 65536), at + 16)
+  }
+  assert.equal(elfLayout(library).loadSegmentCount, 3)
+  library.writeUInt16LE(2, 56)
+  const layout = elfLayout(library)
+  assert.equal(layout.programHeaderOffset, 64)
+  assert.equal(layout.loadSegmentCount, 2)
+  assert.deepEqual(layout.loadSegments.map(segment => segment.flags), [5, 6])
+  assert.deepEqual(layout.loadSegments.map(segment => segment.virtualAddress), [0, 65536])
+})
+
+test('diagnostic rejects non-ELF and truncated ELF tables', () => {
+  assert.throws(() => elfLayout(Buffer.from('invalid')), /Expected ELF64/)
+  const library = Buffer.alloc(64)
+  Buffer.from('7f454c460201', 'hex').copy(library)
+  library.writeBigUInt64LE(64n, 32)
+  library.writeUInt16LE(56, 54)
+  library.writeUInt16LE(2, 56)
+  assert.throws(() => elfLayout(library), /Invalid ELF program-header/)
+})
 
 test('game load and failure survive thousands of later foreign linker lines', () => {
   const noise = Array.from({ length: 8000 }, (_, n) => `10-17 20:00:01.000 ${9000 + n} ${9000 + n} D linker: loading adb command libc.so`)

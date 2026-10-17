@@ -78,7 +78,7 @@ class ApkTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 validate_config(value)
 
-    def test_elf_adds_only_immutable_segment_and_seven_calls(self):
+    def test_elf_preserves_two_loads_and_extends_rx_in_virtual_gap(self):
         library = self.patched.read('lib/arm64-v8a/libg.so')
         elf = ELFFile(io.BytesIO(library))
         original_library = args.library.read_bytes()
@@ -89,25 +89,35 @@ class ApkTests(unittest.TestCase):
         self.assertIn(bytes.fromhex(PUBLIC_KEY), library)
         self.assertEqual(elf.num_segments(), original.num_segments())
         self.assertEqual(elf['e_phoff'], original['e_phoff'])
-        slot = self.report['appendedSegment']['programHeaderSlot']
+        layout = self.report['loadLayout']
+        insertion, shift = layout['fileInsertionOffset'], layout['insertedFileBytes']
+        code_end = layout['codeAddress'] + layout['codeBytes']
         for n, old in enumerate(original.iter_segments()):
-            if n != slot:
-                self.assertEqual(dict(old.header), dict(elf.get_segment(n).header))
-            else:
-                self.assertEqual(old['p_type'], 'PT_NOTE')
-                self.assertEqual([note['n_name'] for note in old.iter_notes()], ['Android'])
-        added = elf.get_segment(slot)
-        self.assertEqual(added['p_type'], 'PT_LOAD')
-        self.assertEqual(added['p_flags'], 5)
-        first_load = next(s for s in elf.iter_segments() if s['p_type'] == 'PT_LOAD')
-        self.assertLessEqual(elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize'], first_load['p_filesz'])
-        self.assertFalse(self.report['appendedSegment']['programHeadersRelocated'])
-        loads = [s for s in elf.iter_segments() if s['p_type'] == 'PT_LOAD']
-        self.assertEqual([s['p_vaddr'] for s in loads], sorted(s['p_vaddr'] for s in loads))
-        original_ids = [note['n_desc'] for s in original.iter_segments() if s['p_type'] == 'PT_NOTE' for note in s.iter_notes() if note['n_type'] == 'NT_GNU_BUILD_ID']
-        patched_ids = [note['n_desc'] for s in elf.iter_segments() if s['p_type'] == 'PT_NOTE' for note in s.iter_notes() if note['n_type'] == 'NT_GNU_BUILD_ID']
-        self.assertEqual(original_ids, patched_ids)
-        self.assertEqual(added['p_offset'] % added['p_align'], added['p_vaddr'] % added['p_align'])
+            expected = dict(old.header)
+            if expected['p_offset'] >= insertion:
+                expected['p_offset'] += shift
+            if expected['p_type'] == 'PT_LOAD' and expected['p_vaddr'] == 0:
+                expected['p_filesz'] = expected['p_memsz'] = code_end
+            self.assertEqual(expected, dict(elf.get_segment(n).header))
+        loads = [segment for segment in elf.iter_segments() if segment['p_type'] == 'PT_LOAD']
+        self.assertEqual(len(loads), 2)
+        self.assertEqual([segment['p_flags'] for segment in loads], [5, 6])
+        self.assertEqual([segment['p_vaddr'] for segment in loads], [0, layout['virtualGapEnd']])
+        self.assertEqual(elf['e_phnum'], 8)
+        self.assertEqual(elf['e_phoff'], 64)
+        self.assertFalse(layout['programHeadersRelocated'])
+        self.assertTrue(layout['allOriginalNotesPreserved'])
+        self.assertLessEqual(elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize'], loads[0]['p_filesz'])
+        for page in [4096, 16384, 65536]:
+            for segment in loads:
+                self.assertEqual(segment['p_offset'] % page, segment['p_vaddr'] % page)
+        for page in [4096, 16384]:
+            self.assertLessEqual((code_end + page - 1) // page * page, loads[1]['p_vaddr'] // page * page)
+        for segment in loads:
+            self.assertEqual(segment['p_offset'], segment['p_vaddr'])
+        original_notes = [(note['n_name'], note['n_descdata']) for segment in original.iter_segments() if segment['p_type'] == 'PT_NOTE' for note in segment.iter_notes()]
+        patched_notes = [(note['n_name'], note['n_descdata']) for segment in elf.iter_segments() if segment['p_type'] == 'PT_NOTE' for note in segment.iter_notes()]
+        self.assertEqual(original_notes, patched_notes)
         memory, _ = runtime_image(elf)
         before, _ = runtime_image(original)
         permitted = set()
@@ -116,13 +126,44 @@ class ApkTests(unittest.TestCase):
             self.assertIn(at, CALLS)
             self.assertEqual(bytes(memory[at:at + 4]), branch(at, change['target']))
             permitted.update(range(at, at + 4))
+        phdr_bytes = set(range(elf['e_phoff'], elf['e_phoff'] + elf['e_phnum'] * elf['e_phentsize']))
+        section_metadata = set(range(40, 48)) | {60, 61}
         for segment in original.iter_segments():
             if segment['p_type'] == 'PT_LOAD' and segment['p_flags'] & 1:
                 start, size = segment['p_vaddr'], segment['p_filesz']
                 differing = {n for n in range(start, start + size) if before[n] != memory[n]}
-                header_slot = set(range(elf['e_phoff'] + slot * elf['e_phentsize'], elf['e_phoff'] + (slot + 1) * elf['e_phentsize']))
-                self.assertTrue(differing.issubset(permitted | header_slot))
+                self.assertTrue(differing.issubset(permitted | phdr_bytes | section_metadata))
+        expected_changes = permitted | phdr_bytes | section_metadata | set(range(layout['codeAddress'], code_end))
+        for table in self.report['integrity']:
+            for group in table['locations']:
+                for address in group:
+                    expected_changes.update(range(address, address + 4))
+        self.assertEqual(len(memory), len(before))
+        self.assertTrue(all(a == b or n in expected_changes for n, (a, b) in enumerate(zip(before, memory))))
         self.assertEqual(len(self.report['calls']), 7)
+
+    def test_original_sections_relocations_and_imports_survive_file_insertion(self):
+        original = ELFFile(io.BytesIO(args.library.read_bytes()))
+        elf = ELFFile(io.BytesIO(self.patched.read('lib/arm64-v8a/libg.so')))
+        layout = self.report['loadLayout']
+        self.assertEqual(elf.num_sections(), original.num_sections() + 1)
+        for n, old in enumerate(original.iter_sections()):
+            new = elf.get_section(n)
+            self.assertEqual(old.name, new.name)
+            for field in ['sh_type', 'sh_flags', 'sh_addr', 'sh_link', 'sh_info', 'sh_addralign', 'sh_entsize']:
+                self.assertEqual(old[field], new[field], (old.name, field))
+            if old.name != '.shstrtab':
+                self.assertEqual(old['sh_size'], new['sh_size'])
+                offset = old['sh_offset'] + (layout['insertedFileBytes'] if old['sh_offset'] >= layout['fileInsertionOffset'] else 0)
+                self.assertEqual(offset, new['sh_offset'])
+            if old.name not in ['.text', '.data', '.shstrtab']:
+                self.assertEqual(old.data(), new.data(), old.name)
+        added = elf.get_section_by_name('.text.private_peer')
+        self.assertEqual(added['sh_flags'], 6)
+        self.assertEqual(added['sh_addr'], layout['codeAddress'])
+        self.assertEqual(added['sh_offset'], layout['codeAddress'])
+        self.assertEqual(added['sh_size'], layout['codeBytes'])
+        self.assertEqual(elf.get_section_by_name('.shstrtab').data()[:original.get_section_by_name('.shstrtab')['sh_size']], original.get_section_by_name('.shstrtab').data())
 
     def test_all_integrity_tables_and_tamper_detection(self):
         memory, _ = runtime_image(ELFFile(io.BytesIO(self.patched.read('lib/arm64-v8a/libg.so'))))

@@ -29,19 +29,39 @@ published APK/library hashes and confirms e_phoff=64/e_phnum=8. That layout
 change alone did not resolve the problem on this MuMu device; the cause remains
 unresolved.
 
-The new layout keeps the table at **64**, keeps its **8 descriptors**, and
-places the complete table within the first original PT_LOAD. The optional
-Android NDK-ident PT_NOTE descriptor becomes the appended RX PT_LOAD. Its
-note bytes/section remain intact; the original GNU build-id PT_NOTE and all
-load/dynamic, stack, RELRO and unwind descriptors remain unchanged. Load
-segments remain in ascending virtual-address order with their original
-alignment requirements; the appended segment is 64 KiB aligned.
-The peer key, native adapter code, seven call sites, configuration file,
-original game DEX, UI and assets are unchanged by this loader-layout fix.
+## Current two-load layout
 
-Regression checks require this layout, verify that only the permitted PHDR
-slot and seven original instructions change in executable mappings, and
-recheck the original 13 integrity tables. Native startup decryption and both
+A subsequent live capture recorded the exact canonical-header APK/library.
+It includes the native x86 loader's ARM64 rejection for both fmod and g,
+and Houdini initialization, but no internal native-bridge error or native
+backtrace. That wrong-machine message is still not sufficient to identify
+why the translator rejects g. OpenGL extension lookups in a graphics worker
+also appear; they are not evidence that g has a missing GL dependency.
+
+The new candidate removes the third PT_LOAD entirely. It uses the existing
+virtual gap between the first RX load and the second RW load:
+
+| Property | Supplied original | New candidate |
+| --- | --- | --- |
+| PT_LOAD count | 2 | 2 |
+| Load flags | RX, RW | RX, RW |
+| PHDR offset/count | 64 / 8 | 64 / 8 |
+| RW virtual address | `0xa29a48` | `0xa29a48` |
+| RW file offset | `0xa19a48` | `0xa29a48` |
+| GNU build-id and Android NDK notes | Both present | Both preserved |
+
+The RX load extends to contain the adapter at `0xa194c0`. Its end remains
+below the original RW mapping after both 4 KiB and 16 KiB page rounding.
+The RW data is shifted 64 KiB in the file, with dynamic/RELRO/section file
+offsets updated; its virtual addresses and all original relocations remain
+unchanged. An ordinary allocated executable `.text.private_peer` section
+covers the new code. No segment is made RWX and no note descriptor is reused.
+This reduces assumptions about native-bridge ELF layouts; it does **not**
+prove the proprietary Houdini loader's root cause or confirm device success.
+
+Ten APK tests validate the two-load layout, original sections/imports/relocations,
+complete mapped-image changes, both notes, nonoverlapping page-rounded mappings,
+and the original 13 integrity tables. Native startup decryption and both
 handshake paths are tested separately. These are **not Houdini execution**.
 
 ## Device verification
@@ -77,11 +97,12 @@ The previous collector captured logs after metadata requests and kept only
 and NewFileUpdater messages occupied every retained line, excluding the game
 load/failure. The collector now preserves target-process details without that
 tail cutoff, includes a complete raw capture, and indicates whether a game
-load/failure was seen. Eight regression tests cover capture order, noisy
+load/failure was seen. Ten diagnostic regression tests cover ELF layout extraction, capture order, noisy
 logs, metadata errors and actual child-process stream collection; Android/ADB
 execution is still not available in the build environment.
 
 Successful Houdini/native-bridge loading and actual gameplay remain unverified;
-the reported MuMu test of the canonical-header revision failed. This ARM64 APK cannot
+the reported MuMu test of the earlier canonical-header/three-load revision failed.
+The current two-load candidate still needs a device result. This ARM64 APK cannot
 support a bridge that only translates ARM32 or an emulator without working
 ARM64 translation; no ARMv7 or x86 game library was supplied.

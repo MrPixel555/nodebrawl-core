@@ -174,10 +174,24 @@ def patch_library(original, work, clang, linker, public_key=PUBLIC_KEY):
             tables.append({'address': table, 'entries': entries, 'locations': locations, 'originalKeys': values})
     if not any(t['address'] == 0xbeefd4 and len(t['entries']) == 83788 for t in tables):
         raise ValueError('Original integrity baseline did not verify')
-    end = max(segment['p_vaddr'] + segment['p_memsz'] for segment in elf.iter_segments() if segment['p_type'] == 'PT_LOAD')
-    appended = align(max(len(original), end))
-    code_start = appended + 0x1000
+    loads = [segment for segment in elf.iter_segments() if segment['p_type'] == 'PT_LOAD']
+    if len(loads) != 2 or loads[0]['p_flags'] != 5 or loads[1]['p_flags'] != 6:
+        raise ValueError('Expected original RX/RW load pair')
+    rx, rw = loads
+    if rx['p_offset'] != 0 or rx['p_vaddr'] != 0:
+        raise ValueError('Expected identity-mapped first load')
+    code_start = align(rx['p_vaddr'] + rx['p_memsz'], 16)
+    insertion = rw['p_offset']
+    shift = rw['p_vaddr'] - rw['p_offset']
+    if shift != 0x10000 or insertion < rx['p_filesz']:
+        raise ValueError('Unexpected original RX/RW file layout')
     code, names = payload(elf, code_start, work, clang, linker, public_key)
+    code_end = code_start + len(code)
+    if align(code_end, 0x4000) > (rw['p_vaddr'] & -0x4000):
+        raise ValueError('Adapter does not fit the existing virtual gap at 16 KiB pages')
+    if any(memory[code_start:code_end]):
+        raise ValueError('Original virtual gap is not empty')
+    memory[code_start:code_end] = code
     changed = []
     for address, (name, target) in CALLS.items():
         if bytes(memory[address:address + 4]) != branch(address, target):
@@ -219,30 +233,49 @@ def patch_library(original, work, clang, linker, public_key=PUBLIC_KEY):
                 for n in range(4):
                     output[at + n] ^= baseline[address + n] ^ memory[address + n]
         metadata.append({'table': hex(table['address']), 'ranges': len(table['entries']), 'originalKeys': table['originalKeys'], 'updatedKeys': values, 'locations': table['locations']})
-    # Keep the PHDR table at its original low file offset. Some native-bridge
-    # loaders may reject a table relocated into a late PT_LOAD even though
-    # Android's ARM64 linker accepts it. Reuse the optional Android NDK-ident note
-    # descriptor; its bytes/section remain intact. Preserve GNU build-id, stack,
-    # RELRO, unwind and all original load/dynamic descriptors.
-    note_slots = [n for n, segment in enumerate(elf.iter_segments())
-                  if segment['p_type'] == 'PT_NOTE'
-                  and all(note['n_name'] == 'Android' for note in segment.iter_notes())]
-    if len(note_slots) != 1:
-        raise ValueError('Expected one optional Android NDK note descriptor')
-    slot = note_slots[0]
-    total = 0x1000 + len(code)
-    output.extend(bytes(appended + total - len(output)))
-    descriptor = elf['e_phoff'] + slot * elf['e_phentsize']
-    output[descriptor:descriptor + elf['e_phentsize']] = struct.pack('<IIQQQQQQ', 1, 5, appended, appended, appended, total, total, 0x10000)
-    output[code_start:code_start + len(code)] = code
+    # Materialize the existing RX/RW virtual gap in the file. Moving only the
+    # RW backing bytes leaves every original virtual address and relocation
+    # unchanged. Keep two PT_LOADs, their RX/RW flags, all notes and the original
+    # PHDR table/count. No third executable mapping or RWX mapping is needed.
+    output[insertion:insertion] = bytes(shift)
+    output[code_start:code_end] = code
+    for n, segment in enumerate(elf.iter_segments()):
+        at = elf['e_phoff'] + n * elf['e_phentsize']
+        if segment['p_offset'] >= insertion:
+            struct.pack_into('<Q', output, at + 8, segment['p_offset'] + shift)
+        if segment is rx or (segment['p_type'] == 'PT_LOAD' and segment['p_vaddr'] == 0):
+            struct.pack_into('<QQ', output, at + 32, code_end, code_end)
+    # Keep all original section addresses/contents and provide an ordinary
+    # allocated executable section for the adapter (including translator tools).
+    shstr = elf.get_section(elf['e_shstrndx']).data()
+    name_offset = len(shstr)
+    shstr += b'.text.private_peer\0'
+    string_offset = align(len(output), 8)
+    output.extend(bytes(string_offset - len(output)))
+    output.extend(shstr)
+    section_offset = align(len(output), 8)
+    output.extend(bytes(section_offset - len(output)))
+    for n in range(elf['e_shnum']):
+        header = list(struct.unpack_from('<IIQQQQIIQQ', original, elf['e_shoff'] + n * elf['e_shentsize']))
+        if header[4] >= insertion:
+            header[4] += shift
+        if n == elf['e_shstrndx']:
+            header[4], header[5] = string_offset, len(shstr)
+        output.extend(struct.pack('<IIQQQQIIQQ', *header))
+    output.extend(struct.pack('<IIQQQQIIQQ', name_offset, 1, 6, code_start, code_start, len(code), 0, 0, 16, 0))
+    struct.pack_into('<Q', output, 40, section_offset)
+    struct.pack_into('<H', output, 60, elf['e_shnum'] + 1)
     patched = ELFFile(io.BytesIO(output))
     check_memory, _ = runtime_image(patched)
     for table in tables:
         assert checksum.calculate(check_memory, table['entries']) == [struct.unpack_from('<I', check_memory, group[0])[0] for group in table['locations']]
     report = {'originalLibrarySha256': LIBRARY_SHA, 'patchedLibrarySha256': hashlib.sha256(output).hexdigest(), 'serverPublicKey': public_key,
               'fridaRequired': False, 'instrumentationFrameworkBundled': False, 'integrityChecksDisabled': False,
-              'appendedSegment': {'address': appended, 'size': total, 'flags': 'RX', 'programHeadersRelocated': False,
-                                  'programHeaderSlot': slot, 'replacedDescriptor': 'PT_NOTE Android NDK ident',
-                                  'originalProgramHeaderOffset': elf['e_phoff'], 'originalProgramHeaderCount': elf['e_phnum']},
+              'loadLayout': {'strategy': 'extend-original-rx-into-existing-virtual-gap', 'codeAddress': code_start,
+                             'codeBytes': len(code), 'virtualGapEnd': rw['p_vaddr'], 'fileInsertionOffset': insertion,
+                             'insertedFileBytes': shift, 'originalLoadCount': 2, 'newLoadCount': 2,
+                             'originalVirtualAddressesPreserved': True, 'originalLoadFlagsPreserved': True,
+                             'programHeadersRelocated': False, 'originalProgramHeaderOffset': elf['e_phoff'],
+                             'originalProgramHeaderCount': elf['e_phnum'], 'allOriginalNotesPreserved': True},
               'calls': changed, 'integrity': metadata, 'nativeSymbols': {name: names[name] for name in ['peer_connect', 'peer_shared', 'peer_seal', 'peer_open']}}
     return bytes(output), report

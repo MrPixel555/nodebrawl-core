@@ -1,69 +1,75 @@
 {
   "originalLibrarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
-  "patchedLibrarySha256": "34dec25e84a886835d43e9219511ef2e97ee634952fb55082f617ebbc772ef37",
+  "patchedLibrarySha256": "a91b8607c403df642d85f1c9743e78cca7a673eeee6d507a6ebfa8ec80e0df32",
   "serverPublicKey": "8ddd4aa88e325e6cf7393740d2b9a9a952934477a44818bc0605d3b730cc5831",
   "fridaRequired": false,
   "instrumentationFrameworkBundled": false,
   "integrityChecksDisabled": false,
-  "appendedSegment": {
-    "address": 14155776,
-    "size": 18200,
-    "flags": "RX",
+  "loadLayout": {
+    "strategy": "extend-original-rx-into-existing-virtual-gap",
+    "codeAddress": 10589376,
+    "codeBytes": 14104,
+    "virtualGapEnd": 10656328,
+    "fileInsertionOffset": 10590792,
+    "insertedFileBytes": 65536,
+    "originalLoadCount": 2,
+    "newLoadCount": 2,
+    "originalVirtualAddressesPreserved": true,
+    "originalLoadFlagsPreserved": true,
     "programHeadersRelocated": false,
-    "programHeaderSlot": 4,
-    "replacedDescriptor": "PT_NOTE Android NDK ident",
     "originalProgramHeaderOffset": 64,
-    "originalProgramHeaderCount": 8
+    "originalProgramHeaderCount": 8,
+    "allOriginalNotesPreserved": true
   },
   "calls": [
     {
       "address": 3918952,
-      "target": 14159872,
+      "target": 10589376,
       "symbol": "peer_shared_deferred",
       "oldHex": "2c79fe97",
-      "newHex": "e6102794"
+      "newHex": "16721994"
     },
     {
       "address": 2507236,
-      "target": 14159880,
+      "target": 10589384,
       "symbol": "peer_shared_inline",
       "oldHex": "cddb0394",
-      "newHex": "89732c94"
+      "newHex": "b9d41e94"
     },
     {
       "address": 2615988,
-      "target": 14159888,
+      "target": 10589392,
       "symbol": "peer_shared_reply",
       "oldHex": "99710394",
-      "newHex": "57092c94"
+      "newHex": "876a1e94"
     },
     {
       "address": 3918980,
-      "target": 14159896,
+      "target": 10589400,
       "symbol": "peer_seal_deferred",
       "oldHex": "febbfe97",
-      "newHex": "e5102794"
+      "newHex": "15721994"
     },
     {
       "address": 2507264,
-      "target": 14159904,
+      "target": 10589408,
       "symbol": "peer_seal_inline",
       "oldHex": "9f1e0494",
-      "newHex": "88732c94"
+      "newHex": "b8d41e94"
     },
     {
       "address": 2616020,
-      "target": 14159912,
+      "target": 10589416,
       "symbol": "peer_open_reply",
       "oldHex": "0de9fd97",
-      "newHex": "55092c94"
+      "newHex": "856a1e94"
     },
     {
       "address": 2306488,
-      "target": 14160304,
+      "target": 10589808,
       "symbol": "peer_connect",
       "oldHex": "e6b1fa97",
-      "newHex": "fe372d94"
+      "newHex": "2e991f94"
     }
   ],
   "integrity": [
@@ -226,8 +232,8 @@
         3260813369
       ],
       "updatedKeys": [
-        2915220621,
-        2955635941,
+        3301686706,
+        2569169856,
         3260813369
       ],
       "locations": [
@@ -301,9 +307,9 @@
         1756549578
       ],
       "updatedKeys": [
-        1691293668,
-        3484004762,
-        99027161
+        2045004024,
+        3489360339,
+        126427280
       ],
       "locations": [
         [
@@ -376,9 +382,9 @@
         1420105696
       ],
       "updatedKeys": [
-        4265628304,
-        3789304889,
-        3712240510
+        2530805544,
+        3795553090,
+        4009494004
       ],
       "locations": [
         [
@@ -394,15 +400,15 @@
     }
   ],
   "nativeSymbols": {
-    "peer_connect": 14160304,
-    "peer_shared": 14159920,
-    "peer_seal": 14160024,
-    "peer_open": 14160148
+    "peer_connect": 10589808,
+    "peer_shared": 10589424,
+    "peer_seal": 10589528,
+    "peer_open": 10589652
   },
   "originalBundledLibrarySha256": "6020d2fb42fa13c81ac755cbec31621b3b104ebfdbfb65ae4b1a4356b7b0a46a",
   "originalApkSha256": "dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1",
-  "apkSha256": "b8e35fb2b9e584caaf17e129e618c6ac963696b4d8e22a0f465ba01affaa5c77",
-  "apkBytes": 104730905,
+  "apkSha256": "b89a5256fabb92e242e7204eff2195cd918b952f7c2475da5296850cfe00d9a1",
+  "apkBytes": 104730904,
   "launcherActivity": "com.supercell.clashroyale.GameApp",
   "configurationAsset": "assets/configs.so",
   "settingsUi": false,

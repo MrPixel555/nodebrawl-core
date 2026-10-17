@@ -66,7 +66,7 @@ checks that every other non-signature entry remains byte-for-byte identical.
 APK edits always require re-signing; updates require the installed signing
 identity. Use the same signing directory for subsequent local builds.
 
-The current APK passed nine structure/configuration/integrity tests. A separate
+The current APK passed ten structure/configuration/integrity tests. A separate
 test changed the asset from an IPv4 address to an ASCII hostname with CRLF,
 verified the resulting APK signature, confirmed the signing certificate was
 retained, and checked that the native library and all other non-signature
@@ -74,17 +74,23 @@ entries were unchanged. Both native Login paths, startup string decryption,
 endpoint validation and DNS adapter fixtures also passed.
 
 Native code is position independent and has no dynamic relocations, mutable
-globals or extra shared-library dependencies. An appended 64 KiB-aligned RX
-PT_LOAD contains the adapter. The ELF program header table stays at its
-original offset (64 bytes), with its original count (8). Only the optional
-Android NDK-ident PT_NOTE descriptor is reused for the extra load segment;
-the note bytes/section remain in the file. GNU build-id, original load/dynamic
-descriptors, stack policy, RELRO and unwind header remain intact. This avoids
-the previous late-PHDR-table layout when using native-bridge loaders. The integrity updater
-checks the original checksum baseline, updates affected stored constants
-through their string XOR encoding, reaches a fixed point and then rechecks
-all 13 identified tables against the final ELF. It never disables a checksum
-branch. [Third-party notices](THIRD_PARTY.md).
+globals or extra shared-library dependencies. The adapter uses the original
+virtual gap immediately after the RX load, starting at `0xa194c0`, before the
+unchanged RW virtual address `0xa29a48`. The original RX load is extended only
+to cover that code. The RW backing bytes move 64 KiB later **in the file**;
+every original virtual address and relocation remains unchanged. The builder
+updates the dependent file offsets and adds an ordinary `.text.private_peer`
+section. There are still exactly two PT_LOADs, with original RX/RW flags;
+no extra RX segment and no RWX mapping. Both original note descriptors,
+build-id, stack policy, RELRO and unwind metadata are preserved. The PHDR table
+remains at offset 64 with 8 entries. 4 KiB and 16 KiB rounded mappings do not
+overlap. Tests compare the complete mapped image, permitting only the seven
+calls, header metadata, known checksum constants and the new adapter bytes.
+
+The integrity updater checks the original checksum baseline, updates affected
+stored constants through their string XOR encoding, reaches a fixed point and
+then rechecks all 13 identified tables against the final ELF. It never disables
+a checksum branch. [Third-party notices](THIRD_PARTY.md).
 
 Verification:
 
