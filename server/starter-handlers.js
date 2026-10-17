@@ -59,7 +59,7 @@ function createStarterHandlers ({ store, logger = () => {}, traceNetwork = false
     }
     const requests = turn.commands.filter(command => command.id === 527)
     if (requests.length > 1) throw new ProtocolError('Multiple matchmaking requests in one turn')
-    if (requests.some(command => command.fields.field_0x20 !== 0 || command.fields.field_0x24 !== -1)) {
+    if (requests.some(command => !battles.requestMode(command.fields))) {
       logger({ event: 'matchmaking-request-rejected', reason: 'Event matchmaking requires a configured catalogue', applied: false })
       return
     }

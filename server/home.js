@@ -10,6 +10,8 @@ const unlockedProfile = require('./data/unlocked-profile.json')
 const { playerState } = require('./starter-state')
 const { writeArenaBoostState } = require('./arena-boost')
 const { writePassClaim } = require('./season-pass')
+const { encodeEventCatalogue } = require('../lib/protocol/event-catalogue')
+const { partyCatalogue } = require('./party')
 
 // External templates bind fixed-width account IDs explicitly. The starter
 // profile below uses typed bindings generated from the native nested codecs.
@@ -34,15 +36,15 @@ async function loadHomeTemplate (filename) {
   }
 }
 
-function createStarterHomeProvider ({ unlocked = true, now = Date.now } = {}) {
-  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217, now)
+function createStarterHomeProvider ({ unlocked = true, now = Date.now, party = false } = {}) {
+  return createPlayerProvider(unlocked ? unlockedHome : starter, 21217, now, party)
 }
 
 function createStarterProfileProvider ({ unlocked = true } = {}) {
   return createPlayerProvider(unlocked ? unlockedProfile : starterProfile, 22757)
 }
 
-function createPlayerProvider (data, messageId, now = Date.now) {
+function createPlayerProvider (data, messageId, now = Date.now, party = false) {
   if (typeof now !== 'function') throw new Error('Invalid Home clock')
   if (data.schema !== 1 || data.librarySha256 !== profile.library_sha256 || data.messageId !== messageId) throw new Error('Starter player data does not match this library')
   const parts = data.parts.map(part => part.hex === undefined ? part : { buffer: Buffer.from(part.hex, 'hex') })
@@ -53,6 +55,7 @@ function createPlayerProvider (data, messageId, now = Date.now) {
     const nowMs = state.arena1Boost === null ? null : now()
     for (const part of parts) {
       if (part.buffer) writer.raw(part.buffer)
+      else if (part.field === 'eventCatalogue' && part.type === 'nativeEvents') writer.raw(encodeEventCatalogue(partyCatalogue(party)))
       else if (part.field === 'accountId' && part.type === 'long') writer.long(account.id)
       else if (part.field === 'accountId' && part.type === 'vlong') { writer.vint(account.id[0]); writer.vint(account.id[1]) }
       else if (part.field === 'name' && part.type === 'string') writer.string(account.name)
@@ -65,7 +68,17 @@ function createPlayerProvider (data, messageId, now = Date.now) {
       }
       else if (part.field === 'arenaBoostClaim' && part.type === 'nativeArenaBoost' && (state.passInitialized || state.freePassGoldClaimed || state.passCrowns !== 0 || state.passSeenCrowns !== -1)) writePassClaim(writer, state.arena1Boost, state)
       else if (['arenaBoostTimers', 'arenaBoostClaim'].includes(part.field) && part.type === 'nativeArenaBoost') writeArenaBoostState(writer, part.field, state.arena1Boost, nowMs)
-      else if (part.field === 'nameSet' && part.type === 'bit') writer.byte((part.base & ~part.mask) | (state.nameSet ? part.mask : 0))
+      else if (part.field === 'avatarMembership' && part.type === 'nativeMembership') {
+        const flags = (part.base & ~part.mask) | (state.nameSet ? part.mask : 0)
+        if (!account.alliance) writer.byte(flags)
+        else {
+          const clan = account.alliance
+          // Native Avatar 0x71e290: presence shares the first flag byte.
+          // Badge has an implicit table 16, hence ordinal+1, not a full ref.
+          writer.byte(flags | 8).vint(clan.id[0]).vint(clan.id[1]).string(clan.name)
+            .vint(clan.badge[1] + 1).vint(clan.role).vint(clan.level).bool(false).bool(false)
+        }
+      }
       else if (part.field === 'resourceBalances' && part.type === 'nativeResources') {
         const freeGoldPresent = state.freeGold > 0
         writer.vint(freeGoldPresent ? 2 : 1).dataReference([5, 1]).vint(state.gold)
@@ -78,12 +91,12 @@ function createPlayerProvider (data, messageId, now = Date.now) {
   }
 }
 
-async function loadHomeProvider ({ mode, templatePath } = {}) {
+async function loadHomeProvider ({ mode, templatePath, party = false } = {}) {
   mode = mode || (templatePath ? 'template' : 'disabled')
   if (!['disabled', 'starter', 'template'].includes(mode)) throw new Error('Invalid HOME_MODE; use disabled, starter or template')
   if (mode !== 'template' && templatePath) throw new Error('HOME_TEMPLATE_PATH requires HOME_MODE=template')
   if (mode === 'template' && !templatePath) throw new Error('HOME_MODE=template requires HOME_TEMPLATE_PATH')
-  if (mode === 'starter') return createStarterHomeProvider()
+  if (mode === 'starter') return createStarterHomeProvider({ party })
   return mode === 'template' ? loadHomeTemplate(templatePath) : null
 }
 

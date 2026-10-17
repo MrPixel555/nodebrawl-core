@@ -123,8 +123,8 @@
       "hex": "000100"
     },
     {
-      "field": "nameSet",
-      "type": "bit",
+      "field": "avatarMembership",
+      "type": "nativeMembership",
       "mask": 1,
       "base": 1
     },

@@ -32,10 +32,12 @@ its public key do not change. Continue using the trusted HTTPS content URL.
 | Training `17967`, NPC `[18,n]` | Source NPC, original deck/card levels, location and Training GameMode |
 | `10953` | Same path only when its PvE reference is null; challenge rules are unsupported |
 | EndClientTurn `13597`, command `527` | Normal queue; two humans, or a labelled practice bot after five seconds |
-| Cancel `13006` | Removes queued search or aborts a still-loading match, then sends Home |
+| Cancel `13006` | Removes queued search and acknowledges with 25382; a crossing found match continues loading |
 | Snapshot `28991` / acknowledgment `15263` | Original owner-specific initialization/full world state, then start ticking |
 | Input `16194` | Authenticated battle command plus client tick/checksum |
 | Sector `26980` | Native tick/checksum and commands, every ten ticks (500 ms) |
+| Result `22871` | Native outcome, both crown counts and final snapshot; persisted once |
+| Event `13351` | Decoded LogicEvent receipt and bounded metadata trace |
 | Return `12526/15965/18533/14062` | Authoritative forfeit if still running, result persistence and current Home |
 | Same-account reconnect | Rebinds the current match and sends an actual snapshot including pending inputs |
 
@@ -61,8 +63,9 @@ using the native validator; it is not a recovered official matchmaking/AI policy
 | `BATTLE_ARENA` | 54000001; the source Arena selects PvP/2v2 geometry |
 
 Source collection-deck modes with PvP/TvT player layouts can be configured.
-Only ordinary matchmaking selectors are handled; event/challenge selectors,
-draft/predefined player-deck rules and the Party selection UI are not implemented.
+Starter Home advertises two CASUAL events: TeamVsTeamLadder (2v2) and
+DoubleElixir. Their known event IDs/selectors use separate Party queues. Other
+event/challenge selectors and draft/predefined player-deck rules remain unsupported.
 Training uses each NPC's source location. All 53 original level geometries are
 available in the image; unused 3v3 geometry being loadable does not implement
 six-player play or its UI. Runtime rosters are two or four players.
@@ -107,9 +110,9 @@ at tick 2890 (3–1 crowns), and executed each of the 95 unlocked cards through 
 original spell executor. The isolated card fixture puts a card in hand and sets
 time/mana explicitly; this does not prove every possible card interaction.
 Team geometry probes use four players, including the unused 3v3 map. These
-checks do not establish Android UI correctness. No Android device is available
-in the cloud workspace; actual Training/Battle loading and controls still need
-the supplied phone run.
+checks do not establish Android UI correctness. The user confirmed Training opens on the phone. No Android device is available
+in the cloud workspace; the updated controls, result/cancel transitions and
+Party/clan screens still require the supplied phone run.
 
 ```bash
 npm test
@@ -149,3 +152,5 @@ native-memory block hashes exactly. Verify block hashes and run the runtime test
 before replacing a committed image. The WebAssembly dependency is the upstream
 [Unicorn.js](https://github.com/AlexAltea/unicorn.js), licensed GPL-2.0; its
 packaged license and source remain available through that dependency.
+
+[Device fixes, exact message routes and verification](battle-device-fixes.md)

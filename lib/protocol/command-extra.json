@@ -177,6 +177,49 @@
       "unresolvedReason": null,
       "verification": "tools/reverse/verify_loot_result.py",
       "codecScope": "Optional ordinary loot result (type 0) only; draft result type 2 unresolved; no runtime chest handler"
+    },
+    {
+      "id": 477,
+      "vtable": "0xa5ecf8",
+      "encode": "0x3f19a0",
+      "decode": "0x55e580",
+      "execute": "0x6dbf30",
+      "fields": [
+        {
+          "field": "field_0x20",
+          "type": "long"
+        },
+        {
+          "field": "field_0x30",
+          "type": "string"
+        },
+        {
+          "field": "field_0x28",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0x38",
+          "type": "bool"
+        },
+        {
+          "field": "field_0x1c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x10",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "type": "vlong"
+        }
+      ],
+      "unresolvedReason": null,
+      "verification": "tools/reverse/verify_clan_membership.py"
     }
   ]
 }

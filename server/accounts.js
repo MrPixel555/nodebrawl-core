@@ -5,6 +5,7 @@ const { randomBytes, timingSafeEqual } = require('node:crypto')
 const { ProtocolError } = require('../lib/protocol/stream')
 const { playerState, applyCommands } = require('./starter-state')
 const { applyBattleResult, validateBattleHistory } = require('./battle/results')
+const { equalId, validateAlliances, createAlliance, clanData } = require('./alliances')
 
 const queues = new Map()
 
@@ -40,9 +41,10 @@ class AccountStore {
         playerState(account)
         validateBattleHistory(account.battleHistory)
       }
+      validateAlliances(data)
       return data
     } catch (error) {
-      if (error.code === 'ENOENT') return { schema: 1, nextId: 1, accounts: [] }
+      if (error.code === 'ENOENT') return { schema: 1, nextId: 1, accounts: [], nextAllianceId: 1, alliances: [] }
       throw error
     }
   }
@@ -84,7 +86,7 @@ class AccountStore {
       const account = (await this.load()).accounts.find(account => account.id[0] === id[0] && account.id[1] === id[1])
       if (!account) return null
       // Profile responses never include credentials or private gem/gold balances.
-      return { id: [...account.id], name: account.name, starter: { ...playerState(account), gold: 0, freeGold: 0, gems: 0, freeGems: 0 } }
+      return { id: [...account.id], name: account.name, alliance: account.alliance, starter: { ...playerState(account), gold: 0, freeGold: 0, gems: 0, freeGems: 0 } }
     })
   }
 
@@ -113,6 +115,32 @@ class AccountStore {
       const next = applyBattleResult(account, result, this.now())
       if (next !== account) { database.accounts[index] = next; await this.save(database) }
       return next
+    })
+  }
+
+  createAlliance (identity, fields) {
+    return this.serial(async () => {
+      const database = await this.load()
+      const account = database.accounts.find(account => equalId(account.id, identity?.id))
+      if (!account || !sameToken(identity.token, account.token)) throw new ProtocolError('Invalid account credentials')
+      const clan = createAlliance(database, account, fields)
+      await this.save(database)
+      return { account, data: clanData(database, clan) }
+    })
+  }
+
+  listAlliances (query = '') {
+    return this.serial(async () => {
+      const database = await this.load()
+      return database.alliances.filter(clan => clan.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())).slice(0, 50).map(clan => clanData(database, clan).header)
+    })
+  }
+
+  findAlliance (id) {
+    return this.serial(async () => {
+      const database = await this.load()
+      const clan = database.alliances.find(clan => equalId(clan.id, id))
+      return clan ? clanData(database, clan) : null
     })
   }
 }

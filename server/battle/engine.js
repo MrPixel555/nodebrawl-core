@@ -149,6 +149,11 @@ class BattleEngine {
     const requested = command.fields.field_0x10
     if (!Number.isInteger(requested) || requested < this.tick - 40 || requested > this.tick + 40) throw new ProtocolError('Battle command tick is outside the accepted window')
     if (command.id === 2 && (command.fields.field_0x38 !== null || command.fields.field_0x34)) throw new ProtocolError('Client cannot supply or replace a battle card')
+    if (command.id === 2) {
+      const fields = command.fields, { width, height } = this.definition.location
+      if (!player.deck.includes(fields.field_0x24) || !Number.isInteger(fields.field_0x1c) || fields.field_0x1c < 0 || fields.field_0x1c >= player.deck.length) throw new ProtocolError('Battle card is outside the owned deck')
+      if (![fields.field_0x28, fields.field_0x2c].every(Number.isInteger) || fields.field_0x28 < 0 || fields.field_0x28 >= width * 500 || fields.field_0x2c < 0 || fields.field_0x2c >= height * 500) throw new ProtocolError('Battle placement is outside the map')
+    }
     const fingerprint = slot + ':' + encodeCommand(command).toString('hex')
     if (this.inputsSeen.has(fingerprint)) return { accepted: false, duplicate: true }
     this.inputsSeen.set(fingerprint, this.tick)
@@ -156,11 +161,11 @@ class BattleEngine {
     if (this.inputsSeen.size > 1024) throw new ProtocolError('Battle input rate limit exceeded')
     const scheduled = Math.max(this.tick + 1, requested + 20)
     const normalized = { id: command.id, fields: { ...command.fields, field_0x10: scheduled - 20, field_0xc: scheduled, field_0x14: [...player.id] } }
-    const object = this.nativeCommand(normalized), v = this.vm
-    const result = v.call(v.qword(v.qword(object) + 0x18), object, this.game, 1, 0) | 0
-    this.destroyCommand(object)
-    // Code 22 is the original pre-battle countdown: revalidate at execution.
-    if (result !== 0 && !(command.id === 2 && result === 22)) return { accepted: false, result }
+    // Flags 1 run CLIENT PREDICTION, not a read-only validator: the original
+    // spell executor reserves mana (+0x200) and hand state on that branch.
+    // Running it in the authority leaks reservations between inputs. Decode
+    // and execute once with flags 3 at the agreed future tick; that path runs
+    // the original actual-mana, hand and placement checks before applying.
     this.pending.push({ slot, command: normalized, tick: scheduled, bot })
     this.accepted.push(normalized)
     return { accepted: true, tick: scheduled }
@@ -195,6 +200,7 @@ class BattleEngine {
       const hand = (first + n) % 4, spell = v.call(0x13d174, player, hand)
       if (!spell) continue
       const data = v.call(0x704010, spell)
+      if (v.call(0x11126c, player) < v.call(0x31861c, player, data)) continue
       const command = {
         id: 2,
         fields: {
@@ -211,6 +217,7 @@ class BattleEngine {
           field_0x2c: slot % 2 === 0 ? 21000 : 11000,
         },
       }
+      if (v.call(0x748450, this.world, command.fields.field_0x28, command.fields.field_0x2c, data, 0) !== 0) continue
       const result = this.queue(slot, command, { bot: true })
       if (result.accepted) return command
     }

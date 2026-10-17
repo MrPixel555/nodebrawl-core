@@ -30,7 +30,7 @@ for (const fixture of require('./fixtures/native-turns.json')) {
 
 test('command catalog retains unresolved native types and refuses to guess their sizes', () => {
   assert.equal(commandCatalog.size, 135)
-  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 95)
+  assert.equal([...commandCatalog.values()].filter(command => command.fields !== null).length, 96)
   for (const id of [1001, -1]) {
     assert.throws(() => encodeCommand({ id }), UnverifiedCommandError)
     assert.throws(() => decodeCommand(new Writer().vint(id).toBuffer()), error => error instanceof UnverifiedCommandError && error.id === id)

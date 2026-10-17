@@ -3,7 +3,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const zlib = require('node:zlib')
 const crypto = require('node:crypto')
-const moduleFactory = require('@alexaltea/unicorn-js/arm64')
+const moduleFactory = require('./runtime').loadBattleRuntime()
 const imports = require('./imports.json')
 const { library_sha256: libraryHash } = require('../../lib/protocol/libg-profile.json')
 

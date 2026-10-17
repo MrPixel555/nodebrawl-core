@@ -8,8 +8,8 @@ name and an optional `Background` object. Targeting is parsed separately.
 The probe resolves `DoubleElixir` to **72000001** and `TeamVsTeamLadder` to
 **72000023** using the original native game-mode table/name lookup. Both records
 have `ValidPartyMode=true` in this APK's `game_modes.csv`. There are no
-substituted game-data lookup functions. These are tested metadata examples,
-not a complete Party schedule or matchmaking implementation.
+substituted game-data lookup functions. Starter Home now advertises both modes as CASUAL events. Their known event
+selectors route to native matchmaking; this is not a complete official schedule.
 
 `lib/protocol/event-catalogue.js` implements the nested catalogue's revision,
 counted event list and complete generic event fields, including four time values,
@@ -37,10 +37,12 @@ String initializers from the pinned library; this does not initialize the
 Android platform or all game state.
 
 [Native evidence](native-party-catalogue.json) records scope and functions.
-The default Home still advertises an empty event catalogue. Targeting/time
-filters, the Android Party UI, event availability, matchmaking and battle
-snapshots remain unverified. The new nested codec does not increase the count
-of fully supported message IDs or establish playable Party battles.
+With native battles enabled, production starter Home advertises events 1002
+(2v2) and 1001 (Double Elixir). Disabling battles leaves the catalogue empty.
+Native full Home decoding constructs their handlers using linked CSV data.
+Mode/reward queues are isolated and both modes pass native sector simulation
+checks. The Android Party screen and controls still need device verification.
+[Current implementation and limits](battle-device-fixes.md).
 
 ## Server-friend prefetch when opening Party
 
@@ -56,5 +58,6 @@ zero**, eight bytes. `verify_empty_friends.py` executes the original codecs
 (`0x5e5f88`/`0x204f78`), empty-list consumer and listener refresh. The complete
 nonempty friend codec remains unresolved in the registry; this supported empty
 case is not counted as a full new codec. Encrypted TCP tests compare the actual
-response to the native fixture. This completes the prefetch exchange; the Home
-event catalogue is still empty and Party battles are still unimplemented.
+response to the native fixture. This completes the prefetch exchange; the separate Home catalogue now
+advertises the two supported CASUAL events. General friend relations remain
+unimplemented.

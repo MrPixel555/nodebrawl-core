@@ -1,8 +1,9 @@
 # Clan search and recovered request formats
 
-The runtime clan search route is **14783 -> 24184**, returning an allocated
-empty header list because clan creation/membership and stored clans remain
-unimplemented.
+The runtime clan search route is **14783 -> 24184**, returning headers for
+stored clan names. Creation, persisted leader membership and native clan data
+are now implemented; advanced search filters and other clan actions are incomplete.
+[Current scope and native verification](battle-device-fixes.md).
 
 **Correction:** request **16592 is a name preflight**, not a clan search.
 The previous 16592 -> 25074 pairing was wrong and left the naming dialog waiting.
@@ -22,8 +23,8 @@ The clan wire evidence retained here is independent of that mistaken pairing:
 Creation strings use native limits 15*4 and 140*4 UTF-8 bytes. Settings uses a
 900000-byte wire string limit. Codec bounds are distinct from gameplay validation
 of names/descriptions. Badge references use table 16; locations use table 57.
-Create/settings handlers remain absent until membership, costs, account/Home
-bindings and response semantics are implemented.
+Create now uses the verified source cost and command 477 acknowledgement.
+The settings handler remains absent.
 
 25074 serializes a query string and a nullable VInt-counted list of clan headers.
 Header codecs `0x32ea04`/`0x4b5a14` write a fixed-width Long ID, name, badge
@@ -50,13 +51,15 @@ This search requires **24184**, containing only a nullable header vector.
 It does not use the query-bearing 25074 response. UI submit `0x714e0c` builds
 14783 through `0x747884`. Dispatcher branch `0x720d7c` consumes 24184 via
 `0x46fec8`, which forwards the list to that search popup's `0x1166f4` consumer.
-The live handler sends an allocated empty list for the still-empty clan store.
+The live handler searches stored names, returning an allocated empty list when
+there are no matching clans.
 
 The probe now verifies **12 fixtures**, including both search responses with
 nonempty/empty/null header lists and advanced request filters with Persian text,
 negative/fixed-width integers, non-null region, ID vectors and string vectors.
 Encrypted TCP tests exercise the advanced exchange and a subsequent heartbeat.
-Clan creation, membership and chat remain unimplemented.
+Clan creation and retained leader membership are implemented; joining/leaving,
+chat and other clan functions remain incomplete.
 
 Encrypted TCP tests send startup receipts, naming checks, advanced clan search, turns and
 heartbeat on one session. Actual CLI smoke exercises naming preflight, final
@@ -70,6 +73,6 @@ npm test
 npm run lint
 ```
 
-Training/battle simulation, matchmaking, remaining shop actions, clan creation/membership/chat
-and progression still require server rules and additional state. Wire codec
+Training/battle simulation and matchmaking use the native Node runtime. Remaining
+shop actions, clan functions and progression need further server rules. Wire codec
 coverage is reported separately from those handlers.

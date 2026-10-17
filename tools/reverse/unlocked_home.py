@@ -17,7 +17,7 @@ class UnlockedHome(StarterHome):
     def __init__(self):
         super().__init__()
         vm = self.vm
-        self.expected_bindings = 63
+        self.expected_bindings = 64
         self.owned_ids = []
         self.card_metadata = {}
         table = qword(vm, 0xd5dc68 + 7 * 8)

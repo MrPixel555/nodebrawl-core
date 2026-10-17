@@ -86,7 +86,7 @@ async function handle (frame) {
     assert.equal(frame.id, 21217)
     const payload = receiveCipher ? receiveCipher.decrypt(frame.payload) : frame.payload
     player = { id: account.field_0x80, name: 'Player', starter: playerState({ starter: { selectedDeck: 0, nameSet: false, nameChangeCount: -1 } }) }
-    const expected = await createStarterHomeProvider()(player)
+    const expected = await createStarterHomeProvider({ party: process.env.BATTLE_MODE !== 'disabled' })(player)
     assert.deepEqual(payload, expected.payload)
     stage = 'name-check'
     for (const [id, fields] of [

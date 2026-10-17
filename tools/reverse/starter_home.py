@@ -29,7 +29,7 @@ class StarterHome:
         self.data = {}
         self.records = {}
         self.bindings = []
-        self.expected_bindings = 62
+        self.expected_bindings = 63
         self.stream = None
         self.profile_id = None
         table_vtable = vm.alloc(0x70)
@@ -108,6 +108,7 @@ class StarterHome:
         vm.register_hook(0x5e0f60, self.observe_name)
         vm.register_hook(0x45d234, self.observe_selection)
         vm.register_hook(0x487e90, self.observe_flags)
+        vm.register_hook(0x524ba0, self.observe_events)
         vm.register_hook(0x54ff70, self.observe_commodity)
         vm.register_hook(0x6d5a08, self.observe_card)
         vm.register_hook(0x1032d8, self.observe_profile_id)
@@ -204,7 +205,16 @@ class StarterHome:
         if vm.reg(0) == self.stream and vm.uc.reg_read(UC_ARM64_REG_LR) == 0x71e268:
             assert read_u32(vm, self.stream + 0x1c) == 0
             self.bindings.append({'offset': read_u32(vm, self.stream + 0x14), 'bytes': 1,
-                                  'field': 'nameSet', 'type': 'bit', 'mask': 1})
+                                  'field': 'avatarMembership', 'type': 'nativeMembership', 'mask': 1})
+
+    def observe_events(self, vm):
+        if vm.reg(1) == self.stream:
+            # Baseline catalogue is revision -1/count 0. Runtime binds the
+            # complete variable-size catalogue at this original codec boundary.
+            assert read_u32(vm, vm.reg(0)) == 0xffffffff
+            assert read_u32(vm, vm.reg(0) + 0x14) == 0
+            self.bindings.append({'offset': read_u32(vm, self.stream + 0x14), 'bytes': 2,
+                                  'field': 'eventCatalogue', 'type': 'nativeEvents'})
 
     def make(self, account_id=(0, 37), name='Player', selected_deck=0, *, name_set=True,
              name_change_count=0, gold=100, gems=100, free_gems=100, decks=None):
@@ -311,7 +321,7 @@ def make_parts(payload, bindings):
         if offset > at:
             parts.append({'hex': payload[at:offset].hex()})
         part = {name: value for name, value in binding.items() if name not in ('offset', 'bytes')}
-        if binding['type'] == 'bit':
+        if binding['type'] in ('bit', 'nativeMembership'):
             part['base'] = payload[offset]
         if part.get('field') == 'gold':
             # Bind the whole first resource group, including its count. The

@@ -1,0 +1,82 @@
+[
+  {
+    "id": 28165,
+    "fields": {
+      "field_0x80": {
+        "header": {
+          "field_0x0": [
+            0,
+            37
+          ],
+          "field_0x8": "\u0642\u0628\u06cc\u0644\u0647",
+          "field_0x10": [
+            16,
+            0
+          ],
+          "field_0x18": 1,
+          "field_0x1c": 1,
+          "field_0x20": 0,
+          "field_0x24": 0,
+          "field_0x28": 0,
+          "field_0x2c": 0,
+          "field_0x30": 0,
+          "field_0x40": 0,
+          "field_0x44": 0,
+          "field_0x48": 0,
+          "field_0x58": [
+            0,
+            0
+          ],
+          "field_0x50": [
+            0,
+            0
+          ],
+          "field_0x60": false,
+          "field_0x34": 0,
+          "field_0x38": 0,
+          "field_0x3c": 0,
+          "field_0x61": false,
+          "field_0x62": false,
+          "field_0x63": false,
+          "field_0x64": false
+        },
+        "description": "\u062a\u0648\u0636\u06cc\u062d",
+        "members": [
+          {
+            "field_0x10": [
+              0,
+              123
+            ],
+            "field_0x20": "Player",
+            "field_0x48": [
+              54,
+              1
+            ],
+            "field_0x28": 2,
+            "field_0x2c": 0,
+            "field_0x30": 1,
+            "field_0x34": 0,
+            "field_0x38": 0,
+            "field_0x3c": 0,
+            "field_0x40": 0,
+            "field_0x50": 0,
+            "field_0x5c": 0,
+            "field_0x54": false,
+            "field_0x55": false,
+            "field_0x58": 0,
+            "field_0x8": [
+              0,
+              0
+            ],
+            "field_0x18": null
+          }
+        ],
+        "field_0x28": 0,
+        "field_0x30": null
+      }
+    },
+    "payloadHex": "00000000000000250000000ad982d8a8db8cd984d987100001010000000000000000000000000000000000000ad8aad988d8b6db8cd8ad01000000000000007b00000006506c61796572360102000100000000000000000000000000000000000000000000",
+    "nativeDecodeConsumed": 101,
+    "nativeReencodeEqual": true
+  }
+]

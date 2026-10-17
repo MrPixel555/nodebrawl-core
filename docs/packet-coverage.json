@@ -438,7 +438,7 @@
       "id": 10453,
       "name": "CreateAlliance",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "atomic 1000-gold clan creation and persisted leader membership",
       "fields": [
         {
           "field": "field_0x80",
@@ -1189,7 +1189,7 @@
       "id": 13006,
       "name": "Message13006",
       "codec": true,
-      "runtimeSupport": "queued/loading matchmaking cancellation",
+      "runtimeSupport": "queued matchmaking cancellation; a crossing found match continues",
       "fields": [],
       "nativeEncode": "0x415534",
       "nativeDecode": "0x423b40",
@@ -1285,10 +1285,15 @@
     },
     {
       "id": 13351,
-      "name": "Message13351",
-      "codec": false,
-      "runtimeSupport": null,
-      "fields": null,
+      "name": "LogicEvent",
+      "codec": true,
+      "runtimeSupport": "native LogicEvent codec and receipt; no client-authoritative gameplay mutation",
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "logicEvent"
+        }
+      ],
       "nativeEncode": "0x24de20",
       "nativeDecode": "0x531908",
       "factoryObservations": [
@@ -1715,7 +1720,7 @@
       "id": 14783,
       "name": "AdvancedAllianceSearch",
       "codec": true,
-      "runtimeSupport": "empty advanced clan search",
+      "runtimeSupport": "stored clan name search; advanced numeric filters incomplete",
       "fields": [
         {
           "field": "field_0x80",
@@ -2735,7 +2740,7 @@
       "id": 18495,
       "name": "Message18495",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "battle client status receipt",
       "fields": [
         {
           "type": "vint",
@@ -3838,7 +3843,7 @@
       "id": 21217,
       "name": "OwnHomeData",
       "codec": false,
-      "runtimeSupport": "persistent Home with 95 unlocked cards, card order and free pass claim",
+      "runtimeSupport": "persistent Home with 95 cards, CASUAL catalogue, clan membership and free pass claim",
       "fields": null,
       "nativeEncode": "0x4bce90",
       "nativeDecode": "0x154440",
@@ -4072,7 +4077,7 @@
       "id": 22192,
       "name": "ServerCommand",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "native server command 477 clan acknowledgement",
       "fields": [
         {
           "field": "field_0x80",
@@ -4270,10 +4275,79 @@
     },
     {
       "id": 22871,
-      "name": "Message22871",
-      "codec": false,
-      "runtimeSupport": null,
-      "fields": null,
+      "name": "BattleResult",
+      "codec": true,
+      "runtimeSupport": "native outcome/crowns and final snapshot after authoritative completion",
+      "fields": [
+        {
+          "field": "field_0x7c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x80",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x84",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x88",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x8c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x90",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x94",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x98",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x9c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xa0",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xa4",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0xb0",
+          "type": "bytes"
+        },
+        {
+          "field": "field_0xb8",
+          "type": "bool"
+        },
+        {
+          "field": "field_0xbc",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0xc0",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0xc4",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0xc8",
+          "type": "dataReference"
+        }
+      ],
       "nativeEncode": "0x57be64",
       "nativeDecode": "0x739d3c",
       "factoryObservations": [
@@ -4990,9 +5064,9 @@
     },
     {
       "id": 25382,
-      "name": "Message25382",
+      "name": "CancelMatchmakingOk",
       "codec": true,
-      "runtimeSupport": null,
+      "runtimeSupport": "queued search cancellation acknowledgement; found matches continue loading",
       "fields": [],
       "nativeEncode": "0x4bec84",
       "nativeDecode": "0x59c670",
@@ -5857,10 +5931,15 @@
     },
     {
       "id": 28165,
-      "name": "Message28165",
-      "codec": false,
-      "runtimeSupport": null,
-      "fields": null,
+      "name": "AllianceData",
+      "codec": true,
+      "runtimeSupport": "clan header/member data after creation and login; other clan functions incomplete",
+      "fields": [
+        {
+          "field": "field_0x80",
+          "type": "allianceData"
+        }
+      ],
       "nativeEncode": "0x583b9c",
       "nativeDecode": "0x694730",
       "factoryObservations": [
@@ -7480,9 +7559,43 @@
       "encode": "0x3f19a0",
       "decode": "0x55e580",
       "execute": "0x6dbf30",
-      "fields": null,
-      "unresolvedReason": "unknown call at 0x3f19d8",
-      "runtimeSupport": null
+      "fields": [
+        {
+          "field": "field_0x20",
+          "type": "long"
+        },
+        {
+          "field": "field_0x30",
+          "type": "string"
+        },
+        {
+          "field": "field_0x28",
+          "type": "dataReference"
+        },
+        {
+          "field": "field_0x38",
+          "type": "bool"
+        },
+        {
+          "field": "field_0x1c",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x10",
+          "type": "vint"
+        },
+        {
+          "field": "field_0xc",
+          "type": "vint"
+        },
+        {
+          "field": "field_0x14",
+          "type": "vlong"
+        }
+      ],
+      "unresolvedReason": null,
+      "verification": "tools/reverse/verify_clan_membership.py",
+      "runtimeSupport": "server-origin clan creation acknowledgement; native client cost and membership transition"
     },
     {
       "id": 479,
@@ -7740,7 +7853,7 @@
         }
       ],
       "unresolvedReason": null,
-      "runtimeSupport": "normal matchmaking, native 1v1/2v2, optional labelled bots; event branches unsupported"
+      "runtimeSupport": "ladder and advertised CASUAL events 1001/1002; separate mode/reward queues, native 1v1/2v2 and optional labelled bots"
     },
     {
       "id": 532,

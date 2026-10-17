@@ -13,7 +13,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 10268 | Message10268 | verified | not implemented |
 | 10344 | Message10344 | verified | not implemented |
 | 10393 | Message10393 | verified | not implemented |
-| 10453 | CreateAlliance | verified | not implemented |
+| 10453 | CreateAlliance | verified | atomic 1000-gold clan creation and persisted leader membership |
 | 10459 | Message10459 | verified | metadata receipt and bounded content diagnostics |
 | 10484 | Message10484 | verified | not implemented |
 | 10576 | Message10576 | verified | not implemented |
@@ -49,12 +49,12 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 12848 | Message12848 | unresolved | not implemented |
 | 12912 | Message12912 | verified | not implemented |
 | 12951 | Message12951 | verified | not implemented |
-| 13006 | Message13006 | verified | queued/loading matchmaking cancellation |
+| 13006 | Message13006 | verified | queued matchmaking cancellation; a crossing found match continues |
 | 13058 | Message13058 | verified | not implemented |
 | 13090 | Message13090 | verified | not implemented |
 | 13172 | Message13172 | verified | not implemented |
 | 13211 | Message13211 | unresolved | not implemented |
-| 13351 | Message13351 | unresolved | not implemented |
+| 13351 | LogicEvent | verified | native LogicEvent codec and receipt; no client-authoritative gameplay mutation |
 | 13475 | Message13475 | unresolved | not implemented |
 | 13481 | Message13481 | unresolved | not implemented |
 | 13525 | Message13525 | unresolved | not implemented |
@@ -73,7 +73,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 14173 | Message14173 | unresolved | not implemented |
 | 14315 | Message14315 | verified | not implemented |
 | 14674 | Message14674 | verified | not implemented |
-| 14783 | AdvancedAllianceSearch | verified | empty advanced clan search |
+| 14783 | AdvancedAllianceSearch | verified | stored clan name search; advanced numeric filters incomplete |
 | 14809 | Message14809 | verified | not implemented |
 | 14843 | Message14843 | verified | not implemented |
 | 14997 | Message14997 | unresolved | not implemented |
@@ -121,7 +121,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 18216 | Message18216 | unresolved | not implemented |
 | 18385 | Message18385 | unresolved | not implemented |
 | 18443 | Message18443 | unresolved | not implemented |
-| 18495 | Message18495 | verified | not implemented |
+| 18495 | Message18495 | verified | battle client status receipt |
 | 18533 | Message18533 | verified | native return-dialog Home route |
 | 18685 | Message18685 | verified | not implemented |
 | 18720 | Message18720 | unresolved | not implemented |
@@ -165,7 +165,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 21008 | Message21008 | verified | not implemented |
 | 21047 | ServerFriends | unresolved | only type-zero empty list supported; general friend codec unresolved |
 | 21083 | Message21083 | verified | not implemented |
-| 21217 | OwnHomeData | unresolved | persistent Home with 95 unlocked cards, card order and free pass claim |
+| 21217 | OwnHomeData | unresolved | persistent Home with 95 cards, CASUAL catalogue, clan membership and free pass claim |
 | 21243 | Message21243 | unresolved | not implemented |
 | 21669 | Message21669 | verified | not implemented |
 | 21749 | Message21749 | unresolved | not implemented |
@@ -178,7 +178,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 22064 | Message22064 | verified | not implemented |
 | 22091 | Message22091 | verified | not implemented |
 | 22177 | Message22177 | unresolved | not implemented |
-| 22192 | ServerCommand | verified | not implemented |
+| 22192 | ServerCommand | verified | native server command 477 clan acknowledgement |
 | 22344 | Message22344 | unresolved | not implemented |
 | 22493 | Message22493 | verified | not implemented |
 | 22556 | Message22556 | unresolved | not implemented |
@@ -189,7 +189,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 22708 | Message22708 | unresolved | not implemented |
 | 22757 | PlayerProfile | unresolved | native starter profile provider; general codec unresolved |
 | 22823 | Message22823 | unresolved | not implemented |
-| 22871 | Message22871 | unresolved | not implemented |
+| 22871 | BattleResult | verified | native outcome/crowns and final snapshot after authoritative completion |
 | 22904 | Message22904 | verified | not implemented |
 | 22906 | Message22906 | verified | not implemented |
 | 22968 | Message22968 | verified | not implemented |
@@ -223,7 +223,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 25275 | Message25275 | unresolved | not implemented |
 | 25279 | Message25279 | unresolved | not implemented |
 | 25290 | Message25290 | verified | not implemented |
-| 25382 | Message25382 | verified | not implemented |
+| 25382 | CancelMatchmakingOk | verified | queued search cancellation acknowledgement; found matches continue loading |
 | 25507 | Message25507 | verified | not implemented |
 | 25520 | Message25520 | verified | not implemented |
 | 25729 | Message25729 | unresolved | not implemented |
@@ -264,7 +264,7 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 28089 | Message28089 | verified | not implemented |
 | 28100 | Message28100 | unresolved | not implemented |
 | 28158 | Message28158 | verified | not implemented |
-| 28165 | Message28165 | unresolved | not implemented |
+| 28165 | AllianceData | verified | clan header/member data after creation and login; other clan functions incomplete |
 | 28299 | AvatarStream | unresolved | only allocated empty AvatarStream supported; nonempty entry codecs unresolved |
 | 28313 | Message28313 | unresolved | not implemented |
 | 28356 | Message28356 | unresolved | not implemented |
@@ -327,13 +327,13 @@ Every catalogued type is listed, including unresolved codecs and absent handlers
 | 450 | 0x4c0410 | unresolved | not implemented |
 | 454 | 0x4535f4 | unresolved | not implemented |
 | 469 | 0x3f4180 | verified | not implemented |
-| 477 | 0x6dbf30 | unresolved | not implemented |
+| 477 | 0x6dbf30 | verified | server-origin clan creation acknowledgement; native client cost and membership transition |
 | 479 | 0x630e54 | verified | not implemented |
 | 490 | 0x1a5898 | verified | not implemented |
 | 503 | 0x6bb594 | verified | not implemented |
 | 521 | 0x1ade8c | verified | not implemented |
 | 523 | 0x4c125c | verified | not implemented |
-| 527 | 0x370930 | verified | normal matchmaking, native 1v1/2v2, optional labelled bots; event branches unsupported |
+| 527 | 0x370930 | verified | ladder and advertised CASUAL events 1001/1002; separate mode/reward queues, native 1v1/2v2 and optional labelled bots |
 | 532 | 0x204678 | verified | not implemented |
 | 541 | 0x637c64 | verified | not implemented |
 | 547 | 0x6bc17c | verified | not implemented |

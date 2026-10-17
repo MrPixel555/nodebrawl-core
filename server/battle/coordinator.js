@@ -6,6 +6,7 @@ const { ProtocolError } = require('../../lib/protocol/stream')
 const { encodeSectorStateEnvelope } = require('../../lib/protocol/sector-state')
 const { encodeCommand } = require('../../lib/protocol/commands')
 const catalogue = require('./catalogue.json')
+const { partyMode } = require('../party')
 
 const key = account => account.id.join(':')
 const alive = session => session && !session.socket.destroyed
@@ -32,6 +33,8 @@ class BattleCoordinator {
       [10953, (session, fields) => this.training(session, fields.field_0x88, fields.field_0x80)],
       [15263, session => this.acknowledge(session)],
       [16194, (session, fields) => this.input(session, fields)],
+      [13351, (session, fields) => this.event(session, fields.field_0x80)],
+      [18495, (session, fields) => { if (this.traceNetwork) this.logger({ event: 'battle-client-status', code: fields.field_0x7c, flag: fields.field_0x80 }) }],
       [13006, session => this.cancel(session)],
       // These constructors are used by the native search/return dialogs and
       // battle end Home button. A fresh authoritative Home completes the return.
@@ -48,15 +51,20 @@ class BattleCoordinator {
 
   async request (session, fields) {
     if (this.stopped || !alive(session)) return
-    if (fields.field_0x20 !== 0 || fields.field_0x24 !== -1) throw new ProtocolError('This matchmaking request requires an event catalogue')
+    const mode = this.requestMode(fields)
+    if (!mode) throw new ProtocolError('Unknown or unsupported matchmaking event')
     if (this.active(session) || this.queue.has(key(session.account))) return
     const entry = this.player(session)
+    entry.mode = mode
+    entry.party = fields.field_0x24 !== -1
     entry.enqueued = Date.now()
     entry.timer = this.fallbackMs ? setTimeout(() => this.pair().catch(error => this.logError(error)), this.fallbackMs) : null
     this.queue.set(key(session.account), entry)
     this.logger({ event: 'matchmaking-queued', players: this.queue.size })
     await this.pair()
   }
+
+  requestMode (fields) { return fields.field_0x20 === 0 && fields.field_0x24 === -1 ? this.mode : partyMode(fields) }
 
   async training (session, reference, pve = [0, 0]) {
     if (this.stopped || !alive(session)) return
@@ -82,16 +90,23 @@ class BattleCoordinator {
     if (this.stopped || this.pairing) return
     this.pairing = true
     try {
-      const size = this.mode.Players === 'TvT' ? 4 : 2
       while (this.matches.size < this.maxBattles && this.queue.size) {
         const entries = [...this.queue.values()].filter(entry => alive(entry.session))
         for (const [id, entry] of this.queue) if (!alive(entry.session)) this.dequeue(id)
         if (!entries.length) break
-        const expired = this.fallbackMs > 0 && Date.now() - entries[0].enqueued >= this.fallbackMs
-        if (entries.length < size && !expired) break
-        const players = entries.slice(0, size).map(entry => this.dequeue(entry.id.join(':')))
+        const groups = new Map()
+        for (const entry of entries) {
+          const groupId = `${entry.mode.id}:${entry.party}`
+          const group = groups.get(groupId) || []
+          group.push(entry); groups.set(groupId, group)
+        }
+        const eligible = [...groups.values()].find(group => group.length >= (group[0].mode.Players === 'TvT' ? 4 : 2) || (this.fallbackMs > 0 && Date.now() - group[0].enqueued >= this.fallbackMs))
+        if (!eligible) break
+        const { mode, party } = eligible[0]
+        const size = mode.Players === 'TvT' ? 4 : 2
+        const players = eligible.slice(0, size).map(entry => this.dequeue(entry.id.join(':')))
         for (let slot = players.length; slot < size; slot++) players.push({ id: [-2, slot + 1], name: 'Practice Bot', level: 1, deck: [...players[0].deck], bot: true })
-        await this.start(players, { training: false, modeId: this.mode.id })
+        await this.start(players, { training: false, modeId: mode.id, party })
       }
     } finally { this.pairing = false }
   }
@@ -108,7 +123,7 @@ class BattleCoordinator {
       if (match.stopped || this.stopped) return
       match.status = ready.status
       match.hashes.set(ready.status.tick, ready.status.checksum)
-      this.logger({ event: 'battle-created', kind: options.training ? 'training' : 'ladder', players: options.training ? 2 : players.length, bots: options.training ? 1 : players.filter(p => p.bot).length, location: ready.location })
+      this.logger({ event: 'battle-created', kind: options.training ? 'training' : options.party ? 'party' : 'ladder', players: options.training ? 2 : players.length, bots: options.training ? 1 : players.filter(p => p.bot).length, location: ready.location })
       players.forEach((player, slot) => { if (!player.bot && alive(player.session)) player.session.sendRaw(28991, encodeSectorStateEnvelope(Buffer.from(ready.snapshots[slot]))) })
       match.loadTimer = setTimeout(() => this.abort(match, 'battle-load-timeout').catch(error => this.logError(error)), 30000)
     } catch (error) { await this.abort(match, 'battle-start-failed', error) }
@@ -122,16 +137,28 @@ class BattleCoordinator {
     clearTimeout(match.loadTimer)
     match.phase = 'running'
     this.logger({ event: 'battle-snapshot-acknowledged' })
-    match.interval = setInterval(() => this.advance(match).catch(error => this.abort(match, 'battle-engine-failed', error).catch(error => this.logError(error))), 500)
+    match.clockStart = performance.now() - match.status.tick * 50
+    this.schedule(match)
+  }
+
+  schedule (match) {
+    if (match.stopped || match.phase !== 'running') return
+    const delay = Math.max(0, match.clockStart + (match.status.tick + 10) * 50 - performance.now())
+    match.interval = setTimeout(async () => {
+      try { await this.advance(match) } catch (error) { await this.abort(match, 'battle-engine-failed', error).catch(error => this.logError(error)) }
+      this.schedule(match)
+    }, delay)
   }
 
   async advance (match) {
     if (match.busy || match.stopped || match.phase !== 'running') return
     match.busy = true
     try {
+      const started = performance.now()
       const result = await match.process.call('advance', { ticks: 10 })
       if (match.stopped) return
       match.status = result
+      if (this.traceNetwork && performance.now() - started > 500) this.logger({ event: 'battle-engine-slow', tick: result.tick, elapsedMs: Math.round(performance.now() - started), behindTicks: Math.max(0, Math.floor((performance.now() - match.clockStart) / 50) - result.tick) })
       match.hashes.set(result.tick, result.checksum)
       if (match.hashes.size > 120) match.hashes.delete(match.hashes.keys().next().value)
       for (const player of match.players) { if (!player.bot && alive(player.session)) {
@@ -155,10 +182,10 @@ class BattleCoordinator {
     if (fields.field_0x80) {
       try {
         const result = await match.process.call('input', { slot, command: fields.field_0x80 })
-        this.logger({ event: result.accepted ? 'battle-input-accepted' : 'battle-input-rejected', id: fields.field_0x80.id, result: result.result ?? 0 })
+        this.logger({ event: result.accepted ? 'battle-input-accepted' : 'battle-input-rejected', id: fields.field_0x80.id, result: result.result ?? 0, ...(this.traceNetwork ? { serverTick: match.status.tick, clientTick: tick, commandTick: fields.field_0x80.fields.field_0x10 } : {}) })
       } catch (error) {
         if (match.process.closed) await this.abort(match, 'battle-engine-failed', error)
-        else this.logger({ event: 'battle-input-rejected', id: fields.field_0x80.id, reason: error.message })
+        else this.logger({ event: 'battle-input-rejected', id: fields.field_0x80.id, reason: error.message, ...(this.traceNetwork ? { serverTick: match.status.tick, clientTick: tick, commandTick: fields.field_0x80.fields.field_0x10 } : {}) })
       }
     } else if (match.hashes.has(tick) && match.hashes.get(tick) !== fields.field_0x88) {
       this.logger({ event: 'battle-checksum-mismatch', tick })
@@ -166,6 +193,11 @@ class BattleCoordinator {
       // rather than accepting a client-reported outcome or checksum as state.
       if (Date.now() - (match.lastResync || 0) > 5000) { match.lastResync = Date.now(); await this.resend(match, session, slot) }
     }
+  }
+
+  event (session, event) {
+    const match = this.active(session)
+    if (match && this.traceNetwork) this.logger({ event: 'battle-client-event', type: event.type, tick: event.field_0x0, serverTick: match.status.tick })
   }
 
   async resend (match, session, slot) {
@@ -176,7 +208,7 @@ class BattleCoordinator {
     }
   }
 
-  async finish (match, result) {
+  async finish (match, result, returningSession = null) {
     if (match.finished) return match.finished
     clearInterval(match.interval)
     match.phase = 'finished'
@@ -184,11 +216,21 @@ class BattleCoordinator {
       if (![-1, 0, 1].includes(result.winner)) throw Error('Unexpected native battle winner')
       for (const [slot, player] of match.players.entries()) {
         if (player.bot) continue
-        const account = await this.store.recordBattle(player.identity, { id: match.id, kind: match.options.training ? 'training' : 'ladder', slot, winner: result.winner, crowns: result.crowns[slot], arena: this.arena.id })
+        const account = await this.store.recordBattle(player.identity, { id: match.id, kind: match.options.training ? 'training' : match.options.party ? 'friendly' : 'ladder', slot, winner: result.winner, crowns: result.crowns[slot], arena: this.arena.id })
         player.identity = account
         if (alive(player.session)) player.session.account = account
       }
       this.logger({ event: 'battle-finished', tick: result.tick, winner: result.winner, crowns: result.crowns })
+      for (const [slot, player] of match.players.entries()) {
+        if (player.bot || !alive(player.session) || player.session === returningSession) continue
+        const snapshot = await match.process.call('snapshot', { slot })
+        player.session.send(22871, {
+          field_0x7c: result.winner === -1 ? 3 : result.winner === slot % 2 ? 1 : 2,
+          field_0x9c: result.crowns[slot],
+          field_0xa0: result.crowns[slot ^ 1],
+          field_0xb0: encodeSectorStateEnvelope(Buffer.from(snapshot.snapshot)),
+        })
+      }
       match.cleanup = setTimeout(() => this.dispose(match).catch(error => this.logError(error)), 120000)
     })()
     return match.finished
@@ -197,12 +239,14 @@ class BattleCoordinator {
   async cancel (session) {
     if (this.dequeue(key(session.account))) {
       this.logger({ event: 'matchmaking-cancelled' })
-      await this.sendHome(session)
+      session.send(25382)
       return
     }
     const match = this.active(session)
-    if (match?.phase === 'loading') await this.abort(match, 'battle-cancelled')
-    else if (!match) await this.sendHome(session)
+    // A snapshot may cross an already-sent cancel on the network. A found
+    // match continues loading; cancellation must not replace live Home/Avatar
+    // objects underneath the search popup or its pending callbacks.
+    if (!match || match.phase === 'loading') session.send(25382)
   }
 
   async goHome (session) {
@@ -214,8 +258,7 @@ class BattleCoordinator {
         const slot = match.players.findIndex(player => player.session === session)
         const result = await match.process.call('forfeit', { slot })
         match.status = result
-        await this.finish(match, result)
-        for (const [other, player] of match.players.entries()) if (!player.bot && player.session !== session && alive(player.session)) await this.resend(match, player.session, other)
+        await this.finish(match, result, session)
       }
       if (match.finished) await match.finished
       const player = match.players.find(player => player.session === session)

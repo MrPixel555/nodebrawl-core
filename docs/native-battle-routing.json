@@ -1,0 +1,27 @@
+{
+  "librarySha256": "4dd79f7c143fe87dba0e3c7521fe150bf1e018783a2e04632bd38bba5dafde5a",
+  "cancel": {
+    "message": 25382,
+    "dispatcherBranch": "0x71ebc0",
+    "popupCallback": "0x739910",
+    "stateCallback": "0x3f1aa8"
+  },
+  "result": {
+    "message": 22871,
+    "dispatcherBranch": "0x71f85c",
+    "consumer": "0x63c2ec",
+    "hudConstructor": "0x13b2ac"
+  },
+  "observed": [
+    "close-search-popup",
+    "clear-search-state",
+    "battle-result-consumer"
+  ],
+  "adapters": [
+    "UI singleton/window lookups",
+    "close popup and search state callbacks",
+    "connected GameClient lookup/state callback",
+    "result UI consumer boundary"
+  ],
+  "scope": "Original type virtual methods and full dispatcher branches execute. UI callbacks are captured, not Android screens. No Home is used as a cancellation acknowledgement."
+}
