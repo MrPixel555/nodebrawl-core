@@ -21,9 +21,15 @@ JAR download locations:
 - https://dl.google.com/dl/android/maven2/com/android/tools/r8/8.3.37/r8-8.3.37.jar
 
 The builder verifies both JAR hashes. Its D8 library input includes the JDK
-home because the Maven Android stubs omit `java.lang` classes. Source and
-target bytecode levels are Java 8; only API-16-compatible launcher calls are
-used. The original target SDK 28 manifest and network policy are retained.
+home because the Maven Android stubs omit `java.lang` classes. A compile-only
+MultiDexApplication stub is excluded from the APK: the original DEX supplies
+the real superclass. The new Application only copies `assets/configs.so` into
+private files before GameApp starts. There is no new Activity or UI. Original
+launcher/deeplinks, SDK levels and network policy are retained.
+
+Edit `client/configs.so` (or pass `--config /path/configs.so`) before building.
+The single-line text format is `host:port`, with an optional LF or CRLF.
+The `.so` filename is intentional; this asset is not an ELF shared library.
 
 Example, using your own absolute paths:
 
@@ -49,16 +55,23 @@ commit either file. A fresh signing identity changes the APK hash and signing
 certificate even with identical source and native code.
 
 It preserves original ZIP entries, replaces the manifest and ARM64 library,
-adds `classes2.dex` and license notices, aligns stored entries, and signs with
+adds `classes2.dex`, `assets/configs.so` and license notices, aligns stored entries, and signs with
 v1/v2/v3. The signature is independently verified by apksigner. No Frida
 runtime or script is bundled. The existing Frida tools remain available for
 the original unmodified APK and diagnostics.
 
-Two builds in independent work directories, using the retained signing
-identity and tool versions above, produced the identical 104,734,939-byte APK:
-`bf8a4328b7dd4898860c73115be26d77ad80d897b27bd6001ed525a72033e6c9`.
-All eight APK structure/integrity tests passed, including deliberate corruption
-of a modified instruction causing the main checksum to differ.
+To change only the packaged endpoint, `tools/client/reconfigure.py` replaces
+`assets/configs.so` and re-signs without compiling Java or native code. It
+checks that every other non-signature entry remains byte-for-byte identical.
+APK edits always require re-signing; updates require the installed signing
+identity. Use the same signing directory for subsequent local builds.
+
+The current APK passed nine structure/configuration/integrity tests. A separate
+test changed the asset from an IPv4 address to an ASCII hostname with CRLF,
+verified the resulting APK signature, confirmed the signing certificate was
+retained, and checked that the native library and all other non-signature
+entries were unchanged. Both native Login paths, startup string decryption,
+endpoint validation and DNS adapter fixtures also passed.
 
 Native code is position independent and has no dynamic relocations, mutable
 globals or extra shared-library dependencies. An appended 64 KiB-aligned RX
@@ -88,12 +101,13 @@ GAME_ANALYSIS_DIR=/path/existing-analysis-workspace \
 The second command uses the repository's existing analysis artifacts
 (`memory.bin`, `libg.so`, schemas and native Home fixture). It executes the
 original startup string decryptor, both native Login paths, the native LoginOk,
-Home and heartbeat parsers, and the compiled endpoint adapter. It never
+Home and heartbeat parsers, and the compiled endpoint adapter including
+Bionic-layout getaddrinfo/freeaddrinfo I/O fixtures for DNS. It never
 overrides crypto arguments. Only synthetic client ephemeral secrets cross a
 local test pipe to the Node oracle; no server private key is accessed.
 
-These checks **do not execute Android's dynamic linker, Activity UI or game
+These checks **do not execute Android's dynamic linker, Android Application lifecycle or game
 lobby/battle on a device**. Signature verification, ELF checksum consistency
 and native protocol execution are separate evidence, not a claim of device
-compatibility. Device validation should first open the launcher, connect,
-reach Home, close/reopen, then change the endpoint and reconnect.
+compatibility. Device validation should open the game directly, reach Home, close/reopen, then
+install an APK with an edited configs.so and reconnect.

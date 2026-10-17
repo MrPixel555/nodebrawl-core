@@ -96,6 +96,24 @@ def connections(library, report):
     path, connected = [], []
     config = [None]
     error = vm.alloc(4)
+    dns, freed = [], []
+    def getaddrinfo(vm):
+        host = vm.string(vm.reg(0)).decode()
+        dns.append(host)
+        assert vm.reg(1) == 0
+        assert word(vm, vm.reg(2) + 4) == 2 and word(vm, vm.reg(2) + 8) == 1
+        if host == 'missing.invalid':
+            vm.ret(-2)
+            return
+        address = vm.alloc(16)
+        vm.uc.mem_write(address, bytes([2, 0, 0, 0, 192, 0, 2, 99]) + bytes(8))
+        info = vm.alloc(48)
+        vm.uc.mem_write(info, struct.pack('<iiiiI4xQQQ', 0, 2, 1, 6, 16, 0, address, 0))
+        vm.uc.mem_write(vm.reg(3), struct.pack('<Q', info))
+        vm.ret(0)
+    def freeaddrinfo(vm):
+        freed.append(vm.reg(0))
+        vm.ret(0)
     def fopen(vm):
         path.append(vm.string(vm.reg(0)).decode())
         vm.ret(0x1234 if config[0] is not None else 0)
@@ -109,12 +127,12 @@ def connections(library, report):
         vm.uc.mem_write(error, struct.pack('<I', 115))
         vm.ret(-1)  # Preserve the original EINPROGRESS contract.
     for at, name in vm.imports.items():
-        fn = {'fopen': fopen, 'fread': fread, 'fclose': lambda vm: vm.ret(), '__errno': lambda vm: vm.ret(error), 'connect': connect}.get(name)
+        fn = {'fopen': fopen, 'fread': fread, 'fclose': lambda vm: vm.ret(), '__errno': lambda vm: vm.ret(error), 'connect': connect, 'getaddrinfo': getaddrinfo, 'freeaddrinfo': freeaddrinfo}.get(name)
         if fn:
             vm.register_hook(at, fn)
     original = vm.alloc(16)
     vm.uc.mem_write(original, b'\x02\x00\x24\x7b\x01\x02\x03\x04' + bytes(8))
-    for text, expected in [(None, ('223.223.223.1', 9339)), (b'192.0.2.20:1234\n', ('192.0.2.20', 1234)), (b'127.0.0.1:65535', ('127.0.0.1', 65535)), (b'', None), (b'256.2.3.4:9339', None), (b'1.2.3.4:0', None), (b'1.2.3.4:65536', None), (b'1.2.3.4:9339\ntrailing', None), (b'x' * 64, None)]:
+    for text, expected in [(None, None), (b'192.0.2.20:1234\n', ('192.0.2.20', 1234)), (b'127.0.0.1:65535', ('127.0.0.1', 65535)), (b'', None), (b'256.2.3.4:9339', None), (b'1.2.3.4:0', None), (b'1.2.3.4:65536', None), (b'1.2.3.4:9339\ntrailing', None), (b'x' * 272, None), (b'game.example.com:1234\r\n', ('192.0.2.99', 1234)), (b'missing.invalid:9339', None), (b'1.2.3.4:9339\0x', None)]:
         config[0] = text
         connected.clear()
         vm.uc.mem_write(error, bytes(4))
@@ -126,14 +144,15 @@ def connections(library, report):
             assert int.from_bytes(value[2:4], 'big') == expected[1]
             assert word(vm, error) == 115
         else:
-            assert not connected and word(vm, error) == 22
+            assert not connected and word(vm, error) == (113 if text == b'missing.invalid:9339' else 22)
         cases.append({'config': None if text is None else text.decode(), 'accepted': bool(expected)})
     vm.uid = 1010123
     path.clear()
     config[0] = b'192.0.2.1:9339\n'
     vm.call(report['nativeSymbols']['peer_connect'], 7, original, 16)
-    assert path == ['/data/user/10/com.supercell.clashroyale/files/private-server.conf']
-    print('Native endpoint parsing, nonblocking errno and Android user paths: PASS', flush=True)
+    assert path == ['/data/user/10/com.supercell.clashroyale/files/configs.so']
+    assert dns == ['game.example.com', 'missing.invalid'] and len(freed) == 1
+    print('Native configs.so parsing, DNS, nonblocking errno and Android user paths: PASS', flush=True)
     return cases
 
 

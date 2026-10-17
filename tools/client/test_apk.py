@@ -18,7 +18,8 @@ from lxml import etree
 
 from build import check_alignment
 from elf_patch import CALLS, LIBRARY_SHA, PUBLIC_KEY, Checksums, branch, ranges, runtime_image
-from manifest import ACTIVITY, GAME, ANDROID, patch_manifest
+from manifest import APPLICATION, GAME, ANDROID, patch_manifest
+from configuration import validate_config
 
 args = None
 
@@ -45,41 +46,37 @@ class ApkTests(unittest.TestCase):
         for name in self.original.namelist():
             if not name.upper().startswith('META-INF/') and name not in ['AndroidManifest.xml', 'lib/arm64-v8a/libg.so']:
                 self.assertEqual(hashlib.sha256(self.original.read(name)).digest(), hashlib.sha256(self.patched.read(name)).digest(), name)
-        self.assertEqual(set(self.patched.namelist()) - set(self.original.namelist()) - {name for name in self.patched.namelist() if name.startswith('META-INF/')}, {'classes2.dex', 'assets/private-client-notices.txt'})
+        self.assertEqual(set(self.patched.namelist()) - set(self.original.namelist()) - {name for name in self.patched.namelist() if name.startswith('META-INF/')}, {'classes2.dex', 'assets/private-client-notices.txt', 'assets/configs.so'})
 
-    def test_manifest_preserves_game_and_adds_separate_process_launcher(self):
+    def test_manifest_preserves_launcher_and_has_no_settings_activity(self):
         data = self.patched.read('AndroidManifest.xml')
         self.assertEqual(data, patch_manifest(self.original.read('AndroidManifest.xml')))
         printer = AXMLPrinter(data)
         self.assertTrue(printer.is_valid())
         root = printer.get_xml_obj()
         old = AXMLPrinter(self.original.read('AndroidManifest.xml')).get_xml_obj()
-        self.assertEqual(dict(root.attrib), dict(old.attrib))
-        application, previous = root.find('application'), old.find('application')
-        self.assertEqual(dict(application.attrib), dict(previous.attrib))
-        launchers = application.xpath('activity[@android:name="' + ACTIVITY + '"]', namespaces={'android': ANDROID})
-        self.assertEqual(len(launchers), 1)
-        launcher = launchers[0]
-        self.assertEqual(launcher.get(self.ns + 'process'), ':connection')
-        self.assertEqual(launcher.get(self.ns + 'taskAffinity'), 'org.nodebrawl.client.connection')
-        self.assertEqual(launcher.get(self.ns + 'exported'), 'true')
-        actions = launcher.findall('intent-filter/action')
-        self.assertEqual([a.get(self.ns + 'name') for a in actions], ['android.intent.action.MAIN'])
-        self.assertEqual(launcher.find('intent-filter/category').get(self.ns + 'name'), 'android.intent.category.LAUNCHER')
-        application.remove(launcher)
-        for activity in previous.findall('activity'):
-            if activity.get(self.ns + 'name') == GAME:
-                for item in activity.findall('intent-filter'):
-                    if any(action.get(self.ns + 'name') == 'android.intent.action.MAIN' for action in item.findall('action')):
-                        activity.remove(item)
+        application = root.find('application')
+        self.assertEqual(application.get(self.ns + 'name'), APPLICATION)
+        application.set(self.ns + 'name', old.find('application').get(self.ns + 'name'))
         self.assertEqual(etree.tostring(root), etree.tostring(old))
+        self.assertTrue(all('org.nodebrawl' not in a.get(self.ns + 'name', '') for a in application.findall('activity')))
+        game = next(a for a in application.findall('activity') if a.get(self.ns + 'name') == GAME)
+        self.assertTrue(any(a.get(self.ns + 'name') == 'android.intent.action.MAIN' for a in game.findall('intent-filter/action')))
 
-    def test_launcher_dex_and_no_instrumentation_runtime(self):
+    def test_application_dex_has_no_activity_or_instrumentation_runtime(self):
         dex = DEX(self.patched.read('classes2.dex'))
-        classes = [c.get_name() for c in dex.get_classes()]
-        self.assertIn('Lorg/nodebrawl/client/ServerActivity;', classes)
-        self.assertTrue(all(c.startswith('Lorg/nodebrawl/client/ServerActivity') for c in classes))
+        classes = dex.get_classes()
+        self.assertEqual([c.get_name() for c in classes], ['Lorg/nodebrawl/client/ServerApplication;'])
+        self.assertEqual(classes[0].get_superclassname(), 'Landroid/support/multidex/MultiDexApplication;')
         self.assertFalse(any('frida' in name.lower() or 'gadget' in name.lower() for name in self.patched.namelist()))
+
+    def test_configuration_is_plain_text_and_validated(self):
+        self.assertEqual(self.patched.read('assets/configs.so'), Path('client/configs.so').read_bytes())
+        self.assertEqual(validate_config(b'223.223.223.1:9339\n'), ('223.223.223.1', 9339))
+        self.assertEqual(validate_config(b'game.example.com:1234\r\n'), ('game.example.com', 1234))
+        for value in [b'', b'256.2.3.4:9339', b'host:0', b'host:65536', b'http://example.com:9339', b'host:9339\ntrailing', b'a:9339\0x']:
+            with self.assertRaises(ValueError):
+                validate_config(value)
 
     def test_elf_adds_only_immutable_segment_and_seven_calls(self):
         library = self.patched.read('lib/arm64-v8a/libg.so')

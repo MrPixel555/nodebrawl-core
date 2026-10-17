@@ -23,7 +23,7 @@
   "connections": [
     {
       "config": null,
-      "accepted": true
+      "accepted": false
     },
     {
       "config": "192.0.2.20:1234\n",
@@ -54,10 +54,22 @@
       "accepted": false
     },
     {
-      "config": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "config": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "accepted": false
+    },
+    {
+      "config": "game.example.com:1234\r\n",
+      "accepted": true
+    },
+    {
+      "config": "missing.invalid:9339",
+      "accepted": false
+    },
+    {
+      "config": "1.2.3.4:9339\u0000x",
       "accepted": false
     }
   ],
-  "patchedLibrarySha256": "df42b5e2479c6c7abd1cb9e9ca4725659af6582c87c96fa9815e58db4b30ca1f",
+  "patchedLibrarySha256": "629273c4b7a042d3ce0d41e50504a5abc3827d139830271a59cc4f0f9077dc3f",
   "androidLoaderAndUiVerified": false
 }

@@ -55,9 +55,8 @@ int peer_open(void *out, const void *input, uint64_t length, const void *unused,
     return result;
 }
 
-/* The Android launcher resolves an IP/hostname on a background thread and
- * writes only IPv4:port here. The original nonblocking TCP connection and its
- * error handling still execute. This call site is the game socket only. */
+/* A non-UI Application copies assets/configs.so to private files at startup.
+ * Endpoint parsing and optional DNS happen at the original game connect site. */
 static size_t decimal(char *out, unsigned int value)
 {
     char reversed[12];
@@ -75,7 +74,7 @@ static unsigned int app_user(void)
     return (unsigned int)(x0 / 100000);
 }
 
-static int endpoint(const char *text, uint8_t address[4], unsigned int *port)
+static int ipv4(const char *text, uint8_t address[4], unsigned int *port)
 {
     for (unsigned int n = 0; n < 4; n++) {
         unsigned int value = 0, digits = 0;
@@ -98,29 +97,97 @@ static int endpoint(const char *text, uint8_t address[4], unsigned int *port)
     return 1;
 }
 
+/* Android/Bionic ARM64 netdb.h order (canonname precedes addr). */
+struct peer_addrinfo {
+    int flags, family, socktype, protocol;
+    unsigned int addrlen;
+    char *canonname;
+    uint8_t *addr;
+    struct peer_addrinfo *next;
+};
+_Static_assert(sizeof(struct peer_addrinfo) == 48, "Bionic ARM64 addrinfo size");
+extern int native_getaddrinfo(const char *, const char *, const struct peer_addrinfo *, struct peer_addrinfo **);
+extern void native_freeaddrinfo(struct peer_addrinfo *);
+
+static int endpoint(char *text, uint8_t address[4], unsigned int *port)
+{
+    size_t length = 0;
+    int numeric = 1;
+    while (text[length] && text[length] != ':') {
+        unsigned char c = (unsigned char)text[length];
+        if (length >= 253 || !((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9') || c == '.' || c == '-')) goto invalid;
+        if ((c < '0' || c > '9') && c != '.') numeric = 0;
+        length++;
+    }
+    if (!length || text[length] != ':') goto invalid;
+    if (numeric) {
+        if (ipv4(text, address, port)) return 1;
+        goto invalid;
+    }
+    unsigned int value = 0, digits = 0;
+    char *number = text + length + 1;
+    while (*number >= '0' && *number <= '9') {
+        if (++digits > 5) goto invalid;
+        value = value * 10 + (unsigned int)(*number++ - '0');
+    }
+    if (*number == '\n') number++;
+    if (!digits || !value || value > 65535 || *number) goto invalid;
+    text[length] = 0;
+    struct peer_addrinfo hints = {0}, *result = 0;
+    hints.family = 2;
+    hints.socktype = 1;
+    int error = native_getaddrinfo(text, 0, &hints, &result);
+    if (error || !result) {
+        if (result) native_freeaddrinfo(result);
+        *native_errno() = 113;
+        return 0;
+    }
+    struct peer_addrinfo *selected = result;
+    while (selected && (selected->family != 2 || selected->addrlen < 16 || !selected->addr)) selected = selected->next;
+    if (!selected) {
+        native_freeaddrinfo(result);
+        *native_errno() = 113;
+        return 0;
+    }
+    for (size_t n = 0; n < 4; n++) address[n] = selected->addr[4 + n];
+    native_freeaddrinfo(result);
+    *port = value;
+    return 1;
+invalid:
+    *native_errno() = 22;
+    return 0;
+}
+
 int peer_connect(int fd, const void *original, unsigned int original_size)
 {
     if (!original || original_size < 16 || *(const uint16_t *)original != 2) {
         *native_errno() = 22;
         return -1;
     }
-    char path[128], config[64] = "223.223.223.1:9339\n";
-    const char prefix[] = "/data/user/", suffix[] = "/com.supercell.clashroyale/files/private-server.conf";
+    char path[128], config[272] = {0};
+    const char prefix[] = "/data/user/", suffix[] = "/com.supercell.clashroyale/files/configs.so";
     size_t at = 0;
     for (size_t n = 0; n < sizeof(prefix) - 1; n++) path[at++] = prefix[n];
     at += decimal(path + at, app_user());
     for (size_t n = 0; n < sizeof(suffix); n++) path[at++] = suffix[n];
     void *file = native_fopen(path, "rb");
-    if (!file) file = native_fopen("/data/data/com.supercell.clashroyale/files/private-server.conf", "rb");
+    if (!file) file = native_fopen("/data/data/com.supercell.clashroyale/files/configs.so", "rb");
+    if (!file) { *native_errno() = 22; return -1; }
     if (file) {
         size_t count = native_fread(config, 1, sizeof(config) - 1, file);
         native_fclose(file);
         config[count] = 0;
         if (count == sizeof(config) - 1) { *native_errno() = 22; return -1; }
+        for (size_t n = 0; n < count; n++) {
+            if (!config[n]) { *native_errno() = 22; return -1; }
+        }
+        if (count && config[count - 1] == '\n') config[--count] = 0;
+        if (count && config[count - 1] == '\r') config[--count] = 0;
     }
     uint8_t target[16] = {2, 0};
     unsigned int port = 0;
-    if (!endpoint(config, target + 4, &port)) { *native_errno() = 22; return -1; }
+    if (!endpoint(config, target + 4, &port)) return -1;
     target[2] = (uint8_t)(port >> 8);
     target[3] = (uint8_t)port;
     return native_connect(fd, target, sizeof(target));

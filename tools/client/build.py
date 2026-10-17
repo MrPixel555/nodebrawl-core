@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import secrets
 import struct
@@ -11,6 +12,7 @@ import zipfile
 
 from elf_patch import REPO, PUBLIC_KEY, patch_library
 from manifest import patch_manifest
+from configuration import validate_config
 
 ANDROID_SHA = '84072541cbb711eff89f7277100ff854929a446dba7ceb1b195c340e0b4fd3cb'
 R8_SHA = '59753e70a74f918389cc87f1b7d66b5c0862932559167425708ded159e3de439'
@@ -88,10 +90,13 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--signing-dir', type=Path, default=REPO / '.local')
     parser.add_argument('--public-key', default=PUBLIC_KEY)
+    parser.add_argument('--config', type=Path, default=REPO / 'client/configs.so')
     args = parser.parse_args()
     args.work.mkdir(parents=True, exist_ok=True)
     checked_jar(args.android_jar, ANDROID_SHA)
     checked_jar(args.r8, R8_SHA)
+    config = args.config.read_bytes()
+    validate_config(config)
     with zipfile.ZipFile(args.apk) as original:
         if sha(args.apk.read_bytes()) != 'dce6a6bf55e7021f6410438e47adf69e1e0c6120bc34f8c3457350e2366178c1':
             raise ValueError('Expected the supplied, hash-verified 3.1.0 APK')
@@ -112,11 +117,18 @@ def main():
     for previous in classes.rglob('*.class'):
         previous.unlink()
     (dex / 'classes.dex').unlink(missing_ok=True)
-    source = REPO / 'client/launcher/org/nodebrawl/client/ServerActivity.java'
-    subprocess.run([args.java, 'com.sun.tools.javac.Main', '-source', '8', '-target', '8', '-Xlint:-options', '-classpath', str(args.android_jar), '-d', str(classes), str(source)], check=True)
-    subprocess.run([args.java, '-cp', str(args.r8), 'com.android.tools.r8.D8', '--release', '--min-api', '16', '--lib', str(args.android_jar), '--lib', str(args.java_home), '--output', str(dex), *map(str, sorted(classes.rglob('*.class')))], check=True)
+    stubs = args.work / 'compile-stubs'
+    stubs.mkdir(exist_ok=True)
+    subprocess.run([args.java, 'com.sun.tools.javac.Main', '-source', '8', '-target', '8', '-Xlint:-options', '-classpath', str(args.android_jar), '-d', str(stubs), str(REPO / 'tools/client/stubs/android/support/multidex/MultiDexApplication.java')], check=True)
+    stub_jar = args.work / 'compile-stubs.jar'
+    with zipfile.ZipFile(stub_jar, 'w') as archive:
+        for compiled in stubs.rglob('*.class'):
+            archive.write(compiled, str(compiled.relative_to(stubs)))
+    source = REPO / 'client/application/org/nodebrawl/client/ServerApplication.java'
+    subprocess.run([args.java, 'com.sun.tools.javac.Main', '-source', '8', '-target', '8', '-Xlint:-options', '-classpath', str(args.android_jar) + os.pathsep + str(stub_jar), '-d', str(classes), str(source)], check=True)
+    subprocess.run([args.java, '-cp', str(args.r8), 'com.android.tools.r8.D8', '--release', '--min-api', '16', '--lib', str(args.android_jar), '--lib', str(args.java_home), '--classpath', str(stub_jar), '--output', str(dex), *map(str, sorted(classes.rglob('*.class')))], check=True)
     notices = (REPO / 'client/THIRD_PARTY.md').read_bytes()
-    replacements = {'lib/arm64-v8a/libg.so': library, 'AndroidManifest.xml': manifest, 'classes2.dex': (dex / 'classes.dex').read_bytes(), 'assets/private-client-notices.txt': notices}
+    replacements = {'lib/arm64-v8a/libg.so': library, 'AndroidManifest.xml': manifest, 'classes2.dex': (dex / 'classes.dex').read_bytes(), 'assets/private-client-notices.txt': notices, 'assets/configs.so': config}
     unsigned = args.work / 'client-unsigned.apk'
     repack(args.apk, replacements, unsigned)
     check_alignment(unsigned)
@@ -132,7 +144,7 @@ def main():
                 if original.read(name) != built.read(name):
                     raise ValueError('Unexpected APK change: ' + name)
     report.update({'originalApkSha256': sha(args.apk.read_bytes()), 'apkSha256': sha(args.output.read_bytes()), 'apkBytes': args.output.stat().st_size,
-                   'launcherActivity': 'org.nodebrawl.client.ServerActivity', 'originalGameDexUnchanged': True, 'originalAssetsUnchanged': True,
+                   'launcherActivity': 'com.supercell.clashroyale.GameApp', 'configurationAsset': 'assets/configs.so', 'settingsUi': False, 'applicationClass': 'org.nodebrawl.client.ServerApplication', 'originalGameDexUnchanged': True, 'originalAssetsUnchanged': True,
                    'storedEntriesAligned': True, 'androidRuntimeVerified': False, 'signingVerification': verified.strip().splitlines()})
     (args.output.parent / 'build-report.json').write_text(json.dumps(report, indent=2) + '\n')
     print('Built', args.output, str(report['apkBytes']) + ' bytes', report['apkSha256'])
